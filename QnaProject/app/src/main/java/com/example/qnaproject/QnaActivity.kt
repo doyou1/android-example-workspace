@@ -7,5 +7,6 @@ class QnaActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_qna)
+        setSupportActionBar(findViewById(R.id.toolbar))
     }
 }
