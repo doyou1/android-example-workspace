@@ -1,14 +1,11 @@
-package com.example.qnaproject.qna
+package com.example.qnaproject
 
-import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.example.qnaproject.R
 
 class QnaAdapter(val qnaList: ArrayList<Qna>) :
     RecyclerView.Adapter<QnaAdapter.QnaViewHolder>() {
@@ -37,11 +34,16 @@ class QnaAdapter(val qnaList: ArrayList<Qna>) :
             itemView.setOnClickListener {
                 val curPos: Int = adapterPosition
                 val qna: Qna = qnaList.get(curPos)
-                Toast.makeText(viewGroup.context, "Qna-id: ${qna.QNA_ID}", Toast.LENGTH_SHORT).show()
+                val intent = Intent(viewGroup.context, QnaDetailActivity::class.java)
+                intent.putExtra("QNA_ID", qna.QNA_ID)
+
+                val activity: QnaActivity = viewGroup.context as QnaActivity
+                // 액티비티 종료하는 코드
+                activity.startActivity(intent)
+                activity.finish()
             }
         }
     }
-
     override fun onBindViewHolder(viewHolder: QnaViewHolder, position: Int) {
         viewHolder.bind(qnaList.get(position))
     }

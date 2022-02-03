@@ -1,11 +1,10 @@
-package com.example.qnaproject.qna
+package com.example.qnaproject
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.qnaproject.R
 
 class QnaActivity : AppCompatActivity() {
 
@@ -24,5 +23,7 @@ class QnaActivity : AppCompatActivity() {
         rv_qna.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         rv_qna.setHasFixedSize(true)
         rv_qna.adapter = QnaAdapter(qnaList)
+        rv_qna.setOnClickListener(View.OnClickListener {  })
+
     }
 }
