@@ -93,7 +93,7 @@ class QnaActivity : AppCompatActivity() {
                         Log.e(tag, it.toString())
                     }
                 }
-                // Response FailΩ
+                // Response Fail
                 override fun onFailure(call: Call<ResponseModel>, t: Throwable) {
                     Log.d(tag, "실패 : $t")
                 }

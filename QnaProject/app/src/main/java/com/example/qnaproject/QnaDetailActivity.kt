@@ -1,6 +1,7 @@
 package com.example.qnaproject
 
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -84,11 +85,15 @@ class QnaDetailActivity: AppCompatActivity() {
                     Log.d(tag, "성공 : ${resBody.data}")
                     val data = resBody.data[0].asJsonObject     // ResponseModel의 "data"속성이 JsonArray형태
                                                                 // ResponseBody 중 QnaDetail 정보를 담고 있는 객체
-                    val qna_title = data.get("QNA_TITLE").asString
-                    val qna_content = data.get("QNA_CONTENT").asString
-                    val qna_answer = data.get("QNA_ANSWER").asString
-                    val qna_con_dt = data.get("QNA_CON_DT").asString
-                    val qna_ann_dt = data.get("QNA_ANN_DT").asString
+
+                    Log.e(tag, "data: ${data.get("QNA_ANN_DT")}")
+
+
+                    val qna_title = if(data.get("QNA_TITLE").isJsonNull()) "" else data.get("QNA_TITLE").asString
+                    val qna_content = if(data.get("QNA_CONTENT").isJsonNull()) "" else data.get("QNA_CONTENT").asString
+                    val qna_answer = if(data.get("QNA_ANSWER").isJsonNull()) "" else data.get("QNA_ANSWER").asString
+                    val qna_con_dt = if(data.get("QNA_CON_DT").isJsonNull()) "" else data.get("QNA_CON_DT").asString
+                    val qna_ann_dt = if(data.get("QNA_ANN_DT").isJsonNull()) "" else data.get("QNA_ANN_DT").asString
 
                     val qnaDetail = QnaDetail(qna_title, qna_content, qna_answer, qna_con_dt, qna_ann_dt)
 
@@ -111,6 +116,18 @@ class QnaDetailActivity: AppCompatActivity() {
         val intent = Intent(this, QnaActivity::class.java)
         this.startActivity(intent)
         this.finish()
+    }
+
+    // Android 내장 BackButton 클릭시
+    override fun onBackPressed() {
+        moveToBack()
+
+        // 현재 조건에 적절하지 않아보임(메세지 출력, 입력 등이 이루어지고 있는 상황이 아님)
+//        if(this is QnaDetailActivity) {
+//            moveToBack()
+//        } else {
+//            super.onBackPressed()
+//        }
     }
 }
 
