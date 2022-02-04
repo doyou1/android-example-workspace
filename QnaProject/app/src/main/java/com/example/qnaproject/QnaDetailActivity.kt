@@ -109,6 +109,11 @@ class QnaDetailActivity: AppCompatActivity() {
         })
     }
 
+    // Android 내장 BackButton 클릭시
+    override fun onBackPressed() {
+        moveToBack()
+    }
+
     /**
      * Activity to Activity 이동, QnaActivity(QnaList화면으로 이동)
      */
@@ -118,17 +123,6 @@ class QnaDetailActivity: AppCompatActivity() {
         this.finish()
     }
 
-    // Android 내장 BackButton 클릭시
-    override fun onBackPressed() {
-        moveToBack()
-
-        // 현재 조건에 적절하지 않아보임(메세지 출력, 입력 등이 이루어지고 있는 상황이 아님)
-//        if(this is QnaDetailActivity) {
-//            moveToBack()
-//        } else {
-//            super.onBackPressed()
-//        }
-    }
 }
 
 
