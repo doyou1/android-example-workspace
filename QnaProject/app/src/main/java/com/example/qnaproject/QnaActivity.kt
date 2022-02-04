@@ -1,5 +1,6 @@
 package com.example.qnaproject
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -32,6 +33,10 @@ class QnaActivity : AppCompatActivity() {
 //        setContentView(R.layout.activity_qna) // use DataBinding
         binding = DataBindingUtil.setContentView(this, R.layout.activity_qna)
         setSupportActionBar(binding.toolbarQna.root as Toolbar)
+
+        binding.toolbarQna.btnRegister.setOnClickListener {
+            moveToRegister()
+        }
 
         // Retrofit 객체 생성
         val retrofit:Retrofit = Retrofit.Builder()
@@ -108,4 +113,14 @@ class QnaActivity : AppCompatActivity() {
         binding.rvQna.setHasFixedSize(true)
         binding.rvQna.adapter = QnaAdapter(qnaList)
     }
+
+    /**
+     * Activity to Activity 이동, QnaRegisterActivity
+     */
+    private fun moveToRegister() {
+        val intent = Intent(this, QnaRegisterActivity::class.java)
+        this.startActivity(intent)
+        this.finish()
+    }
+
 }
