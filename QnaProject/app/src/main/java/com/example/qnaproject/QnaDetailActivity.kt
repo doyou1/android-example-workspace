@@ -3,100 +3,115 @@ package com.example.qnaproject
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import android.widget.ImageButton
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.android.volley.Request
-import com.android.volley.RequestQueue
-import com.android.volley.VolleyError
-import com.android.volley.toolbox.JsonObjectRequest
-import com.android.volley.toolbox.Volley
+import androidx.appcompat.widget.Toolbar
+import androidx.databinding.DataBindingUtil
+import com.example.qnaproject.databinding.ActivityQnaDetailBinding
 import kotlinx.coroutines.*
-import org.json.JSONArray
-import org.json.JSONObject
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
+/**
+ * Qna 상세정보 출력 화면 액티비티
+ */
 class QnaDetailActivity: AppCompatActivity() {
 
-    private val url = "https://api.jamjami.co.kr/api/faq/FaqInfo"
+    private val baseUrl = "https://api.jamjami.co.kr/"
+    private var qnaId:Int = -1  // url param - QNA_ID
+
     private val tag = "QnaDetailActivity"
+
+    // activity_qna_detail의 Data Binding 객체
+    private lateinit var binding: ActivityQnaDetailBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_qna_detail)
-        setSupportActionBar(findViewById(R.id.toolbar))
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_qna_detail)
+        setSupportActionBar(binding.toolbarQnaDetail.root as Toolbar)
 
-        val mActivity = this as QnaDetailActivity
-        findViewById<ImageButton>(R.id.tb_back).setOnClickListener(
-            View.OnClickListener {
-                val intent = Intent(this, QnaActivity::class.java)
-
-                mActivity.startActivity(intent)
-                mActivity.finish()
-            }
-        )
+        // 상단 BackButton Click시 QnaList로 이동
+        binding.toolbarQnaDetail.ibBack.setOnClickListener {
+            moveToBack()
+        }
 
         // Get Intent Extra
-        if(intent.hasExtra("QNA_ID")) {
-            val qna_id = intent.getIntExtra("QNA_ID", -1)
-            if (qna_id != -1) {
-                val urlWithQnaId = url.plus("?QNA_ID=${qna_id}")
-                val queue = Volley.newRequestQueue(this)
+        if(intent.hasExtra("QNA_ID")) { // QnaList 화면에서 Extra 전송 유무 확인
+            qnaId = intent.getIntExtra("QNA_ID", -1)
+            if (qnaId != -1) {  // QNA_ID 존재하면
+                // Retrofit 객체 생성
+                val retrofit: Retrofit = Retrofit.Builder()
+                    .baseUrl(baseUrl)
+                    .addConverterFactory(GsonConverterFactory.create()) // JSON 변환 객체 등록
+                    .build()
+
+                // Retrofit 객체로 service 인터페이스 구현
+                val qnaService = retrofit.create(QnaService::class.java)
+
+                // QnaDetail 데이터에 접근하는 call 객체 생성
+                // param(QNA_ID)
+                val call: Call<ResponseModel> = qnaService.getQnaDetail(qnaId)
                 CoroutineScope(Dispatchers.IO).launch {
                     async {
-                        val qnaDetail = getInterfaceData(queue, urlWithQnaId)
-                        withContext(Dispatchers.Main) {
-                            drawUI(qnaDetail)
-                        }
+                        // 인터페이스에 QnaDetail 요청
+                        // return QnaDetail
+                        binding.qnaDetail = getInterfaceData(call)
                     }
                 }
+            } else {    // 존재하지 않으면 초기화면으로 이동
+                moveToBack()
             }
         }
     }
 
-    suspend fun getInterfaceData(queue: RequestQueue, urlWithQnaId:String): QnaDetail =
+    /**
+     * QnaDetail 데이터를 요청하는 함수
+     */
+    suspend fun getInterfaceData(call: Call<ResponseModel>): QnaDetail =
         suspendCancellableCoroutine { continuation ->
-            val request = JsonObjectRequest(
-                Request.Method.GET, urlWithQnaId, null,
-                { response ->
-                    val data:JSONObject = response.getJSONArray("data")[0] as JSONObject
 
-                    val qna_title = data.getString("QNA_TITLE")
-                    val qna_content = data.getString("QNA_CONTENT")
-                    val qna_answer = data.getString("QNA_ANSWER")
-                    val qna_con_dt = data.getString("QNA_CON_DT")
-                    val qna_ann_dt = data.getString("QNA_ANN_DT")
+            // 선언한 call 객체에 queue 추가
+            call.enqueue(object : Callback<ResponseModel> {
+                // Response Success
+                override fun onResponse(
+                    call: Call<ResponseModel>,
+                    response: Response<ResponseModel>
+                ) {
+                    // ResponseBody의 형태에 따라 Custom ResponseModel로 변환
+                    val resBody = response.body() as ResponseModel
+                    Log.d(tag, "성공 : ${resBody.data}")
+                    val data = resBody.data[0].asJsonObject     // ResponseModel의 "data"속성이 JsonArray형태
+                                                                // ResponseBody 중 QnaDetail 정보를 담고 있는 객체
+                    val qna_title = data.get("QNA_TITLE").asString
+                    val qna_content = data.get("QNA_CONTENT").asString
+                    val qna_answer = data.get("QNA_ANSWER").asString
+                    val qna_con_dt = data.get("QNA_CON_DT").asString
+                    val qna_ann_dt = data.get("QNA_ANN_DT").asString
 
                     val qnaDetail = QnaDetail(qna_title, qna_content, qna_answer, qna_con_dt, qna_ann_dt)
 
-                    continuation.resume(qnaDetail) {
+
+                    continuation.resume(qnaDetail) {    // 얻은 데이터 리턴 | 60: binding.qnaDetail = getInterfaceData(call)
                         Log.e(tag, it.toString())
                     }
-                },
-                { error: VolleyError? ->
-                    println(error?.message)
                 }
-            )
-        queue.add(request)
+                // Response Fail
+                override fun onFailure(call: Call<ResponseModel>, t: Throwable) {
+                    Log.d(tag, "실패 : $t")
+                }
+        })
     }
 
-    private fun drawUI(qnaDetail: QnaDetail) {
-        findViewById<TextView>(R.id.qna_title).text = qnaDetail.QNA_TITLE
-        findViewById<TextView>(R.id.qna_con_dt).text = qnaDetail.QNA_CON_DT
-        findViewById<TextView>(R.id.qna_content).text = qnaDetail.QNA_CONTENT
-
-        if (qnaDetail.QNA_ANN_DT != "null") {
-            findViewById<TextView>(R.id.qna_answer).text = qnaDetail.QNA_ANSWER
-            findViewById<TextView>(R.id.qna_ann_dt).text = qnaDetail.QNA_ANN_DT
-        } else {
-            findViewById<ConstraintLayout>(R.id.layout_qna_answer).visibility = View.GONE
-            findViewById<View>(R.id.line).visibility = View.GONE
-        }
+    /**
+     * Activity to Activity 이동, QnaActivity(QnaList화면으로 이동)
+     */
+    private fun moveToBack() {
+        val intent = Intent(this, QnaActivity::class.java)
+        this.startActivity(intent)
+        this.finish()
     }
-
 }
 
 

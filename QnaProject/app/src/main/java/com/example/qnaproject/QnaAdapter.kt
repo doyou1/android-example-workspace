@@ -5,32 +5,36 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.qnaproject.databinding.ActivityQnaBinding
+import com.example.qnaproject.databinding.ListQnaItemBinding
 
-class QnaAdapter(val qnaList: ArrayList<Qna>) :
-    RecyclerView.Adapter<QnaAdapter.QnaViewHolder>() {
+/**
+ * Qna화면의 RecyclerView Adapter
+ * 데이터 바인딩, 클릭 이벤트 처리
+ */
+class QnaAdapter(val qnaList: ArrayList<Qna>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    class QnaViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val qna_title: TextView
-        val qna_con_dt: TextView
+    // DataBinding object
+    private lateinit var binding: ListQnaItemBinding
+    val list = mutableListOf<Qna>()
 
-        init {
-            qna_title = view.findViewById(R.id.tv_qna_title)
-            qna_con_dt = view.findViewById(R.id.tv_qna_con_dt)
-        }
-
-        fun bind(item: Qna) {
-            qna_title.text = item.QNA_TITLE
-            qna_con_dt.text = item.QNA_CON_DT
-        }
+    // 인터페이스로부터 받아온 QnaList 추가
+    init {
+        list.addAll(qnaList)
     }
 
-    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): QnaViewHolder {
-        // Create a new view, which defines the UI of the list item
-        val view = LayoutInflater.from(viewGroup.context)
-            .inflate(R.layout.list_qna_item, viewGroup, false)
+    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        // list_qna_item.xml과 DataBinding
+        binding = DataBindingUtil.inflate(
+            LayoutInflater.from(viewGroup.context),
+            R.layout.list_qna_item,
+            viewGroup,
+            false
+        )
 
-        return QnaViewHolder(view).apply {
+        return QnaViewHolder(binding).apply {   // RecyclerViewItem 클릭 이벤트 설정
             itemView.setOnClickListener {
                 val curPos: Int = adapterPosition
                 val qna: Qna = qnaList.get(curPos)
@@ -44,9 +48,20 @@ class QnaAdapter(val qnaList: ArrayList<Qna>) :
             }
         }
     }
-    override fun onBindViewHolder(viewHolder: QnaViewHolder, position: Int) {
-        viewHolder.bind(qnaList.get(position))
+
+    override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int) {
+        if (viewHolder is QnaViewHolder) {
+            val item = list[position]
+            viewHolder.binding.tvQnaTitle.text = item.QNA_TITLE
+            viewHolder.binding.tvQnaConDt.text = item.QNA_CON_DT
+        }
     }
 
-    override fun getItemCount() = qnaList.size
+    override fun getItemCount(): Int {
+        return list.size
+    }
+
+    inner class QnaViewHolder(val binding: ListQnaItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+    }
 }
