@@ -1,9 +1,7 @@
 package com.example.qnaproject
 
 import retrofit2.Call
-import retrofit2.http.GET
-import retrofit2.http.Headers
-import retrofit2.http.Query
+import retrofit2.http.*
 
 public interface QnaService {
 
@@ -20,6 +18,13 @@ public interface QnaService {
     @Headers("content-type: application/json; charset=utf-8")
     @GET("api/faq/FaqInfo")
     fun getQnaDetail(@Query("QNA_ID") QNA_ID: Int): Call<ResponseModel>
+
+    /**
+     * 작성한 Qna 서버에 등록
+     */
+    @Headers("content-type: application/json; charset=utf-8")
+    @POST("api/faq/RegisterFAQ")
+    fun registerNewQna(@Body newQna: NewQna) : Call<ResponseModel>
 
 
 }
