@@ -64,40 +64,24 @@ class QnaDetailActivity : AppCompatActivity() {
 
         // QnaDetail 데이터에 접근하는 call 객체 생성
         // param(QNA_ID)
-        val call: Call<ResponseModel> = qnaService.getQnaDetail(qnaId)
+        val call: Call<QnaDetailResponseModel> = qnaService.getQnaDetail(qnaId)
 
         // 인터페이스에 QnaDetail 요청
         // 선언한 call 객체에 queue 추가
-        call.enqueue(object : Callback<ResponseModel> {
+        call.enqueue(object : Callback<QnaDetailResponseModel> {
             // Response Success
-            override fun onResponse(call: Call<ResponseModel>, response: Response<ResponseModel>) {
+            override fun onResponse(call: Call<QnaDetailResponseModel>, response: Response<QnaDetailResponseModel>) {
                 // ResponseBody의 형태에 따라 Custom ResponseModel로 변환
-                val resBody = response.body() as ResponseModel
+                val resBody = response.body() as QnaDetailResponseModel
                 Log.d(tag, "성공 : ${resBody.data}")
-                val data = resBody.data[0].asJsonObject     // ResponseModel의 "data"속성이 JsonArray형태
-                // ResponseBody 중 QnaDetail 정보를 담고 있는 객체
-                Log.e(tag, "data: ${data.get("QNA_ANN_DT")}")
+                val qnaDetail = resBody.data[0] // com.google.gson.JsonSyntaxException: java.lang.IllegalStateException: Expected BEGIN_OBJECT but was BEGIN_ARRAY at line 1 column 34 path $.data
 
-                val qna_title =
-                    if (data.get("QNA_TITLE").isJsonNull()) "" else data.get("QNA_TITLE").asString
-                val qna_content = if (data.get("QNA_CONTENT")
-                        .isJsonNull()
-                ) "" else data.get("QNA_CONTENT").asString
-                val qna_answer =
-                    if (data.get("QNA_ANSWER").isJsonNull()) "" else data.get("QNA_ANSWER").asString
-                val qna_con_dt =
-                    if (data.get("QNA_CON_DT").isJsonNull()) "" else data.get("QNA_CON_DT").asString
-                val qna_ann_dt =
-                    if (data.get("QNA_ANN_DT").isJsonNull()) "" else data.get("QNA_ANN_DT").asString
-
-                val qnaDetail =
-                    QnaDetail(qna_title, qna_content, qna_answer, qna_con_dt, qna_ann_dt)
-
+                Log.e(tag, "qnaDetail.QNA_ANSWER.length: ${qnaDetail.QNA_ANSWER?.length}")
                 binding.qnaDetail = qnaDetail
             }
 
             // Response Fail
-            override fun onFailure(call: Call<ResponseModel>, t: Throwable) {
+            override fun onFailure(call: Call<QnaDetailResponseModel>, t: Throwable) {
                 Log.d(tag, "실패 : $t")
             }
         })
