@@ -69,31 +69,21 @@ class QnaActivity : AppCompatActivity() {
         // 구현된 service 객체를 이용해
         // QnaList 데이터에 접근하는 call 객체 생성
         // params(MEM_ID, PAGE)
-        val call: Call<ResponseModel> = qnaService.getQnaList(memId, page)
+        val call: Call<QnaResponseModel> = qnaService.getQnaList(memId, page)
         // 선언한 call 객체에 queue 추가
-        call.enqueue(object : Callback<ResponseModel> {
+        call.enqueue(object : Callback<QnaResponseModel> {
             override fun onResponse(
-                call: Call<ResponseModel>,
-                response: Response<ResponseModel>
+                call: Call<QnaResponseModel>,
+                response: Response<QnaResponseModel>
             ) { // Response Success
                 // ResponseBody의 형태에 따라 Custom ResponseModel로 변환
-                val resBody = response.body() as ResponseModel
+                val resBody = response.body() as QnaResponseModel
                 Log.d(tag, "성공 : ${resBody.data}")
-                val data = resBody.data // ResponseBody 중 Qna List 정보를 담고 있는 객체
-                val currentList = arrayListOf<Qna>()
-                for (i in 0 until data.size()) {
-                    val item = data.get(i).asJsonObject // data.get(index): JsonArray
-
-                    val qna_id = item.get("QNA_ID").asInt // JsonArray.get("name"): JsonPrimitive
-                    val qna_title = item.get("QNA_TITLE").asString
-                    val qna_con_dt = item.get("QNA_CON_DT").asString
-                    currentList.add(Qna(qna_id, qna_title, qna_con_dt))
-                }
-
+                qnaList = resBody.data // ResponseBody 중 Qna List 정보를 담고 있는 객체
                 drawRecyclerView(qnaList)
             }
 
-            override fun onFailure(call: Call<ResponseModel>, t: Throwable) {   // Response Fail
+            override fun onFailure(call: Call<QnaResponseModel>, t: Throwable) {   // Response Fail
                 Log.d(tag, "실패 : $t")
             }
         })

@@ -102,15 +102,15 @@ class QnaRegisterActivity : AppCompatActivity() {
         // Retrofit 객체로 service 인터페이스 구현
         val qnaService = retrofit.create(QnaService::class.java)
         val newQna = NewQna(MEM_ID, titleText, contentText)
-        val call: Call<ResponseModel> = qnaService.registerNewQna(newQna)
+        val call: Call<NewQnaResponseModel> = qnaService.registerNewQna(newQna)
 
         val mContext = this
         // 선언한 call 객체에 queue 추가
-        call.enqueue(object : Callback<ResponseModel> {
+        call.enqueue(object : Callback<NewQnaResponseModel> {
             // Response Success
             override fun onResponse(
-                call: Call<ResponseModel>,
-                response: Response<ResponseModel>
+                call: Call<NewQnaResponseModel>,
+                response: Response<NewQnaResponseModel>
             ) {
                 // {
                 //     "code": 200,
@@ -123,7 +123,7 @@ class QnaRegisterActivity : AppCompatActivity() {
             }
 
             // Response Fail
-            override fun onFailure(call: Call<ResponseModel>, t: Throwable) {
+            override fun onFailure(call: Call<NewQnaResponseModel>, t: Throwable) {
                 Log.d(tag, "실패 : $t")
             }
         })
