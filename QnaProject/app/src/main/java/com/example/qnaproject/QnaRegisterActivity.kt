@@ -2,31 +2,20 @@ package com.example.qnaproject
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.MotionEvent
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import com.example.qnaproject.databinding.ActivityQnaRegisterBinding
-import android.os.Looper
-
-import android.R
-import android.app.Service
-import android.os.Handler
-import android.util.Log
-import android.view.View
-import android.view.ViewTreeObserver
-import android.view.inputmethod.InputMethodManager
-
-import android.widget.LinearLayout
-
-
-
 
 class QnaRegisterActivity: AppCompatActivity() {
 
     private val tag = "QnaRegisterActivity"
 
     private lateinit var binding: ActivityQnaRegisterBinding
+
+    private val titleTextLimit = 10
+    private val contentTextLimit = 20
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +26,29 @@ class QnaRegisterActivity: AppCompatActivity() {
         binding.toolbarQnaRegister.ibBack.setOnClickListener {
             moveToBack()
         }
+
+        // 등록 Button Click Event
+        binding.btnQnaRegister.setOnClickListener {
+            val titleText = binding.etQnaTitle.text.toString()
+            val contentText = binding.etQanContent.text.toString()
+
+            if (validateText(titleText, contentText)) {
+                Log.e(tag, "Validation Success ${titleText}, ${contentText}")
+            } else {
+                Log.e(tag, "Validation Fail")
+            }
+        }
+
+    }
+
+    /**
+     * 문의 작성 유효성 검사
+     */
+    private fun validateText(titleText: String, contentText: String) : Boolean {
+
+        return !(titleText.length > titleTextLimit
+                || contentText.length > contentTextLimit)
+
     }
 
     // Android 내장 BackButton 클릭시
