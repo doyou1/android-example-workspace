@@ -29,7 +29,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="1:1 문의"
-
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/btn_register"
                 app:layout_constraintStart_toEndOf="@+id/tb_back"
