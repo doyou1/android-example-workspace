@@ -1,19 +1,26 @@
 package com.example.qnaproject
 
+import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.MotionEvent
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import com.example.qnaproject.databinding.ActivityQnaRegisterBinding
-import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import android.view.Window
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
+
 
 /**
  * 신규문의를 등록하는 화면
@@ -25,7 +32,7 @@ class QnaRegisterActivity : AppCompatActivity() {
     val MEM_ID = "73"
 
     private lateinit var binding: ActivityQnaRegisterBinding
-
+    private lateinit var mContext: Context
     // 제한 글자수 변수
     private val titleTextLimit = 10
     private val contentTextLimit = 20
@@ -37,12 +44,15 @@ class QnaRegisterActivity : AppCompatActivity() {
     private val OVERFLOW_CONTENT = 3
     private val NULL_CONTENT = 4
 
-    private val tag = "QnaRegisterActivity"
+    // 레이아웃의 높이를 담는 변수 (키보드 visible/hide를 구분하기 위함)
+    private var mLastContentHeight = 0
 
+    private val tag = "QnaRegisterActivity"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_qna_register)
+        mContext = this
         setSupportActionBar(binding.toolbarQnaRegister.root as Toolbar)
         setClickEvent()
     }
@@ -87,6 +97,43 @@ class QnaRegisterActivity : AppCompatActivity() {
                 else -> Toast.makeText(this, "작성된 텍스트 다시 한번 확인해주세요", Toast.LENGTH_SHORT).show()
             }
         }
+
+        mLastContentHeight = this.findViewById<View>(Window.ID_ANDROID_CONTENT).getHeight();
+
+        setTouchEvent(binding.root)
+
+//        seekBar.setOnTouchListener(object : View.OnTouchListener {
+//            override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+//                when (event?.action) {
+//                    MotionEvent.ACTION_DOWN -> {
+//                        //터치가 눌리면...
+//                    }
+//                }
+//                //리턴값이 false면 seekbar 동작 안됨
+//                return true //or false
+//            }
+//        })
+    }
+
+    /**
+     * EditText가 아닌 부분을 터치했을 경우
+     * 키보드를 숨기기 위한 TouchEvent 설정
+     */
+    private fun setTouchEvent(view: View) {
+        if (view !is EditText) {    // 현재 focus View가 EditText가 아니라면, if문 통과하는 구조 공부 필요
+            view.setOnTouchListener(object : View.OnTouchListener {
+                override fun onTouch(p0: View?, p1: MotionEvent?): Boolean {
+                    hideSoftKeyboard(mContext); // Keyboard를 숨김
+                    return false;
+                }
+            })
+        }
+    }
+
+    private fun hideSoftKeyboard(mContext: Context) {
+        // InputMethodManager 객체 생성
+        val inputMethodManager = mContext.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(currentFocus?.windowToken, 0)    // 키보드 숨김
     }
 
     /**
