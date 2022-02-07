@@ -197,13 +197,16 @@ class QnaRegisterActivity : AppCompatActivity() {
         when (responseCode) {
             // 문의 등록 성공, 문의리스트 화면으로 돌아가 신규 데이터 확인
             200 -> {
+                // 키보드 열린 상태에서 등록 시, Toast Message가 화면 중간에 출력되는 문제발생
+                // *여전히 발생 - 추후 변경*
+                hideSoftKeyboard(this)
                 Toast.makeText(this, "문의 등록 성공!", Toast.LENGTH_SHORT).show()
                 moveToBack()
             }
             // 문의 등록 실패, 등록 버튼 비활성화, 정확하게 다양한 경우는 추후에 추가
             else -> {
+                hideSoftKeyboard(this)
                 Toast.makeText(this, "문의 등록 실패", Toast.LENGTH_SHORT).show()
-                binding.btnQnaRegister.isEnabled = false
             }
         }
     }
