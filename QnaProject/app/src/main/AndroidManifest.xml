@@ -13,14 +13,34 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.QnaProject"
         >
+
         <activity
-            android:name=".QnaActivity"
+            android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <!-- Redirect URI: "kakao{NATIVE_APP_KEY}://oauth" -->
+                <data android:host="oauth"
+                    android:scheme="kakaoc4ab14465de77a0d0621a4f8f587bd5b" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".StartActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+
+        <activity
+            android:name=".QnaActivity"
+            android:exported="true">
         </activity>
         <activity
             android:name=".QnaDetailActivity"
@@ -31,7 +51,6 @@
             android:exported="true"
             android:windowSoftInputMode="adjustResize"
             >
-
         </activity>
     </application>
 
