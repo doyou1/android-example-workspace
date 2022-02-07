@@ -1,8 +1,10 @@
 package com.example.qnaproject.activity
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
@@ -38,19 +40,30 @@ class QnaDetailActivity : AppCompatActivity() {
 
         // QnaList 화면로부터의 QNA_ID 전송 확인
         QNA_ID = intent.getIntExtra("QNA_ID", -1)
-        MEM_ID = intent.getIntExtra("MEM_ID", -1)
-
+        getSharedPreferenceData()
         if (QNA_ID != -1) setQndDetail(QNA_ID)
-        else moveToQnaActivity()                       // 적절하지 못한 접근이므로, 이전화면으로 이동
+        else super.onBackPressed()                       // 적절하지 못한 접근이므로, 이전화면으로 이동
     }
 
-    /**
+    private fun getSharedPreferenceData() {
+        val sharedPref = this.getSharedPreferences("App", Context.MODE_PRIVATE)
+        MEM_ID = sharedPref.getInt("MEM_ID", -1)
+
+        Log.e(tag, "MEM_ID: ${MEM_ID}")
+
+        if (MEM_ID == -1) {    // 기존의 MEM_ID가 없다면..
+            Toast.makeText(this, "적절하지 않은 접근입니다.", Toast.LENGTH_SHORT).show()
+            moveToMain()
+        }
+    }
+
+        /**
      * ClickEvent 설정
      */
     private fun setClickEvent() {
         // 상단 BackButton Click시 QnaList로 이동
         binding.toolbarQnaDetail.ibBack.setOnClickListener {
-            moveToQnaActivity()
+            super.onBackPressed()
         }
     }
 
@@ -93,17 +106,11 @@ class QnaDetailActivity : AppCompatActivity() {
         })
     }
 
-    // Android 내장 BackButton 클릭시
-    override fun onBackPressed() {
-        moveToQnaActivity()
-    }
-
     /**
-     * Activity to Activity 이동, QnaActivity(QnaList화면으로 이동)
+     * Activity to Activity 이동, MainActivity(로그인, 회원가입 화면으로 이동)
      */
-    private fun moveToQnaActivity() {
-        val intent = Intent(this, QnaActivity::class.java)
-        intent.putExtra("MEM_ID", MEM_ID)
+    private fun moveToMain() {
+        val intent = Intent(this, MainActivity::class.java)
         this.startActivity(intent)
         this.finish()
     }

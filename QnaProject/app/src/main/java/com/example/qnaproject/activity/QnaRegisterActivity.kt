@@ -56,16 +56,22 @@ class QnaRegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_qna_register)
-        mContext = this
-        getDataFromPreviousActivity()
         setSupportActionBar(binding.toolbarQnaRegister.root as Toolbar)
+        mContext = this
+        getSharedPreferenceData()
         setClickEvent()
     }
 
-    private fun getDataFromPreviousActivity() {
-        // QnaList 화면로부터의 QNA_ID 전송 확인
-        MEM_ID = intent.getIntExtra("MEM_ID", -1)
-        Log.e(tag, "getDataFromPreviousActivity: ${MEM_ID}")
+    private fun getSharedPreferenceData() {
+        val sharedPref = this.getSharedPreferences("App", Context.MODE_PRIVATE)
+        MEM_ID = sharedPref.getInt("MEM_ID", -1)
+
+        Log.e(tag, "MEM_ID: ${MEM_ID}")
+
+        if (MEM_ID == -1) {    // 기존의 MEM_ID가 없다면..
+            Toast.makeText(this, "적절하지 않은 접근입니다.", Toast.LENGTH_SHORT).show()
+            moveToMain()
+        }
     }
 
     /**
@@ -74,7 +80,7 @@ class QnaRegisterActivity : AppCompatActivity() {
     private fun setClickEvent() {
         // 상단 BackButton Click시 QnaList로 이동
         binding.toolbarQnaRegister.ibBack.setOnClickListener {
-            moveToQnaActivity()
+            super.onBackPressed()
         }
 
         // 등록Btn Click Event
@@ -113,17 +119,6 @@ class QnaRegisterActivity : AppCompatActivity() {
 
         setTouchEvent(binding.root)
 
-//        seekBar.setOnTouchListener(object : View.OnTouchListener {
-//            override fun onTouch(v: View?, event: MotionEvent?): Boolean {
-//                when (event?.action) {
-//                    MotionEvent.ACTION_DOWN -> {
-//                        //터치가 눌리면...
-//                    }
-//                }
-//                //리턴값이 false면 seekbar 동작 안됨
-//                return true //or false
-//            }
-//        })
     }
 
     /**
@@ -162,7 +157,6 @@ class QnaRegisterActivity : AppCompatActivity() {
         val newQna = NewQna(MEM_ID, titleText, contentText)
         val call: Call<NewQnaResponseModel> = qnaService.registerNewQna(newQna)
 
-        val mContext = this
         // 선언한 call 객체에 queue 추가
         call.enqueue(object : Callback<NewQnaResponseModel> {
             // Response Success
@@ -212,7 +206,7 @@ class QnaRegisterActivity : AppCompatActivity() {
                 // *여전히 발생 - 추후 변경*
                 hideSoftKeyboard(this)
                 Toast.makeText(this, "문의 등록 성공!", Toast.LENGTH_SHORT).show()
-                moveToQnaActivity()
+                super.onBackPressed()
             }
             // 문의 등록 실패, 등록 버튼 비활성화, 정확하게 다양한 경우는 추후에 추가
             else -> {
@@ -222,20 +216,10 @@ class QnaRegisterActivity : AppCompatActivity() {
         }
     }
 
-    /**
-     * Android 내장 BackButton 클릭이벤트
-     */
-    override fun onBackPressed() {
-        moveToQnaActivity()
-    }
-
-    /**
-     * Activity to Activity 이동, QnaActivity(QnaList화면으로 이동)
-     */
-    private fun moveToQnaActivity() {
-        val intent = Intent(this, QnaActivity::class.java)
-        intent.putExtra("MEM_ID", MEM_ID)
+    private fun moveToMain() {
+        val intent = Intent(this, MainActivity::class.java)
         this.startActivity(intent)
         this.finish()
     }
+
 }

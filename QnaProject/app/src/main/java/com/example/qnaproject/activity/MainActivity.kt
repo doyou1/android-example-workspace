@@ -134,7 +134,7 @@ class MainActivity:AppCompatActivity() {
 
     private fun removeAccessToken() {
         // 로그아웃
-        UserApiClient.instance.logout { error ->
+        mKakaoApi.logout { error ->
             if (error != null) {
                 Log.e(tag, "로그아웃 실패. SDK에서 토큰 삭제됨", error)
             }

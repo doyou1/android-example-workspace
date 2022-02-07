@@ -132,8 +132,9 @@ class QnaActivity : AppCompatActivity() {
         this.getSharedPreferences("App", Context.MODE_PRIVATE).edit().clear().commit();
         moveToMain()
     }
+
     /**
-     * Activity to Activity 이동, QnaRegisterActivity
+     * Activity to Activity 이동, QnaRegisterActivity(문의 등록2)
      */
     private fun moveToRegister() {
         val intent = Intent(this, QnaRegisterActivity::class.java)
@@ -141,6 +142,9 @@ class QnaActivity : AppCompatActivity() {
         this.finish()
     }
 
+    /**
+     * Activity to Activity 이동, MainActivity(로그인, 회원가입)
+     */
     private fun moveToMain() {
         val intent = Intent(this, MainActivity::class.java)
         this.startActivity(intent)
