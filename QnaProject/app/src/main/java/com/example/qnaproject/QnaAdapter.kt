@@ -27,6 +27,10 @@ class QnaAdapter(val qnaList: ArrayList<Qna>?, val MEM_ID: Int?) : RecyclerView.
         }
     }
 
+    fun setList(newList: ArrayList<Qna>) {
+        list.addAll(newList)
+    }
+
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         // list_qna_item.xml과 DataBinding
         binding = DataBindingUtil.inflate(
@@ -39,17 +43,15 @@ class QnaAdapter(val qnaList: ArrayList<Qna>?, val MEM_ID: Int?) : RecyclerView.
         return QnaViewHolder(binding).apply {   // RecyclerViewItem 클릭 이벤트 설정
             itemView.setOnClickListener {
                 val curPos: Int = adapterPosition
-                if (qnaList != null) {
-                    val qna: Qna = qnaList.get(curPos)
-                    val intent = Intent(viewGroup.context, QnaDetailActivity::class.java)
-                    intent.putExtra("QNA_ID", qna.QNA_ID)
-                    intent.putExtra("MEM_ID", MEM_ID)
+                val qna: Qna = list.get(curPos)
+                val intent = Intent(viewGroup.context, QnaDetailActivity::class.java)
+                intent.putExtra("QNA_ID", qna.QNA_ID)
+                intent.putExtra("MEM_ID", MEM_ID)
 
-                    val activity: QnaActivity = viewGroup.context as QnaActivity
-                    // 액티비티 종료하는 코드
-                    activity.startActivity(intent)
-                    activity.finish()
-                }
+                val activity: QnaActivity = viewGroup.context as QnaActivity
+                // 액티비티 종료하는 코드
+                activity.startActivity(intent)
+                activity.finish()
             }
         }
     }

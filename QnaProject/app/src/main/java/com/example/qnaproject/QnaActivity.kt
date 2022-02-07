@@ -123,8 +123,7 @@ class QnaActivity : AppCompatActivity() {
      * 인터페이스로부터 받아온 QnaList로 RecyclerView를 그리는 함수
      */
     private fun drawRecyclerView(qnaList: ArrayList<Qna>) {
-        qnaAdapter = QnaAdapter(qnaList, MEM_ID)
-        binding.rvQna.adapter = qnaAdapter
+        qnaAdapter.list.addAll(qnaList)
         qnaAdapter.notifyDataSetChanged()   // 새로운 Adapter 설정에 따라 DataSet Refresh
     }
 
