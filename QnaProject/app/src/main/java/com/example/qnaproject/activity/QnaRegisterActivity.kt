@@ -1,4 +1,4 @@
-package com.example.qnaproject
+package com.example.qnaproject.activity
 
 import android.app.Activity
 import android.content.Context
@@ -20,6 +20,10 @@ import retrofit2.converter.gson.GsonConverterFactory
 import android.view.Window
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import com.example.qnaproject.domain.NewQna
+import com.example.qnaproject.responseModel.NewQnaResponseModel
+import com.example.qnaproject.service.QnaService
+import com.example.qnaproject.R
 
 
 /**

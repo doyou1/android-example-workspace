@@ -4,7 +4,11 @@
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/white</item>
 
-        <!-- Customize your theme here. -->
+        <!-- Customize your theme here. -->`
         <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="SplashTheme" parent="Theme.Design.Light.NoActionBar">
+<!--        <item name="android:windowBackground">@drawable/splash</item>-->
     </style>
 </resources>

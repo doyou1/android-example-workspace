@@ -1,4 +1,4 @@
-package com.example.qnaproject
+package com.example.qnaproject.responseModel
 
 import com.google.gson.JsonArray
 

@@ -1,5 +1,9 @@
-package com.example.qnaproject
+package com.example.qnaproject.service
 
+import com.example.qnaproject.responseModel.ResponseModel
+import com.example.qnaproject.domain.User
+import com.example.qnaproject.responseModel.SocialLoginResponseModel
+import com.example.qnaproject.responseModel.UserResponseModel
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -17,6 +21,6 @@ interface UserService {
      */
     @Headers("content-type: application/json; charset=utf-8")
     @GET("api/user/login/Login")
-    fun socialLogin(@Query("MEM_SNS_TYPE") MEM_SNS_TYPE: String, @Query("MEM_SNS_ID") MEM_SNS_ID: String): Call<ResponseModel>
+    fun socialLogin(@Query("MEM_SNS_TYPE") MEM_SNS_TYPE: String, @Query("MEM_SNS_ID") MEM_SNS_ID: String): Call<SocialLoginResponseModel>
 
 }

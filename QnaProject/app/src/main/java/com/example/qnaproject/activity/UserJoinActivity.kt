@@ -1,10 +1,9 @@
-package com.example.qnaproject
+package com.example.qnaproject.activity
 
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
@@ -15,6 +14,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
+import com.example.qnaproject.R
+import com.example.qnaproject.domain.User
+import com.example.qnaproject.responseModel.UserResponseModel
+import com.example.qnaproject.service.UserService
 import com.example.qnaproject.databinding.ActivityUserJoinBinding
 import retrofit2.Call
 import retrofit2.Callback

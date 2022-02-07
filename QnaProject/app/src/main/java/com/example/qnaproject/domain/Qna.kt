@@ -1,4 +1,4 @@
-package com.example.qnaproject
+package com.example.qnaproject.domain
 
 /**
  * QnaList Item 모델

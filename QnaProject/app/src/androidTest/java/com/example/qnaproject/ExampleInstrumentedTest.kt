@@ -3,7 +3,8 @@ package com.example.qnaproject
 import android.util.Log
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import org.json.JSONObject
+import com.example.qnaproject.responseModel.QnaResponseModel
+import com.example.qnaproject.service.QnaService
 
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -47,19 +48,19 @@ class ExampleInstrumentedTest {
         // Retrofit 객체로 service 인터페이스 구현
         val qnaService = retrofit.create(QnaService::class.java)
 
-        val call: Call<JSONObject> = qnaService.getQnaList(memId, page)
+        val call: Call<QnaResponseModel> = qnaService.getQnaList(memId, page)
 
-        call.enqueue(object : Callback<JSONObject> {
+        call.enqueue(object : Callback<QnaResponseModel> {
             override fun onResponse(
-                call: Call<JSONObject>,
-                response: Response<JSONObject>
+                call: Call<QnaResponseModel>,
+                response: Response<QnaResponseModel>
             ) {
                 Log.d(tag, "성공 : ${response.raw()}")
                 Log.d(tag, "성공 : ${response.body()}")
                 Log.d(tag, "성공 : ${response}")
             }
 
-            override fun onFailure(call: Call<JSONObject>, t: Throwable) {
+            override fun onFailure(call: Call<QnaResponseModel>, t: Throwable) {
                 Log.d(tag, "실패 : $t")
             }
         })
