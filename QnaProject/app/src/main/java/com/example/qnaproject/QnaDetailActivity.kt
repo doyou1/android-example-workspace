@@ -20,11 +20,13 @@ import retrofit2.converter.gson.GsonConverterFactory
 class QnaDetailActivity : AppCompatActivity() {
 
     private val baseUrl = "https://api.jamjami.co.kr/"
-
     private val tag = "QnaDetailActivity"
 
     // activity_qna_detail의 Data Binding 객체
     private lateinit var binding: ActivityQnaDetailBinding
+
+    private var QNA_ID = -1
+    private var MEM_ID = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,9 +35,11 @@ class QnaDetailActivity : AppCompatActivity() {
         setClickEvent()
 
         // QnaList 화면로부터의 QNA_ID 전송 확인
-        val qnaId: Int = intent.getIntExtra("QNA_ID", -1)
-        if (qnaId != -1) setQndDetail(qnaId)
-        else moveToBack()                       // 적절하지 못한 접근이므로, 이전화면으로 이동
+        QNA_ID = intent.getIntExtra("QNA_ID", -1)
+        MEM_ID = intent.getIntExtra("MEM_ID", -1)
+
+        if (QNA_ID != -1) setQndDetail(QNA_ID)
+        else moveToQnaActivity()                       // 적절하지 못한 접근이므로, 이전화면으로 이동
     }
 
     /**
@@ -44,7 +48,7 @@ class QnaDetailActivity : AppCompatActivity() {
     private fun setClickEvent() {
         // 상단 BackButton Click시 QnaList로 이동
         binding.toolbarQnaDetail.ibBack.setOnClickListener {
-            moveToBack()
+            moveToQnaActivity()
         }
     }
 
@@ -89,14 +93,15 @@ class QnaDetailActivity : AppCompatActivity() {
 
     // Android 내장 BackButton 클릭시
     override fun onBackPressed() {
-        moveToBack()
+        moveToQnaActivity()
     }
 
     /**
      * Activity to Activity 이동, QnaActivity(QnaList화면으로 이동)
      */
-    private fun moveToBack() {
+    private fun moveToQnaActivity() {
         val intent = Intent(this, QnaActivity::class.java)
+        intent.putExtra("MEM_ID", MEM_ID)
         this.startActivity(intent)
         this.finish()
     }

@@ -29,7 +29,7 @@ import android.widget.EditText
 class QnaRegisterActivity : AppCompatActivity() {
 
     private val baseUrl = "https://api.jamjami.co.kr/"
-    val MEM_ID = "73"
+    private var MEM_ID = -1
 
     private lateinit var binding: ActivityQnaRegisterBinding
     private lateinit var mContext: Context
@@ -53,8 +53,15 @@ class QnaRegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_qna_register)
         mContext = this
+        getDataFromPreviousActivity()
         setSupportActionBar(binding.toolbarQnaRegister.root as Toolbar)
         setClickEvent()
+    }
+
+    private fun getDataFromPreviousActivity() {
+        // QnaList 화면로부터의 QNA_ID 전송 확인
+        MEM_ID = intent.getIntExtra("MEM_ID", -1)
+        Log.e(tag, "getDataFromPreviousActivity: ${MEM_ID}")
     }
 
     /**
@@ -63,7 +70,7 @@ class QnaRegisterActivity : AppCompatActivity() {
     private fun setClickEvent() {
         // 상단 BackButton Click시 QnaList로 이동
         binding.toolbarQnaRegister.ibBack.setOnClickListener {
-            moveToBack()
+            moveToQnaActivity()
         }
 
         // 등록Btn Click Event
@@ -201,7 +208,7 @@ class QnaRegisterActivity : AppCompatActivity() {
                 // *여전히 발생 - 추후 변경*
                 hideSoftKeyboard(this)
                 Toast.makeText(this, "문의 등록 성공!", Toast.LENGTH_SHORT).show()
-                moveToBack()
+                moveToQnaActivity()
             }
             // 문의 등록 실패, 등록 버튼 비활성화, 정확하게 다양한 경우는 추후에 추가
             else -> {
@@ -215,14 +222,15 @@ class QnaRegisterActivity : AppCompatActivity() {
      * Android 내장 BackButton 클릭이벤트
      */
     override fun onBackPressed() {
-        moveToBack()
+        moveToQnaActivity()
     }
 
     /**
      * Activity to Activity 이동, QnaActivity(QnaList화면으로 이동)
      */
-    private fun moveToBack() {
+    private fun moveToQnaActivity() {
         val intent = Intent(this, QnaActivity::class.java)
+        intent.putExtra("MEM_ID", MEM_ID)
         this.startActivity(intent)
         this.finish()
     }
