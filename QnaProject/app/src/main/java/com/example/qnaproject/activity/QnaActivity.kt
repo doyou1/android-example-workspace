@@ -15,7 +15,6 @@ import com.example.qnaproject.domain.Qna
 import com.example.qnaproject.responseModel.QnaResponseModel
 import com.example.qnaproject.service.QnaService
 import com.example.qnaproject.databinding.ActivityQnaBinding
-import com.kakao.sdk.user.UserApiClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -101,6 +100,8 @@ class QnaActivity : AppCompatActivity() {
                 val resBody = response.body() as QnaResponseModel
                 Log.d(tag, "성공 : ${resBody.data}")
                 qnaList = resBody.data // ResponseBody 중 Qna List 정보를 담고 있는 객체
+                if (qnaList.size == 0) page--   // gnaList.size == 0 일경우, 해당 페이지 인덱스에 QnaList가 없음을 의미
+//                binding.rvQna.removeOnScrollListener()
 
                 drawRecyclerView(qnaList)
             }
@@ -121,6 +122,9 @@ class QnaActivity : AppCompatActivity() {
         setRecyclerViewScrollEvent()
     }
 
+    /**
+     * RecyclerView의 최하단(Bottom) 스크롤을 인지하는 Listener 등록
+     */
     private fun setRecyclerViewScrollEvent() {
         binding.rvQna.addOnScrollListener(object: RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -130,7 +134,7 @@ class QnaActivity : AppCompatActivity() {
                 val itemTotalCount = recyclerView.adapter?.itemCount?.minus(1);
                 if (lastVisibleItemPosition == itemTotalCount) {
                     Log.d(tag, "last Position...");
-                    page++
+                    page++  // 다음 페이지 호출을 위한 page index 변경
                     setQnaList()
                 }
             }
@@ -141,7 +145,7 @@ class QnaActivity : AppCompatActivity() {
      * 인터페이스로부터 받아온 QnaList로 RecyclerView를 그리는 함수
      */
     private fun drawRecyclerView(qnaList: ArrayList<Qna>) {
-        if (qnaList.size > 0) {
+        if (qnaList.size > 0) { // 받
             val fromIndex = qnaAdapter.list.size            // 0        10      20      30
             qnaAdapter.list.addAll(qnaList.toMutableList())
             val toIndex = qnaAdapter.list.size - 1          // 10-1     20-1    30-1    34-1
@@ -152,6 +156,9 @@ class QnaActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * 로그아웃 처리
+     */
     private fun logout() {
         // 저장된 MEM_ID 삭제
         this.getSharedPreferences("App", Context.MODE_PRIVATE).edit().clear().commit();
@@ -159,7 +166,7 @@ class QnaActivity : AppCompatActivity() {
     }
 
     /**
-     * Activity to Activity 이동, QnaRegisterActivity(문의 등록2)
+     * Activity to Activity 이동, QnaRegisterActivity(문의 등록)
      */
     private fun moveToRegister() {
         val intent = Intent(this, QnaRegisterActivity::class.java)

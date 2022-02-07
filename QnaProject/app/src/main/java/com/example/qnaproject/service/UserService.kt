@@ -1,6 +1,5 @@
 package com.example.qnaproject.service
 
-import com.example.qnaproject.responseModel.ResponseModel
 import com.example.qnaproject.domain.User
 import com.example.qnaproject.responseModel.SocialLoginResponseModel
 import com.example.qnaproject.responseModel.UserResponseModel
