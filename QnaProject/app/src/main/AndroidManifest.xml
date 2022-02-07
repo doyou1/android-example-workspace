@@ -37,7 +37,6 @@
             </intent-filter>
         </activity>
 
-
         <activity
             android:name=".QnaActivity"
             android:exported="true">
@@ -50,6 +49,11 @@
             android:name=".QnaRegisterActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustResize"
+            >
+        </activity>
+        <activity
+            android:name=".UserJoinActivity"
+            android:exported="true"
             >
         </activity>
     </application>

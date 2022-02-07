@@ -3,7 +3,7 @@ package com.example.qnaproject
 import retrofit2.Call
 import retrofit2.http.*
 
-public interface QnaService {
+interface QnaService {
 
     /**
      * Qna화면에 출력할 Qna List Object 리턴
@@ -26,5 +26,12 @@ public interface QnaService {
     @POST("api/faq/RegisterFAQ")
     fun registerNewQna(@Body newQna: NewQna) : Call<NewQnaResponseModel>
 
+
+    /**
+     * 작성한 Qna 서버에 등록
+     */
+    @Headers("content-type: application/json; charset=utf-8")
+    @GET("api/user/login/Login")
+    fun socialLogin(@Query("MEM_SNS_TYPE") MEM_SNS_TYPE: String, @Query("MEM_SNS_ID") MEM_SNS_ID: String): Call<ResponseModel>
 
 }
