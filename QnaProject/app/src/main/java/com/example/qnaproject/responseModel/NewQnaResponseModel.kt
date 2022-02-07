@@ -1,4 +1,6 @@
-package com.example.qnaproject
+package com.example.qnaproject.responseModel
+
+import com.example.qnaproject.domain.NewQna
 
 class NewQnaResponseModel(val code:Int, val message:String, val data: ArrayList<NewQna>) {
 

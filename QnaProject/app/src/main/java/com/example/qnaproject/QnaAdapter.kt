@@ -2,23 +2,23 @@ package com.example.qnaproject
 
 import android.content.Intent
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.qnaproject.databinding.ActivityQnaBinding
+import com.example.qnaproject.activity.QnaActivity
+import com.example.qnaproject.activity.QnaDetailActivity
+import com.example.qnaproject.domain.Qna
 import com.example.qnaproject.databinding.ListQnaItemBinding
 
 /**
  * Qna화면의 RecyclerView Adapter
  * 데이터 바인딩, 클릭 이벤트 처리
  */
-class QnaAdapter(val qnaList: ArrayList<Qna>?, val MEM_ID: Int?) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class QnaAdapter(val qnaList: ArrayList<Qna>?) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     // DataBinding object
     private lateinit var binding: ListQnaItemBinding
-    val list = mutableListOf<Qna>()
+    var list = mutableListOf<Qna>()
 
     // 인터페이스로부터 받아온 QnaList 추가
     init {
@@ -46,7 +46,6 @@ class QnaAdapter(val qnaList: ArrayList<Qna>?, val MEM_ID: Int?) : RecyclerView.
                 val qna: Qna = list.get(curPos)
                 val intent = Intent(viewGroup.context, QnaDetailActivity::class.java)
                 intent.putExtra("QNA_ID", qna.QNA_ID)
-                intent.putExtra("MEM_ID", MEM_ID)
 
                 val activity: QnaActivity = viewGroup.context as QnaActivity
                 // 액티비티 종료하는 코드
@@ -59,8 +58,7 @@ class QnaAdapter(val qnaList: ArrayList<Qna>?, val MEM_ID: Int?) : RecyclerView.
     override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int) {
         if (viewHolder is QnaViewHolder) {
             val item = list[position]
-            viewHolder.binding.tvQnaTitle.text = item.QNA_TITLE
-            viewHolder.binding.tvQnaConDt.text = item.QNA_CON_DT
+            viewHolder.binding.qna = item
         }
     }
 

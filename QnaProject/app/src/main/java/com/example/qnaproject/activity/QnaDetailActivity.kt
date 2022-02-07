@@ -1,4 +1,4 @@
-package com.example.qnaproject
+package com.example.qnaproject.activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,8 +6,10 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
+import com.example.qnaproject.responseModel.QnaDetailResponseModel
+import com.example.qnaproject.service.QnaService
+import com.example.qnaproject.R
 import com.example.qnaproject.databinding.ActivityQnaDetailBinding
-import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

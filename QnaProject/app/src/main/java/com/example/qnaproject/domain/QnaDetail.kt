@@ -1,4 +1,4 @@
-package com.example.qnaproject
+package com.example.qnaproject.domain
 
 /**
  * QnaDetail(상세정보) 모델

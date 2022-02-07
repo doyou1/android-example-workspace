@@ -1,16 +1,20 @@
-package com.example.qnaproject
+package com.example.qnaproject.activity
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.example.qnaproject.*
+import com.example.qnaproject.domain.Qna
+import com.example.qnaproject.responseModel.QnaResponseModel
+import com.example.qnaproject.service.QnaService
 import com.example.qnaproject.databinding.ActivityQnaBinding
 import com.kakao.sdk.user.UserApiClient
-import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -31,22 +35,28 @@ class QnaActivity : AppCompatActivity() {
     private lateinit var binding: ActivityQnaBinding
 
     private var qnaList = arrayListOf<Qna>()
-    private var qnaAdapter = QnaAdapter(qnaList, MEM_ID)
+    private var qnaAdapter = QnaAdapter(qnaList)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_qna)
         setSupportActionBar(binding.toolbarQna.root as Toolbar)
-
-        getDataFromPreviousActivity()
+        getSharedPreferenceData()
         setClickEvent()
         setQndList()
         setRecyclerView()
     }
 
-    private fun getDataFromPreviousActivity() {
-        // QnaList 화면로부터의 QNA_ID 전송 확인
-        MEM_ID = intent.getIntExtra("MEM_ID", -1)
+    private fun getSharedPreferenceData() {
+        val sharedPref = this.getSharedPreferences("App", Context.MODE_PRIVATE)
+        MEM_ID = sharedPref.getInt("MEM_ID", -1)
+
+        Log.e(tag, "MEM_ID: ${MEM_ID}")
+
+        if(MEM_ID == -1) {    // 기존의 MEM_ID가 없다면..
+            Toast.makeText(this, "적절하지 않은 접근입니다.", Toast.LENGTH_SHORT).show()
+            moveToMain()
+        }
     }
 
     /**
@@ -58,17 +68,7 @@ class QnaActivity : AppCompatActivity() {
             moveToRegister()
         }
         binding.toolbarQna.btnKakaoLogout.setOnClickListener{
-            // 로그아웃
-            UserApiClient.instance.logout { error ->
-                if (error != null) {
-                    Log.e(tag, "로그아웃 실패. SDK에서 토큰 삭제됨", error)
-                }
-                else {
-                    Log.i(tag, "로그아웃 성공. SDK에서 토큰 삭제됨")
-
-                    moveToSplash()
-                }
-            }
+            logout()
         }
     }
 
@@ -123,23 +123,26 @@ class QnaActivity : AppCompatActivity() {
      * 인터페이스로부터 받아온 QnaList로 RecyclerView를 그리는 함수
      */
     private fun drawRecyclerView(qnaList: ArrayList<Qna>) {
-        qnaAdapter.list.addAll(qnaList)
+        qnaAdapter.list = qnaList.toMutableList()
         qnaAdapter.notifyDataSetChanged()   // 새로운 Adapter 설정에 따라 DataSet Refresh
     }
 
+    private fun logout() {
+        // 저장된 MEM_ID 삭제
+        this.getSharedPreferences("App", Context.MODE_PRIVATE).edit().clear().commit();
+        moveToMain()
+    }
     /**
      * Activity to Activity 이동, QnaRegisterActivity
      */
     private fun moveToRegister() {
         val intent = Intent(this, QnaRegisterActivity::class.java)
-        Log.e(tag, "moveToRegister: ${MEM_ID}")
-        intent.putExtra("MEM_ID", MEM_ID)
         this.startActivity(intent)
         this.finish()
     }
 
-    private fun moveToSplash() {
-        val intent = Intent(this, SplashActivity::class.java)
+    private fun moveToMain() {
+        val intent = Intent(this, MainActivity::class.java)
         this.startActivity(intent)
         this.finish()
     }

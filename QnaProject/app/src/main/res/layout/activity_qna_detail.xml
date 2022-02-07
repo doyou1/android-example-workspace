@@ -7,14 +7,14 @@
         <import type="android.view.View"/>
         <variable
             name="qnaDetail"
-            type="com.example.qnaproject.QnaDetail" />
+            type="com.example.qnaproject.domain.QnaDetail" />
     </data>
 
     <!-- layout 정의 -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="QnaDetailActivity"
+        tools:context=".activity.QnaDetailActivity"
         >
         <include
             android:id="@+id/toolbar_qna_detail"

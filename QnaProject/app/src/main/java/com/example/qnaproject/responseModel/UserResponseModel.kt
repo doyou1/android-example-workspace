@@ -1,4 +1,6 @@
-package com.example.qnaproject
+package com.example.qnaproject.responseModel
+
+import com.example.qnaproject.domain.User
 
 data class UserResponseModel(val code:Int, val message:String, val data: Array<User>?) {
 

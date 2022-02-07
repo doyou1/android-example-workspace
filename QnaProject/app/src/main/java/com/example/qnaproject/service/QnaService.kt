@@ -1,5 +1,9 @@
-package com.example.qnaproject
+package com.example.qnaproject.service
 
+import com.example.qnaproject.domain.NewQna
+import com.example.qnaproject.responseModel.NewQnaResponseModel
+import com.example.qnaproject.responseModel.QnaDetailResponseModel
+import com.example.qnaproject.responseModel.QnaResponseModel
 import retrofit2.Call
 import retrofit2.http.*
 
