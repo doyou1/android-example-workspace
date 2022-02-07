@@ -31,6 +31,7 @@
                 android:layout_height="0dp"
                 android:background="#f3f6fe"
                 android:hint="문의제목"
+                android:inputType="text"
                 android:textSize="14sp"
                 android:paddingHorizontal="15dp"
                 app:layout_constraintBottom_toTopOf="@+id/et_qan_content"
