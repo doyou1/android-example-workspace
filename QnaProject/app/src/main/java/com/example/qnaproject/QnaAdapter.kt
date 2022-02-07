@@ -50,7 +50,6 @@ class QnaAdapter(val qnaList: ArrayList<Qna>?) : RecyclerView.Adapter<RecyclerVi
                 val activity: QnaActivity = viewGroup.context as QnaActivity
                 // 액티비티 종료하는 코드
                 activity.startActivity(intent)
-                activity.finish()
             }
         }
     }

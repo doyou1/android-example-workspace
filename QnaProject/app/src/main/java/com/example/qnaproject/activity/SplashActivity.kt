@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.example.qnaproject.R
 import com.example.qnaproject.databinding.ActivitySplashBinding
+import com.kakao.sdk.common.util.Utility
 
 class SplashActivity: AppCompatActivity() {
 
@@ -18,6 +19,9 @@ class SplashActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_splash)
+
+//        var keyHash = Utility.getKeyHash(this)
+//        Log.e(tag, keyHash)
 
         val sharedPref = this.getSharedPreferences("App", Context.MODE_PRIVATE)
         val MEM_ID = sharedPref.getInt("MEM_ID", -1)

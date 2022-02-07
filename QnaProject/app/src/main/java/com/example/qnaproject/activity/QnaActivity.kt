@@ -139,7 +139,6 @@ class QnaActivity : AppCompatActivity() {
     private fun moveToRegister() {
         val intent = Intent(this, QnaRegisterActivity::class.java)
         this.startActivity(intent)
-        this.finish()
     }
 
     /**
