@@ -100,6 +100,7 @@ class QnaActivity : AppCompatActivity() {
                 val resBody = response.body() as QnaResponseModel
                 Log.d(tag, "성공 : ${resBody.data}")
                 qnaList = resBody.data // ResponseBody 중 Qna List 정보를 담고 있는 객체
+
                 drawRecyclerView(qnaList)
             }
 
@@ -115,7 +116,6 @@ class QnaActivity : AppCompatActivity() {
      */
     private fun setRecyclerView() {
         binding.rvQna.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        binding.rvQna.setHasFixedSize(true)
         binding.rvQna.adapter = qnaAdapter
     }
 
