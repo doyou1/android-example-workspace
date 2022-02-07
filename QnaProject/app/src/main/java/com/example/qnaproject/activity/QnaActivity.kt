@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.qnaproject.*
 import com.example.qnaproject.domain.Qna
 import com.example.qnaproject.responseModel.QnaResponseModel
@@ -28,7 +29,7 @@ class QnaActivity : AppCompatActivity() {
 
     private val baseUrl = "https://api.jamjami.co.kr/"
     private var MEM_ID:Int = -1  // url param - MEM_ID
-    private val page = 1     // url param - Page
+    private var page = 1     // url param - Page
     private val tag = "QnaActivity"
 
     // activity_qna의 Data Binding 객체
@@ -43,7 +44,7 @@ class QnaActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbarQna.root as Toolbar)
         getSharedPreferenceData()
         setClickEvent()
-        setQndList()
+        setQnaList()
         setRecyclerView()
     }
 
@@ -76,7 +77,7 @@ class QnaActivity : AppCompatActivity() {
      * 서버로부터 QnaList 데이터를 얻고,
      * RecyclerView refresh
      */
-    private fun setQndList() {
+    private fun setQnaList() {
         // Retrofit 객체 생성
         val retrofit: Retrofit = Retrofit.Builder()
             .baseUrl(baseUrl)
@@ -117,14 +118,38 @@ class QnaActivity : AppCompatActivity() {
     private fun setRecyclerView() {
         binding.rvQna.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding.rvQna.adapter = qnaAdapter
+        setRecyclerViewScrollEvent()
+    }
+
+    private fun setRecyclerViewScrollEvent() {
+        binding.rvQna.addOnScrollListener(object: RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                val lastVisibleItemPosition = (recyclerView.layoutManager as? LinearLayoutManager)?.findLastCompletelyVisibleItemPosition();
+                val itemTotalCount = recyclerView.adapter?.itemCount?.minus(1);
+                if (lastVisibleItemPosition == itemTotalCount) {
+                    Log.d(tag, "last Position...");
+                    page++
+                    setQnaList()
+                }
+            }
+        })
     }
 
     /**
      * 인터페이스로부터 받아온 QnaList로 RecyclerView를 그리는 함수
      */
     private fun drawRecyclerView(qnaList: ArrayList<Qna>) {
-        qnaAdapter.list = qnaList.toMutableList()
-        qnaAdapter.notifyDataSetChanged()   // 새로운 Adapter 설정에 따라 DataSet Refresh
+        if (qnaList.size > 0) {
+            val fromIndex = qnaAdapter.list.size            // 0        10      20      30
+            qnaAdapter.list.addAll(qnaList.toMutableList())
+            val toIndex = qnaAdapter.list.size - 1          // 10-1     20-1    30-1    34-1
+//        qnaAdapter.notifyDataSetChanged()   // 새로운 Adapter 설정에 따라 DataSet Refresh
+
+            Log.e(tag, "fromIndex: ${fromIndex}, toIndex: ${toIndex}")
+            qnaAdapter.notifyItemRangeChanged(fromIndex,toIndex)
+        }
     }
 
     private fun logout() {
