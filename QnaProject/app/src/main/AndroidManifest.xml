@@ -14,8 +14,7 @@
         <activity
             android:name=".activity.ProductActivity"
             android:exported="false"
-            android:label="@string/title_activity_product"
-            android:theme="@style/Theme.QnaProject.NoActionBar" />
+            />
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
             android:exported="true" >

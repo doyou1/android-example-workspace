@@ -15,6 +15,4 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
-    <style name="Theme.QnaProject.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-    <style name="Theme.QnaProject.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

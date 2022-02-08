@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.example.qnaproject.R
 import com.example.qnaproject.databinding.ActivityProductBinding
+import com.example.qnaproject.fragment.HomeFragment
 import com.google.android.material.navigation.NavigationBarView
 
 class ProductActivity : AppCompatActivity() {
