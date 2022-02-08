@@ -67,7 +67,7 @@
             app:layout_constraintWidth_default="percent"
             app:layout_constraintWidth_percent="0.3"
             app:layout_constraintDimensionRatio="1.2:1"
-            tools:src="@tools:sample/avatars" />
+            android:src="@drawable/company_product_default" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

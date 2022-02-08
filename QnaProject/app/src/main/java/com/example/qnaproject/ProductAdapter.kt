@@ -17,6 +17,8 @@ class ProductAdapter(val productList: ArrayList<Product>) : RecyclerView.Adapter
     private val tag = "ProductAdapter"
     private lateinit var binding: ListProductItemBinding
     private lateinit var mContext: Context
+    var count = 0
+
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         binding = DataBindingUtil.inflate(
@@ -34,6 +36,9 @@ class ProductAdapter(val productList: ArrayList<Product>) : RecyclerView.Adapter
         if (holder is ProductViewHolder) {
             val product: Product = productList.get(position)
             holder.bind(product)
+
+            Log.e(tag, "count: ${count++}")
+
         }
     }
 
@@ -43,7 +48,6 @@ class ProductAdapter(val productList: ArrayList<Product>) : RecyclerView.Adapter
 
     inner class ProductViewHolder(val binding: ListProductItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-
             fun bind(product:Product) {
                 this.itemView.setOnClickListener {
                     Log.e(tag, product.toString())
@@ -51,11 +55,11 @@ class ProductAdapter(val productList: ArrayList<Product>) : RecyclerView.Adapter
                 }
                 binding.product = product
 
-                Log.e(tag, "w: ${binding.ivProductImg1.width} h: ${binding.ivProductImg1.height}")
                 // Glide 이미지 라이브러리 사용
                 Glide.with(mContext)
                     .load(product.ITM_IMG1)
                     .transform(RoundedCorners(100))
+                    .error(R.drawable.company_product_default)
                     .into(binding.ivProductImg1)
 
             }
