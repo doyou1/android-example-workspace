@@ -206,7 +206,8 @@ class QnaRegisterActivity : AppCompatActivity() {
                 // *여전히 발생 - 추후 변경*
                 hideSoftKeyboard(this)
                 Toast.makeText(this, "문의 등록 성공!", Toast.LENGTH_SHORT).show()
-                super.onBackPressed()
+//                super.onBackPressed() // 되돌아갈 경우 List Refresh X
+                moveToQnaList()
             }
             // 문의 등록 실패, 등록 버튼 비활성화, 정확하게 다양한 경우는 추후에 추가
             else -> {
@@ -218,6 +219,12 @@ class QnaRegisterActivity : AppCompatActivity() {
 
     private fun moveToMain() {
         val intent = Intent(this, MainActivity::class.java)
+        this.startActivity(intent)
+        this.finish()
+    }
+
+    private fun moveToQnaList() {
+        val intent = Intent(this, QnaActivity::class.java)
         this.startActivity(intent)
         this.finish()
     }
