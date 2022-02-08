@@ -21,12 +21,16 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+/**
+ * ProductActivity 기본 화면
+ * 상품리스트 출력 화면
+ */
 class HomeFragment : Fragment() {
 
     private val baseUrl = "https://api.jamjami.co.kr/"
     private lateinit var binding:FragmentHomeBinding
 
-    private val MEM_ID = 94
+    private val MEM_ID = 94             // 로그인 유저 id
     private val ITM_ONLY_VIEW = "N"
     private var PAGE = 1
 
@@ -45,6 +49,9 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
+    /**
+     * RecyclerView 생성 메서드
+     */
     private fun setRecyclerView() {
         binding.rvProduct.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         binding.rvProduct.adapter = productAdapter
@@ -70,6 +77,9 @@ class HomeFragment : Fragment() {
         })
     }
 
+    /**
+     * 상품리스트 인터페이스 URL 호출 및 응답 데이터 RecyclerView 전달
+     */
     private fun setProductList() {
         // Retrofit 객체 생성
         val retrofit: Retrofit = Retrofit.Builder()
@@ -105,6 +115,9 @@ class HomeFragment : Fragment() {
         })
     }
 
+    /**
+     * 서버로부터의 새로운 상품리스트를 RecyclerView에 반영
+     */
     private fun drawRecyclerView(newList: ArrayList<Product>) {
         if (newList.size > 0) {
             val positionStart = productList.size    // 0        10      20      30
@@ -116,6 +129,7 @@ class HomeFragment : Fragment() {
 
     // Java의 static과 비슷, 추후 공부 필요
     companion object {
+        // 싱글톤
         @Volatile private var instance: HomeFragment? = null
 
         @JvmStatic fun getInstance(): HomeFragment =

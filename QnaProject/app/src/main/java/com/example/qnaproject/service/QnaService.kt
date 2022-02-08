@@ -7,6 +7,9 @@ import com.example.qnaproject.responseModel.QnaResponseModel
 import retrofit2.Call
 import retrofit2.http.*
 
+/**
+ * 문의 인터페이스 URL 요청 서비스 interface
+ */
 interface QnaService {
 
     /**

@@ -5,10 +5,14 @@ import retrofit2.Call
 import retrofit2.http.*
 
 
+/**
+ * 상품 인터페이스 URL 요청 서비스 interface
+ */
 interface ProductService {
 
     /**
-     * Qna화면에 출력할 Qna List Object 리턴
+     * ProductActivity - HomeFragment - RecycierView
+     * 상품정보 리스트
      */
     @Headers("content-type: application/json; charset=utf-8")
     @GET("api/goods/GoodList")

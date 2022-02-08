@@ -6,6 +6,9 @@ import com.example.qnaproject.responseModel.UserResponseModel
 import retrofit2.Call
 import retrofit2.http.*
 
+/**
+ * 유저 인터페이스 URL 요청 서비스 interface
+ */
 interface UserService {
 
     /**

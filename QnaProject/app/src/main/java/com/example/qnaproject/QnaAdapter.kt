@@ -62,7 +62,6 @@ class QnaAdapter(val qnaList: ArrayList<Qna>) : RecyclerView.Adapter<RecyclerVie
                 activity.startActivity(intent)
             }
             binding.qna = qna
-
         }
     }
 }

@@ -12,6 +12,9 @@ import com.bumptech.glide.module.AppGlideModule
  * or LibraryGlideModules will be silently ignored
  */
 
+/**
+ * 위 Warning을 해결하기 위한 GlideModule 선언
+ */
 @GlideModule
 class GlideModule: AppGlideModule() {
 }

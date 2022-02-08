@@ -12,6 +12,10 @@ import com.example.qnaproject.databinding.ListProductItemBinding
 import com.example.qnaproject.domain.Product
 import com.example.qnaproject.module.GlideApp
 
+/**
+ * ProductActivity - HomeFragment - RecyclerView
+ * 상품리스트(recyclerview)의 어댑터
+ */
 class ProductAdapter(val productList: ArrayList<Product>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val tag = "ProductAdapter"
@@ -42,6 +46,9 @@ class ProductAdapter(val productList: ArrayList<Product>) : RecyclerView.Adapter
         return productList.size
     }
 
+    /**
+     * 레이아웃과 바인딩
+     */
     inner class ProductViewHolder(val binding: ListProductItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
             fun bind(product:Product) {
