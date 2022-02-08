@@ -1,19 +1,16 @@
 package com.example.qnaproject
 
 import android.content.Context
-import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.qnaproject.activity.QnaActivity
-import com.example.qnaproject.activity.QnaDetailActivity
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.qnaproject.databinding.ListProductItemBinding
-import com.example.qnaproject.databinding.ListQnaItemBinding
 import com.example.qnaproject.domain.Product
-import com.example.qnaproject.domain.Qna
 
 class ProductAdapter(val productList: ArrayList<Product>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -37,8 +34,6 @@ class ProductAdapter(val productList: ArrayList<Product>) : RecyclerView.Adapter
         if (holder is ProductViewHolder) {
             val product: Product = productList.get(position)
             holder.bind(product)
-
-            holder.itemView
         }
     }
 
@@ -55,6 +50,14 @@ class ProductAdapter(val productList: ArrayList<Product>) : RecyclerView.Adapter
                     Toast.makeText(mContext, product.toString(), Toast.LENGTH_SHORT).show()
                 }
                 binding.product = product
+
+                Log.e(tag, "w: ${binding.ivProductImg1.width} h: ${binding.ivProductImg1.height}")
+                // Glide 이미지 라이브러리 사용
+                Glide.with(mContext)
+                    .load(product.ITM_IMG1)
+                    .transform(RoundedCorners(100))
+                    .into(binding.ivProductImg1)
+
             }
     }
 }
