@@ -7,17 +7,16 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.qnaproject.databinding.ListProductItemBinding
 import com.example.qnaproject.domain.Product
+import com.example.qnaproject.module.GlideApp
 
 class ProductAdapter(val productList: ArrayList<Product>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val tag = "ProductAdapter"
     private lateinit var binding: ListProductItemBinding
     private lateinit var mContext: Context
-    var count = 0
 
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -36,9 +35,6 @@ class ProductAdapter(val productList: ArrayList<Product>) : RecyclerView.Adapter
         if (holder is ProductViewHolder) {
             val product: Product = productList.get(position)
             holder.bind(product)
-
-            Log.e(tag, "count: ${count++}")
-
         }
     }
 
@@ -55,8 +51,9 @@ class ProductAdapter(val productList: ArrayList<Product>) : RecyclerView.Adapter
                 }
                 binding.product = product
 
+                Log.e(tag, "product ${product.ITM_NM}, ${product.ITM_IMG1}")
                 // Glide 이미지 라이브러리 사용
-                Glide.with(mContext)
+                GlideApp.with(mContext)
                     .load(product.ITM_IMG1)
                     .transform(RoundedCorners(100))
                     .error(R.drawable.company_product_default)
