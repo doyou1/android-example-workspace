@@ -117,7 +117,7 @@ class QnaActivity : AppCompatActivity() {
      */
     private fun drawRecyclerView(newList: ArrayList<Qna>) {
         if (newList.size > 0) { // 받
-            val positionStart = qnaList.size            // 0        10      20      30
+            val positionStart = qnaList.size      // 0        10      20      30
             qnaList.addAll(newList)
             val itemCount = newList.size          // 10-1     20-1    30-1    34-1
             qnaAdapter.notifyItemRangeChanged(positionStart,itemCount)

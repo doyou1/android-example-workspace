@@ -91,7 +91,9 @@ class HomeFragment : Fragment() {
             ) { // Response Success
                 // ResponseBody의 형태에 따라 Custom ResponseModel로 변환
                 val resBody = response.body() as ProductResponseModel
+                Log.e(tag, resBody.toString())
                 val newList = resBody.data
+
                 if (newList.size == 0) PAGE--   // productList.size == 0 일경우, 해당 페이지 인덱스에 List가 없음을 의미
 
                 drawRecyclerView(newList)

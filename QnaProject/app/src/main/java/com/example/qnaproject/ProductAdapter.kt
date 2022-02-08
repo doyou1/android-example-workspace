@@ -58,7 +58,6 @@ class ProductAdapter(val productList: ArrayList<Product>) : RecyclerView.Adapter
                     .transform(RoundedCorners(100))
                     .error(R.drawable.company_product_default)
                     .into(binding.ivProductImg1)
-
             }
     }
 }

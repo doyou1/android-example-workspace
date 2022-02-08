@@ -1,5 +1,6 @@
 package com.example.qnaproject
 
+import android.content.Context
 import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
@@ -23,6 +24,7 @@ class QnaAdapter(val qnaList: ArrayList<Qna>) : RecyclerView.Adapter<RecyclerVie
 
     // DataBinding object
     private lateinit var binding: ListQnaItemBinding
+    private lateinit var mContext: Context
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         // list_qna_item.xml과 DataBinding
@@ -32,26 +34,14 @@ class QnaAdapter(val qnaList: ArrayList<Qna>) : RecyclerView.Adapter<RecyclerVie
             viewGroup,
             false
         )
-
-        return QnaViewHolder(binding).apply {   // RecyclerViewItem 클릭 이벤트 설정
-            itemView.setOnClickListener {
-                val curPos: Int = adapterPosition
-                val qna: Qna = qnaList.get(curPos)
-                val intent = Intent(viewGroup.context, QnaDetailActivity::class.java)
-                intent.putExtra("QNA_ID", qna.QNA_ID)
-
-                val activity: QnaActivity = viewGroup.context as QnaActivity
-                // 액티비티 종료하는 코드
-                activity.startActivity(intent)
-            }
-        }
+        mContext = viewGroup.context
+        return QnaViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is QnaViewHolder) {
             val qna = qnaList[position]
             holder.bind(qna)
-
         }
     }
 
@@ -64,8 +54,12 @@ class QnaAdapter(val qnaList: ArrayList<Qna>) : RecyclerView.Adapter<RecyclerVie
 
         fun bind(qna: Qna) {
             this.itemView.setOnClickListener {
+                val intent = Intent(mContext, QnaDetailActivity::class.java)
+                intent.putExtra("QNA_ID", qna.QNA_ID)
 
-
+                val activity: QnaActivity = mContext as QnaActivity
+                // 액티비티 종료하는 코드
+                activity.startActivity(intent)
             }
             binding.qna = qna
 

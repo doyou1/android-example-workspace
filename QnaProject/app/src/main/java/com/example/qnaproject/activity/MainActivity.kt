@@ -20,6 +20,9 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+/**
+ * 카카오 로그인 및 회원가입을 처리하는 화면
+ */
 class MainActivity:AppCompatActivity() {
     private val baseUrl = "https://api.jamjami.co.kr/"
 
@@ -27,9 +30,10 @@ class MainActivity:AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var mContext: Context
-    private lateinit var mKakaoApi: UserApiClient
-    private val MEM_SNS_TYPE = "K"
-    private lateinit var MEM_SNS_ID: String
+    private lateinit var mKakaoApi: UserApiClient   // 카카오로그인 접근 객체
+
+    private val MEM_SNS_TYPE = "K"  // 소셜 로그인 유형 변수
+    private lateinit var MEM_SNS_ID: String // 카카오로그인 이후 카카오서버로부터의 유저 ID
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,13 +41,17 @@ class MainActivity:AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         mContext = this
-        mKakaoApi = UserApiClient.instance
-        binding.btnKakaoLogin.setOnClickListener {
-            getAccessToken(mContext)
+        mKakaoApi = UserApiClient.instance  // 카카오로그인 접근 객체
+        binding.btnKakaoLogin.setOnClickListener {  // 카카오로그인 버튼 클릭시
+            getAccessToken(mContext)                // 카카오로그인 이후 AccessToken 리턴
         }
 
     }
 
+    /**
+     * 카카오서버로부터의 AccessToken을 확인하는 메소드
+     * AccessToken이 발급돼야 유저정보 접근이 가능
+     */
     private fun getAccessToken(mContext: Context) {
         mKakaoApi.loginWithKakaoAccount(mContext) { token, error ->
             if (error != null) {
@@ -51,11 +59,16 @@ class MainActivity:AppCompatActivity() {
             } else if (token != null) {
                 Log.e(tag, "getAccessToken 성공! ${token.accessToken}")
 
-                setKakaoUserId()
+                setKakaoUserId()    // AccessToken 발급시 유저정보 접근
             }
         }
     }
 
+    /**
+     * AccessToken이 발급되면
+     * 유저 정보에 접근하고, 회원가입 유무 판단을 위해
+     * 유저 id를
+     */
     private fun setKakaoUserId() {
         mKakaoApi.me { user, error ->
             if (error != null) {
