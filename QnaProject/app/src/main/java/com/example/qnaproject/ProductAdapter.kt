@@ -55,7 +55,6 @@ class ProductAdapter(val productList: ArrayList<Product>) : RecyclerView.Adapter
                 // Glide 이미지 라이브러리 사용
                 GlideApp.with(mContext)
                     .load(product.ITM_IMG1)
-                    .transform(RoundedCorners(100))
                     .error(R.drawable.company_product_default)
                     .into(binding.ivProductImg1)
             }
