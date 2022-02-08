@@ -124,7 +124,8 @@ class MainActivity:AppCompatActivity() {
             }
             200 -> {
                 removeAccessToken()
-                moveToQnaList(MEM_ID)
+//                moveToQnaList(MEM_ID)
+                moveToProduct() // Login 이후 바텀네비게이션뷰로 이동s
             }
             else -> {
                 Toast.makeText(this, "적절하지 못한 접근입니다.", Toast.LENGTH_SHORT).show()
@@ -153,15 +154,20 @@ class MainActivity:AppCompatActivity() {
 //        this.finish() // onBackPressed 동작을 위한 이전 액티비티 not finish
     }
 
-    private fun moveToQnaList(MEM_ID: Int) {
-        saveMemId(MEM_ID)
-        val sharedPref = this.getSharedPreferences("App", Context.MODE_PRIVATE)
-        Log.e(tag, "MEM_ID: ${sharedPref.getInt("MEM_ID", -1)}")
-
-        val intent = Intent(this, QnaActivity::class.java)
+    private fun moveToProduct() {
+        val intent = Intent(this, ProductActivity::class.java)
         this.startActivity(intent)
-        this.finish() // 재로그인은 실시할 필요가 없으므로
+        this.finish()
     }
+//    private fun moveToQnaList(MEM_ID: Int) {
+//        saveMemId(MEM_ID)
+//        val sharedPref = this.getSharedPreferences("App", Context.MODE_PRIVATE)
+//        Log.e(tag, "MEM_ID: ${sharedPref.getInt("MEM_ID", -1)}")
+//
+//        val intent = Intent(this, QnaActivity::class.java)
+//        this.startActivity(intent)
+//        this.finish() // 재로그인은 실시할 필요가 없으므로
+//    }
 
     private fun saveMemId(MEM_ID: Int) {
         val sharedPref = this.getSharedPreferences("App", Context.MODE_PRIVATE)

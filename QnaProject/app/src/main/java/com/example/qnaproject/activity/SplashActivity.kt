@@ -25,7 +25,10 @@ class SplashActivity: AppCompatActivity() {
 
         if(MEM_ID != -1) {  // 기존의 MEM_ID가 저장되어있다면..
             // 문의리스트 화면 이동
-            val intent = Intent(this, QnaActivity::class.java)
+//            val intent = Intent(this, QnaActivity::class.java)
+//            this.startActivity(intent)
+//            this.finish()
+            val intent = Intent(this, ProductActivity::class.java)
             this.startActivity(intent)
             this.finish()
         }

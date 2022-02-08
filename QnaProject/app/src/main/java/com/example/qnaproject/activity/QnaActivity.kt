@@ -35,16 +35,17 @@ class QnaActivity : AppCompatActivity() {
     private lateinit var binding: ActivityQnaBinding
 
     private var qnaList = arrayListOf<Qna>()
-    private var qnaAdapter = QnaAdapter(qnaList)
+    private val qnaAdapter = QnaAdapter(qnaList)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_qna)
         setSupportActionBar(binding.toolbarQna.root as Toolbar)
+        setRecyclerView()   // 먼저 리사이클러뷰 초기화 및 셋팅
         getSharedPreferenceData()
         setClickEvent()
         setQnaList()
-        setRecyclerView()
+
     }
 
     private fun getSharedPreferenceData() {
@@ -146,11 +147,12 @@ class QnaActivity : AppCompatActivity() {
      */
     private fun drawRecyclerView(qnaList: ArrayList<Qna>) {
         if (qnaList.size > 0) { // 받
+
             val positionStart = qnaAdapter.list.size            // 0        10      20      30
             qnaAdapter.list.addAll(qnaList.toMutableList())
             val itemCount = qnaAdapter.list.size          // 10-1     20-1    30-1    34-1
 //        qnaAdapter.notifyDataSetChanged()   // 새로운 Adapter 설정에 따라 DataSet Refresh
-            
+
             qnaAdapter.notifyItemRangeChanged(positionStart,itemCount)
         }
     }

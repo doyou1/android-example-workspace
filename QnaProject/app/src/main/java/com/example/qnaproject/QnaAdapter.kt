@@ -14,7 +14,7 @@ import com.example.qnaproject.databinding.ListQnaItemBinding
  * Qna화면의 RecyclerView Adapter
  * 데이터 바인딩, 클릭 이벤트 처리
  */
-class QnaAdapter(val qnaList: ArrayList<Qna>?) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class QnaAdapter(val qnaList: ArrayList<Qna>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     // DataBinding object
     private lateinit var binding: ListQnaItemBinding

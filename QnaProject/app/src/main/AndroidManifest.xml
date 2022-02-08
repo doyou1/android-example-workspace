@@ -11,10 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.QnaProject" >
-        <activity
-            android:name=".activity.ProductActivity"
-            android:exported="false"
-            />
+
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
             android:exported="true" >
@@ -61,6 +58,12 @@
             android:name=".activity.UserJoinActivity"
             android:exported="true" >
         </activity>
+
+        <activity
+            android:name=".activity.ProductActivity"
+            android:exported="false"
+            android:theme="@style/ProductTheme"
+            />
     </application>
 
 </manifest>
