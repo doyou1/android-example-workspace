@@ -48,6 +48,9 @@ class QnaActivity : AppCompatActivity() {
 
     }
 
+    /**
+     * GET saved MEM_ID in SharedPreference
+     */
     private fun getSharedPreferenceData() {
         val sharedPref = this.getSharedPreferences("App", Context.MODE_PRIVATE)
         MEM_ID = sharedPref.getInt("MEM_ID", -1)
@@ -56,7 +59,7 @@ class QnaActivity : AppCompatActivity() {
 
         if(MEM_ID == -1) {    // 기존의 MEM_ID가 없다면..
             Toast.makeText(this, "적절하지 않은 접근입니다.", Toast.LENGTH_SHORT).show()
-            moveToMain()
+            moveToMain()    // 재로그인을 위한 MainActivity 이동
         }
     }
 
@@ -116,10 +119,12 @@ class QnaActivity : AppCompatActivity() {
      * 인터페이스로부터 받아온 QnaList로 RecyclerView를 그리는 함수
      */
     private fun drawRecyclerView(newList: ArrayList<Qna>) {
-        if (newList.size > 0) { // 받
+        if (newList.size > 0) { // 새로운 List가 있을 시
             val positionStart = qnaList.size      // 0        10      20      30
             qnaList.addAll(newList)
             val itemCount = newList.size          // 10-1     20-1    30-1    34-1
+
+            // index[positionStart]부터 itemCount개 Refresh
             qnaAdapter.notifyItemRangeChanged(positionStart,itemCount)
         }
     }
@@ -152,8 +157,6 @@ class QnaActivity : AppCompatActivity() {
             }
         })
     }
-
-
 
     /**
      * 로그아웃 처리

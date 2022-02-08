@@ -9,6 +9,10 @@ import androidx.databinding.DataBindingUtil
 import com.example.qnaproject.R
 import com.example.qnaproject.databinding.ActivitySplashBinding
 
+/**
+ * Splash화면을 보여주며
+ * SharedPreference의 `MEM_ID` 존재여부 확인
+ */
 class SplashActivity: AppCompatActivity() {
 
     private lateinit var binding:ActivitySplashBinding
@@ -28,12 +32,13 @@ class SplashActivity: AppCompatActivity() {
 //            val intent = Intent(this, QnaActivity::class.java)
 //            this.startActivity(intent)
 //            this.finish()
+            // 상품관련 화면 이동
             val intent = Intent(this, ProductActivity::class.java)
             this.startActivity(intent)
             this.finish()
         }
         else {    // 기존의 MEM_ID가 없다면..
-            // 로그인 및 회원가입
+            // MainActivity로 이동(로그인 및 회원가입)
             val intent = Intent(this, MainActivity::class.java)
             this.startActivity(intent)
             this.finish()

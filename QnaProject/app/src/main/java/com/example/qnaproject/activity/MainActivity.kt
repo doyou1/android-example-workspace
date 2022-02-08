@@ -67,13 +67,13 @@ class MainActivity:AppCompatActivity() {
     /**
      * AccessToken이 발급되면
      * 유저 정보에 접근하고, 회원가입 유무 판단을 위해
-     * 유저 id를
+     * 유저 id에 접근 및 `MEM_SNS_ID`에 담기
      */
     private fun setKakaoUserId() {
         mKakaoApi.me { user, error ->
             if (error != null) {
                 Log.e(tag, "사용자 정보 요청 실패", error)
-            } else if (user != null) {
+            } else if (user != null) {  // 유저 정보 획득 성공
                 Log.i(
                     tag, "사용자 정보 요청 성공" +
                             "\n회원번호: ${user.id}" +
@@ -83,12 +83,16 @@ class MainActivity:AppCompatActivity() {
                 )
 
                 MEM_SNS_ID = user.id.toString()
-                kakaoLogin()
+                serverLogin()
             }
         }
     }
 
-    private fun kakaoLogin() {
+    /**
+     * 카카오로부터 얻은 유저 ID로
+     * 회원가입 여부 확인
+     */
+    private fun serverLogin() {
         // Retrofit 객체 생성
         val retrofit: Retrofit = Retrofit.Builder()
             .baseUrl(baseUrl)
@@ -109,11 +113,11 @@ class MainActivity:AppCompatActivity() {
                 // ResponseBody의 형태에 따라 Custom ResponseModel로 변환
                 val resBody = response.body() as SocialLoginResponseModel
                 Log.d(tag, "성공 : ${resBody}")
-
+                
                 val MEM_ID = resBody.data?.get(0)?.MEM_ID
                 Log.d(tag, "성공 : ${MEM_ID}")
 
-                if (MEM_ID != null) {
+                if (MEM_ID != null) {   // 가입된 회원일 경우 - MEM_ID
                     resultProcess(MEM_ID, resBody.code)
                 }
             }
@@ -132,13 +136,13 @@ class MainActivity:AppCompatActivity() {
      */
     private fun resultProcess(MEM_ID:Int, responseCode: Int) {
         when (responseCode) {
-            423 -> {
+            423 -> {    // 회원이 아닐시 회원가입화면으로 이동
                 moveToUserJoin()
             }
-            200 -> {
-                removeAccessToken()
-//                moveToQnaList(MEM_ID)
-                moveToProduct() // Login 이후 바텀네비게이션뷰로 이동s
+            200 -> {    // 기존 회원시 정보화면으로 이동
+                removeAccessToken() // 카카오 AccessToken 제거 (로그인 여부는 MEM_ID를 통해 실시)
+                saveMemId(MEM_ID)   // Save in SharedPreference
+                moveToProduct()     // 로그인 처리 이후 상품관련 화면으로 이동
             }
             else -> {
                 Toast.makeText(this, "적절하지 못한 접근입니다.", Toast.LENGTH_SHORT).show()
@@ -146,6 +150,12 @@ class MainActivity:AppCompatActivity() {
         }
     }
 
+    /**
+     * 서버와의 로그인이 완료되면,
+     * 카카오의 AccessToken을 제거함.
+     * (실제 로그아웃시, SharedPreference의 MEM_ID만 제거하면 로그아웃 완료)
+     * 인증 절차는 모두 끝났으므로, SharedPreference의 MEM_ID만 로그인 여부 확인 가능
+     */
     private fun removeAccessToken() {
         // 로그아웃
         mKakaoApi.logout { error ->
@@ -158,6 +168,10 @@ class MainActivity:AppCompatActivity() {
         }
     }
 
+    /**
+     * 회원가입 화면으로 이동
+     * 회원가입시 필요한 소셜로그인 유형 정보(MEM_SNS_TYPE), 소셜아이디 정보(MEM_SNS_ID) 함께 전송
+     */
     private fun moveToUserJoin() {
         val intent = Intent(this, UserJoinActivity::class.java)
         intent.putExtra("MEM_SNS_TYPE", MEM_SNS_TYPE)
@@ -167,11 +181,15 @@ class MainActivity:AppCompatActivity() {
 //        this.finish() // onBackPressed 동작을 위한 이전 액티비티 not finish
     }
 
+    /**
+     * 상품 관련 화면으로 이동
+     */
     private fun moveToProduct() {
         val intent = Intent(this, ProductActivity::class.java)
         this.startActivity(intent)
         this.finish()
     }
+    
 //    private fun moveToQnaList(MEM_ID: Int) {
 //        saveMemId(MEM_ID)
 //        val sharedPref = this.getSharedPreferences("App", Context.MODE_PRIVATE)
@@ -182,6 +200,9 @@ class MainActivity:AppCompatActivity() {
 //        this.finish() // 재로그인은 실시할 필요가 없으므로
 //    }
 
+    /**
+     * save MEM_ID in SharedPreference(name: "App")
+     */
     private fun saveMemId(MEM_ID: Int) {
         val sharedPref = this.getSharedPreferences("App", Context.MODE_PRIVATE)
         sharedPref.edit {

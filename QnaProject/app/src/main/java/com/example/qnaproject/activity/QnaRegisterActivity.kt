@@ -83,7 +83,7 @@ class QnaRegisterActivity : AppCompatActivity() {
             super.onBackPressed()
         }
 
-        // 등록Btn Click Event
+        // `등록`버튼 Click Event
         binding.btnQnaRegister.setOnClickListener {
             val titleText = binding.etQnaTitle.text.toString()
             val contentText = binding.etQanContent.text.toString()
@@ -115,8 +115,8 @@ class QnaRegisterActivity : AppCompatActivity() {
             }
         }
 
+        // 키보드에 의한 레이아웃 축소 확인용 메서드
         mLastContentHeight = this.findViewById<View>(Window.ID_ANDROID_CONTENT).getHeight();
-
         setTouchEvent(binding.root)
 
     }
@@ -136,6 +136,9 @@ class QnaRegisterActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * 키보드를 숨기는(닫는) 메서드
+     */
     private fun hideSoftKeyboard(mContext: Context) {
         // InputMethodManager 객체 생성
         val inputMethodManager = mContext.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -217,12 +220,19 @@ class QnaRegisterActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Activity to Activity 이동, MainActivity
+     */
+
     private fun moveToMain() {
         val intent = Intent(this, MainActivity::class.java)
         this.startActivity(intent)
         this.finish()
     }
 
+    /**
+     * Activity to Activity 이동, QnaActivity
+     */
     private fun moveToQnaList() {
         val intent = Intent(this, QnaActivity::class.java)
         this.startActivity(intent)

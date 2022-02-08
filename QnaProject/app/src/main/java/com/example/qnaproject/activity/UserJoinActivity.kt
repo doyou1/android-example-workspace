@@ -42,6 +42,7 @@ class UserJoinActivity: AppCompatActivity() {
     private val OVERFLOW_NICKNAME = 1
     private val NULL_NICKNAME = 2
 
+    //
     private lateinit var MEM_SNS_TYPE: String
     private lateinit var MEM_SNS_ID: String
 
@@ -58,12 +59,18 @@ class UserJoinActivity: AppCompatActivity() {
 
     }
 
+    /**
+     * MainActivity에서 보내온
+     * 소셜로그인 유형 정보(MEM_SNS_TYPE), 소셜아이디 정보(MEM_SNS_ID) GET
+     */
     private fun getDataFromPreviousActivity() {
-        // QnaList 화면로부터의 QNA_ID 전송 확인
         MEM_SNS_TYPE = intent.getStringExtra("MEM_SNS_TYPE").toString()
         MEM_SNS_ID = intent.getStringExtra("MEM_SNS_ID").toString()
     }
 
+    /**
+     * Click Event 설정 메서드
+     */
     private fun setClickEvent() {
         binding.toolbarUserJoin.ibBack.setOnClickListener { // 이전 화면으로 전환, StartActivity nonFinish
             super.onBackPressed()
@@ -106,6 +113,10 @@ class UserJoinActivity: AppCompatActivity() {
         }
     }
 
+    /**
+     * 회원가입 메서드
+     * 회원가입 성공시 QnaActivity로 이동(추후 검토 필요)
+     */
     private fun joinUser(nickNameText: String, telText: String) {
     // Retrofit 객체 생성
         val retrofit: Retrofit = Retrofit.Builder()
@@ -136,31 +147,29 @@ class UserJoinActivity: AppCompatActivity() {
         })
     }
 
-    private fun validateText(nickNameText: String): Int {
-
-        if (nickNameText.length > nickNameTextLimit) return OVERFLOW_NICKNAME
-        else if (nickNameText.isEmpty() || nickNameText == "" || nickNameText == null) return NULL_NICKNAME
-
-        return SUCCESS
-    }
-
+    /**
+     * 회원가입 결과에 대한 절차 진행 메서드
+     */
     private fun resultProcess(MEM_ID: Int?, responseCode: Int) {
         when (responseCode) {
-            200 -> {
+            200 -> {    // 회원가입 성공시
                 if (MEM_ID != null) {
-                    moveToQnaList(MEM_ID)
+                    moveToQnaList(MEM_ID)   // QnaAcitivity로 이동
                     Toast.makeText(this, "회원가입 성공!.", Toast.LENGTH_SHORT).show()
                 } else {
                     Toast.makeText(this, "적절하지 못한 접근입니다.", Toast.LENGTH_SHORT).show()
                 }
 
             }
-            else -> {
+            else -> {   // 이외의 경우
                 Toast.makeText(this, "적절하지 못한 접근입니다.", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
+    /**
+     * Activity to Activity 이동, QnaActivity(문의 리스트 화면)
+     */
     private fun moveToQnaList(MEM_ID: Int) {
         val intent = Intent(this, QnaActivity::class.java)
         intent.putExtra("MEM_ID", MEM_ID)
@@ -169,7 +178,21 @@ class UserJoinActivity: AppCompatActivity() {
         this.finish()
     }
 
+    /**
+     * 입력텍스트 유효성 검사 메서드
+     * 유효성 검사 결과에 따른 FLAG return
+     */
+    private fun validateText(nickNameText: String): Int {
 
+        if (nickNameText.length > nickNameTextLimit) return OVERFLOW_NICKNAME
+        else if (nickNameText.isEmpty() || nickNameText == "" || nickNameText == null) return NULL_NICKNAME
+
+        return SUCCESS
+    }
+
+    /**
+     * 키보드를 숨기는(닫는) 메서드
+     */
     private fun hideSoftKeyboard(mContext: Context) {
         // InputMethodManager 객체 생성
         val inputMethodManager = mContext.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager

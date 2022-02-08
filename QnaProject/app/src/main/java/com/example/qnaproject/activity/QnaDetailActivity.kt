@@ -38,13 +38,16 @@ class QnaDetailActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbarQnaDetail.root as Toolbar)
         setClickEvent()
 
-        // QnaList 화면로부터의 QNA_ID 전송 확인
+        // QnaActivity로부터 QNA_ID 전송 확인
         QNA_ID = intent.getIntExtra("QNA_ID", -1)
         getSharedPreferenceData()
         if (QNA_ID != -1) setQndDetail(QNA_ID)
         else super.onBackPressed()                       // 적절하지 못한 접근이므로, 이전화면으로 이동
     }
 
+    /**
+     * GET saved MEM_ID in SharedPreference
+     */
     private fun getSharedPreferenceData() {
         val sharedPref = this.getSharedPreferences("App", Context.MODE_PRIVATE)
         MEM_ID = sharedPref.getInt("MEM_ID", -1)
@@ -57,11 +60,11 @@ class QnaDetailActivity : AppCompatActivity() {
         }
     }
 
-        /**
+    /**
      * ClickEvent 설정
      */
     private fun setClickEvent() {
-        // 상단 BackButton Click시 QnaList로 이동
+        // 상단 BackButton Click시 QnaActivity로 이동
         binding.toolbarQnaDetail.ibBack.setOnClickListener {
             super.onBackPressed()
         }
@@ -69,7 +72,7 @@ class QnaDetailActivity : AppCompatActivity() {
 
     /**
      * 서버로부터 QnaDetail 데이터를 받아오고,
-     * draw in UI
+     * UI에 뿌려주는 메소드
      */
     private fun setQndDetail(qnaId: Int) {
         // Retrofit 객체 생성
@@ -95,8 +98,7 @@ class QnaDetailActivity : AppCompatActivity() {
                 Log.d(tag, "성공 : ${resBody.data}")
                 val qnaDetail = resBody.data[0] // com.google.gson.JsonSyntaxException: java.lang.IllegalStateException: Expected BEGIN_OBJECT but was BEGIN_ARRAY at line 1 column 34 path $.data
 
-                Log.e(tag, "qnaDetail.QNA_ANSWER.length: ${qnaDetail.QNA_ANSWER?.length}")
-                binding.qnaDetail = qnaDetail
+                binding.qnaDetail = qnaDetail   // Databinding (check activity_qna_detail.xml)
             }
 
             // Response Fail
