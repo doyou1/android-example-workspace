@@ -16,4 +16,9 @@
         <!--        <item name="android:windowBackground">@drawable/splash</item>-->
         <item name="colorPrimary">@color/blue</item>
     </style>
+
+    <!--  ShapeableImageView's Style  -->
+    <style name="ShapeAppearanceOverlay.App.CornerSize10Percent" parent="">
+        <item name="cornerSize">10%</item>
+    </style>
 </resources>

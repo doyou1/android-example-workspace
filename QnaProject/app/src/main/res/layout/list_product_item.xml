@@ -56,7 +56,7 @@
                 tools:text="20,000원" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/iv_product_img1"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -67,7 +67,9 @@
             app:layout_constraintWidth_default="percent"
             app:layout_constraintWidth_percent="0.3"
             app:layout_constraintDimensionRatio="1.2:1"
-            android:src="@drawable/company_product_default" />
+            android:src="@drawable/company_product_default"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
