@@ -146,13 +146,12 @@ class QnaActivity : AppCompatActivity() {
      */
     private fun drawRecyclerView(qnaList: ArrayList<Qna>) {
         if (qnaList.size > 0) { // 받
-            val fromIndex = qnaAdapter.list.size            // 0        10      20      30
+            val positionStart = qnaAdapter.list.size            // 0        10      20      30
             qnaAdapter.list.addAll(qnaList.toMutableList())
-            val toIndex = qnaAdapter.list.size - 1          // 10-1     20-1    30-1    34-1
+            val itemCount = qnaAdapter.list.size          // 10-1     20-1    30-1    34-1
 //        qnaAdapter.notifyDataSetChanged()   // 새로운 Adapter 설정에 따라 DataSet Refresh
-
-            Log.e(tag, "fromIndex: ${fromIndex}, toIndex: ${toIndex}")
-            qnaAdapter.notifyItemRangeChanged(fromIndex,toIndex)
+            
+            qnaAdapter.notifyItemRangeChanged(positionStart,itemCount)
         }
     }
 
