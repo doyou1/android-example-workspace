@@ -100,17 +100,28 @@ class QnaActivity : AppCompatActivity() {
                 // ResponseBody의 형태에 따라 Custom ResponseModel로 변환
                 val resBody = response.body() as QnaResponseModel
                 Log.d(tag, "성공 : ${resBody.data}")
-                qnaList = resBody.data // ResponseBody 중 Qna List 정보를 담고 있는 객체
+                val newList = resBody.data // ResponseBody 중 Qna List 정보를 담고 있는 객체
                 if (qnaList.size == 0) page--   // gnaList.size == 0 일경우, 해당 페이지 인덱스에 QnaList가 없음을 의미
-//                binding.rvQna.removeOnScrollListener()
 
-                drawRecyclerView(qnaList)
+                drawRecyclerView(newList)
             }
 
             override fun onFailure(call: Call<QnaResponseModel>, t: Throwable) {   // Response Fail
                 Log.d(tag, "실패 : $t")
             }
         })
+    }
+
+    /**
+     * 인터페이스로부터 받아온 QnaList로 RecyclerView를 그리는 함수
+     */
+    private fun drawRecyclerView(newList: ArrayList<Qna>) {
+        if (newList.size > 0) { // 받
+            val positionStart = qnaList.size            // 0        10      20      30
+            qnaList.addAll(newList)
+            val itemCount = newList.size          // 10-1     20-1    30-1    34-1
+            qnaAdapter.notifyItemRangeChanged(positionStart,itemCount)
+        }
     }
 
     /**
@@ -142,20 +153,7 @@ class QnaActivity : AppCompatActivity() {
         })
     }
 
-    /**
-     * 인터페이스로부터 받아온 QnaList로 RecyclerView를 그리는 함수
-     */
-    private fun drawRecyclerView(qnaList: ArrayList<Qna>) {
-        if (qnaList.size > 0) { // 받
 
-            val positionStart = qnaAdapter.list.size            // 0        10      20      30
-            qnaAdapter.list.addAll(qnaList.toMutableList())
-            val itemCount = qnaAdapter.list.size          // 10-1     20-1    30-1    34-1
-//        qnaAdapter.notifyDataSetChanged()   // 새로운 Adapter 설정에 따라 DataSet Refresh
-
-            qnaAdapter.notifyItemRangeChanged(positionStart,itemCount)
-        }
-    }
 
     /**
      * 로그아웃 처리

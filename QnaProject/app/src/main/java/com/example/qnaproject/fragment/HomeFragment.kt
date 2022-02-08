@@ -1,6 +1,5 @@
 package com.example.qnaproject.fragment
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -15,9 +14,7 @@ import com.example.qnaproject.R
 import com.example.qnaproject.databinding.FragmentHomeBinding
 import com.example.qnaproject.domain.Product
 import com.example.qnaproject.responseModel.ProductResponseModel
-import com.example.qnaproject.responseModel.QnaResponseModel
 import com.example.qnaproject.service.ProductService
-import com.example.qnaproject.service.QnaService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -29,13 +26,12 @@ class HomeFragment : Fragment() {
     private val baseUrl = "https://api.jamjami.co.kr/"
     private lateinit var binding:FragmentHomeBinding
 
-    private var productList = arrayListOf<Product>()
-    private lateinit var productAdapter:ProductAdapter
-
     private val MEM_ID = 94
     private val ITM_ONLY_VIEW = "N"
     private var PAGE = 1
 
+    private var productList = arrayListOf<Product>()
+    private lateinit var productAdapter:ProductAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -95,10 +91,8 @@ class HomeFragment : Fragment() {
             ) { // Response Success
                 // ResponseBody의 형태에 따라 Custom ResponseModel로 변환
                 val resBody = response.body() as ProductResponseModel
-                Log.e(tag, "성공 response : ${response}")
-                Log.e(tag, "성공 resBody.data : ${resBody.data}")
                 val newList = resBody.data
-                if (newList.size == 0) PAGE--   // gnaList.size == 0 일경우, 해당 페이지 인덱스에 List가 없음을 의미
+                if (newList.size == 0) PAGE--   // productList.size == 0 일경우, 해당 페이지 인덱스에 List가 없음을 의미
 
                 drawRecyclerView(newList)
             }
@@ -114,7 +108,6 @@ class HomeFragment : Fragment() {
             val positionStart = productList.size    // 0        10      20      30
             productList.addAll(newList)
             val itemCount = newList.size            // 10-1     20-1    30-1    34-1
-            Log.e(tag, "positionStart: ${positionStart}, itemCount: ${itemCount}")
             productAdapter.notifyItemRangeChanged(positionStart,itemCount)
         }
     }

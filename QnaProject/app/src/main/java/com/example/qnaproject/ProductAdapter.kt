@@ -33,7 +33,7 @@ class ProductAdapter(val productList: ArrayList<Product>) : RecyclerView.Adapter
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is ProductViewHolder) {
-            val product: Product = productList.get(position)
+            val product: Product = productList[position]
             holder.bind(product)
         }
     }
