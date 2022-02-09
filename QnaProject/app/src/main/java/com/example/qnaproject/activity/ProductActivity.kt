@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.example.qnaproject.ProductAdapter
 import com.example.qnaproject.R
@@ -32,7 +33,6 @@ class ProductActivity : AppCompatActivity() {
         mFragmentManager = supportFragmentManager
         mFragmentManager.beginTransaction().add(binding.mainFrame.id, HomeFragment()).commit()
         setBottomNavigationClickEvent() // bottomNavigation을 통한 fragment 대체
-
     }
 
     /**
@@ -55,20 +55,16 @@ class ProductActivity : AppCompatActivity() {
             }
             true
         }
+    }
 
-        // 람다식 공부필요
-//                    object: NavigationBarView.OnItemSelectedListener {
-//                override fun onNavigationItemSelected(item: MenuItem): Boolean {
-//                    when(item.itemId) {
-//                        R.id.item_product_list -> mFragmentManager.beginTransaction().replace(binding.mainFrame.id, HomeFragment.getInstance()).commit()
-//                        R.id.item_product_register -> mFragmentManager.beginTransaction().replace(binding.mainFrame.id, RegisterFragment.getInstance()).commit()
-//                        R.id.item_3 -> mFragmentManager.beginTransaction().replace(binding.mainFrame.id, Fragment3.getInstance()).commit()
-//                        R.id.item_4 -> mFragmentManager.beginTransaction().replace(binding.mainFrame.id, Fragment4.getInstance()).commit()
-//                        R.id.item_5 -> mFragmentManager.beginTransaction().replace(binding.mainFrame.id, Fragment5.getInstance()).commit()
-//                    }
-//                    return true
-//                }
-//            }
+    fun changeFragment(flag: String) {
+
+        when(flag) {
+            "register" -> {
+                mFragmentManager.beginTransaction()
+                    .replace(binding.mainFrame.id, RegisterFragment.getInstance()).commit()
+            }
+        }
     }
 
 }

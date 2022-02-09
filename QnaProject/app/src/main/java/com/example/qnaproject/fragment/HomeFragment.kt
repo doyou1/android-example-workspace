@@ -1,5 +1,6 @@
 package com.example.qnaproject.fragment
 
+import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -7,10 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.qnaproject.ProductAdapter
 import com.example.qnaproject.R
+import com.example.qnaproject.activity.ProductActivity
 import com.example.qnaproject.databinding.FragmentHomeBinding
 import com.example.qnaproject.domain.Product
 import com.example.qnaproject.responseModel.ProductResponseModel
@@ -29,7 +32,7 @@ class HomeFragment : Fragment() {
 
     private val baseUrl = "https://api.jamjami.co.kr/"
     private lateinit var binding:FragmentHomeBinding
-
+    private lateinit var mActivity:FragmentActivity
     private val MEM_ID = 94             // 로그인 유저 id
     private val ITM_ONLY_VIEW = "N"
     private var PAGE = 1
@@ -40,13 +43,26 @@ class HomeFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         productAdapter = ProductAdapter(productList)
+        mActivity = requireActivity()
+
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
+        setClickEvent()
         setRecyclerView()
         setProductList()
         return binding.root
+    }
+
+    /**
+     * 레이아웃 아이템 클릭 이벤트
+     */
+    private fun setClickEvent() {
+        binding.toolbarProductHome.btnRegister.setOnClickListener {
+            val parentActivity = activity as ProductActivity
+            parentActivity.changeFragment("register")
+        }
     }
 
     /**
