@@ -17,6 +17,11 @@
         <item name="colorPrimary">@color/blue</item>
     </style>
 
+    <style name="ToolbarTheme">
+        <item name="colorPrimary">@color/white</item>
+    </style>
+
+
     <!--  ShapeableImageView's Style  -->
     <style name="ShapeAppearanceOverlay.App.CornerSize10Percent" parent="">
         <item name="cornerSize">10%</item>

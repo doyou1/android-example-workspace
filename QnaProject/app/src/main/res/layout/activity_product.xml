@@ -10,6 +10,13 @@
         android:layout_height="match_parent"
         tools:context=".activity.ProductActivity">
 
+        <include
+            android:id="@+id/toolbar_product"
+            layout="@layout/toolbar_product"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <FrameLayout
             android:id="@+id/main_frame"
             android:layout_width="match_parent"
@@ -17,7 +24,8 @@
             app:layout_constraintBottom_toTopOf="@+id/bnv_product"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_product"
+            />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bnv_product"
