@@ -64,6 +64,10 @@ class ProductActivity : AppCompatActivity() {
                 mFragmentManager.beginTransaction()
                     .replace(binding.mainFrame.id, RegisterFragment.getInstance()).commit()
             }
+            "home" -> {
+                mFragmentManager.beginTransaction()
+                    .replace(binding.mainFrame.id, HomeFragment.getInstance()).commit()
+            }
         }
     }
 
