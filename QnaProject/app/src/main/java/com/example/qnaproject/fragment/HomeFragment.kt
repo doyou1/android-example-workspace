@@ -43,14 +43,12 @@ class HomeFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         productAdapter = ProductAdapter(productList)
-        mActivity = requireActivity()
-
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
-        setClickEvent()
         setRecyclerView()
+        setClickEvent()
         setProductList()
         return binding.root
     }
@@ -61,7 +59,7 @@ class HomeFragment : Fragment() {
     private fun setClickEvent() {
         binding.toolbarProductHome.btnRegister.setOnClickListener {
             val parentActivity = activity as ProductActivity
-            parentActivity.changeFragment("register")
+            parentActivity.changeFragment("register", null)
         }
     }
 

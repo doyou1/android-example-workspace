@@ -5,10 +5,10 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.ActivityResultLauncher
@@ -30,7 +30,6 @@ class RegisterFragment : Fragment() {
     private lateinit var binding: FragmentRegisterBinding
     private lateinit var backButtonCallback: OnBackPressedCallback
     private lateinit var galleryLauncher: ActivityResultLauncher<Intent>
-    private var hasImage = false
     private lateinit var mContext: Context
 
 //    private val MEM_ID = 94             // 로그인 유저 id
@@ -41,9 +40,9 @@ class RegisterFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_register, container, false)
         // ImageView에 설정돼있는 background 설정 플래그
         // (default 값에는 border가 추가됨, 이미지가 추가되면 border를 지워야함)
-        binding.hasImage = hasImage
         galleryLauncher = getGalleryActivityResultLauncher()
         setClickEvent()
+
         return binding.root
     }
 
@@ -103,7 +102,7 @@ class RegisterFragment : Fragment() {
      */
     private fun moveToHomeFrag() {
         val parentActivity = activity as ProductActivity
-        parentActivity.changeFragment("home")
+        parentActivity.changeFragment("home", null)
     }
 
     /**

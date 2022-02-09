@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.example.qnaproject.activity.ProductActivity
 import com.example.qnaproject.databinding.ListProductItemBinding
 import com.example.qnaproject.domain.Product
 import com.example.qnaproject.module.GlideApp
@@ -21,7 +21,6 @@ class ProductAdapter(val productList: ArrayList<Product>) : RecyclerView.Adapter
     private val tag = "ProductAdapter"
     private lateinit var binding: ListProductItemBinding
     private lateinit var mContext: Context
-
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         binding = DataBindingUtil.inflate(
@@ -53,8 +52,8 @@ class ProductAdapter(val productList: ArrayList<Product>) : RecyclerView.Adapter
         RecyclerView.ViewHolder(binding.root) {
             fun bind(product:Product) {
                 this.itemView.setOnClickListener {
-                    Log.e(tag, product.toString())
-                    Toast.makeText(mContext, product.toString(), Toast.LENGTH_SHORT).show()
+                    val mActivity = mContext as ProductActivity
+                    mActivity.changeFragment("update", product.ITM_ID)
                 }
                 binding.product = product
 

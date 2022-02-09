@@ -57,16 +57,28 @@ class ProductActivity : AppCompatActivity() {
         }
     }
 
-    fun changeFragment(flag: String) {
+    fun changeFragment(flag: String, data: Any?) {
 
         when(flag) {
+            "home" -> {
+                mFragmentManager.beginTransaction()
+                    .replace(binding.mainFrame.id, HomeFragment.getInstance()).commit()
+            }
             "register" -> {
                 mFragmentManager.beginTransaction()
                     .replace(binding.mainFrame.id, RegisterFragment.getInstance()).commit()
             }
-            "home" -> {
+            "update" -> {
+                val itmId = data as Int
+                UpdateFragment.getInstance().arguments = Bundle().also { it.putInt("ITM_ID", itmId) }
                 mFragmentManager.beginTransaction()
-                    .replace(binding.mainFrame.id, HomeFragment.getInstance()).commit()
+                    .replace(
+                        binding.mainFrame.id,
+                        UpdateFragment.getInstance().also { fragment ->
+                            fragment.arguments = Bundle().also { bundle ->
+                                bundle.putInt("ITM_ID", itmId)
+                            }
+                        }).commit()
             }
         }
     }
