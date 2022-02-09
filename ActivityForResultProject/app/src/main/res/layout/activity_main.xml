@@ -18,12 +18,22 @@
 
 
     <Button
-        android:id="@+id/btn_move"
+        android:id="@+id/btn_sub_move"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="이동"
+        android:text="서브액티비티이동"
         app:layout_constraintTop_toBottomOf="@+id/textView"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_gallery_move"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+    <Button
+        android:id="@+id/btn_gallery_move"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="갤러리이동"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintStart_toEndOf="@+id/btn_sub_move"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         />
