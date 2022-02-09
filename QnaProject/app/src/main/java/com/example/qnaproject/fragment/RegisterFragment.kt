@@ -5,24 +5,32 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import com.example.qnaproject.R
+import com.example.qnaproject.databinding.FragmentRegisterBinding
 
 /**
  * ProductActivity 두번째 화면
  * 상품 등록 화면
  */
 class RegisterFragment : Fragment() {
-   
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+
+    private val baseUrl = "https://api.jamjami.co.kr/"
+    private lateinit var binding: FragmentRegisterBinding
+
+//    private val MEM_ID = 94             // 로그인 유저 id
+//    private val ITM_ONLY_VIEW = "N"
+//    private var PAGE = 1
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_register, container, false)
+        setClickEvent()
+
+        return binding.root
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_register, container, false)
+    private fun setClickEvent() {
+
     }
 
     companion object {
