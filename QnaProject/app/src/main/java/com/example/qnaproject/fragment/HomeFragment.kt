@@ -1,8 +1,11 @@
 package com.example.qnaproject.fragment
 
 import android.app.Activity
+<<<<<<< HEAD
 import android.content.Context
 import android.content.Intent
+=======
+>>>>>>> a08212a752b7cca2ae4275252684a64966ae1fff
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -15,7 +18,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.qnaproject.ProductAdapter
 import com.example.qnaproject.R
+<<<<<<< HEAD
 import com.example.qnaproject.activity.MainActivity
+=======
+>>>>>>> a08212a752b7cca2ae4275252684a64966ae1fff
 import com.example.qnaproject.activity.ProductActivity
 import com.example.qnaproject.databinding.FragmentHomeBinding
 import com.example.qnaproject.domain.Product
@@ -64,9 +70,12 @@ class HomeFragment : Fragment() {
             val parentActivity = activity as ProductActivity
             parentActivity.changeFragment("register", null)
         }
+<<<<<<< HEAD
         binding.toolbarProductHome.btnLogout.setOnClickListener{
             logout()
         }
+=======
+>>>>>>> a08212a752b7cca2ae4275252684a64966ae1fff
     }
 
     /**
@@ -147,6 +156,7 @@ class HomeFragment : Fragment() {
         }
     }
 
+<<<<<<< HEAD
     /**
      * 로그아웃 처리
      */
@@ -172,6 +182,8 @@ class HomeFragment : Fragment() {
     }
 
 
+=======
+>>>>>>> a08212a752b7cca2ae4275252684a64966ae1fff
     // Java의 static과 비슷, 추후 공부 필요
     companion object {
         // 싱글톤

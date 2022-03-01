@@ -24,9 +24,13 @@
 
     <!--  ShapeableImageView's Style  -->
     <style name="ShapeAppearanceOverlay.App.CornerSize10Percent" parent="">
+<<<<<<< HEAD
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">10%</item>
 <!--        <item name="strokeColor">#000000</item>-->
 <!--        <item name="strokeWidth">2dp</item>-->
+=======
+        <item name="cornerSize">10%</item>
+>>>>>>> a08212a752b7cca2ae4275252684a64966ae1fff
     </style>
 </resources>

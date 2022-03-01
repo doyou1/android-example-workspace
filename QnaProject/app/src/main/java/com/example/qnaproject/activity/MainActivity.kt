@@ -2,6 +2,7 @@ package com.example.qnaproject.activity
 
 import android.content.Context
 import android.content.Intent
+<<<<<<< HEAD
 import android.net.Uri
 import android.os.Bundle
 import android.text.SpannableStringBuilder
@@ -10,6 +11,10 @@ import android.text.style.ClickableSpan
 import android.util.Log
 import android.view.View
 import android.widget.TextView
+=======
+import android.os.Bundle
+import android.util.Log
+>>>>>>> a08212a752b7cca2ae4275252684a64966ae1fff
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
@@ -26,8 +31,11 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+<<<<<<< HEAD
 
 const val ACTION_WEB_VIEW = "com.example.qnaproject.WebViewActivity"
+=======
+>>>>>>> a08212a752b7cca2ae4275252684a64966ae1fff
 /**
  * 카카오 로그인 및 회원가입을 처리하는 화면
  */
@@ -54,6 +62,7 @@ class MainActivity:AppCompatActivity() {
             getAccessToken(mContext)                // 카카오로그인 이후 AccessToken 리턴
         }
 
+<<<<<<< HEAD
         setSpinableText()
 
     }
@@ -91,6 +100,10 @@ class MainActivity:AppCompatActivity() {
     }
 
 
+=======
+    }
+
+>>>>>>> a08212a752b7cca2ae4275252684a64966ae1fff
     /**
      * 카카오서버로부터의 AccessToken을 확인하는 메소드
      * AccessToken이 발급돼야 유저정보 접근이 가능

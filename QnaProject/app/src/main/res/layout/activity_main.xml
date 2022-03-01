@@ -33,6 +33,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/title"
             />
+<<<<<<< HEAD
         <TextView
             android:id="@+id/tv_policy"
             android:layout_width="wrap_content"
@@ -46,5 +47,7 @@
             android:textColorLink="@color/blue"
             />
 
+=======
+>>>>>>> a08212a752b7cca2ae4275252684a64966ae1fff
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

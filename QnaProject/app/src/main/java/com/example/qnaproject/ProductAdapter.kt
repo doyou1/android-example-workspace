@@ -7,7 +7,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+<<<<<<< HEAD
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+=======
+>>>>>>> a08212a752b7cca2ae4275252684a64966ae1fff
 import com.example.qnaproject.activity.ProductActivity
 import com.example.qnaproject.databinding.ListProductItemBinding
 import com.example.qnaproject.domain.Product
@@ -58,6 +61,7 @@ class ProductAdapter(val productList: ArrayList<Product>) : RecyclerView.Adapter
                 }
                 binding.product = product
 
+<<<<<<< HEAD
                 Log.e(tag, "product ${product.toString()}")
                 // Glide 이미지 라이브러리 사용
                 GlideApp.with(mContext)
@@ -65,6 +69,12 @@ class ProductAdapter(val productList: ArrayList<Product>) : RecyclerView.Adapter
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .skipMemoryCache(true)
                     .placeholder(R.drawable.company_product_default)
+=======
+                Log.e(tag, "product ${product.ITM_NM}, ${product.ITM_IMG1}")
+                // Glide 이미지 라이브러리 사용
+                GlideApp.with(mContext)
+                    .load(product.ITM_IMG1)
+>>>>>>> a08212a752b7cca2ae4275252684a64966ae1fff
                     .error(R.drawable.company_product_default)
                     .into(binding.ivProductImg1)
             }

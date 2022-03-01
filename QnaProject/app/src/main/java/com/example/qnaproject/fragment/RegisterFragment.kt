@@ -1,5 +1,6 @@
 package com.example.qnaproject.fragment
 
+<<<<<<< HEAD
 import android.Manifest
 import android.app.Activity
 import android.content.Context
@@ -70,6 +71,27 @@ private val introTextLimit = 30
 private val priceLimit = 100000
 private val disLimit = 100
 
+=======
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
+import android.os.Bundle
+import android.util.Log
+import android.view.*
+import androidx.fragment.app.Fragment
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
+import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.databinding.DataBindingUtil
+import com.bumptech.glide.Glide
+import com.example.qnaproject.R
+import com.example.qnaproject.activity.ProductActivity
+import com.example.qnaproject.databinding.FragmentRegisterBinding
+import retrofit2.http.Url
+>>>>>>> a08212a752b7cca2ae4275252684a64966ae1fff
 
 /**
  * ProductActivity 두번째 화면
@@ -79,6 +101,7 @@ class RegisterFragment : Fragment() {
 
     private val baseUrl = "https://api.jamjami.co.kr/"
     private lateinit var binding: FragmentRegisterBinding
+<<<<<<< HEAD
     private lateinit var mContext: Context
     private lateinit var backButtonCallback: OnBackPressedCallback
     private lateinit var galleryLauncher: ActivityResultLauncher<Intent>
@@ -97,6 +120,20 @@ class RegisterFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_register, container, false)
+=======
+    private lateinit var backButtonCallback: OnBackPressedCallback
+    private lateinit var galleryLauncher: ActivityResultLauncher<Intent>
+    private lateinit var mContext: Context
+
+//    private val MEM_ID = 94             // 로그인 유저 id
+//    private val ITM_ONLY_VIEW = "N"
+//    private var PAGE = 1
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_register, container, false)
+        // ImageView에 설정돼있는 background 설정 플래그
+        // (default 값에는 border가 추가됨, 이미지가 추가되면 border를 지워야함)
+>>>>>>> a08212a752b7cca2ae4275252684a64966ae1fff
         galleryLauncher = getGalleryActivityResultLauncher()
         setClickEvent()
 
@@ -111,6 +148,7 @@ class RegisterFragment : Fragment() {
         binding.toolbarProductRegister.tbBack.setOnClickListener {  // 툴바 '<'(BackButton) 클릭 이벤트
             moveToHomeFrag()
         }
+<<<<<<< HEAD
         binding.ibAccessGallery.setOnClickListener {    // ImageView 클릭시 갤러리 앱으로 이동
             openGallery()
         }
@@ -461,29 +499,47 @@ class RegisterFragment : Fragment() {
         else if (itmIntro.isEmpty() || itmIntro.equals("")) return NULL_INTRO
 
         return SUCCESS
+=======
+        binding.ibAccessGallery.setOnClickListener {
+            openGalleryActivityResultLauncher()
+        }
+>>>>>>> a08212a752b7cca2ae4275252684a64966ae1fff
     }
 
     /**
      * Gallery에 접근하기 위한 ActivityResultLauncher 선언 및 리턴 메서드
      * Gallery에 접근한 이후 작업은 if (result.resultCode == Activity.RESULT_OK) 내부에 선언
      */
+<<<<<<< HEAD
     private fun getGalleryActivityResultLauncher(): ActivityResultLauncher<Intent> {
         return registerForActivityResult(
             ActivityResultContracts
                 .StartActivityForResult()
         ) { result ->
+=======
+    private fun getGalleryActivityResultLauncher() : ActivityResultLauncher<Intent> {
+        return registerForActivityResult(
+            ActivityResultContracts
+                .StartActivityForResult()) { result ->
+>>>>>>> a08212a752b7cca2ae4275252684a64966ae1fff
 
             if (result.resultCode == Activity.RESULT_OK) {
                 // There are no request codes
                 val data: Intent? = result.data
 
                 data?.let { data ->
+<<<<<<< HEAD
                     uploadUri = data.data
                     Glide.with(mContext)
                         .load(uploadUri)
                         .diskCacheStrategy(DiskCacheStrategy.NONE)
                         .skipMemoryCache(true)
                         .listener(loadImageListener())
+=======
+                    val uri = data.data
+                    Glide.with(mContext)
+                        .load(uri)
+>>>>>>> a08212a752b7cca2ae4275252684a64966ae1fff
                         .placeholder(R.drawable.ic_baseline_add_36)
                         .error(R.drawable.ic_baseline_add_36)        //
                         .into(binding.ibAccessGallery)
@@ -505,6 +561,7 @@ class RegisterFragment : Fragment() {
     }
 
     /**
+<<<<<<< HEAD
      * Glide 이미지 로드 성공, 실패 여부 확인 리스너
      * 트랜잭션 코드 및 이미지 삭제 버튼 쇼잉 여부 설정
      */
@@ -577,6 +634,8 @@ class RegisterFragment : Fragment() {
     }
 
     /**
+=======
+>>>>>>> a08212a752b7cca2ae4275252684a64966ae1fff
      *  상위 액티비티의 FragmentManager를 이용해
      *  fragment를 replace하기 위한 메서드
      */
@@ -586,6 +645,7 @@ class RegisterFragment : Fragment() {
     }
 
     /**
+<<<<<<< HEAD
      * 현재 액티비티의 FragmentManager를 이용해
      * frament를 replace하기 위한 메서드
      *
@@ -597,6 +657,8 @@ class RegisterFragment : Fragment() {
     }
 
     /**
+=======
+>>>>>>> a08212a752b7cca2ae4275252684a64966ae1fff
      * Fragment를 Activity에 attach할 떄 호출
      * Fragment 최초 생성시 호출 (생명주기 최초)
      */
@@ -619,6 +681,7 @@ class RegisterFragment : Fragment() {
      */
     override fun onDetach() {
         super.onDetach()
+<<<<<<< HEAD
         backButtonCallback.remove() // remove Custom Backbutton callback
     }
 
@@ -628,6 +691,15 @@ class RegisterFragment : Fragment() {
 
         @JvmStatic
         fun getInstance(): RegisterFragment =
+=======
+        backButtonCallback.remove()
+    }
+
+    companion object {
+        @Volatile private var instance: RegisterFragment? = null
+
+        @JvmStatic fun getInstance(): RegisterFragment =
+>>>>>>> a08212a752b7cca2ae4275252684a64966ae1fff
             instance ?: synchronized(this) {
                 instance ?: RegisterFragment().also {
                     instance = it

@@ -1,6 +1,9 @@
 package com.example.qnaproject
 
+<<<<<<< HEAD
 import android.app.Activity
+=======
+>>>>>>> a08212a752b7cca2ae4275252684a64966ae1fff
 import android.content.Context
 import android.content.Intent
 import android.util.Log
@@ -58,7 +61,11 @@ class QnaAdapter(val qnaList: ArrayList<Qna>) : RecyclerView.Adapter<RecyclerVie
                 val intent = Intent(mContext, QnaDetailActivity::class.java)
                 intent.putExtra("QNA_ID", qna.QNA_ID)
 
+<<<<<<< HEAD
                 val activity = mContext as Activity
+=======
+                val activity: QnaActivity = mContext as QnaActivity
+>>>>>>> a08212a752b7cca2ae4275252684a64966ae1fff
                 // 액티비티 종료하는 코드
                 activity.startActivity(intent)
             }

@@ -1,5 +1,6 @@
 package com.example.qnaproject.fragment
 
+<<<<<<< HEAD
 import android.Manifest
 import android.app.Activity
 import android.content.Context
@@ -13,10 +14,22 @@ import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.Toast
+=======
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
+import android.os.Bundle
+import android.util.Log
+import android.view.*
+import android.view.inputmethod.InputMethodManager
+import androidx.fragment.app.Fragment
+import android.widget.EditText
+>>>>>>> a08212a752b7cca2ae4275252684a64966ae1fff
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
+<<<<<<< HEAD
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
@@ -25,6 +38,16 @@ import com.bumptech.glide.request.target.Target
 import com.example.qnaproject.R
 import com.example.qnaproject.activity.ProductActivity
 import com.example.qnaproject.databinding.FragmentUpdateBinding
+=======
+import androidx.fragment.app.FragmentActivity
+import com.bumptech.glide.Glide
+import com.example.qnaproject.ProductAdapter
+import com.example.qnaproject.R
+import com.example.qnaproject.activity.ProductActivity
+import com.example.qnaproject.databinding.FragmentHomeBinding
+import com.example.qnaproject.databinding.FragmentUpdateBinding
+import com.example.qnaproject.domain.Product
+>>>>>>> a08212a752b7cca2ae4275252684a64966ae1fff
 import com.example.qnaproject.responseModel.ProductResponseModel
 import com.example.qnaproject.service.ProductService
 import retrofit2.Call
@@ -32,6 +55,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+<<<<<<< HEAD
 import android.provider.MediaStore
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
@@ -73,6 +97,11 @@ private val disLimit = 100
 /**
  *  ProductActivity 세번째 화면
  *  상품 수정 화면
+=======
+
+/**
+ *  ProductActivity 세번째 화면
+>>>>>>> a08212a752b7cca2ae4275252684a64966ae1fff
  */
 class UpdateFragment : Fragment() {
 
@@ -82,6 +111,7 @@ class UpdateFragment : Fragment() {
     private lateinit var backButtonCallback: OnBackPressedCallback  // 추가할 backbutton callback 함수
     private lateinit var galleryLauncher: ActivityResultLauncher<Intent>
 
+<<<<<<< HEAD
     private var transactionCode = "N"               // 이미지 처리를 위한 트랜잭션 코드 (파일명명 구성 규칙)
     private var hasInitImage = false                // 최초 이미지 유무 플래그
     private var initItmImg1: String? = null         // 최초 이미지 있을시 url
@@ -96,18 +126,31 @@ class UpdateFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_update, container, false)
 
+=======
+    private var ITM_ID: Int = -1    // Product Item ID
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_update, container, false)
+>>>>>>> a08212a752b7cca2ae4275252684a64966ae1fff
         if (arguments?.getInt("ITM_ID") == null) {  // ITM_ID가 없다면, 잘못된 접근
             val parentActivity = activity as ProductActivity
             parentActivity.changeFragment("home", null) // HomeFragment로 이동
         } else {
+<<<<<<< HEAD
             ITM_ID = arguments?.getInt("ITM_ID") ?: -1  // 다른 형태 고민 해볼 것
+=======
+            ITM_ID = arguments?.getInt("ITM_ID")!!  // 다른 형태 고민 해볼 것
+>>>>>>> a08212a752b7cca2ae4275252684a64966ae1fff
             Log.e(tag, "itm_id: ${ITM_ID}")
 
             galleryLauncher = getGalleryActivityResultLauncher()
             setProductData()
             setClickEvent()
         }
+<<<<<<< HEAD
 
+=======
+>>>>>>> a08212a752b7cca2ae4275252684a64966ae1fff
         return binding.root
     }
 
@@ -119,6 +162,7 @@ class UpdateFragment : Fragment() {
             moveToHomeFrag()
         }
         binding.ibAccessGallery.setOnClickListener {    // ImageView 클릭시 갤러리 앱으로 이동
+<<<<<<< HEAD
             openGallery()
         }
         binding.ibRemoveImage.setOnClickListener {  // 이미지 삭제 버튼 클릭시
@@ -147,10 +191,14 @@ class UpdateFragment : Fragment() {
                 }
                 false
             }
+=======
+            openGalleryActivityResultLauncher()
+>>>>>>> a08212a752b7cca2ae4275252684a64966ae1fff
         }
     }
 
     /**
+<<<<<<< HEAD
      * 갤러리 앱을 열기 위한 권한 체크 및 이후 결과에 따른 처리 메서드
      */
     private fun openGallery() {
@@ -214,6 +262,8 @@ class UpdateFragment : Fragment() {
     }
 
     /**
+=======
+>>>>>>> a08212a752b7cca2ae4275252684a64966ae1fff
      * 상품 상세정보 인터페이스 URL 접근
      * 정보 데이터를 UI에 바인딩
      */
@@ -237,6 +287,7 @@ class UpdateFragment : Fragment() {
             ) { // Response Success
                 // ResponseBody의 형태에 따라 Custom ResponseModel로 변환
                 val resBody = response.body() as ProductResponseModel
+<<<<<<< HEAD
                 val product = resBody.data[0]
                 binding.product = product
 
@@ -277,12 +328,27 @@ class UpdateFragment : Fragment() {
                 call: Call<ProductResponseModel>,
                 t: Throwable
             ) {   // Response Fail
+=======
+//                Log.e(tag, resBody.toString())
+                val product = resBody.data[0]
+                binding.product = product
+
+                Glide.with(mContext)
+                    .load(product.ITM_IMG1)
+                    .placeholder(R.drawable.ic_baseline_add_36)     // 기본이미지
+                    .error(R.drawable.ic_baseline_add_36)           // 에러시 대체 이미지
+                    .into(binding.ibAccessGallery)
+            }
+
+            override fun onFailure(call: Call<ProductResponseModel>, t: Throwable) {   // Response Fail
+>>>>>>> a08212a752b7cca2ae4275252684a64966ae1fff
                 Log.d(tag, "실패 : $t")
             }
         })
     }
 
     /**
+<<<<<<< HEAD
      * 상품정보 수정 인터페이스 URL 접근
      * 성공시 수정 성공 메시지와 함께 HomeFragment 이동
      */
@@ -567,12 +633,22 @@ class UpdateFragment : Fragment() {
             ActivityResultContracts
                 .StartActivityForResult()
         ) { result ->
+=======
+     * Gallery에 접근하기 위한 ActivityResultLauncher 선언 및 리턴 메서드
+     * Gallery에 접근한 이후 작업은 if (result.resultCode == Activity.RESULT_OK) 내부에 선언
+     */
+    private fun getGalleryActivityResultLauncher() : ActivityResultLauncher<Intent> {
+        return registerForActivityResult(
+            ActivityResultContracts
+                .StartActivityForResult()) { result ->
+>>>>>>> a08212a752b7cca2ae4275252684a64966ae1fff
 
             if (result.resultCode == Activity.RESULT_OK) {
                 // There are no request codes
                 val data: Intent? = result.data
 
                 data?.let { data ->
+<<<<<<< HEAD
                     uploadUri = data.data
                     Glide.with(mContext)
                         .load(uploadUri)
@@ -581,6 +657,13 @@ class UpdateFragment : Fragment() {
                         .listener(loadImageListener("Y"))
                         .placeholder(R.drawable.ic_baseline_add_36)     // 기본 이미지
                         .error(R.drawable.ic_baseline_add_36)           // 기본 이미지
+=======
+                    val uri = data.data
+                    Glide.with(mContext)
+                        .load(uri)
+                        .placeholder(R.drawable.ic_baseline_add_36)
+                        .error(R.drawable.ic_baseline_add_36)        //
+>>>>>>> a08212a752b7cca2ae4275252684a64966ae1fff
                         .into(binding.ibAccessGallery)
                 }
             }
@@ -596,14 +679,18 @@ class UpdateFragment : Fragment() {
             val mimeTypes = arrayOf("image/jpg")
             it.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
         }
+<<<<<<< HEAD
 
         // 권한 다이얼로그와 갤러리 앱이 함께 쇼잉되는 문제가 있어 
         // 등록 버튼에서 진행
 //        checkPermission()   
+=======
+>>>>>>> a08212a752b7cca2ae4275252684a64966ae1fff
         galleryLauncher.launch(intent)
     }
 
     /**
+<<<<<<< HEAD
      * Glide 이미지 로드 성공, 실패 여부 확인 리스너
      * 트랜잭션 코드 및 이미지 삭제 버튼 쇼잉 여부 설정
      */
@@ -695,6 +782,9 @@ class UpdateFragment : Fragment() {
 
     /**
      *  현재 액티비티의 FragmentManager를 이용해
+=======
+     *  상위 액티비티의 FragmentManager를 이용해
+>>>>>>> a08212a752b7cca2ae4275252684a64966ae1fff
      *  fragment를 replace하기 위한 메서드
      */
     private fun moveToHomeFrag() {
@@ -703,6 +793,7 @@ class UpdateFragment : Fragment() {
     }
 
     /**
+<<<<<<< HEAD
      * 현재 액티비티의 FragmentManager를 이용해
      * frament를 replace하기 위한 메서드
      *
@@ -714,6 +805,8 @@ class UpdateFragment : Fragment() {
     }
 
     /**
+=======
+>>>>>>> a08212a752b7cca2ae4275252684a64966ae1fff
      * Fragment를 Activity에 attach할 떄 호출
      * Fragment 최초 생성시 호출 (생명주기 최초)
      */
@@ -737,6 +830,7 @@ class UpdateFragment : Fragment() {
      */
     override fun onDetach() {
         super.onDetach()
+<<<<<<< HEAD
         backButtonCallback.remove() // remove Custom Backbutton callback
     }
 
@@ -746,11 +840,23 @@ class UpdateFragment : Fragment() {
 
         @JvmStatic
         fun getInstance(): UpdateFragment =
+=======
+        backButtonCallback.remove()
+    }
+
+    companion object {
+        @Volatile private var instance: UpdateFragment? = null
+
+        @JvmStatic fun getInstance(): UpdateFragment =
+>>>>>>> a08212a752b7cca2ae4275252684a64966ae1fff
             instance ?: synchronized(this) {
                 instance ?: UpdateFragment().also {
                     instance = it
                 }
             }
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> a08212a752b7cca2ae4275252684a64966ae1fff
 }

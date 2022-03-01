@@ -1,8 +1,11 @@
 package com.example.qnaproject.service
 
 import com.example.qnaproject.responseModel.ProductResponseModel
+<<<<<<< HEAD
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+=======
+>>>>>>> a08212a752b7cca2ae4275252684a64966ae1fff
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -28,6 +31,7 @@ interface ProductService {
     @GET("api/goods/GetGood")
     fun getProduct(@Query("ITM_ID") ITM_ID: Int): Call<ProductResponseModel>
 
+<<<<<<< HEAD
     /**
      * ProductActivity - UpdateFragment - UpdateProduct
      */
@@ -41,4 +45,7 @@ interface ProductService {
     @Multipart
     @POST("api/goods/RegisterGood")
     fun registerProduct(@PartMap partMap: HashMap<String, RequestBody>, @Part ITM_IMG1:MultipartBody.Part?): Call<ProductResponseModel>
+=======
+
+>>>>>>> a08212a752b7cca2ae4275252684a64966ae1fff
 }

@@ -60,6 +60,7 @@ class QnaRegisterActivity : AppCompatActivity() {
         mContext = this
         getSharedPreferenceData()
         setClickEvent()
+<<<<<<< HEAD
 
         // 키보드에 의한 레이아웃 축소 확인용 메서드
         mLastContentHeight = this.findViewById<View>(Window.ID_ANDROID_CONTENT).getHeight();
@@ -69,6 +70,10 @@ class QnaRegisterActivity : AppCompatActivity() {
     /**
      * SharedPreference 접근 및 저장된 MEM_ID 설정
      */
+=======
+    }
+
+>>>>>>> a08212a752b7cca2ae4275252684a64966ae1fff
     private fun getSharedPreferenceData() {
         val sharedPref = this.getSharedPreferences("App", Context.MODE_PRIVATE)
         MEM_ID = sharedPref.getInt("MEM_ID", -1)
@@ -121,6 +126,14 @@ class QnaRegisterActivity : AppCompatActivity() {
                 else -> Toast.makeText(this, "작성된 텍스트 다시 한번 확인해주세요", Toast.LENGTH_SHORT).show()
             }
         }
+<<<<<<< HEAD
+=======
+
+        // 키보드에 의한 레이아웃 축소 확인용 메서드
+        mLastContentHeight = this.findViewById<View>(Window.ID_ANDROID_CONTENT).getHeight();
+        setTouchEvent(binding.root)
+
+>>>>>>> a08212a752b7cca2ae4275252684a64966ae1fff
     }
 
     /**
