@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rotate xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fromDegrees="0"
+    android:toDegrees="360"
+    >
+<!--set the color gradients of the shape-->
+    <shape
+        android:shape="ring"
+        android:useLevel="false">
+        <gradient
+            android:startColor="@android:color/holo_orange_light"
+            android:endColor="@android:color/holo_red_dark"
+            android:type="sweep"
+        />
+    </shape>
+</rotate>

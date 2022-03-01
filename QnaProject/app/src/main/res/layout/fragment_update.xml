@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="product"
+            type="com.example.qnaproject.domain.Product" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_root_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".fragment.RegisterFragment">
+
+        <include
+            android:id="@+id/toolbar_product_update"
+            layout="@layout/toolbar_product_update"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_product_update">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                >
+
+                <EditText
+                    android:id="@+id/et_itm_nm"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginVertical="10dp"
+                    android:background="@drawable/edittext_product_register_rounded_corner_10_stroke_color_rectangle"
+                    android:hint="상품명"
+                    android:inputType="text"
+                    android:paddingHorizontal="15dp"
+                    android:text="@{product.ITM_NM}"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toTopOf="@+id/et_itm_price"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_percent="0.075"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintWidth_default="percent"
+                    app:layout_constraintWidth_percent="0.9" />
+
+                <EditText
+                    android:id="@+id/et_itm_price"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginVertical="10dp"
+                    android:background="@drawable/edittext_product_register_rounded_corner_10_stroke_color_rectangle"
+                    android:hint="가격"
+                    android:inputType="number"
+                    android:paddingHorizontal="15dp"
+                    android:text="@{product.ITM_PRICE}"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_default="percent"
+                    app:layout_constraintHeight_percent="0.075"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/et_itm_nm"
+                    app:layout_constraintWidth_default="percent"
+                    app:layout_constraintWidth_percent="0.9" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:text="원"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/et_itm_price"
+                    app:layout_constraintEnd_toEndOf="@+id/et_itm_price"
+                    app:layout_constraintTop_toTopOf="@+id/et_itm_price" />
+
+                <EditText
+                    android:id="@+id/et_itm_dis"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginVertical="10dp"
+                    android:background="@drawable/edittext_product_register_rounded_corner_10_stroke_color_rectangle"
+                    android:hint="할인율"
+                    android:inputType="number"
+                    android:maxLength="3"
+                    android:paddingHorizontal="15dp"
+                    android:text="@{product.ITM_DIS}"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_default="percent"
+                    app:layout_constraintHeight_percent="0.075"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/et_itm_price"
+                    app:layout_constraintWidth_default="percent"
+                    app:layout_constraintWidth_percent="0.9" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:text="%"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/et_itm_dis"
+                    app:layout_constraintEnd_toEndOf="@+id/et_itm_dis"
+                    app:layout_constraintTop_toTopOf="@+id/et_itm_dis" />
+
+                <EditText
+                    android:id="@+id/et_itm_intro"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/edittext_product_register_rounded_corner_10_stroke_color_rectangle"
+                    android:gravity="top|left"
+                    android:hint="상품설명"
+                    android:padding="15dp"
+                    android:text="@{product.ITM_INTRO}"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_default="percent"
+                    app:layout_constraintHeight_percent="0.3"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/et_itm_dis"
+                    app:layout_constraintWidth_default="percent"
+                    app:layout_constraintWidth_percent="0.9" />
+
+                <TextView
+                    android:id="@+id/tv_img_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="소개사진(1장)"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0"
+                    app:layout_constraintStart_toStartOf="@+id/et_itm_intro"
+                    app:layout_constraintTop_toBottomOf="@+id/et_itm_intro" />
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/ib_access_gallery"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="10dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_baseline_add_36"
+                    app:layout_constraintDimensionRatio="h,5:3"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0"
+                    app:layout_constraintStart_toStartOf="@+id/tv_img_label"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_img_label"
+                    app:layout_constraintWidth_default="percent"
+                    app:layout_constraintWidth_percent="0.25"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize10Percent"
+                    app:strokeColor="@color/black"
+                    app:strokeWidth="2dp" />
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/ib_remove_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_baseline_cancel_24"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toTopOf="@+id/ib_access_gallery"
+                    app:layout_constraintStart_toEndOf="@+id/ib_access_gallery" />
+
+                <TextView
+                    android:id="@+id/tv_view_yn_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="노출여부"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0"
+                    app:layout_constraintStart_toStartOf="@+id/ib_access_gallery"
+                    app:layout_constraintTop_toBottomOf="@+id/ib_access_gallery" />
+
+                <RadioGroup
+                    android:id="@+id/rg_view_yn"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="10dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0"
+                    app:layout_constraintStart_toStartOf="@+id/tv_view_yn_label"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_view_yn_label"
+                    app:layout_constraintWidth_default="percent"
+                    app:layout_constraintWidth_percent="0.9">
+
+                    <RadioButton
+                        android:id="@+id/rb_view_y"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="노출" />
+
+                    <RadioButton
+                        android:id="@+id/rb_view_n"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="숨김" />
+                </RadioGroup>
+
+                <Button
+                    android:id="@+id/btn_itm_update"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginVertical="10dp"
+                    android:background="@drawable/button_rounded_corner_rectangle"
+                    android:backgroundTint="@color/blue"
+                    android:text="수정"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_default="percent"
+                    app:layout_constraintHeight_percent="0.075"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rg_view_yn"
+                    app:layout_constraintWidth_default="percent"
+                    app:layout_constraintWidth_percent="0.9" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

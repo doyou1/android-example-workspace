@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".activity.QnaRegisterActivity"
+        >
+
+        <include
+            android:id="@+id/toolbar_qna_register"
+            layout="@layout/toolbar_qna_register"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_qna_register">
+
+            <EditText
+                android:id="@+id/et_qna_title"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="#f3f6fe"
+                android:hint="문의제목"
+                android:inputType="text"
+                android:textSize="14sp"
+                android:paddingHorizontal="15dp"
+                app:layout_constraintBottom_toTopOf="@+id/et_qan_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_default="percent"
+                app:layout_constraintHeight_percent="0.1"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_default="percent"
+                app:layout_constraintWidth_percent="0.75" />
+
+            <EditText
+                android:id="@+id/et_qan_content"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="#f3f6fe"
+                android:gravity="top|left"
+                android:hint="문의내용"
+                android:textSize="14sp"
+                android:padding="15dp"
+                app:layout_constraintBottom_toTopOf="@+id/btn_qna_register"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_default="percent"
+                app:layout_constraintHeight_percent="0.6"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/et_qna_title"
+                app:layout_constraintWidth_default="percent"
+                app:layout_constraintWidth_percent="0.75" />
+
+            <Button
+                android:id="@+id/btn_qna_register"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:backgroundTint="@color/blue"
+                android:text="저장"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_default="percent"
+                app:layout_constraintHeight_percent="0.1"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/et_qan_content"
+                app:layout_constraintWidth_default="percent"
+                app:layout_constraintWidth_percent="0.75" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

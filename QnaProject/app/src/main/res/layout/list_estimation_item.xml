@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <data>
+        <variable
+            name="estimation"
+            type="com.example.qnaproject.domain.Estimation" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        >
+
+        <TextView
+            android:id="@+id/tv_estimation_req_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="타이틀"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:text="@{estimation.REQ_NAME}"
+            android:paddingVertical="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_estimation_area_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="1900-01-01"
+            android:textColor="@color/gray"
+            android:textSize="14sp"
+            android:text="@{estimation.AREA_NM}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_estimation_req_name" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
