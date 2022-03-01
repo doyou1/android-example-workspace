@@ -17,7 +17,7 @@ import kotlin.collections.HashMap
 class MainActivity : AppCompatActivity() {
 
     private val TAG = this::class.java.simpleName.toString()
-    private val API_KEY = "AIzaSyBDvC8lfhx-uG94koTYGQGqrqBIp7bPoZA"
+    private val API_KEY = resources.getString(R.string.api_key)
     private val baseUrl = "https://www.googleapis.com/"
 
     private val part = "snippet"
