@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
+
+        <TextView
+            android:id="@+id/tv_request_result"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:text="요청 결과 대기중..."
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/btn_request"
+            app:layout_constraintStart_toStartOf="@+id/btn_request"
+            app:layout_constraintEnd_toEndOf="@+id/btn_send"
+            />
+
+        <TextView
+            android:id="@+id/tv_subscribe_result"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:text="구독 전송 결과 대기중..."
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@+id/tv_request_result"
+            app:layout_constraintBottom_toTopOf="@+id/btn_request"
+            app:layout_constraintStart_toStartOf="@+id/btn_request"
+            app:layout_constraintEnd_toEndOf="@+id/btn_send"
+            />
+
+        <Button
+            android:id="@+id/btn_request"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="요청"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_send"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <Button
+            android:id="@+id/btn_send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="구독"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btn_request"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
