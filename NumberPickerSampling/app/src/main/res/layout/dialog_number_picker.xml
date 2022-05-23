@@ -31,7 +31,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/np_year"
-                app:layout_constraintEnd_toStartOf="@+id/np_day"
+                app:layout_constraintEnd_toStartOf="@+id/np_week"
                 />
             <NumberPicker
                 android:id="@+id/np_week"
