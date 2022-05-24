@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MultipleActivity">
+
+        <!--        열1-->
+        <TextView
+            android:id="@+id/tv_picked_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00:00 AM"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/btn_pick_time"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            />
+
+        <!--        열2-->
+        <Button
+            android:id="@+id/btn_pick_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pick Time"
+
+            app:layout_constraintTop_toBottomOf="@+id/tv_picked_time"
+            app:layout_constraintBottom_toTopOf="@+id/btn_set_all_alarm"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+        <!--        열3-->
+        <Button
+            android:id="@+id/btn_set_all_alarm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Set All Alarm"
+            app:layout_constraintTop_toBottomOf="@+id/btn_pick_time"
+            app:layout_constraintBottom_toTopOf="@+id/btn_set_0_alarm"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_cancel_all_alarm"
+            />
+
+        <Button
+            android:id="@+id/btn_cancel_all_alarm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancel All Alarm"
+            app:layout_constraintTop_toBottomOf="@+id/btn_pick_time"
+            app:layout_constraintBottom_toTopOf="@+id/btn_set_0_alarm"
+            app:layout_constraintStart_toEndOf="@+id/btn_set_all_alarm"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+        <!--        열4-->
+        <Button
+            android:id="@+id/btn_set_0_alarm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Set 0s Alarm"
+            app:layout_constraintTop_toBottomOf="@+id/btn_set_all_alarm"
+            app:layout_constraintBottom_toTopOf="@+id/btn_set_30_alarm"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_cancel_0_alarm"
+            />
+
+        <Button
+            android:id="@+id/btn_cancel_0_alarm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancel 0s Alarm"
+            app:layout_constraintTop_toBottomOf="@+id/btn_set_all_alarm"
+            app:layout_constraintBottom_toTopOf="@+id/btn_set_30_alarm"
+            app:layout_constraintStart_toEndOf="@+id/btn_set_0_alarm"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+        <!--        열5-->
+        <Button
+            android:id="@+id/btn_set_30_alarm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Set 30s Alarm"
+            app:layout_constraintTop_toBottomOf="@+id/btn_set_0_alarm"
+            app:layout_constraintBottom_toTopOf="@+id/btn_set_45_alarm"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_cancel_30_alarm"
+            />
+
+        <Button
+            android:id="@+id/btn_cancel_30_alarm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancel 30s Alarm"
+            app:layout_constraintTop_toBottomOf="@+id/btn_set_0_alarm"
+            app:layout_constraintBottom_toTopOf="@+id/btn_set_45_alarm"
+            app:layout_constraintStart_toEndOf="@+id/btn_set_30_alarm"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+        <!--        열6-->
+        <Button
+            android:id="@+id/btn_set_45_alarm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Set 45s Alarm"
+            app:layout_constraintTop_toBottomOf="@+id/btn_set_30_alarm"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_cancel_45_alarm"
+            />
+
+        <Button
+            android:id="@+id/btn_cancel_45_alarm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancel 45s Alarm"
+            app:layout_constraintTop_toBottomOf="@+id/btn_set_30_alarm"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btn_set_45_alarm"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
