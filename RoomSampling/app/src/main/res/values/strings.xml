@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">RoomSampling</string>
+    <string name="text_id">ID</string>
+    <string name="text_pwd">PWD</string>
+    <string name="text_name">NAME</string>
+    <string name="text_send">SEND</string>
+</resources>
