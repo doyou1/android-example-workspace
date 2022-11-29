@@ -3,9 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/jh/android-example-workspace/RoomSampling/app/src/main/res/layout/activity_main.xml" value="0.22826086956521738" />
-        <entry key="..\:/Users/jh/android-example-workspace/RoomSampling/app/src/main/res/layout/activity_update_user.xml" value="0.1125" />
-        <entry key="..\:/Users/jh/android-example-workspace/RoomSampling/app/src/main/res/layout/rv_item_user.xml" value="0.1" />
+        <entry key="..\:/Users/jh/android-example-workspace/ViewPagerSingleFragment/app/src/main/res/drawable/bg_border.xml" value="0.2265" />
+        <entry key="..\:/Users/jh/android-example-workspace/ViewPagerSingleFragment/app/src/main/res/layout/activity_main.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/jh/android-example-workspace/ViewPagerSingleFragment/app/src/main/res/layout/fragment_test.xml" value="0.1721311475409836" />
       </map>
     </option>
   </component>

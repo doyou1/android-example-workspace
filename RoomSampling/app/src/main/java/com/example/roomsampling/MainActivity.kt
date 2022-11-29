@@ -1,5 +1,6 @@
 package com.example.roomsampling
 
+import android.app.Activity
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -18,13 +19,14 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     private val TAG = this::class.java.simpleName
-
     private var userList: List<User> = arrayListOf()
+    private lateinit var _activity: Activity
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
 
+        _activity = this
         setContentView(binding.root)
     }
 
@@ -41,7 +43,7 @@ class MainActivity : AppCompatActivity() {
             userList = (application as BaseApplication).userDao.getAll()
             binding.num = userList[userList.size-1].uid + 1
             lifecycleScope.launch(Dispatchers.Main) {
-                binding.recyclerView.adapter = UserRvAdapter(userList)
+                binding.recyclerView.adapter = UserRvAdapter(userList, _activity)
             }
         }
     }
@@ -54,7 +56,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setRecyclerView() {
         binding.recyclerView.layoutManager = getLayoutManager()
-        binding.recyclerView.adapter = UserRvAdapter(userList)
+        binding.recyclerView.adapter = UserRvAdapter(userList, _activity)
     }
 
 

@@ -1,12 +1,14 @@
 package com.example.roomsampling
 
+import android.app.Activity
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.roomsampling.databinding.RvItemUserBinding
 
-class UserRvAdapter(list: List<User>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class UserRvAdapter(list: List<User>,private val activity: Activity) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val _list = list
 
     private val TAG = this::class.java.simpleName
@@ -33,6 +35,11 @@ class UserRvAdapter(list: List<User>) : RecyclerView.Adapter<RecyclerView.ViewHo
 
         fun bind(item: User) {
             binding.model = UserViewModel(item.uid.toString(), item.id, item.pwd, item.name)
+            binding.btnUpdate.setOnClickListener {
+                val intent = Intent(activity, UpdateUserActivity::class.java)
+                intent.putExtra("uid", item.uid)
+                activity.startActivity(intent)
+            }
         }
     }
 }
