@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         setData()
     }
 
-    private fun setData() {
+    fun setData() {
         lifecycleScope.launch(Dispatchers.IO) {
             userList = (application as BaseApplication).userDao.getAll()
             binding.num = userList[userList.size-1].uid + 1
