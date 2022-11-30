@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">pedometer-app</string>
+    <string name="label">걸음 수</string>
+
+</resources>
