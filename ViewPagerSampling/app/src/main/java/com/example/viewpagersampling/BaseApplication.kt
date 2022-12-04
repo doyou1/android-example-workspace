@@ -12,16 +12,18 @@ class BaseApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        setToday()
+        sharedPreferences = getSharedPreferences(TEXT_DAY_OF_MONTH, MODE_PRIVATE)
+        setDayOfMonth()
     }
 
-    private fun setToday() {
+    private fun setDayOfMonth() {
         val calendar = Calendar.getInstance()
-        val YYYY = calendar.get(Calendar.YEAR)
-        val MM = String.format("%02d", calendar.get(Calendar.MONTH) + 1)
         val DD = String.format("%02d", calendar.get(Calendar.DAY_OF_MONTH))
+        sharedPreferences.edit().putString(TEXT_DAY_OF_MONTH, DD).apply()
+    }
 
-        val sharedPreferences = getSharedPreferences(TEXT_TODAY, MODE_PRIVATE)
-        sharedPreferences.edit().putString(TEXT_TODAY, "$YYYY$MM$DD").apply()
+    companion object {
+        lateinit var sharedPreferences: SharedPreferences
+
     }
 }
