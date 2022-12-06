@@ -22,6 +22,7 @@ class ViewPagerAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
         calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) + (position - START_POSITION))
         val yyyy = calendar.get(Calendar.YEAR).toString()
         val mm = String.format("%02d", calendar.get(Calendar.MONTH) + 1)
+        val dd = if (isThisMonth(yyyy, mm)) getThisDayOfMonth() else TEXT_FIRST_DAY_OF_MONTH
 
         Log.e(TAG, "$yyyy$mm")
 
