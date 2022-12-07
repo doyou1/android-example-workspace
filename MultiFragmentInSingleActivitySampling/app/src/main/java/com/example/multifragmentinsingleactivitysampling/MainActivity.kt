@@ -3,6 +3,8 @@ package com.example.multifragmentinsingleactivitysampling
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.MotionEvent
+import android.view.View
 import com.example.multifragmentinsingleactivitysampling.databinding.ActivityMainBinding
 import com.google.android.material.tabs.TabLayout
 import java.text.SimpleDateFormat
@@ -13,6 +15,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val TAG = this::class.java.simpleName
     private var currentDate: String? = null
+    private lateinit var onSwipeTouchListener: OnSwipeTouchListener
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,6 +56,23 @@ class MainActivity : AppCompatActivity() {
 
     private fun initFrameLayout() {
         setFragment(0)
+
+        // handleHorizontalSwipe
+        onSwipeTouchListener = object :
+            OnSwipeTouchListener(this@MainActivity) {
+            override fun onSwipeLeftToRight() {
+                super.onSwipeLeftToRight()
+                setPrevDate()
+
+            }
+
+            override fun onSwipeRightToLeft() {
+                super.onSwipeRightToLeft()
+                setNextDate()
+            }
+        }
+
+        binding.frameLayout.setOnTouchListener(onSwipeTouchListener)
     }
 
     private fun initDate() {
@@ -63,46 +84,54 @@ class MainActivity : AppCompatActivity() {
 
     private fun setClickEvent() {
         binding.btnPrev.setOnClickListener {
-            currentDate?.let {
-                val yyyy = it.substring(0, 4).toInt()
-                val MM = it.substring(4, 6).toInt() - 1
-                val dd = it.substring(6, 8).toInt()
-
-                val cal = Calendar.getInstance()
-                cal.set(yyyy, MM, dd)
-                cal.set(Calendar.DAY_OF_MONTH, dd - 1)
-                val sdf = SimpleDateFormat("yyyyMMdd")
-                currentDate = sdf.format(cal.time)
-                binding.tvDate.text = currentDate
-
-                val currentPosition = binding.tabLayout.selectedTabPosition
-                binding.tabLayout.getTabAt(currentPosition)?.select()
-            }
+            setPrevDate()
         }
 
         binding.btnNext.setOnClickListener {
-            currentDate?.let {
-                val yyyy = it.substring(0, 4).toInt()
-                val MM = it.substring(4, 6).toInt() - 1
-                val dd = it.substring(6, 8).toInt()
+            setNextDate()
+        }
+    }
 
-                val cal = Calendar.getInstance()
-                cal.set(yyyy, MM, dd)
-                cal.set(Calendar.DAY_OF_MONTH, dd + 1)
-                val sdf = SimpleDateFormat("yyyyMMdd")
-                currentDate = sdf.format(cal.time)
-                binding.tvDate.text = currentDate
+    private fun setPrevDate() {
+        currentDate?.let {
+            val yyyy = it.substring(0, 4).toInt()
+            val MM = it.substring(4, 6).toInt() - 1
+            val dd = it.substring(6, 8).toInt()
 
-                val currentPosition = binding.tabLayout.selectedTabPosition
-                binding.tabLayout.getTabAt(currentPosition)?.select()
-            }
+            val cal = Calendar.getInstance()
+            cal.set(yyyy, MM, dd)
+            cal.set(Calendar.DAY_OF_MONTH, dd - 1)
+            val sdf = SimpleDateFormat("yyyyMMdd")
+            currentDate = sdf.format(cal.time)
+            binding.tvDate.text = currentDate
+
+            val currentPosition = binding.tabLayout.selectedTabPosition
+            binding.tabLayout.getTabAt(currentPosition)?.select()
+        }
+    }
+
+    private fun setNextDate() {
+        currentDate?.let {
+            val yyyy = it.substring(0, 4).toInt()
+            val MM = it.substring(4, 6).toInt() - 1
+            val dd = it.substring(6, 8).toInt()
+
+            val cal = Calendar.getInstance()
+            cal.set(yyyy, MM, dd)
+            cal.set(Calendar.DAY_OF_MONTH, dd + 1)
+            val sdf = SimpleDateFormat("yyyyMMdd")
+            currentDate = sdf.format(cal.time)
+            binding.tvDate.text = currentDate
+
+            val currentPosition = binding.tabLayout.selectedTabPosition
+            binding.tabLayout.getTabAt(currentPosition)?.select()
         }
     }
 
     private fun setFragment(position: Int?) {
         position?.let {
             val transaction = supportFragmentManager.beginTransaction()
-            val fragment = when(it) {
+            val fragment = when (it) {
                 0 -> FirstFragment(currentDate)
                 1 -> SecondFragment(currentDate)
                 2 -> ThirdFragment(currentDate)
