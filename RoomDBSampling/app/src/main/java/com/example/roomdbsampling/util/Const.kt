@@ -1,6 +1,8 @@
 package com.example.roomdbsampling.util
 
-object Const {
+import com.example.roomdbsampling.entity.History
 
-    val DB_NAME = "ACCOUNT_TEST"
+object Const {
+    const val DB_NAME = "ACCOUNT_TEST"
+    const val TEXT_INIT = "init"
 }

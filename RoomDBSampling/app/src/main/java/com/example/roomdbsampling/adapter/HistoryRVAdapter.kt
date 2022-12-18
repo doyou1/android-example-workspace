@@ -35,6 +35,7 @@ class HistoryRVAdapter(list: List<History>) : RecyclerView.Adapter<RecyclerView.
 
             val viewModel = HistoryViewModel(
                 item.id.toString(),
+                item.type.toString(),
                 item.date,
                 item.asset,
                 item.category,

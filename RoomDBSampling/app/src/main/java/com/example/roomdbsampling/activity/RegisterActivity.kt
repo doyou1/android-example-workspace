@@ -69,12 +69,12 @@ class RegisterActivity : AppCompatActivity() {
 
         if (!isValidate(date, asset, category, amount)) return
 
-        val item = History(0, date, asset, category, amount.toInt(), memo)
+//        val item = History(0, date, asset, category, amount.toInt(), memo)
 
         lifecycleScope.launch(Dispatchers.IO) {
-            (application as BaseApplication).historyDao.insert(item)
+//            (application as BaseApplication).historyDao.insert(item)
             lifecycleScope.launch(Dispatchers.Main) {
-                finish()
+//                finish()
             }
         }
     }
