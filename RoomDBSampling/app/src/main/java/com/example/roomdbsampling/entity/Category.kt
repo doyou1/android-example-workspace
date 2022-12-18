@@ -4,15 +4,11 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class History(
+data class Category(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
     val type: Int,
-    val date: String,
-    val assetId: Int,
-    val assetName: String,
-    val categoryId: Int,
-    val categoryName: String,
-    val amount: Int,
+    val groupId: Int,
+    val name: String,
     val memo: String?
 )

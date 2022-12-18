@@ -10,7 +10,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.roomdbsampling.application.BaseApplication
 import com.example.roomdbsampling.databinding.ActivityRegisterBinding
+import com.example.roomdbsampling.entity.Asset
+import com.example.roomdbsampling.entity.Category
 import com.example.roomdbsampling.entity.History
+import com.example.roomdbsampling.util.Const.TEXT_CONSUMPTION
+import com.example.roomdbsampling.util.Const.TEXT_INCOME
+import com.example.roomdbsampling.util.Const.TEXT_TRANSFER
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.text.ParseException
@@ -22,9 +27,15 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
     private val TAG = this::class.java.simpleName
 
+    private var currentType = -1
+    private var currentAssets: List<Asset>? = null
+    private var currentCategories: List<Category>? = null
+    private lateinit var mContext: Context
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
+        mContext = this
         setContentView(binding.root)
     }
 
@@ -44,14 +55,18 @@ class RegisterActivity : AppCompatActivity() {
             showDatePicker()
         }
 
+        binding.btnType.setOnClickListener {
+            showTypePopup()
+        }
+
         // Asset
         binding.btnAsset.setOnClickListener {
-            showAssetPopup()
+            if (currentType != -1) showAssetPopup()
         }
 
         // Category
         binding.btnCategory.setOnClickListener {
-            showCategoryPopup()
+            if (currentType != -1) showCategoryPopup()
         }
 
         // 登録
@@ -126,34 +141,69 @@ class RegisterActivity : AppCompatActivity() {
         datePickerDialog.show()
     }
 
-    private fun showAssetPopup() {
-        val popup = PopupMenu(this, binding.btnAsset)
+    private fun showTypePopup() {
+        val popup = PopupMenu(this, binding.btnType)
         popup.setOnMenuItemClickListener { item ->
-            Log.e(TAG, "title : ${item.title}")
-            binding.tvAsset.text = item.title
+
+            when (item.title) {
+                TEXT_INCOME -> {
+                    currentType = 0
+                    binding.tvType.text = TEXT_INCOME
+                }
+                TEXT_CONSUMPTION -> {
+                    currentType = 1
+                    binding.tvType.text = TEXT_CONSUMPTION
+                }
+                TEXT_TRANSFER -> {
+                    currentType = 2
+                    binding.tvType.text = TEXT_TRANSFER
+                }
+            }
             false
         }
-        popup.menu.add("현금")
-        popup.menu.add("카드")
-        popup.menu.add("은행")
-        popup.menu.add("기타")
-//        popup.menuInflater.inflate(R.menu.menu_select_repeat_and_installment, popup.menu)
+        popup.menu.add(TEXT_INCOME)
+        popup.menu.add(TEXT_CONSUMPTION)
+        popup.menu.add(TEXT_TRANSFER)
         popup.show()
     }
 
-    private fun showCategoryPopup() {
-        val popup = PopupMenu(this, binding.btnCategory)
-        popup.setOnMenuItemClickListener { item ->
-            Log.e(TAG, "title : ${item.title}")
-            binding.tvCategory.text = item.title
-            false
+    private fun showAssetPopup() {
+        lifecycleScope.launch(Dispatchers.IO) {
+            currentAssets = (application as BaseApplication).assetDao.getByType(currentType)
+            lifecycleScope.launch(Dispatchers.Main) {
+                currentAssets?.let {
+                    val popup = PopupMenu(mContext, binding.btnAsset)
+                    popup.setOnMenuItemClickListener { item ->
+                        binding.tvAsset.text = item.title
+                        false
+                    }
+                    for (asset in it) {
+                        popup.menu.add(asset.name)
+                    }
+                    popup.show()
+                }
+            }
         }
-        popup.menu.add("식비")
-        popup.menu.add("경조사")
-        popup.menu.add("공과금")
-        popup.menu.add("기타")
-//        popup.menuInflater.inflate(R.menu.menu_select_repeat_and_installment, popup.menu)
-        popup.show()
+    }
+
+    private fun showCategoryPopup() {
+        lifecycleScope.launch(Dispatchers.IO) {
+            currentCategories = (application as BaseApplication).categoryDao.getByType(currentType)
+            lifecycleScope.launch(Dispatchers.Main) {
+                currentCategories?.let {
+                    val popup = PopupMenu(mContext, binding.btnCategory)
+                    popup.setOnMenuItemClickListener { item ->
+                        binding.tvCategory.text = item.title
+                        false
+                    }
+                    for (category in it) {
+                        popup.menu.add(category.name)
+                    }
+                    popup.show()
+                }
+
+            }
+        }
     }
 
     private fun hideKeyboard() {

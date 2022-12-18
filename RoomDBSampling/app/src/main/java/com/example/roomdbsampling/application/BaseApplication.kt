@@ -6,9 +6,12 @@ import android.util.Log
 import androidx.lifecycle.lifecycleScope
 import androidx.room.Room
 import com.example.roomdbsampling.adapter.HistoryRVAdapter
+import com.example.roomdbsampling.entity.Asset
+import com.example.roomdbsampling.entity.Category
 import com.example.roomdbsampling.entity.History
 import com.example.roomdbsampling.room.AppDataBase
 import com.example.roomdbsampling.util.Const
+import com.example.roomdbsampling.util.InitUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
@@ -25,6 +28,14 @@ class BaseApplication : Application() {
         Room.databaseBuilder(applicationContext, AppDataBase::class.java, Const.DB_NAME).build()
     }
 
+    val assetDao by lazy {
+        db.assetDao()
+    }
+
+    val categoryDao by lazy {
+        db.categoryDao()
+    }
+
     val historyDao by lazy {
         db.historyDao()
     }
@@ -35,7 +46,11 @@ class BaseApplication : Application() {
         val isInit = preferences.getBoolean(Const.TEXT_INIT, false)
         if (!isInit) {
             CoroutineScope(Dispatchers.IO).launch {
-                historyDao.insertAll(getInitHistoryList())
+                assetDao.insertAll(getInitAssetList())
+                categoryDao.insertAll(getInitCategoryList())
+                val assetSize = assetDao.getSize()
+                val categorySize = categoryDao.getSize()
+                historyDao.insertAll(getInitHistoryList(assetSize, categorySize))
                 CoroutineScope(Dispatchers.Main).launch {
                     preferences.edit().putBoolean(Const.TEXT_INIT, true).apply()
                 }
@@ -43,115 +58,109 @@ class BaseApplication : Application() {
         }
     }
 
-    private fun getRandomDate(): String {
-        val cal = Calendar.getInstance()
+    private fun getInitAssetList(): List<Asset> {
+        val list = ArrayList<Asset>()
 
-        val year = 2022
-        cal.set(Calendar.YEAR, year)
-        val dayOfYear = randBetween(1, cal.getActualMaximum(Calendar.DAY_OF_YEAR))
-        cal.set(Calendar.DAY_OF_YEAR, dayOfYear)
-
-        return "${cal.get(Calendar.YEAR)}${
-            String.format(
-                "%02d",
-                cal.get(Calendar.MONTH) + 1
+        var count = 0
+        for (name in Const.INIT_INCOME_ASSETS) {
+            val item = Asset(
+                0,
+                0,
+                count,
+                name,
+                Random.nextInt(0, 100000),
+                if (Math.random() > 0.5) "memo$count" else null
             )
-        }${String.format("%02d", cal.get(Calendar.DAY_OF_MONTH))}"
-    }
-
-    private fun getRandomAsset(type: Int): String {
-        val incomeAssets = arrayOf(
-            "현금",
-            "카드",
-            "은행",
-            "기타",
-        )
-        val consumptionAssets = arrayOf(
-            "현금",
-            "카드",
-            "은행",
-            "기타"
-        )
-        val transferAssets = arrayOf(
-            "현금",
-            "신한은행",
-            "미즈호",
-            "해외송금",
-            "기타",
-        )
-
-        return when (type) {
-            // income
-            0 -> {
-                incomeAssets[randBetween(0, incomeAssets.size - 1)]
-            }
-            // consumption
-            1 -> {
-                consumptionAssets[randBetween(0, consumptionAssets.size - 1)]
-            }
-            // transfer
-            2 -> {
-                transferAssets[randBetween(0, transferAssets.size - 1)]
-            }
-            else -> throw NotImplementedError()
+            count++
+            list.add(item)
         }
-    }
 
-    private fun getRandomCategory(type: Int): String {
-        val incomeCategories = arrayOf(
-            "월급",
-            "상여",
-            "환급",
-            "이자",
-            "기타",
-        )
-        val consumptionCategories = arrayOf(
-            "식비",
-            "교통비",
-            "공과금",
-            "경조사",
-            "옷",
-            "사치",
-            "적금",
-            "기타"
-        )
-        val transferCategories = arrayOf(
-            "부모님",
-            "은행간이동",
-            "해외송금",
-            "기타",
-        )
-
-        return when (type) {
-            // income
-            0 -> {
-                incomeCategories[randBetween(0, incomeCategories.size - 1)]
-            }
-            // consumption
-            1 -> {
-                consumptionCategories[randBetween(0, consumptionCategories.size - 1)]
-            }
-            // transfer
-            2 -> {
-                transferCategories[randBetween(0, transferCategories.size - 1)]
-            }
-            else -> throw NotImplementedError()
+        for (name in Const.INIT_CONSUMPTION_ASSETS) {
+            val item = Asset(
+                0,
+                1,
+                count,
+                name,
+                -1,
+                if (Math.random() > 0.5) "memo$count" else null
+            )
+            count++
+            list.add(item)
         }
+
+        for (name in Const.INIT_TRANSFER_ASSETS) {
+            val item = Asset(
+                0,
+                2,
+                count,
+                name,
+                -1,
+                if (Math.random() > 0.5) "memo$count" else null
+            )
+            count++
+            list.add(item)
+        }
+
+        return list.toList()
     }
 
-    private fun randBetween(start: Int, end: Int): Int {
-        return start + (Math.random() * (end - start)).roundToInt()
+    private fun getInitCategoryList(): List<Category> {
+        val list = ArrayList<Category>()
+
+        var count = 0
+        for (name in Const.INIT_INCOME_CATEGORIES) {
+            val item = Category(
+                0,
+                0,
+                count,
+                name,
+                if (Math.random() > 0.5) "memo$count" else null
+            )
+            count++
+            list.add(item)
+        }
+
+        for (name in Const.INIT_CONSUMPTION_CATEGORIES) {
+            val item = Category(
+                0,
+                1,
+                count,
+                name,
+                if (Math.random() > 0.5) "memo$count" else null
+            )
+            count++
+            list.add(item)
+        }
+
+        for (name in Const.INIT_TRANSFER_CATEGORIES) {
+            val item = Category(
+                0,
+                2,
+                count,
+                name,
+                if (Math.random() > 0.5) "memo$count" else null
+            )
+            count++
+            list.add(item)
+        }
+
+        return list.toList()
     }
 
-    private fun getInitHistoryList(): List<History> {
+    private fun getInitHistoryList(assetSize: Int, categorySize: Int): List<History> {
         val list = ArrayList<History>()
         for (i in 0..1000) {
             val id = i + 1
-            val date = getRandomDate()
+            val date = InitUtil.getRandomDate()
             // 0:income, 1:consumption, 2:transfer
             val type = i % 3
-            val asset = getRandomAsset(type)
-            val category = getRandomCategory(type)
+
+            val assetId = InitUtil.randBetween(1, assetSize)
+            val assetName = assetDao.getNameByid(assetId)
+
+            val categoryId = InitUtil.randBetween(1, categorySize)
+            val categoryName = categoryDao.getNameByid(categoryId)
+
             val amount = Random.nextInt(100, 10000)
             val memo = if (i % 3 == 0) null else "memo${String.format("%02d", i)}"
 
@@ -159,11 +168,14 @@ class BaseApplication : Application() {
                 id,
                 type,
                 date,
-                asset,
-                category,
+                assetId,
+                assetName,
+                categoryId,
+                categoryName,
                 amount,
                 memo
             )
+            Log.e(TAG, "item: $item")
             list.add(item)
         }
         return list.toList()
