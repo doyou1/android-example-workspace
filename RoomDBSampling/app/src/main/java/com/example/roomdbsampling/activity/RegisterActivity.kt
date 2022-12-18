@@ -84,12 +84,25 @@ class RegisterActivity : AppCompatActivity() {
 
         if (!isValidate(date, asset, category, amount)) return
 
-//        val item = History(0, date, asset, category, amount.toInt(), memo)
+        val assetId = getAssetId(asset)
+        val categoryId = getCategoryId(category)
+
+        val item = History(
+            0,
+            currentType,
+            date,
+            assetId,
+            asset,
+            categoryId,
+            category,
+            amount.toInt(),
+            memo
+        )
 
         lifecycleScope.launch(Dispatchers.IO) {
-//            (application as BaseApplication).historyDao.insert(item)
+            (application as BaseApplication).historyDao.insert(item)
             lifecycleScope.launch(Dispatchers.Main) {
-//                finish()
+                finish()
             }
         }
     }
@@ -144,21 +157,21 @@ class RegisterActivity : AppCompatActivity() {
     private fun showTypePopup() {
         val popup = PopupMenu(this, binding.btnType)
         popup.setOnMenuItemClickListener { item ->
-
             when (item.title) {
                 TEXT_INCOME -> {
                     currentType = 0
-                    binding.tvType.text = TEXT_INCOME
                 }
                 TEXT_CONSUMPTION -> {
                     currentType = 1
-                    binding.tvType.text = TEXT_CONSUMPTION
                 }
                 TEXT_TRANSFER -> {
                     currentType = 2
-                    binding.tvType.text = TEXT_TRANSFER
                 }
             }
+            binding.tvType.text = item.title
+            binding.tvAsset.text = null
+            binding.tvCategory.text = null
+
             false
         }
         popup.menu.add(TEXT_INCOME)
@@ -204,6 +217,20 @@ class RegisterActivity : AppCompatActivity() {
 
             }
         }
+    }
+
+    private fun getAssetId(name: String): Int {
+        currentAssets?.let {
+            return it.filter { item -> item.name == name }[0].id
+        }
+        return -1
+    }
+
+    private fun getCategoryId(name: String): Int {
+        currentCategories?.let {
+            return it.filter { item -> item.name == name }[0].id
+        }
+        return -1
     }
 
     private fun hideKeyboard() {
