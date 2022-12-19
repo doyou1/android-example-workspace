@@ -40,6 +40,16 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, SummaryActivity::class.java)
             startActivity(intent)
         }
+
+        binding.btnAsset.setOnClickListener {
+            val intent = Intent(this, AddAssetActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.btnCategory.setOnClickListener {
+            val intent = Intent(this, AddCategoryActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun setRecyclerView() {

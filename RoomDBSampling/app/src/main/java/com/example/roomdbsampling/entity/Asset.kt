@@ -8,7 +8,6 @@ data class Asset(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
     val type: Int,
-    val groupId: Int,
     val name: String,
     val amount: Int,
     val memo: String?

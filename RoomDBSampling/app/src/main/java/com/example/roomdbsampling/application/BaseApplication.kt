@@ -66,7 +66,6 @@ class BaseApplication : Application() {
             val item = Asset(
                 0,
                 0,
-                count,
                 name,
                 Random.nextInt(0, 100000),
                 if (Math.random() > 0.5) "memo$count" else null
@@ -79,7 +78,6 @@ class BaseApplication : Application() {
             val item = Asset(
                 0,
                 1,
-                count,
                 name,
                 -1,
                 if (Math.random() > 0.5) "memo$count" else null
@@ -92,7 +90,6 @@ class BaseApplication : Application() {
             val item = Asset(
                 0,
                 2,
-                count,
                 name,
                 -1,
                 if (Math.random() > 0.5) "memo$count" else null
@@ -112,7 +109,6 @@ class BaseApplication : Application() {
             val item = Category(
                 0,
                 0,
-                count,
                 name,
                 if (Math.random() > 0.5) "memo$count" else null
             )
@@ -124,7 +120,6 @@ class BaseApplication : Application() {
             val item = Category(
                 0,
                 1,
-                count,
                 name,
                 if (Math.random() > 0.5) "memo$count" else null
             )
@@ -136,7 +131,6 @@ class BaseApplication : Application() {
             val item = Category(
                 0,
                 2,
-                count,
                 name,
                 if (Math.random() > 0.5) "memo$count" else null
             )
@@ -149,7 +143,7 @@ class BaseApplication : Application() {
 
     private fun getInitHistoryList(assetSize: Int, categorySize: Int): List<History> {
         val list = ArrayList<History>()
-        for (i in 0..1000) {
+        for (i in 0..10000) {
             val id = i + 1
             val date = InitUtil.getRandomDate()
             // 0:income, 1:consumption, 2:transfer

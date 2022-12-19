@@ -24,12 +24,18 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activity.RegisterActivity"
-            android:exported="false"
-            />
-        <activity android:name=".activity.SummaryActivity"
-            android:exported="false"
-            />
+        <activity
+            android:name=".activity.RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.SummaryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.AddAssetActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.AddCategoryActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

@@ -47,11 +47,30 @@
                 android:layout_height="wrap_content"
                 android:text="Summary"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btn_asset"
                 app:layout_constraintStart_toEndOf="@+id/btn_register"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_asset"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add Asset"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btn_category"
+                app:layout_constraintStart_toEndOf="@+id/btn_summary"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add Category"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/btn_asset"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </layout>
