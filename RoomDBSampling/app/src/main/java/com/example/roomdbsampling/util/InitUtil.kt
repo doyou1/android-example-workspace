@@ -9,54 +9,24 @@ class InitUtil {
         fun getRandomDate(): String {
             val cal = Calendar.getInstance()
 
-            val year = 2022
+            val year = 2023
             cal.set(Calendar.YEAR, year)
             val dayOfYear = randBetween(1, cal.getActualMaximum(Calendar.DAY_OF_YEAR))
             cal.set(Calendar.DAY_OF_YEAR, dayOfYear)
 
-            return "${cal.get(Calendar.YEAR)}${
-                String.format(
-                    "%02d",
-                    cal.get(Calendar.MONTH) + 1
-                )
-            }${String.format("%02d", cal.get(Calendar.DAY_OF_MONTH))}"
-        }
+            val yyyy = cal.get(Calendar.YEAR)
+            val MM = String.format(
+                "%02d",
+                cal.get(Calendar.MONTH) + 1
+            )
+            val dd = String.format(
+                "%02d",
+                cal.get(Calendar.DAY_OF_MONTH)
+            )
+            val HH = String.format("%02d", randBetween(0, 23))
+            val mm = String.format("%02d", randBetween(0, 59))
 
-        fun getRandomAsset(type: Int): String {
-
-            return when (type) {
-                // income
-                0 -> {
-                    Const.INIT_INCOME_ASSETS[randBetween(0, Const.INIT_INCOME_ASSETS.size - 1)]
-                }
-                // consumption
-                1 -> {
-                    Const.INIT_CONSUMPTION_ASSETS[randBetween(0, Const.INIT_CONSUMPTION_ASSETS.size - 1)]
-                }
-                // transfer
-                2 -> {
-                    Const.INIT_TRANSFER_ASSETS[randBetween(0, Const.INIT_TRANSFER_ASSETS.size - 1)]
-                }
-                else -> throw NotImplementedError()
-            }
-        }
-
-        fun getRandomCategory(type: Int): String {
-            return when (type) {
-                // income
-                0 -> {
-                    Const.INIT_INCOME_CATEGORIES[randBetween(0, Const.INIT_INCOME_CATEGORIES.size - 1)]
-                }
-                // consumption
-                1 -> {
-                    Const.INIT_CONSUMPTION_CATEGORIES[randBetween(0, Const.INIT_CONSUMPTION_CATEGORIES.size - 1)]
-                }
-                // transfer
-                2 -> {
-                    Const.INIT_TRANSFER_CATEGORIES[randBetween(0, Const.INIT_TRANSFER_CATEGORIES.size - 1)]
-                }
-                else -> throw NotImplementedError()
-            }
+            return "$yyyy$MM$dd$HH$mm"
         }
 
         fun randBetween(start: Int, end: Int): Int {

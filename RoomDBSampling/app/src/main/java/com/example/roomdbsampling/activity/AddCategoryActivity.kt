@@ -15,12 +15,10 @@ import com.example.roomdbsampling.adapter.HistoryRVAdapter
 import com.example.roomdbsampling.application.BaseApplication
 import com.example.roomdbsampling.databinding.ActivityAddAssetBinding
 import com.example.roomdbsampling.databinding.ActivityAddCategoryBinding
-import com.example.roomdbsampling.databinding.ActivitySummaryBinding
-import com.example.roomdbsampling.entity.History
-import com.example.roomdbsampling.dto.Summary
-import com.example.roomdbsampling.entity.Asset
 import com.example.roomdbsampling.entity.Category
-import com.example.roomdbsampling.util.Const
+import com.example.roomdbsampling.util.TEXT_CONSUMPTION
+import com.example.roomdbsampling.util.TEXT_INCOME
+import com.example.roomdbsampling.util.TEXT_TRANSFER
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.*
@@ -65,7 +63,7 @@ class AddCategoryActivity : AppCompatActivity() {
 
         val category = Category(
             0,
-            if (type == Const.TEXT_INCOME) 0 else if (type == Const.TEXT_CONSUMPTION) 1 else 2,
+            if (type == TEXT_INCOME) 0 else if (type == TEXT_CONSUMPTION) 1 else 2,
             name,
             memo
         )
@@ -94,13 +92,13 @@ class AddCategoryActivity : AppCompatActivity() {
         val popup = PopupMenu(this, binding.btnType)
         popup.setOnMenuItemClickListener { item ->
             when (item.title) {
-                Const.TEXT_INCOME -> {
+                TEXT_INCOME -> {
                     currentType = 0
                 }
-                Const.TEXT_CONSUMPTION -> {
+                TEXT_CONSUMPTION -> {
                     currentType = 1
                 }
-                Const.TEXT_TRANSFER -> {
+                TEXT_TRANSFER -> {
                     currentType = 2
                 }
             }
@@ -108,16 +106,16 @@ class AddCategoryActivity : AppCompatActivity() {
 
             false
         }
-        popup.menu.add(Const.TEXT_INCOME)
-        popup.menu.add(Const.TEXT_CONSUMPTION)
-        popup.menu.add(Const.TEXT_TRANSFER)
+        popup.menu.add(TEXT_INCOME)
+        popup.menu.add(TEXT_CONSUMPTION)
+        popup.menu.add(TEXT_TRANSFER)
         popup.show()
     }
 
     private fun isValidate(type: String, name: String): Boolean {
 
         // type validate
-        if (!(type == Const.TEXT_INCOME || type == Const.TEXT_CONSUMPTION || type == Const.TEXT_TRANSFER)) return false
+        if (!(type == TEXT_INCOME || type == TEXT_CONSUMPTION || type == TEXT_TRANSFER)) return false
 
         // name validate
         if (name.trim().isNullOrEmpty()) return false

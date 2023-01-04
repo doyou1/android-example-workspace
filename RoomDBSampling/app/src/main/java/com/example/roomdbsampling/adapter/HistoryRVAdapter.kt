@@ -37,6 +37,7 @@ class HistoryRVAdapter(list: List<History>) : RecyclerView.Adapter<RecyclerView.
                 item.id.toString(),
                 item.type.toString(),
                 item.date,
+                item.repeat.toString(),
                 item.assetName,
                 item.categoryName,
                 item.amount.toString(),
