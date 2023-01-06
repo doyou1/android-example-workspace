@@ -12,20 +12,20 @@ class CustomDrawView(context: Context, attrs: AttributeSet) : View(context, attr
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
 
-        canvas!!.drawColor(Color.rgb(32, 32, 32))
+        canvas!!.drawColor(Color.rgb(255, 255, 255))
 
         val redPaint = Paint()
-        redPaint.setColor(Color.rgb(255, 0, 0))
+        redPaint.color = Color.rgb(255, 0, 0)
 
         val greenPaint = Paint()
-        greenPaint.setColor(Color.rgb(0, 255, 0))
+        greenPaint.color = Color.rgb(0, 255, 0)
 
         val bluePaint = Paint()
-        bluePaint.setColor(Color.rgb(0, 0, 255))
+        bluePaint.color = Color.rgb(0, 0, 255)
 
-        canvas.drawCircle(getWidth() * .75f, getHeight() * .2f, 200f, redPaint);
-        canvas.drawCircle(getWidth() * .25f, getHeight() * .3f, 300f, greenPaint);
-        canvas.drawCircle(getWidth() * .5f, getHeight() * .75f, 400f, bluePaint);
+        canvas.drawCircle(width * .75f, height * .2f, 200f, redPaint);
+        canvas.drawCircle(width * .25f, height * .3f, 200f, greenPaint);
+        canvas.drawCircle(width * .5f, height * .75f, 200f, bluePaint);
     }
 
 }

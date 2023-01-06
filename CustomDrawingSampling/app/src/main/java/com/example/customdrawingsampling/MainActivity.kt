@@ -17,6 +17,8 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
-
+        binding.btnClear.setOnClickListener {
+            binding.touchDrawView.clear()
+        }
     }
 }
