@@ -16,9 +16,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-
-        binding.btnClear.setOnClickListener {
-            binding.touchDrawView.clear()
+        binding.ladderView.post {
+            binding.ladderView.init(5, 20, 5, 5)
         }
+//        binding.btnClear.setOnClickListener {
+//            binding.touchDrawView.clear()
+//        }
     }
 }
