@@ -16,36 +16,52 @@ class LadderView(context: Context, attrs: AttributeSet) : View(context, attrs) {
     private val TAG = this::class.java.simpleName
     private val ladders = arrayListOf<Rect>()
     private val regs = arrayListOf<Rect>()
+    private val users = arrayListOf<XY>()
+    private val goals = arrayListOf<XY>()
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
         canvas!!.drawColor(Color.rgb(255, 255, 255))
 
         val paint = Paint()
+        paint.color = Color.rgb(0, 0, 0)
+
         for (item in ladders) {
-            paint.color =
-                Color.rgb(
-                    (Math.random() * 256).toInt(),
-                    (Math.random() * 256).toInt(),
-                    (Math.random() * 256).toInt()
-                )
             canvas.drawRect(item, paint)
         }
 
         for (item in regs) {
-            paint.color =
-                Color.rgb(
-                    (Math.random() * 256).toInt(),
-                    (Math.random() * 256).toInt(),
-                    (Math.random() * 256).toInt()
-                )
             canvas.drawRect(item, paint)
+        }
+
+        val textPaint = Paint()
+        textPaint.color = Color.rgb(0, 0, 0)
+        textPaint.textSize = 50f;
+        textPaint.textAlign = Paint.Align.CENTER
+
+        for (item in users) {
+            canvas.drawText(item.name, item.x, item.y, textPaint)
+        }
+
+        for (item in goals) {
+            canvas.drawText(item.name, item.x, item.y, textPaint)
         }
     }
 
-    fun init(ladderSize: Int, ladderWidth: Int, legSize: Int, legHeight: Int) {
+    fun init(
+        ladderSize: Int,
+        ladderWidth: Int,
+        regSize: Int,
+        regHeight: Int,
+        userNames: Array<String>,
+        goalNames: Array<String>
+    ) {
+        ladders.clear()
+        regs.clear()
         setLadders(ladderSize, ladderWidth)
-        setLegs(legSize, legHeight)
+        setRegs(regSize, regHeight)
+        setUsers(userNames.iterator())
+        setGoals(goalNames.iterator())
         invalidate()
     }
 
@@ -61,48 +77,48 @@ class LadderView(context: Context, attrs: AttributeSet) : View(context, attrs) {
         }
     }
 
-    private fun setLegs(legSize: Int, legHeight: Int) {
+    private fun setRegs(regSize: Int, regHeight: Int) {
         val ladderTop = ladders[0].top
         val ladderBottom = ladders[0].bottom
 
         for (i in 0 until ladders.size - 1) {
-            if(i % 2 == 0) {
-                val currentLegSize = legSize
-
-                val current = ladders[i]
-                val after = ladders[i + 1]
-                val space = ((ladderBottom - ladderTop) / (currentLegSize + 1))
-
-                for (j in 1..currentLegSize) {
-                    if(Random.nextDouble() > 0.5) continue
-                    val legTop = ladderTop + (space * j)
-                    val legBottom = legTop + legHeight
-                    val legLeft = current.right
-                    val legRight = after.left
-                    val rect = Rect(legLeft, legTop, legRight, legBottom)
-                    regs.add(rect)
-                }
-            }
-            else {
-                val currentLegSize = legSize - 1
-
-                val current = ladders[i]
-                val after = ladders[i + 1]
-                val space = ((ladderBottom - ladderTop) / (currentLegSize + 1))
-
-                for (j in 1..currentLegSize) {
-                    if(Random.nextDouble() > 0.5) continue
-                    val legTop = ladderTop + (space * j)
-                    val legBottom = legTop + legHeight
-                    val legLeft = current.right
-                    val legRight = after.left
-                    val rect = Rect(legLeft, legTop, legRight, legBottom)
-                    regs.add(rect)
-                }
+            val currentRegSize = if (i % 2 == 0) {
+                regSize
+            } else {
+                regSize - 1
             }
 
+            val current = ladders[i]
+            val after = ladders[i + 1]
+            val space = ((ladderBottom - ladderTop) / (currentRegSize + 1))
 
+            for (j in 1..currentRegSize) {
+                if (Random.nextDouble() > 0.5) continue
+                val regTop = ladderTop + (space * j)
+                val regBottom = regTop + regHeight
+                val regLeft = current.right
+                val regRight = after.left
+                val rect = Rect(regLeft, regTop, regRight, regBottom)
+                regs.add(rect)
+            }
+        }
+    }
 
+    private fun setUsers(names: Iterator<String>) {
+        val y = ladders[0].top - 20
+
+        for (item in ladders) {
+            val x = (item.left + item.right) / 2
+            users.add(XY(names.next(), x.toFloat(), y.toFloat()))
+        }
+    }
+
+    private fun setGoals(names: Iterator<String>) {
+        val y = ladders[0].bottom + 60
+
+        for (item in ladders) {
+            val x = (item.left + item.right) / 2
+            goals.add(XY(names.next(), x.toFloat(), y.toFloat()))
         }
     }
 }
