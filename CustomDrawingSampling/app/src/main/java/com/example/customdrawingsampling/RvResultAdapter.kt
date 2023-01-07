@@ -5,41 +5,40 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.RecyclerView
+import com.example.customdrawingsampling.databinding.RvItemButtonBinding
 import com.example.customdrawingsampling.databinding.RvItemEditTextBinding
 
-class RvGoalAdapter(private val list: List<String>, private val activity: MainActivity) :
+class RvResultAdapter(private val list: List<String>, private val activity: LadderActivity) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private val _list = list
     private val TAG = this::class.java.simpleName
+    private val _list = list
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val binding = RvItemEditTextBinding.inflate(
+        val binding = RvItemButtonBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
         )
-        return GoalViewHolder(binding)
+        return ResultViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = _list[position]
-        (holder as GoalViewHolder).bind(item, position)
+        (holder as ResultViewHolder).bind(item, position)
     }
 
     override fun getItemCount(): Int {
         return _list.size
     }
 
-    inner class GoalViewHolder(
-        private val binding: RvItemEditTextBinding
+    inner class ResultViewHolder(
+        private val binding: RvItemButtonBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: String, position: Int) {
-            binding.etText.setText(item)
-            binding.etText.hint = position.toString()
-
-            binding.etText.addTextChangedListener {
-                activity.changeListItem(it.toString(), position, FLAG_GOAL)
+            binding.btnText.text = item
+            binding.btnText.setOnClickListener {
+                activity.showResult(position)
             }
         }
     }

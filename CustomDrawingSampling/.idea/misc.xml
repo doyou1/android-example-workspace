@@ -3,8 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/jh/android-example-workspace/CustomDrawingSampling/app/src/main/res/layout/activity_ladder.xml" value="0.1" />
+        <entry key="..\:/Users/jh/android-example-workspace/CustomDrawingSampling/app/src/main/res/layout/activity_ladder.xml" value="0.2" />
         <entry key="..\:/Users/jh/android-example-workspace/CustomDrawingSampling/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Users/jh/android-example-workspace/CustomDrawingSampling/app/src/main/res/layout/rv_item_button.xml" value="0.4" />
         <entry key="..\:/Users/jh/android-example-workspace/CustomDrawingSampling/app/src/main/res/layout/rv_item_edit_text.xml" value="0.264" />
       </map>
     </option>
