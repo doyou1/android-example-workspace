@@ -1,17 +1,17 @@
-package com.example.customdrawingsampling
+package com.example.customdrawingsampling.ladder
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.RecyclerView
+import com.example.customdrawingsampling.FLAG_GOAL
 import com.example.customdrawingsampling.databinding.RvItemEditTextBinding
 
-class RvGoalAdapter(private val list: List<String>, private val activity: MainActivity) :
+class RvUserAdapter(private val list: List<String>, private val activity: InitLadderActivity) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private val _list = list
     private val TAG = this::class.java.simpleName
+    private val _list = list
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val binding = RvItemEditTextBinding.inflate(
@@ -19,19 +19,19 @@ class RvGoalAdapter(private val list: List<String>, private val activity: MainAc
             parent,
             false
         )
-        return GoalViewHolder(binding)
+        return UserViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = _list[position]
-        (holder as GoalViewHolder).bind(item, position)
+        (holder as UserViewHolder).bind(item, position)
     }
 
     override fun getItemCount(): Int {
         return _list.size
     }
 
-    inner class GoalViewHolder(
+    inner class UserViewHolder(
         private val binding: RvItemEditTextBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: String, position: Int) {

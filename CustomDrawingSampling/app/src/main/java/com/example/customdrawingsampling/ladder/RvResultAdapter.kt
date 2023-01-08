@@ -1,12 +1,9 @@
-package com.example.customdrawingsampling
+package com.example.customdrawingsampling.ladder
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.RecyclerView
 import com.example.customdrawingsampling.databinding.RvItemButtonBinding
-import com.example.customdrawingsampling.databinding.RvItemEditTextBinding
 
 class RvResultAdapter(private val list: List<String>, private val activity: LadderActivity) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {

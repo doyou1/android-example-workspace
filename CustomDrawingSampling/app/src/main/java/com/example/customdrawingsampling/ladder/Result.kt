@@ -1,4 +1,4 @@
-package com.example.customdrawingsampling
+package com.example.customdrawingsampling.ladder
 
 import android.graphics.Color
 import android.graphics.Rect

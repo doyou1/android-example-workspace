@@ -1,12 +1,12 @@
-package com.example.customdrawingsampling
+package com.example.customdrawingsampling.ladder
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.customdrawingsampling.TEXT_COUNT
+import com.example.customdrawingsampling.TEXT_GOAL
+import com.example.customdrawingsampling.TEXT_USER
 import com.example.customdrawingsampling.databinding.ActivityLadderBinding
-import com.example.customdrawingsampling.databinding.ActivityMainBinding
 
 class LadderActivity : AppCompatActivity() {
 

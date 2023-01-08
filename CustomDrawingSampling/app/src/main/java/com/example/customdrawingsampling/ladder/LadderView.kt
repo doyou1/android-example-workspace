@@ -1,4 +1,4 @@
-package com.example.customdrawingsampling
+package com.example.customdrawingsampling.ladder
 
 import android.content.Context
 import android.graphics.Canvas
@@ -6,9 +6,8 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Rect
 import android.util.AttributeSet
-import android.util.Log
 import android.view.View
-import kotlin.math.abs
+import com.example.customdrawingsampling.*
 import kotlin.random.Random
 
 class LadderView(context: Context, attrs: AttributeSet) : View(context, attrs) {

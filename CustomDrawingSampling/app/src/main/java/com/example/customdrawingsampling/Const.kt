@@ -36,3 +36,6 @@ val COLOR_LIST = listOf<Int>(
 const val PAINT_TEXT_SIZE = 50f
 const val TOP_TEXT_MARGIN = 20
 const val BOTTOM_TEXT_MARGIN = 60
+
+const val MIN_ROULETTE_SIZE = 2
+const val MAX_ROULETTE_SIZE = 10
