@@ -7,6 +7,8 @@ import android.os.Bundle
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.regularincomeandinstallmentsampling.databinding.DialogRepeatBinding
+import com.example.regularincomeandinstallmentsampling.regularincome.RegularIncomeActivity
+import com.example.regularincomeandinstallmentsampling.util.REPEAT_ITEM_LIST
 
 class RepeatDialog : DialogFragment() {
 

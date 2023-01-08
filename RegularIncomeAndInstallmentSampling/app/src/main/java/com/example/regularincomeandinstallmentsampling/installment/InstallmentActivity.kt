@@ -1,4 +1,4 @@
-package com.example.regularincomeandinstallmentsampling
+package com.example.regularincomeandinstallmentsampling.installment
 
 
 import androidx.appcompat.app.AppCompatActivity

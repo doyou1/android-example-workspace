@@ -3,7 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/jh/android-example-workspace/RegularIncomeAndInstallmentSampling/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Users/jh/android-example-workspace/RegularIncomeAndInstallmentSampling/app/src/main/res/layout/activity_regular_income.xml" value="0.1125" />
+        <entry key="..\:/Users/jh/android-example-workspace/RegularIncomeAndInstallmentSampling/app/src/main/res/layout/rv_item_installment.xml" value="0.1125" />
+        <entry key="..\:/Users/jh/android-example-workspace/RegularIncomeAndInstallmentSampling/app/src/main/res/layout/rv_item_regular_income.xml" value="0.1125" />
         <entry key="..\:/Users/jh/android-example-workspace/RegularIncomeAndInstallmentSampling/app/src/main/res/layout/rv_item_repeat.xml" value="0.25364583333333335" />
       </map>
     </option>
