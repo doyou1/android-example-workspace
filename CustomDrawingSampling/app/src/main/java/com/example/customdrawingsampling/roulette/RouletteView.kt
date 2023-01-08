@@ -1,19 +1,19 @@
 package com.example.customdrawingsampling.roulette
 
 import android.content.Context
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
-import android.graphics.RectF
+import android.graphics.*
 import android.util.AttributeSet
 import android.view.View
-import com.example.customdrawingsampling.MIN_ROULETTE_SIZE
-import kotlin.random.Random
+import android.view.animation.Animation
+import android.view.animation.RotateAnimation
+import kotlin.math.cos
+import kotlin.math.sin
 
 class RouletteView(context: Context, attrs: AttributeSet) : View(context, attrs) {
 
     private val TAG = this::class.java.simpleName
-    var rouletteSize = MIN_ROULETTE_SIZE
+    private var roulettes: List<Roulette>? = null
+    private var isDone = false
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
@@ -48,37 +48,84 @@ class RouletteView(context: Context, attrs: AttributeSet) : View(context, attrs)
         fillPaint.style = Paint.Style.FILL
         fillPaint.isAntiAlias = true
 
-        val sweepAngle = 360f / rouletteSize.toFloat()
-
-        val colors = arrayListOf<String>()
-        for (i in 0 until rouletteSize) {
-            var color = ""
-            while (true) {
-                color = getRandomColor()
-                if (colors.contains(color)) continue
-                else {
-                    colors.add(color)
-                    break
-                }
-            }
-            fillPaint.color = Color.parseColor(color)
-            val startAngle = if (i == 0) 0f else sweepAngle * i
-
-            canvas?.drawArc(rectF, startAngle, sweepAngle, true, fillPaint)
-            Roulette(startAngle, sweepAngle, color)
+        val textPaint = Paint()
+        textPaint.apply {
+            color = Color.BLACK
+            textSize = 40f
+            textAlign = Paint.Align.CENTER
         }
+
+        roulettes?.let {
+            val sweepAngle = 360f / it.size.toFloat()
+            val centerX = (rectF.left + rectF.right) / 2
+            val centerY = (rectF.top + rectF.bottom) / 2
+            val radius = (rectF.right - rectF.left) / 2 * 0.5
+
+            for (i in it.indices) {
+                val item = it[i]
+                fillPaint.color = Color.parseColor(item.color)
+                val startAngle = if (i == 0) 0f else sweepAngle * i
+                canvas?.drawArc(rectF, startAngle, sweepAngle, true, fillPaint)
+
+                val medianAngle = (startAngle + sweepAngle / 2f) * Math.PI / 180f
+                val x = (centerX + (radius * cos(medianAngle))).toFloat()
+                val y = (centerY + (radius * sin(medianAngle))).toFloat()
+                canvas?.drawText(item.text, x, y, textPaint)
+            }
+        }
+
     }
 
-    fun setSize(size: Int) {
-        rouletteSize = size
+    fun setRoulette(list: List<Roulette>) {
+        roulettes = list
         invalidate()
     }
 
-    private fun getRandomColor(): String {
-        val r = String.format("%02X", Random.nextInt(0, 256))
-        val g = String.format("%02X", Random.nextInt(0, 256))
-        val b = String.format("%02X", Random.nextInt(0, 256))
+    fun rotateRoulette(toDegrees: Float, duration: Long, rotateListener: RotateListener) {
+        val animListener = object : Animation.AnimationListener {
+            override fun onAnimationStart(animation: Animation?) {
+                rotateListener.onRotateStart()
+            }
 
-        return "#$r$g$b"
+            override fun onAnimationEnd(animation: Animation?) {
+                rotateListener.onRotateEnd(getRouletteRotateResult(toDegrees))
+                isDone = true
+                invalidate()
+            }
+
+            override fun onAnimationRepeat(animation: Animation?) {
+
+            }
+        }
+        val rotateAnim = RotateAnimation(
+            0f, toDegrees,
+            Animation.RELATIVE_TO_SELF, 0.5f,
+            Animation.RELATIVE_TO_SELF, 0.5f
+        )
+        rotateAnim.duration = duration
+        rotateAnim.fillAfter = true
+        rotateAnim.setAnimationListener(animListener)
+
+        startAnimation(rotateAnim)
     }
+
+    private fun getRouletteRotateResult(degrees: Float): String {
+        val moveDegrees = degrees % 360
+        val resultAngle = if (moveDegrees > 270) 360 - moveDegrees + 270 else 270 - moveDegrees
+        roulettes?.let {
+            for (i in 1..it.size) {
+                if (resultAngle < (360 / it.size) * i) {
+                    return it[i - 1].text
+                }
+            }
+        }
+        return ""
+    }
+
+    fun stopRotateRoulette() {
+//        rotateAnim?.cancel()
+//        clearAnimation()
+    }
+
+
 }

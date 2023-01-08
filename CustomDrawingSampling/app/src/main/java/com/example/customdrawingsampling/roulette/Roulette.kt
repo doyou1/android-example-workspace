@@ -1,3 +1,3 @@
 package com.example.customdrawingsampling.roulette
 
-data class Roulette(val startAngle: Float, val sweepAngle: Float, val color: String)
+data class Roulette(var text: String, val color: String)
