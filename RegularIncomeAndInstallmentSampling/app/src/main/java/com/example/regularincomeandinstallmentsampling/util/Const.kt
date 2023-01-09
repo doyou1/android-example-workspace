@@ -26,7 +26,18 @@ const val FLAG_EVERY_FOUR_MONTHS = 8
 const val FLAG_EVERY_SIX_MONTHS = 9
 const val FLAG_EVERY_YEAR = 10
 
-const val TEXT_PERIOD = "Period"
+const val PLUS_TIME_EVERY_DAY = "0001"
+const val PLUS_TIME_EVERY_WEEK = "0007"
+const val PLUS_TIME_EVERY_TWO_WEEKS = "0014"
+const val PLUS_TIME_EVERY_FOUR_WEEKS = "0028"
+const val PLUS_TIME_EVERY_MONTH = "0100"
+const val PLUS_TIME_THE_END_OF_THE_MONTH = TEXT_THE_END_OF_THE_MONTH
+const val PLUS_TIME_EVERY_TWO_MONTHS = "0200"
+const val PLUS_TIME_EVERY_THREE_MONTHS = "0300"
+const val PLUS_TIME_EVERY_FOUR_MONTHS = "0400"
+const val PLUS_TIME_EVERY_SIX_MONTHS = "0600"
+const val PLUS_TIME_EVERY_YEAR = "1200"
+
 const val TEXT_SHOW_PERIOD = "Show Period"
 
 val REPEAT_ITEM_LIST = arrayOf(
@@ -47,4 +58,7 @@ const val TEXT_REPEAT = "repeat"
 const val TEXT_NAME = "name"
 const val TEXT_AMOUNT = "amount"
 const val TEXT_DATE = "date"
+const val TEXT_PREV = "prev"
+const val TEXT_TARGET = "target"
+const val TEXT_INIT = "init"
 const val DB_NAME = "db"

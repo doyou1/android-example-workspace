@@ -7,5 +7,5 @@ import androidx.room.PrimaryKey
 data class RegularIncome(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
-    val period: Int, val date: String, val name: String, val amount: Int, val isNewFlag: Boolean
+    val period: Int, val date: String, val name: String, val amount: Int, var isNewFlag: Boolean
 )

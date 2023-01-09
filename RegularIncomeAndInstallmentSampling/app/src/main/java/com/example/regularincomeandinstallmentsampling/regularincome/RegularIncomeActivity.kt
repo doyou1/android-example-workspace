@@ -4,6 +4,7 @@ package com.example.regularincomeandinstallmentsampling.regularincome
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
+import com.example.regularincomeandinstallmentsampling.RepeatDialog
 import com.example.regularincomeandinstallmentsampling.databinding.ActivityRegularIncomeBinding
 import com.example.regularincomeandinstallmentsampling.room.BaseApplication
 import com.example.regularincomeandinstallmentsampling.util.*
@@ -32,7 +33,7 @@ class RegularIncomeActivity : AppCompatActivity() {
 
     private fun setClickEvent() {
         binding.btnPeriod.setOnClickListener {
-//            RepeatDialog().show(supportFragmentManager, com.example.regularincomeandinstallmentsampling.TEXT_REPEAT)
+            RepeatDialog().show(supportFragmentManager, TEXT_REPEAT)
         }
 
         binding.btnSet.setOnClickListener {
@@ -42,6 +43,11 @@ class RegularIncomeActivity : AppCompatActivity() {
 
     fun periodItemClick(item: String) {
         binding.btnPeriod.text = item
+
+        if (item == TEXT_THE_END_OF_THE_MONTH) {
+            val yearMonth = binding.btnDate.text.toString().substring(0, 6)
+            binding.btnDate.text = Util.getLatestDate(yearMonth)
+        }
     }
 
     private fun set() {
