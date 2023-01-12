@@ -13,13 +13,15 @@ import com.example.roomdbimagesampling.databinding.ActivityMainBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.ByteArrayOutputStream
+import java.io.File
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private val TAG = this::class.java.simpleName
-    private var currentUri: Uri? = null
+//    private var currentUri: Uri? = null
 
+    private val images = arrayListOf<File>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,34 +48,25 @@ class MainActivity : AppCompatActivity() {
             }
         }
         binding.btnSave.setOnClickListener {
-            currentUri?.let {
-                val split = it.toString().split("/")
-                val bytes = getBytes(it)
-                bytes?.let {
-                    val item = Image(0, split[split.size - 1], bytes)
-                    lifecycleScope.launch(Dispatchers.IO) {
-                        val result = (application as BaseApplication).imageDao.insert(item)
-                        lifecycleScope.launch(Dispatchers.Main) {
-                            Log.e(TAG, "save result: $result")
-                        }
-                    }
-                }
-            }
+
+            
         }
 
-        binding.btnShow.setOnClickListener {
-            val intent = Intent(this, ImageActivity::class.java)
-            startActivity(intent)
-        }
+//        binding.btnShow.setOnClickListener {
+//            val intent = Intent(this, ImageActivity::class.java)
+//            startActivity(intent)
+//        }
     }
 
-    private fun getBytes(uri: Uri): ByteArray? {
-        return contentResolver.openInputStream(uri)?.buffered()?.use { it.readBytes() }
-    }
+//    private fun getBytes(uri: Uri): ByteArray? {
+//        return contentResolver.openInputStream(uri)?.buffered()?.use { it.readBytes() }
+//    }
 
     private fun openGallery() {
         val intent = Intent(Intent.ACTION_PICK)
         intent.type = "image/*"
+//    intent.clipData
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
         startActivityForResult(intent, IMAGE_CHOOSE)
     }
 
@@ -81,8 +74,16 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == RESULT_OK) {
-            currentUri = data?.data
-            binding.ivResult.setImageURI(currentUri)
+            data?.let { it ->
+                it.clipData?.let { clipData ->
+                    images.clear()
+                    for(i in 0 until clipData.itemCount) {
+                        val uri = clipData.getItemAt(i).uri
+                        val image = File(uri.path)
+                        images.add(image)
+                    }
+                }
+            }
         }
     }
 
