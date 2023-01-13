@@ -29,18 +29,18 @@ class ImageActivity : AppCompatActivity() {
     }
 
     private fun setImages() {
-        lifecycleScope.launch(Dispatchers.IO) {
-            val list = (application as BaseApplication).imageDao.getAll()
-            lifecycleScope.launch(Dispatchers.Main) {
-                setRecyclerView(list)
-            }
-        }
+//        lifecycleScope.launch(Dispatchers.IO) {
+//            val list = (application as BaseApplication).imageDao.getAll()
+//            lifecycleScope.launch(Dispatchers.Main) {
+//                setRecyclerView(list)
+//            }
+//        }
     }
 
 
     private fun setRecyclerView(list: List<Image>) {
         setLayoutManager()
-        binding.recyclerView.adapter = ImageRVAdapter(list)
+//        binding.recyclerView.adapter = ImageRVAdapter(list)
     }
 
     private fun setLayoutManager() {

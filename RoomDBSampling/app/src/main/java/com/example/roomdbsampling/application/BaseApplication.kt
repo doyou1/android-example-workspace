@@ -73,7 +73,7 @@ class BaseApplication : Application() {
             for (item in targetList) {
                 val id = historyDao.isExistByItem(
                     item.type,
-                    item.repeat,
+                    item.regular,
                     item.date
                 )
                 if (id == 0) {
@@ -87,7 +87,7 @@ class BaseApplication : Application() {
         val targetList = ArrayList<History>()
         for (item in list) {
             var prevDate = item.date
-            val plusTime = when (item.repeat) {
+            val plusTime = when (item.regular) {
                 FLAG_EVERY_1_MINUTES -> STRING_EVERY_1_MINUTES
                 FLAG_EVERY_3_MINUTES -> STRING_EVERY_3_MINUTES
                 FLAG_EVERY_5_MINUTES -> STRING_EVERY_5_MINUTES
@@ -119,7 +119,8 @@ class BaseApplication : Application() {
                 val targetHistory = History(
                     0,
                     item.type,
-                    item.repeat,
+                    item.regular,
+                    -1,
                     targetDate,
                     item.assetId,
                     item.assetName,

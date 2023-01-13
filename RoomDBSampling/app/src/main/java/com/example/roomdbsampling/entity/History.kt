@@ -8,7 +8,8 @@ data class History(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
     val type: Int,
-    val repeat: Int,
+    val regular: Int,
+    val installment: Int,
     val date: String,
     val assetId: Int,
     val assetName: String,
