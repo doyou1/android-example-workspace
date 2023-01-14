@@ -1,6 +1,7 @@
 package com.example.roomdbimagesampling
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -10,7 +11,8 @@ import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.os.Environment
+import android.provider.MediaStore
+import android.provider.MediaStore.Images.Media.*
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.roomdbimagesampling.databinding.ActivityMainBinding
@@ -28,8 +30,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
+import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
 
@@ -63,28 +65,17 @@ class MainActivity : AppCompatActivity() {
                 requestPermission()
             }
         }
+
         binding.btnSave.setOnClickListener {
             val parts = arrayListOf<MultipartBody.Part>()
             for (item in images) {
-                val requestFile = RequestBody.create(MediaType.parse("image/jpg"), item.value)
-                val formData = MultipartBody.Part.createFormData(
-                    item.name,
-                    "${item.value.name}.jpg",
-                    requestFile
-                )
-                parts.add(formData)
+                val bytes = RequestBody.create(MediaType.parse("image/jpg; charset=utf-8"), item.value)
+                val part = MultipartBody.Part.createFormData("image", item.name, bytes)
+                parts.add(part)
             }
 
-//            val item = images[0]
-//            val requestFile = RequestBody.create(MediaType.parse("image/jpg"), item.name)
-//            val formData = MultipartBody.Part.createFormData(
-//                item.name,
-//                "${item.value.name}.jpg",
-//                requestFile
-//            )
-
-            val fileName = "FileName"
-            val body = RequestBody.create(MediaType.parse("multipart/form-data"), fileName)
+            val id = "jh"
+            val body = RequestBody.create(MediaType.parse("multipart/form-data"), id)
 
             val retrofit: Retrofit = Retrofit.Builder()
                 .baseUrl(BASE_URL)
@@ -95,8 +86,9 @@ class MainActivity : AppCompatActivity() {
 
             val call: Call<Int> = imageService.upload(
                 body,
-                parts.toArray(arrayOf<MultipartBody.Part>())
+                parts
             )
+
             call.enqueue(object : Callback<Int> {
                 override fun onResponse(call: Call<Int>, response: Response<Int>) {
                     val result = response.body()
@@ -134,26 +126,34 @@ class MainActivity : AppCompatActivity() {
                     for (i in 0 until clipData.itemCount) {
                         val uri = clipData.getItemAt(i).uri
 
-                        val name = "${Calendar.getInstance().timeInMillis}${
-                            String.format(
-                                "%05d",
-                                Random.nextInt(0, 10000)
-                            )
-                        }"
-
-                        getBitmap(this, uri)?.let { bitmap ->
-                            val file = File(
-                                getExternalFilesDir(Environment.DIRECTORY_PICTURES),
-                                "$name.jpg"
-                            )
-                            convertBitmapToFile(file, bitmap)
-                            images.add(Image(name, file))
+                        val projection = arrayOf(DATA)
+                        val cursor = contentResolver.query(
+                            uri, projection, null, null, null
+                        )
+                        if(cursor != null) {
+                            val columnIndex = cursor.getColumnIndexOrThrow(DATA)
+                            cursor.moveToFirst()
+                            val filePath = cursor.getString(columnIndex)
+                            val bytes = File(filePath).readBytes()
+                            val item = Image(getRandomFileName(), bytes)
+                            Log.e(TAG, "item: $item")
+                            images.add(item)
+                            cursor.close()
                         }
+
                     }
                     Log.e(TAG, "images: $images")
                 }
             }
         }
+    }
+
+    private fun getRandomFileName(): String {
+        val cal = Calendar.getInstance()
+        val sdf = SimpleDateFormat("yyyyMMddHHmmss")
+        val date = sdf.format(cal.time)
+        val unixTime = cal.timeInMillis
+        return "$date$unixTime"
     }
 
     private fun requestPermission() {
@@ -194,39 +194,6 @@ class MainActivity : AppCompatActivity() {
             checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
         } else {
             return true
-        }
-    }
-
-    private fun getBitmap(context: Context, imageUri: Uri): Bitmap? {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            ImageDecoder.decodeBitmap(
-                ImageDecoder.createSource(
-                    context.contentResolver,
-                    imageUri
-                )
-            )
-        } else {
-            context
-                .contentResolver
-                .openInputStream(imageUri)?.use { inputStream ->
-                    BitmapFactory.decodeStream(inputStream)
-                }
-        }
-    }
-
-    fun convertBitmapToFile(destinationFile: File, bitmap: Bitmap) {
-        CoroutineScope(Dispatchers.IO).launch {
-            //create a file to write bitmap data
-            destinationFile.createNewFile()
-            //Convert bitmap to byte array
-            val bos = ByteArrayOutputStream()
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 50, bos)
-            val bitmapData = bos.toByteArray()
-            //write the bytes in file
-            val fos = FileOutputStream(destinationFile)
-            fos.write(bitmapData)
-            fos.flush()
-            fos.close()
         }
     }
 

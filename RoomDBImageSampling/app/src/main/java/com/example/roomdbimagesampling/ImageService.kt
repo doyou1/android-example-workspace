@@ -17,8 +17,8 @@ interface ImageService {
     @Multipart
     @POST("/api/upload")
     fun upload(
-        @Part("name") body: RequestBody,
-        @Part images: Array<MultipartBody.Part>
+        @Part("id") id: RequestBody,
+        @Part images: List<MultipartBody.Part>
     ): Call<Int>
 
 
