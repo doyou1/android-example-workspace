@@ -9,12 +9,12 @@ class BaseApplication: Application() {
 
     private val DB_NAME = "image"
 
-//    private val db by lazy {
-//        Room.databaseBuilder(applicationContext, AppDataBase::class.java, DB_NAME).build()
-//    }
+    private val db by lazy {
+        Room.databaseBuilder(applicationContext, AppDataBase::class.java, DB_NAME).build()
+    }
 
-//    val imageDao by lazy {
-//        db.imageDao()
-//    }
+    val imageDao by lazy {
+        db.imageDao()
+    }
 
 }
