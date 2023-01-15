@@ -73,7 +73,15 @@
 <div><video controls src="https://user-images.githubusercontent.com/56281493/212529376-909d1c40-2fd9-4295-b9af-f6a293358e50.mp4" muted="false"></video></div>
 
 # [AppMsgInDialogProject](#AppMsgInDialogProject)
-- AppMsgInDialogProject
+- Android で基本的に提供されるToast Text が見えにくい問題などがある。 ということでメッセージライブラリの一つをサンプリング。
+- ライブラリの内容が簡単で、必要に応じてメッセージレイアウトを修正してCustomもできる。
+- Android에서 기본적으로 제공되는 Toast Text가 잘 보이지 않는 문제 등이 있다. 그래서 메시지 라이브러리 중 하나 샘플링.
+- 라이브러리 내용이 간단해 필요에 따라 메시지 레이아웃을 수정해 Custom도 할 수 있음.
+- There is a problem that Toast Text, which is basically provided on Android, is difficult to see. So sampling one of the message libraries.
+- The library contents are simple, so you can customize the message layout as needed.
+- ./00_[ProjectResult]/AppMsgProject.mp4
+<div><video controls src="" muted="false"></video></div>
+
 # [AppMsgProject](#AppMsgProject)
 - AppMsgProject
 # [CalendarWithRecyclerViewSampling](#CalendarWithRecyclerViewSampling)
