@@ -1,7 +1,6 @@
 # Sampling Project List
 * [ActivityForResultProject](#ActivityForResultProject)
 * [AlarmManagerSampling](#AlarmManagerSampling)
-* [AlarmSampling_service_foregroundservice](#AlarmSampling_service_foregroundservice)
 * [AnimationSampling](#AnimationSampling)
 * [AppMsgInDialogProject](#AppMsgInDialogProject)
 * [AppMsgProject](#AppMsgProject)
@@ -65,9 +64,6 @@
 - Display Notification through Alarm Manager and BroadCast Receiver and click Notification to navigate to the desired activity. Feature to display Intent Extra set by the BroadCast Receiver in that activity
 - ./00_[ProjectResult]/AlarmManagerSampling.mp4
 <div><video controls src="https://user-images.githubusercontent.com/56281493/212528070-0e4ad395-ef52-4d2f-912a-c2db28164abb.mp4" muted="false"></video></div>
-
-# [AlarmSampling_service_foregroundservice](#AlarmSampling_service_foregroundservice)
-- AlarmSampling_service_foregroundservice
 
 # [AnimationSampling](#AnimationSampling)
 - AnimationSampling
