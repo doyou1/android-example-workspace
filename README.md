@@ -57,6 +57,8 @@
 - ActivityForResult Launcher를 이용해 SubActivity로부터 Text를 받아와 MainAcitivy에 표시하고, Gallery로부터 사진을 가져와 표시하는 기능
 - Feature to receive text from SubActivity using ActivityForResult Launcher, display it in MainACTIVITY, and import and display photos from Gallery
 
+https://github.com/doyou1/android-example-workspace/blob/master/ProjectResult/ActivityForResultProject.mp4
+
 # [AlarmManagerSampling](#AlarmManagerSampling)
 - AlarmManagerSampling
 # [AlarmSampling](#AlarmSampling)
