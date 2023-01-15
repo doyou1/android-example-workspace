@@ -56,7 +56,7 @@
 - ActivityForResult Launcherを利用してSubActivityからTextを受け取ってMainAcitivyに表示し、Galleryから写真を持ってきて表示する機能
 - ActivityForResult Launcher를 이용해 SubActivity로부터 Text를 받아와 MainAcitivy에 표시하고, Gallery로부터 사진을 가져와 표시하는 기능
 - Feature to receive text from SubActivity using ActivityForResult Launcher, display it in MainACTIVITY, and import and display photos from Gallery
-- ./[ProjectResult]/ActivityForResultProject.mp4
+- ./00_[ProjectResult]/ActivityForResultProject.mp4
 <div><video controls src="https://user-images.githubusercontent.com/56281493/212525985-ea845f87-5aab-4bf8-aa4e-7cbdf0e3c8fb.mp4" muted="false"></video></div>
 
 # [AlarmManagerSampling](#AlarmManagerSampling)
