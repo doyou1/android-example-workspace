@@ -8,8 +8,8 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
-import androidx.databinding.DataBindingUtil
 import com.example.alarmmanagersampling.databinding.ActivityMainBinding
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
@@ -23,12 +23,47 @@ class MainActivity : AppCompatActivity() {
     private lateinit var alarmManager: AlarmManager
     private lateinit var pendingIntent: PendingIntent
 
+    private val TAG = this::class.java.simpleName
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         createNotificationChannel()
+    }
 
+    override fun onResume() {
+        super.onResume()
+        init()
+        setClickEvent()
+    }
+
+    private fun init() {
+        val cal = Calendar.getInstance()
+
+        val hour = String.format("%02d", cal.get(Calendar.HOUR_OF_DAY))
+        val minute = String.format("%02d", cal.get(Calendar.MINUTE))
+        val amPm = if (hour.toInt() > 12) {
+            "PM"
+        } else {
+            "AM"
+        }
+        binding.tvSelectedTime.text = "$hour : $minute $amPm"
+        timePicker = MaterialTimePicker.Builder()
+            .setTimeFormat(TimeFormat.CLOCK_12H)
+            .setHour(hour.toInt())
+            .setMinute(minute.toInt())
+            .setTitleText(TIMEPICKER_TITLE_TEXT)
+            .build()
+        calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+        val reserveSeconds = calendar.get(Calendar.SECOND) + DELAY_SECOND
+        calendar.set(year, month, day, hour.toInt(), minute.toInt(), reserveSeconds)
+    }
+
+    private fun setClickEvent() {
         binding.btnSelectTime.setOnClickListener {  // show TimePickerDialog
             showTimePicker()
         }
@@ -42,10 +77,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val name = "MyChannel"
-            val description = "Channel Description"
+            val name = NOTIFICATION_CHANNEL_NAME
+            val description = NOTIFICATION_CHANNEL_DESCRIPTION
             val importance = NotificationManager.IMPORTANCE_HIGH
-            val notificationChannel = NotificationChannel("jhsampling", name, importance)
+            val notificationChannel = NotificationChannel(NOTIFICATION_CHANNEL_ID, name, importance)
             notificationChannel.description = description
 
             val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
@@ -54,29 +89,21 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showTimePicker() {
-        timePicker = MaterialTimePicker.Builder()
-            .setTimeFormat(TimeFormat.CLOCK_12H)
-            .setHour(12)
-            .setMinute(0)
-            .setTitleText("Select Alram Time")
-            .build()
-
-        timePicker.show(supportFragmentManager, "jhsampling")
-
+        timePicker.show(supportFragmentManager, NOTIFICATION_CHANNEL_ID)
         timePicker.addOnPositiveButtonClickListener {
-            if (timePicker.hour > 12) {
-                binding.tvSelectedTime.text = "${timePicker.hour} : ${(timePicker.minute)} PM"
-
-//                binding.tvSelectedTime.text = String.format("%02d", "${(timePicker.hour - 12)} : ") + String.format("%02d", "${(timePicker.minute)} PM")
+            val hour = String.format("%02d", timePicker.hour)
+            val minute = String.format("%02d", timePicker.minute)
+            val amPm = if (timePicker.hour > 12) {
+                "PM"
             } else {
-                binding.tvSelectedTime.text = "${timePicker.hour} : ${(timePicker.minute)} AM"
+                "AM"
             }
-
-            calendar = Calendar.getInstance()
-            calendar.set(Calendar.HOUR_OF_DAY, timePicker.hour)
-            calendar.set(Calendar.MINUTE, timePicker.minute)
-            calendar.set(Calendar.SECOND, 0)
-            calendar.set(Calendar.MILLISECOND, 0)
+            binding.tvSelectedTime.text = "$hour : $minute $amPm"
+            val year = calendar.get(Calendar.YEAR)
+            val month = calendar.get(Calendar.MONTH)
+            val day = calendar.get(Calendar.DAY_OF_MONTH)
+            val reserveSeconds = calendar.get(Calendar.SECOND) + DELAY_SECOND
+            calendar.set(year, month, day, timePicker.hour, timePicker.minute, reserveSeconds)
         }
     }
 
@@ -86,21 +113,22 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, AlarmReceiver::class.java)
         pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0)
 
-        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, AlarmManager.INTERVAL_DAY * calendar.getActualMaximum(Calendar.DAY_OF_MONTH), pendingIntent)
+        alarmManager.setExact(
+            AlarmManager.RTC_WAKEUP,
+            calendar.timeInMillis,
+            pendingIntent
+        )
 
-        Toast.makeText(this, "Set Alarm Success", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, TEXT_SUCCESS_SET_ALARM, Toast.LENGTH_SHORT).show()
     }
 
     private fun cancelAlarm() {
         val intent = Intent(this, AlarmReceiver::class.java)
         pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0)
-
         if (alarmManager == null) {
             alarmManager = getSystemService(ALARM_SERVICE) as AlarmManager
         }
-
         alarmManager.cancel(pendingIntent)
-
-        Toast.makeText(this, "Cancel Alarm Success", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, TEXT_SUCCESS_CANCEL_ALARM, Toast.LENGTH_SHORT).show()
     }
 }
