@@ -1,32 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    >
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="model"
             type="com.example.calendarwithrecyclerviewsampling.CalendarItemViewModel" />
+
+        <variable
+            name="isToday"
+            type="Boolean" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/border_blue"
-        >
+        android:background="@{isToday ? @drawable/border_solid_blue : @drawable/border_blue}">
 
-        <TextView
-            android:id="@+id/tv_day"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{model.day}"
-            tools:text="20221106"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp">
+
+            <TextView
+                android:id="@+id/tv_day"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{model.day}"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toTopOf="@+id/tv_consumption"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="20221106" />
+
+            <TextView
+                android:id="@+id/tv_consumption"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{`consumption: ` + model.consumption}"
+                android:textColor="#FF0000"
+                app:layout_constraintBottom_toTopOf="@+id/tv_income"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_day" />
+
+            <TextView
+                android:id="@+id/tv_income"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{`income: ` + model.income}"
+                android:textColor="#0000FF"
+                app:layout_constraintBottom_toTopOf="@+id/tv_result"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_consumption"
+                tools:text="20221106" />
+
+            <TextView
+                android:id="@+id/tv_result"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{`result: ` + model.result}"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_income"
+                tools:text="20221106" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

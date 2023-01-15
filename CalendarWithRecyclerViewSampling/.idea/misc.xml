@@ -3,6 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/jh/android-example-workspace/CalendarWithRecyclerViewSampling/app/src/main/res/drawable/border_blue.xml" value="0.2265" />
+        <entry key="..\:/Users/jh/android-example-workspace/CalendarWithRecyclerViewSampling/app/src/main/res/drawable/border_solid_blue.xml" value="0.1235" />
+        <entry key="..\:/Users/jh/android-example-workspace/CalendarWithRecyclerViewSampling/app/src/main/res/layout/activity_main.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/jh/android-example-workspace/CalendarWithRecyclerViewSampling/app/src/main/res/layout/rv_calendar_item_content.xml" value="0.1" />
         <entry key="..\:/Users/jh/app-fullstack-workspace/CalendarWithRecyclerViewSampling/app/src/main/res/drawable/border_blue.xml" value="0.1235" />
         <entry key="..\:/Users/jh/app-fullstack-workspace/CalendarWithRecyclerViewSampling/app/src/main/res/drawable/border_red.xml" value="0.1225" />
         <entry key="..\:/Users/jh/app-fullstack-workspace/CalendarWithRecyclerViewSampling/app/src/main/res/drawable/solid_border.xml" value="0.2265" />

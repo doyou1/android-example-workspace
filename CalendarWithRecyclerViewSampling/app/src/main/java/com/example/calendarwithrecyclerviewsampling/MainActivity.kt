@@ -23,15 +23,12 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-
         setRecyclerView()
     }
 
     private fun setRecyclerView() {
-
-
         // head(7) + content(35)
-        val headList = arrayListOf<CalendarItem>(
+        val headList = arrayListOf(
             CalendarItem(TYPE_CALENDAR_HEAD, "", 0, 0, 0),
             CalendarItem(TYPE_CALENDAR_HEAD, "", 0, 0, 0),
             CalendarItem(TYPE_CALENDAR_HEAD, "", 0, 0, 0),

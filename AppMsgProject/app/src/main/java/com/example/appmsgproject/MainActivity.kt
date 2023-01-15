@@ -3,7 +3,6 @@ package com.example.appmsgproject
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Gravity
-import androidx.databinding.DataBindingUtil
 import com.devspark.appmsg.AppMsg
 import com.example.appmsgproject.databinding.ActivityMainBinding
 

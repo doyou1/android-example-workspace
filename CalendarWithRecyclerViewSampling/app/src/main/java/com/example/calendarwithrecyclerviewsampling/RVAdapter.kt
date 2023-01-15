@@ -6,6 +6,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.calendarwithrecyclerviewsampling.databinding.RvCalendarItemContentBinding
 import com.example.calendarwithrecyclerviewsampling.databinding.RvCalendarItemHeadBinding
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class RVAdapter(private val list: ArrayList<CalendarItem>) :
@@ -72,13 +75,13 @@ class RVAdapter(private val list: ArrayList<CalendarItem>) :
         {
             if(calendarItem.viewType == TYPE_CALENDAR_HEAD) {
                 binding.strDayOfWeek = when(sequence++) {
-                    0 -> "일"
-                    1 -> "월"
-                    2 -> "화"
-                    3 -> "수"
-                    4 -> "목"
-                    5 -> "금"
-                    6 -> "토"
+                    0 -> "SUN"
+                    1 -> "MON"
+                    2 -> "TUE"
+                    3 -> "WED"
+                    4 -> "THUR"
+                    5 -> "FRI"
+                    6 -> "SAT"
                     else -> ""
                 }
             } else {
@@ -92,12 +95,18 @@ class RVAdapter(private val list: ArrayList<CalendarItem>) :
 
         fun bind(calendarItem: CalendarItem) {
             val model = formatToViewModel(calendarItem)
+            binding.isToday = model.day == getToday()
             binding.model = model
         }
 
         private fun formatToViewModel(calendarItem: CalendarItem): CalendarItemViewModel {
-            val day = calendarItem.date
-            return CalendarItemViewModel(day, calendarItem.consumption.toString(), calendarItem.income.toString(), calendarItem.result.toString())
+            return CalendarItemViewModel(calendarItem.date, calendarItem.consumption.toString(), calendarItem.income.toString(), calendarItem.result.toString())
+        }
+
+        private fun getToday() : String {
+            val cal = Calendar.getInstance()
+            val sdf = SimpleDateFormat("yyyyMMdd")
+            return sdf.format(cal.time)
         }
     }
 
