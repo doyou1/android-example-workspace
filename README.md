@@ -1,58 +1,161 @@
 # Sampling Project List
 * [ActivityForResultProject](#ActivityForResultProject)
-* [AlarmManagerSampling] (#AlarmManagerSampling)
-* [AlarmSampling] (#AlarmSampling)(service, foregroundservice)
-* [AnimationSampling] (#AnimationSampling)
-* [AppMsgInDialogProject] (#AppMsgInDialogProject)
-* [AppMsgProject] (#AppMsgProject)
-* [CalendarWithRecyclerViewSampling] (#CalendarWithRecyclerViewSampling)
-* [ChartSampling] (#ChartSampling)
-* [CheckboxProject] (#CheckboxProject)
-* [ColorPickerProject] (#ColorPickerProject)
-* [ComponentSizeAndPositionProject] (#ComponentSizeAndPositionProject)
-* [ContentProviderProjectA] (#ContentProviderProjectA)
-* [ContentProviderProjectB] (#ContentProviderProjectB)
-* [CustomComponentProject] (#CustomComponentProject)
-* [CustomDrawingSampling] (#CustomDrawingSampling)
-* [CustomInputLayoutSampling] (#CustomInputLayoutSampling)
-* [DatePickerProject] (#DatePickerProject)
-* [DialogActivityProject] (#DialogActivityProject)
-* [DpAndSpProject] (#DpAndSpProject)
-* [FCMProject] (#FCMProject)
-* [FCM_Token] (#FCM_Token)
-* [FCM_Topic] (#FCM_Topic)
-* [FragmentBackStackProject] (#FragmentBackStackProject)
-* [GallerySampling] (#GallerySampling)
-* [InfiniteViewPagerSampling] (#InfiniteViewPagerSampling)
-* [JodaTimeProject] (#JodaTimeProject)
-* [MqttPahoProject] (#MqttPahoProject)
-* [MultiFragmentInSingleActivitySampling] (#MultiFragmentInSingleActivitySampling)
-* [NavigationBackStackProject] (#NavigationBackStackProject)
-* [NewNetworkDataTestProject] (#NewNetworkDataTestProject)
-* [NotificationChannelSampling] (#NotificationChannelSampling)
-* [NumberPickerSampling] (#NumberPickerSampling)
-* [PedometerSampling] (#PedometerSampling)
-* [ProgressbarProject] (#ProgressbarProject)
-* [QnaProject] (#QnaProject)
-* [RecyclerViewScollProject] (#RecyclerViewScollProject)
-* [RegularIncomeAndInstallmentSampling] (#RegularIncomeAndInstallmentSampling)
-* [RoomDBImageSampling] (#RoomDBImageSampling)
-* [RoomDBSampling] (#RoomDBSampling)
-* [RoomSampling] (#RoomSampling)
-* [RyougaeSampling] (#RyougaeSampling)
-* [SeekbarProject] (#SeekbarProject)
-* [ServiceProject] (#ServiceProject)
-* [ServiceThreadExample] (#ServiceThreadExample)
-* [SwitchProject] (#SwitchProject)
-* [TransparentViewSampling] (#TransparentViewSampling)
-* [ViewPagerProject] (#ViewPagerProject)
-* [ViewPagerSampling] (#ViewPagerSampling)
-* [YoutubeAPIProject] (#YoutubeAPIProject)
-* [network] (#network)-data-test-project
-* [pedometerapp] (#pedometerapp)
-* [service] (#service)-sampling
+* [AlarmManagerSampling](#AlarmManagerSampling)
+* [AlarmSampling](#AlarmSampling(service,foregroundservice))
+* [AnimationSampling](#AnimationSampling)
+* [AppMsgInDialogProject](#AppMsgInDialogProject)
+* [AppMsgProject](#AppMsgProject)
+* [CalendarWithRecyclerViewSampling](#CalendarWithRecyclerViewSampling)
+* [ChartSampling](#ChartSampling)
+* [CheckboxProject](#CheckboxProject)
+* [ColorPickerProject](#ColorPickerProject)
+* [ComponentSizeAndPositionProject](#ComponentSizeAndPositionProject)
+* [ContentProviderProjectA](#ContentProviderProjectA)
+* [ContentProviderProjectB](#ContentProviderProjectB)
+* [CustomComponentProject](#CustomComponentProject)
+* [CustomDrawingSampling](#CustomDrawingSampling)
+* [CustomInputLayoutSampling](#CustomInputLayoutSampling)
+* [DatePickerProject](#DatePickerProject)
+* [DialogActivityProject](#DialogActivityProject)
+* [DpAndSpProject](#DpAndSpProject)
+* [FCMProject](#FCMProject)
+* [FCM_Token](#FCM_Token)
+* [FCM_Topic](#FCM_Topic)
+* [FragmentBackStackProject](#FragmentBackStackProject)
+* [GallerySampling](#GallerySampling)
+* [InfiniteViewPagerSampling](#InfiniteViewPagerSampling)
+* [JodaTimeProject](#JodaTimeProject)
+* [MqttPahoProject](#MqttPahoProject)
+* [MultiFragmentInSingleActivitySampling](#MultiFragmentInSingleActivitySampling)
+* [NavigationBackStackProject](#NavigationBackStackProject)
+* [NewNetworkDataTestProject](#NewNetworkDataTestProject)
+* [NotificationChannelSampling](#NotificationChannelSampling)
+* [NumberPickerSampling](#NumberPickerSampling)
+* [PedometerSampling](#PedometerSampling)
+* [ProgressbarProject](#ProgressbarProject)
+* [QnaProject](#QnaProject)
+* [RecyclerViewScollProject](#RecyclerViewScollProject)
+* [RegularIncomeAndInstallmentSampling](#RegularIncomeAndInstallmentSampling)
+* [RoomDBImageSampling](#RoomDBImageSampling)
+* [RoomDBSampling](#RoomDBSampling)
+* [RoomSampling](#RoomSampling)
+* [RyougaeSampling](#RyougaeSampling)
+* [SeekbarProject](#SeekbarProject)
+* [ServiceProject](#ServiceProject)
+* [ServiceThreadExample](#ServiceThreadExample)
+* [SwitchProject](#SwitchProject)
+* [TransparentViewSampling](#TransparentViewSampling)
+* [ViewPagerProject](#ViewPagerProject)
+* [ViewPagerSampling](#ViewPagerSampling)
+* [YoutubeAPIProject](#YoutubeAPIProject)
+* [network-data-test-project](#network-data-test-project)
+* [pedometerapp](#pedometerapp)
+* [service-sampling](#service-sampling)
 
 # [ActivityForResultProject](#ActivityForResultProject)
+- ActivityForResult Launcherを利用してSubActivityからTextを受け取ってMainAcitivyに表示し、Galleryから写真を持ってきて表示する機能
 - ActivityForResult Launcher를 이용해 SubActivity로부터 Text를 받아와 MainAcitivy에 표시하고, Gallery로부터 사진을 가져와 표시하는 기능
+- Feature to receive text from SubActivity using ActivityForResult Launcher, display it in MainACTIVITY, and import and display photos from Gallery
 
-
+# [AlarmManagerSampling](#AlarmManagerSampling)
+- AlarmManagerSampling
+# [AlarmSampling](#AlarmSampling)
+- AlarmSampling
+# [AnimationSampling](#AnimationSampling)
+- AnimationSampling
+# [AppMsgInDialogProject](#AppMsgInDialogProject)
+- AppMsgInDialogProject
+# [AppMsgProject](#AppMsgProject)
+- AppMsgProject
+# [CalendarWithRecyclerViewSampling](#CalendarWithRecyclerViewSampling)
+- CalendarWithRecyclerViewSampling
+# [ChartSampling](#ChartSampling)
+- ChartSampling
+# [CheckboxProject](#CheckboxProject)
+- CheckboxProject
+# [ColorPickerProject](#ColorPickerProject)
+- ColorPickerProject
+# [ComponentSizeAndPositionProject](#ComponentSizeAndPositionProject)
+- ComponentSizeAndPositionProject
+# [ContentProviderProjectA](#ContentProviderProjectA)
+- ContentProviderProjectA
+# [ContentProviderProjectB](#ContentProviderProjectB)
+- ContentProviderProjectB
+# [CustomComponentProject](#CustomComponentProject)
+- CustomComponentProject
+# [CustomDrawingSampling](#CustomDrawingSampling)
+- CustomDrawingSampling
+# [CustomInputLayoutSampling](#CustomInputLayoutSampling)
+- CustomInputLayoutSampling
+# [DatePickerProject](#DatePickerProject)
+- DatePickerProject
+# [DialogActivityProject](#DialogActivityProject)
+- DialogActivityProject
+# [DpAndSpProject](#DpAndSpProject)
+- DpAndSpProject
+# [FCMProject](#FCMProject)
+- FCMProject
+# [FCM_Token](#FCM_Token)
+- FCM_Token
+# [FCM_Topic](#FCM_Topic)
+- FCM_Topic
+# [FragmentBackStackProject](#FragmentBackStackProject)
+- FragmentBackStackProject
+# [GallerySampling](#GallerySampling)
+- GallerySampling
+# [InfiniteViewPagerSampling](#InfiniteViewPagerSampling)
+- InfiniteViewPagerSampling
+# [JodaTimeProject](#JodaTimeProject)
+- JodaTimeProject
+# [MqttPahoProject](#MqttPahoProject)
+- MqttPahoProject
+# [MultiFragmentInSingleActivitySampling](#MultiFragmentInSingleActivitySampling)
+- MultiFragmentInSingleActivitySampling
+# [NavigationBackStackProject](#NavigationBackStackProject)
+- NavigationBackStackProject
+# [NewNetworkDataTestProject](#NewNetworkDataTestProject)
+- NewNetworkDataTestProject
+# [NotificationChannelSampling](#NotificationChannelSampling)
+- NotificationChannelSampling
+# [NumberPickerSampling](#NumberPickerSampling)
+- NumberPickerSampling
+# [PedometerSampling](#PedometerSampling)
+- PedometerSampling
+# [ProgressbarProject](#ProgressbarProject)
+- ProgressbarProject
+# [QnaProject](#QnaProject)
+- QnaProject
+# [RecyclerViewScollProject](#RecyclerViewScollProject)
+- RecyclerViewScollProject
+# [RegularIncomeAndInstallmentSampling](#RegularIncomeAndInstallmentSampling)
+- RegularIncomeAndInstallmentSampling
+# [RoomDBImageSampling](#RoomDBImageSampling)
+- RoomDBImageSampling
+# [RoomDBSampling](#RoomDBSampling)
+- RoomDBSampling
+# [RoomSampling](#RoomSampling)
+- RoomSampling
+# [RyougaeSampling](#RyougaeSampling)
+- RyougaeSampling
+# [SeekbarProject](#SeekbarProject)
+- SeekbarProject
+# [ServiceProject](#ServiceProject)
+- ServiceProject
+# [ServiceThreadExample](#ServiceThreadExample)
+- ServiceThreadExample
+# [SwitchProject](#SwitchProject)
+- SwitchProject
+# [TransparentViewSampling](#TransparentViewSampling)
+- TransparentViewSampling
+# [ViewPagerProject](#ViewPagerProject)
+- ViewPagerProject
+# [ViewPagerSampling](#ViewPagerSampling)
+- ViewPagerSampling
+# [YoutubeAPIProject](#YoutubeAPIProject)
+- YoutubeAPIProject
+# [network-data-test-project](#network-data-test-project)
+- network-data-test-project
+# [pedometerapp](#pedometerapp)
+- pedometerapp
+# [service-sampling](#service-sampling)
+- service-sampling
