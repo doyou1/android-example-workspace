@@ -82,7 +82,15 @@
 <div><video controls src="https://user-images.githubusercontent.com/56281493/212533849-d8a828f4-df3f-4389-9523-0fc62845e886.mp4" muted="false"></video></div>
 
 # [CalendarWithRecyclerViewSampling](#CalendarWithRecyclerViewSampling)
-- CalendarWithRecyclerViewSampling
+- 家計簿アプリのクローン中にカレンダーView機能の実装が必要で始めたサンプリングプロジェクト。
+- 7*5サイズのカレンダーで内部に消費、所得、結果値を設定し、今日の日付の場合はViewのBackground Colorを埋めて強調した。
+- 가계부 어플 클론하는 중 달력 View 기능 구현이 필요해서 시작한 샘플링 프로젝트.
+- 7*5 크기의 달력으로 내부에 소비, 소득, 결과값을 설정하고, 오늘 날짜일 경우 View의 Background Color를 채워 강조했다.
+- Sampling project started due to the need to implement calendar view function while cloning account book applications.
+- Consumption, income, and results are set internally with a 7*5 calendar, and if it is today's date, it is highlighted by filling in View's Background Color.
+- ./00_[ProjectResult]/CalendarWithRecyclerViewSampling.jpg
+![CalendarWithRecyclerViewSampling](https://user-images.githubusercontent.com/56281493/212535146-21050c24-4e54-45a1-92d8-63f9c731a295.jpg)
+
 # [ChartSampling](#ChartSampling)
 - ChartSampling
 # [CheckboxProject](#CheckboxProject)
