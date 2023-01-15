@@ -5,7 +5,6 @@
 * [AppMsgProject](#AppMsgProject)
 * [CalendarWithRecyclerViewSampling](#CalendarWithRecyclerViewSampling)
 * [ChartSampling](#ChartSampling)
-* [CheckboxProject](#CheckboxProject)
 * [ColorPickerProject](#ColorPickerProject)
 * [ComponentSizeAndPositionProject](#ComponentSizeAndPositionProject)
 * [ContentProviderProjectA](#ContentProviderProjectA)
@@ -101,10 +100,16 @@
 - ./00_[ProjectResult]/ChartSampling.mp4
 <div><video controls src="https://user-images.githubusercontent.com/56281493/212537145-4bd34666-3548-40be-88f9-b78711e702d1.mp4" muted="false"></video></div>
 
-# [CheckboxProject](#CheckboxProject)
-- CheckboxProject
 # [ColorPickerProject](#ColorPickerProject)
-- ColorPickerProject
+- 以前サンプリング作業をしながら進行したColor Pickerプロジェクト。
+- LightテーマでDialogボタンが明確な色で表示されない問題があり、該当ライブラリ[github issue](https://github.com/Dhaval2404/ColorPicker/issues/16))を見たが、特に解決策はないようだ。
+- 이전에 샘플링 작업을 하면서 진행했던 Color Picker 프로젝트.
+- Light테마에서 Dialog 버튼이 명확한 색상으로 표시되지 않는 문제가 있어 해당 라이브러리 [github issue](https://github.com/Dhaval2404/ColorPicker/issues/16)를 봤으나, 딱히 해결방안은 없는 듯 보임.
+- The Color Picker project that was previously carried out while sampling.
+- I saw the library [github issue] (https://github.com/Dhaval2404/ColorPicker/issues/16) because the Dialog button is not clearly displayed in the light theme, but there seems to be no solution.
+- ./00_[ProjectResult]/ColorPickerProject.mp4
+<div><video controls src="" muted="false"></video></div>
+
 # [ComponentSizeAndPositionProject](#ComponentSizeAndPositionProject)
 - ComponentSizeAndPositionProject
 # [ContentProviderProjectA](#ContentProviderProjectA)
