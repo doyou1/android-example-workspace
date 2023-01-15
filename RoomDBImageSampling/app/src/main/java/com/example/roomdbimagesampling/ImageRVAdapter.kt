@@ -45,6 +45,8 @@ class ImageRVAdapter(private val list: List<Image>) :
             binding.tvName.text = item.name
             val fileUrl = "${BASE_URL}api/get/${item.name}"
 
+            Log.e(TAG, "fileUrl: $fileUrl")
+
             Glide.with(itemView.context)
                 .load(fileUrl)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)

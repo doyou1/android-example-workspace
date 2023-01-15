@@ -82,7 +82,11 @@ class MainActivity : AppCompatActivity() {
         val call: Call<Int> = imageService.upload(parts)
         call.enqueue(object : Callback<Int> {
             override fun onResponse(call: Call<Int>, response: Response<Int>) {
-                saveImages()
+                if(response.body() != null && response.body()!! > 0) {
+                    saveImages()
+                } else {
+                    Toast.makeText(baseContext, "image cannot save. maybe backend server not working", Toast.LENGTH_LONG).show()
+                }
             }
 
             override fun onFailure(call: Call<Int>, t: Throwable) {
