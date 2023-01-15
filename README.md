@@ -66,7 +66,12 @@
 <div><video controls src="https://user-images.githubusercontent.com/56281493/212528070-0e4ad395-ef52-4d2f-912a-c2db28164abb.mp4" muted="false"></video></div>
 
 # [AnimationSampling](#AnimationSampling)
-- AnimationSampling
+- ObjectAnimatorを活用してViewのアニメーション効果を具現。
+- ObjectAnimator를 활용해 View의 애니메이션 효과를 구현.
+- Use ObjectAnimator to realize the animation effect of View.
+- ./00_[ProjectResult]/AnimationSampling.mp4
+<div><video controls src="https://user-images.githubusercontent.com/56281493/212529376-909d1c40-2fd9-4295-b9af-f6a293358e50.mp4" muted="false"></video></div>
+
 # [AppMsgInDialogProject](#AppMsgInDialogProject)
 - AppMsgInDialogProject
 # [AppMsgProject](#AppMsgProject)
