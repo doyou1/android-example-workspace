@@ -1,7 +1,7 @@
 # Sampling Project List
 * [ActivityForResultProject](#ActivityForResultProject)
 * [AlarmManagerSampling](#AlarmManagerSampling)
-* [AlarmSampling(service,foregroundservice)](#AlarmSampling-service-foregroundservice)
+* [AlarmSampling(service,foregroundservice)](#AlarmSampling)
 * [AnimationSampling](#AnimationSampling)
 * [AppMsgInDialogProject](#AppMsgInDialogProject)
 * [AppMsgProject](#AppMsgProject)
@@ -66,7 +66,7 @@
 - ./00_[ProjectResult]/AlarmManagerSampling.mp4
 <div><video controls src="https://user-images.githubusercontent.com/56281493/212528070-0e4ad395-ef52-4d2f-912a-c2db28164abb.mp4" muted="false"></video></div>
 
-# [AlarmSampling(service,foregroundservice)](#AlarmSampling-service-foregroundservice)
+# [AlarmSampling(service,foregroundservice)](#AlarmSampling)
 - AlarmSampling(service,foregroundservice)
 
 # [AnimationSampling](#AnimationSampling)
