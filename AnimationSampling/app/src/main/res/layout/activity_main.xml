@@ -9,13 +9,33 @@
         android:layout_height="match_parent">
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn"
+            android:id="@+id/btn_rotate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Click me"
+            android:text="Click Me(Rotate)"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_alpha"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_alpha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Click Me(Alpha)"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_translation"
+            app:layout_constraintStart_toEndOf="@+id/btn_rotate"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_translation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Click Me(Translation)"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btn_alpha"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
