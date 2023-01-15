@@ -99,7 +99,7 @@
 - Sampling was conducted because it seemed that there would be a case of making a chart related to statistics while cloning the accounting book application.
 - We used MPandroidChart, which is the most widely used on Android.
 - ./00_[ProjectResult]/ChartSampling.mp4
-<div><video controls src="" muted="false"></video></div>
+<div><video controls src="https://user-images.githubusercontent.com/56281493/212537145-4bd34666-3548-40be-88f9-b78711e702d1.mp4" muted="false"></video></div>
 
 # [CheckboxProject](#CheckboxProject)
 - CheckboxProject
