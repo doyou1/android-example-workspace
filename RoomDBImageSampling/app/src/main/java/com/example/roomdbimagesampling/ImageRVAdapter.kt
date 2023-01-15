@@ -1,14 +1,22 @@
 package com.example.roomdbimagesampling
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.PixelFormat.RGBA_8888
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.roomdbimagesampling.databinding.RvItemImageBinding
 
 class ImageRVAdapter(private val list: List<Image>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    val _list = list
+    private val TAG = this::class.java.simpleName
+    private val _list = list
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val binding = RvItemImageBinding.inflate(
             LayoutInflater.from(parent.context),
@@ -31,13 +39,17 @@ class ImageRVAdapter(private val list: List<Image>) :
     inner class ImageViewHolder(private val binding: RvItemImageBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: Image) {
 
+        fun bind(item: Image) {
             binding.tvId.text = item.id.toString()
             binding.tvName.text = item.name
+            val fileUrl = "${BASE_URL}api/get/${item.name}"
 
-//            val bitmap = BitmapFactory.decodeByteArray(item.bytes, 0, item.bytes.size)
-//            binding.ivResult.setImageBitmap(bitmap)
+            Glide.with(itemView.context)
+                .load(fileUrl)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true)
+                .into(binding.ivResult)
         }
     }
 

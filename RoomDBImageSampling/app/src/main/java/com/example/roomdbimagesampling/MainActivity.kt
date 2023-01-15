@@ -134,7 +134,7 @@ class MainActivity : AppCompatActivity() {
                             cursor.moveToFirst()
                             val filePath = cursor.getString(columnIndex)
                             val bytes = File(filePath).readBytes()
-                            val item = ImageDto("${getRandomFileName()}.jpg", bytes)
+                            val item = ImageDto("0", "${getRandomFileName()}.jpg", bytes)
                             imageDtos.add(item)
                             cursor.close()
                         }

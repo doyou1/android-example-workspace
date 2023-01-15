@@ -11,7 +11,7 @@ interface ImageService {
     @POST("/api/get")
     fun get(
         @Body names: List<String>
-    ): Call<HashMap<String, ByteArray>>
+    ): Call<HashMap<String, String>>
 
     @Multipart
     @POST("/api/upload")

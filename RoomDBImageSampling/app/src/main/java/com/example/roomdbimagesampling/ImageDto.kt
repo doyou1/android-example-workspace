@@ -6,6 +6,7 @@ import androidx.room.PrimaryKey
 import java.io.File
 
 data class ImageDto(
+    val id: String,
     val name: String,
     val value: ByteArray
 )
