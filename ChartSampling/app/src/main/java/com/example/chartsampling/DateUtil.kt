@@ -18,14 +18,14 @@ class DateUtil {
                 val stepModel = StepModel(strDate, step)
                 list.add(stepModel)
 
-                // 하루 전
+                // prev day
                 date.add(Calendar.DATE, -1)
             }
 
-            // 오늘부터 쌓았기때문에 reverse가 필요, immutable한 array로 변경
+            // reverse, because add today to prev day
             return list.asReversed().toTypedArray()
         }
     }
 }
 
-data class StepModel (val date: String, val step: Int)
+data class StepModel(val date: String, val step: Int)

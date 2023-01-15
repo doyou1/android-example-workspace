@@ -92,7 +92,15 @@
 ![CalendarWithRecyclerViewSampling](https://user-images.githubusercontent.com/56281493/212535146-21050c24-4e54-45a1-92d8-63f9c731a295.jpg)
 
 # [ChartSampling](#ChartSampling)
-- ChartSampling
+- 家計簿アプリのクローン中に統計関連してチャートを作る場合が生じそうでサンプリングを進めた。
+- Android で最も多く活用されるMPAndroid Chart を使用した。
+- 가계부 어플 클론하는 중 통계관련해서 차트를 만들 경우가 생길 것 같아 샘플링을 진행했다.
+- Android에서 가장 많이 활용되는 MPAndroidChart를 사용했다.
+- Sampling was conducted because it seemed that there would be a case of making a chart related to statistics while cloning the accounting book application.
+- We used MPandroidChart, which is the most widely used on Android.
+- ./00_[ProjectResult]/ChartSampling.mp4
+<div><video controls src="" muted="false"></video></div>
+
 # [CheckboxProject](#CheckboxProject)
 - CheckboxProject
 # [ColorPickerProject](#ColorPickerProject)
