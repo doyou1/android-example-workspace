@@ -2,7 +2,6 @@
 * [ActivityForResultProject](#ActivityForResultProject)
 * [AlarmManagerSampling](#AlarmManagerSampling)
 * [AnimationSampling](#AnimationSampling)
-* [AppMsgInDialogProject](#AppMsgInDialogProject)
 * [AppMsgProject](#AppMsgProject)
 * [CalendarWithRecyclerViewSampling](#CalendarWithRecyclerViewSampling)
 * [ChartSampling](#ChartSampling)
