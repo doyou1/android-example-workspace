@@ -2,59 +2,90 @@ package com.example.activityforresultproject
 
 import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.BitmapFactory
+import android.provider.MediaStore.Images.Media.*
 import android.os.Bundle
-import android.util.Log
-import android.widget.Button
-import android.widget.TextView
+import android.provider.MediaStore
+import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
+import com.example.activityforresultproject.databinding.ActivityMainBinding
+import java.io.File
+
 
 class MainActivity : AppCompatActivity() {
 
-    private val tag = "MainActivity"
+    private val TAG = this::class.java.simpleName
+    private lateinit var binding: ActivityMainBinding
+    private val subLauncher = getSubActivityResultLauncher()
+    private val galleryLauncher = getGalleryActivityResultLauncher()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        val subLauncher = getSubActivityResultLauncher()
-        val galleryLauncher = getGalleryActivityResultLauncher()
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+    }
 
-        findViewById<Button>(R.id.btn_sub_move).setOnClickListener {
+    override fun onResume() {
+        super.onResume()
+        binding.btnSubMove.setOnClickListener {
             openSubActivityResultLauncher(subLauncher)
         }
-        findViewById<Button>(R.id.btn_gallery_move).setOnClickListener {
+
+        binding.btnGalleryMove.setOnClickListener {
             openGalleryActivityResultLauncher(galleryLauncher)
         }
     }
 
-    private fun getSubActivityResultLauncher() : ActivityResultLauncher<Intent> {
+    private fun getSubActivityResultLauncher(): ActivityResultLauncher<Intent> {
         return registerForActivityResult(
             ActivityResultContracts
-            .StartActivityForResult()) { result ->
+                .StartActivityForResult()
+        ) { result ->
 
             if (result.resultCode == Activity.RESULT_OK) {
                 // There are no request codes
                 val data: Intent? = result.data
                 data.let { data ->
-                    findViewById<TextView>(R.id.textView).text = data?.getStringExtra("text") ?: "Empty"
+                    binding.tvResult.visibility = View.VISIBLE
+                    binding.ivResult.visibility = View.GONE
+                    binding.progressCircular.visibility = View.GONE
+                    binding.tvResult.text =
+                        data?.getStringExtra("text") ?: "Empty"
                 }
             }
         }
     }
 
-    private fun getGalleryActivityResultLauncher() : ActivityResultLauncher<Intent> {
+    private fun getGalleryActivityResultLauncher(): ActivityResultLauncher<Intent> {
         return registerForActivityResult(
             ActivityResultContracts
-                .StartActivityForResult()) { result ->
+                .StartActivityForResult()
+        ) { result ->
 
             if (result.resultCode == Activity.RESULT_OK) {
                 // There are no request codes
                 val data: Intent? = result.data
 
-                data?.let { data ->
-                    val selectedImage = data.data
-                    Log.e(tag, selectedImage.toString())
+                result.data?.data?.let { uri ->
+
+                    val projection = arrayOf(DATA)
+                    val cursor = contentResolver.query(uri, projection, null, null, null)
+
+                    if (cursor != null) {
+                        val columnIndex = cursor.getColumnIndexOrThrow(DATA)
+                        cursor.moveToFirst()
+                        val filePath = cursor.getString(columnIndex)
+                        val bytes = File(filePath).readBytes()
+                        val bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+                        binding.ivResult.setImageBitmap(bitmap)
+                        binding.tvResult.visibility = View.GONE
+                        binding.ivResult.visibility = View.VISIBLE
+                        binding.progressCircular.visibility = View.GONE
+                        cursor.close()
+                    }
+
                 }
             }
         }
@@ -66,7 +97,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun openGalleryActivityResultLauncher(launcher: ActivityResultLauncher<Intent>) {
         val intent = Intent(Intent.ACTION_PICK).also {
-            it.setType("image/*")
+            it.type = "image/*"
             val mimeTypes = arrayOf("image/jpg")
             it.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
         }
