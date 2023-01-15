@@ -59,7 +59,7 @@
 - ./00_[ProjectResult]/ActivityForResultProject.mp4
 <div><video controls src="https://user-images.githubusercontent.com/56281493/212525985-ea845f87-5aab-4bf8-aa4e-7cbdf0e3c8fb.mp4" muted="false"></video></div>
 
-# [AlarmSampling](#AlarmSampling)
+# [AlarmManagerSampling](#AlarmManagerSampling)
 - Alarm ManagerとBroadCast Receiverを通じてNotification表示及びNotificationクリックすると希望するActivityに移動。BroadCast Receiverで設定したIntent Extraを該当Activityに表示する機能
 - AlarmManager와 BroadCast Receiver를 통해 Notification 표시 및 Notification 클릭시 원하는 Activity로 이동. BroadCast Receiver에서 설정한 Intent Extra를 해당 Activity에 표시하는 기능
 - Display Notification through Alarm Manager and BroadCast Receiver and click Notification to navigate to the desired activity. Feature to display Intent Extra set by the BroadCast Receiver in that activity
