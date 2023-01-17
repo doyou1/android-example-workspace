@@ -7,8 +7,7 @@
 * [ChartSampling](#ChartSampling)
 * [ColorPickerProject](#ColorPickerProject)
 * [ComponentSizeAndPositionProject](#ComponentSizeAndPositionProject)
-* [ContentProviderProjectA](#ContentProviderProjectA)
-* [ContentProviderProjectB](#ContentProviderProjectB)
+* [ContentProviderSampling](#ContentProviderSampling)
 * [CustomComponentProject](#CustomComponentProject)
 * [CustomDrawingSampling](#CustomDrawingSampling)
 * [CustomInputLayoutSampling](#CustomInputLayoutSampling)
@@ -116,6 +115,16 @@
 - Implementation of ScrollView's lowest positioning event. The relevant computational logic is explained in the comments.
 - ./00_[ProjectResult]/ComponentSizeAndPositionProject.mp4
 <div><video controls src="https://user-images.githubusercontent.com/56281493/212914589-94cffa8f-85ff-4a5d-a6eb-46ab5719b093.mp4" muted="false"></video></div>
+
+# [ContentProviderSampling](#ContentProviderSampling)
+- ContentProviderProjectA: 簡単なDBとContentProvider具現(readable & writable)
+- ContentProviderProjectB:ContentProviderProjectAのContentProviderにアクセスしてDBデータを抽出して表示。
+- ContentProviderProjectA: 간단한 DB 구현과 ContentProvider 구현(readable & writable).
+- ContentProviderProjectB: ContentProviderProjectA의 ContentProvider에 접근해 DB 데이터를 추출해서 표시.
+ContentProviderProjectA: Implementation Simple DB and ContentProvider (readable & writable)
+- ContentProviderProjectB: Access ContentProvider of ContentProviderProjectA to extract and display DB data.
+- ./00_[ProjectResult]/ContentProviderSampling.mp4
+<div><video controls src="" muted="false"></video></div>
 
 # [ContentProviderProjectA](#ContentProviderProjectA)
 - ContentProviderProjectA
