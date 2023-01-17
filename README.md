@@ -126,10 +126,6 @@ ContentProviderProjectA: Implementation Simple DB and ContentProvider (readable 
 - ./00_[ProjectResult]/ContentProviderSampling.mp4
 <div><video controls src="https://user-images.githubusercontent.com/56281493/212921416-ea9a03c6-7ef2-436a-a056-19e2ce8f2b0a.mp4" muted="false"></video></div>
 
-# [ContentProviderProjectA](#ContentProviderProjectA)
-- ContentProviderProjectA
-# [ContentProviderProjectB](#ContentProviderProjectB)
-- ContentProviderProjectB
 # [CustomComponentProject](#CustomComponentProject)
 - CustomComponentProject
 # [CustomDrawingSampling](#CustomDrawingSampling)
