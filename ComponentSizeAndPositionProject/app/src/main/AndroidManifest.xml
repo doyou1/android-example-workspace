@@ -11,6 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ComponentSizeAndPositionProject">
         <activity
+            android:screenOrientation="landscape"
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
