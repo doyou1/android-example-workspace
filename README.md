@@ -130,7 +130,8 @@ ContentProviderProjectA: Implementation Simple DB and ContentProvider (readable 
 - ProgressBar, Circle ProgressBar, SeekBar, CheckBox, Switch 관련한 샘플링 프로젝트.
 - 관련해 View를 활용보기 위해 UpAndDown 게임을 만듬.
 - ./00_[ProjectResult]/CustomComponentProject.mp4
-<div><video controls src="" muted="false"></video></div>
+<div><video controls src="https://user-images.githubusercontent.com/56281493/213180449-3a028244-0d9f-4be2-abf5-e503cb69d785.mp4
+" muted="false"></video></div>
 
 # [CustomDrawingSampling](#CustomDrawingSampling)
 - CustomDrawingSampling
