@@ -127,8 +127,12 @@ ContentProviderProjectA: Implementation Simple DB and ContentProvider (readable 
 <div><video controls src="https://user-images.githubusercontent.com/56281493/212921416-ea9a03c6-7ef2-436a-a056-19e2ce8f2b0a.mp4" muted="false"></video></div>
 
 # [CustomComponentProject](#CustomComponentProject)
+- ProgressBar、Circle ProgressBar、SeekBar、CheckBox、Switch関連のサンプリングプロジェクト。
+- 関連してViewを活用するためにUpAndDownゲームを作成。
 - ProgressBar, Circle ProgressBar, SeekBar, CheckBox, Switch 관련한 샘플링 프로젝트.
 - 관련해 View를 활용보기 위해 UpAndDown 게임을 만듬.
+- Sampling projects related to ProgressBar, Circle ProgressBar, SeekBar, CheckBox, Switch.
+- In relation to this, I created an UpAndDown game to utilize View.
 - ./00_[ProjectResult]/CustomComponentProject.mp4
 <div><video controls src="https://user-images.githubusercontent.com/56281493/213180449-3a028244-0d9f-4be2-abf5-e503cb69d785.mp4
 " muted="false"></video></div>
