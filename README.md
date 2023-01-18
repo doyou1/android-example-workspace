@@ -148,7 +148,12 @@ ContentProviderProjectA: Implementation Simple DB and ContentProvider (readable 
 <div><video controls src="https://user-images.githubusercontent.com/56281493/213182730-0e5174f4-6170-42c1-8ec4-7fbff52beea1.mp4" muted="false"></video></div>
 
 # [CustomInputLayoutSampling](#CustomInputLayoutSampling)
-- CustomInputLayoutSampling
+- 가계부 어플 구현 중 필요한 EditText의 새로운 입력 레이아웃 구현.
+- EditText Focus시, 키보드가 아닌 입력 레이아웃 표시 및 관련 작업 수행.
+- BottomSheetDialogFragment 활용
+- ./00_[ProjectResult]/CustomInputLayoutSampling.mp4
+<div><video controls src="" muted="false"></video></div>
+
 # [DatePickerProject](#DatePickerProject)
 - DatePickerProject
 # [DialogActivityProject](#DialogActivityProject)

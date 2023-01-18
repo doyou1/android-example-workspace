@@ -1,14 +1,17 @@
 package com.example.custominputlayoutsampling
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.custominputlayoutsampling.databinding.ActivityMainBinding
-import com.example.custominputlayoutsampling.databinding.FragmentInputBinding
 import com.example.custominputlayoutsampling.databinding.RvItemInputContentBinding
 
-class InputContentRVAdapter(list: ArrayList<String>, private val activityBinding: ActivityMainBinding, private val inputFragment: InputFragment, private val flag: Int) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class InputContentRVAdapter(
+    list: List<String>,
+    private val activityBinding: ActivityMainBinding,
+    private val inputFragment: InputFragment,
+    private val flag: Int
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val _list = list
     private val TAG = this::class.java.simpleName
@@ -31,25 +34,26 @@ class InputContentRVAdapter(list: ArrayList<String>, private val activityBinding
         return _list.size
     }
 
-    inner class InputContentViewHolder(private val binding: RvItemInputContentBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class InputContentViewHolder(private val binding: RvItemInputContentBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: String) {
             binding.btnInput.text = item
             binding.btnInput.setOnClickListener {
-                when(flag) {
-                    FLAG_ASSET -> {
-                        activityBinding.etAsset.setText(item)
-                        activityBinding.etAsset.clearFocus()
-                        activityBinding.etCategory.requestFocus()
+                when (flag) {
+                    FLAG_INPUT_1 -> {
+                        activityBinding.etInput1.setText(item)
+                        activityBinding.etInput1.clearFocus()
+                        activityBinding.etInput2.requestFocus()
                     }
-                    FLAG_CATEGORY -> {
-                        activityBinding.etCategory.setText(item)
-                        activityBinding.etCategory.clearFocus()
-                        activityBinding.etAmount.requestFocus()
+                    FLAG_INPUT_2 -> {
+                        activityBinding.etInput2.setText(item)
+                        activityBinding.etInput2.clearFocus()
+                        activityBinding.etInput3.requestFocus()
                     }
-                    FLAG_AMOUNT -> {
-                        activityBinding.etAmount.setText(item)
-                        activityBinding.etAmount.clearFocus()
+                    FLAG_INPUT_3 -> {
+                        activityBinding.etInput3.setText(item)
+                        activityBinding.etInput3.clearFocus()
                     }
                 }
                 inputFragment.dismiss()

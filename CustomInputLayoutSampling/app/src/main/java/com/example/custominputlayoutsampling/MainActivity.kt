@@ -23,26 +23,26 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun disableKeyboard() {
-        binding.etAsset.showSoftInputOnFocus = false
-        binding.etCategory.showSoftInputOnFocus = false
-        binding.etAmount.showSoftInputOnFocus = false
+        binding.etInput1.showSoftInputOnFocus = false
+        binding.etInput2.showSoftInputOnFocus = false
+        binding.etInput3.showSoftInputOnFocus = false
     }
 
     private fun setEditTextEvent() {
-        binding.etAsset.setOnFocusChangeListener { _, hasFocus ->
-            if (hasFocus) InputFragment(binding, FLAG_ASSET).show(
+        binding.etInput1.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) InputFragment(binding, FLAG_INPUT_1).show(
                 supportFragmentManager,
                 "InputFragment"
             )
         }
-        binding.etCategory.setOnFocusChangeListener { _, hasFocus ->
-            if (hasFocus) InputFragment(binding, FLAG_CATEGORY).show(
+        binding.etInput2.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) InputFragment(binding, FLAG_INPUT_2).show(
                 supportFragmentManager,
                 "InputFragment"
             )
         }
-        binding.etAmount.setOnFocusChangeListener { _, hasFocus ->
-            if (hasFocus) InputFragment(binding, FLAG_AMOUNT).show(
+        binding.etInput3.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) InputFragment(binding, FLAG_INPUT_3).show(
                 supportFragmentManager,
                 "InputFragment"
             )

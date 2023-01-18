@@ -1,14 +1,11 @@
 package com.example.custominputlayoutsampling
 
 import android.app.Dialog
-import android.content.Context
 import android.content.res.Configuration
 import android.os.Bundle
-import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.custominputlayoutsampling.databinding.ActivityMainBinding
@@ -17,8 +14,8 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-
-class InputFragment(private val activityBinding: ActivityMainBinding, private val flag: Int): BottomSheetDialogFragment() {
+class InputFragment(private val activityBinding: ActivityMainBinding, private val flag: Int) :
+    BottomSheetDialogFragment() {
 
     private lateinit var binding: FragmentInputBinding
 
@@ -40,6 +37,16 @@ class InputFragment(private val activityBinding: ActivityMainBinding, private va
 
     override fun onResume() {
         super.onResume()
+
+        when (flag) {
+            FLAG_INPUT_1 -> binding.tvLabel.text = "Input 1"
+            FLAG_INPUT_2 -> binding.tvLabel.text = "Input 2"
+            FLAG_INPUT_3 -> binding.tvLabel.text = "Input 3"
+        }
+
+        binding.btnClose.setOnClickListener {
+            dismiss()
+        }
         setRecyclerView()
     }
 
@@ -60,13 +67,8 @@ class InputFragment(private val activityBinding: ActivityMainBinding, private va
             else -> throw NotImplementedError()
         }
 
-        val list = arrayListOf(
-            "현금",
-            "은행",
-            "카드"
-        )
-        list.add("추가")
-        binding.rvContent.adapter = InputContentRVAdapter(list, activityBinding, this, flag)
+        binding.rvContent.adapter =
+            InputContentRVAdapter(RV_DATA[flag] as List<String>, activityBinding, this, flag)
     }
 
 }

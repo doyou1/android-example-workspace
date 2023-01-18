@@ -48,34 +48,70 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
+                        <TextView
+                            android:id="@+id/tv_input_1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="input1"
+                            android:textColor="@color/black"
+                            app:layout_constraintBottom_toBottomOf="@+id/et_input_1"
+                            app:layout_constraintEnd_toStartOf="@+id/et_input_1"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/et_input_1" />
+
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/et_asset"
+                            android:id="@+id/et_input_1"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            app:layout_constraintBottom_toTopOf="@+id/et_category"
+                            android:hint="Click Me..."
+                            app:layout_constraintBottom_toTopOf="@+id/et_input_2"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintWidth_percent="0.8" />
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/et_category"
-                            android:layout_width="0dp"
+                        <TextView
+                            android:id="@+id/tv_input_2"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:layout_constraintBottom_toTopOf="@+id/et_amount"
-                            app:layout_constraintEnd_toEndOf="parent"
+                            android:text="input2"
+                            android:textColor="@color/black"
+                            app:layout_constraintBottom_toBottomOf="@+id/et_input_2"
+                            app:layout_constraintEnd_toStartOf="@+id/et_input_2"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/et_asset"
-                            app:layout_constraintWidth_percent="0.8" />
+                            app:layout_constraintTop_toTopOf="@+id/et_input_2" />
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/et_amount"
+                            android:id="@+id/et_input_2"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:hint="Click Me..."
+                            app:layout_constraintBottom_toTopOf="@+id/et_input_3"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/et_input_1"
+                            app:layout_constraintWidth_percent="0.8" />
+
+                        <TextView
+                            android:id="@+id/tv_input_3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="input3"
+                            android:textColor="@color/black"
+                            app:layout_constraintBottom_toBottomOf="@+id/et_input_3"
+                            app:layout_constraintEnd_toStartOf="@+id/et_input_3"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/et_input_3" />
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_input_3"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
+                            android:hint="Click Me..."
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/et_category"
+                            app:layout_constraintTop_toBottomOf="@+id/et_input_2"
                             app:layout_constraintWidth_percent="0.8" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
