@@ -138,7 +138,15 @@ ContentProviderProjectA: Implementation Simple DB and ContentProvider (readable 
 " muted="false"></video></div>
 
 # [CustomDrawingSampling](#CustomDrawingSampling)
-- CustomDrawingSampling
+- View.onDrawを利用したCustom Viewサンプリング。
+- 賭けによく使うはしごゲーム、ルーレット機能を具現してみた。
+- View.onDraw를 이용한 Custom View 샘플링.
+- 내기에 자주 사용하는 사다리 게임, 룰렛 기능을 구현해봤다.
+- Custom View Sampling with View.onDraw.
+- I implemented ladder games and roulette functions that are often used for betting.
+- ./00_[ProjectResult]/CustomDrawingSampling.mp4
+<div><video controls src="" muted="false"></video></div>
+
 # [CustomInputLayoutSampling](#CustomInputLayoutSampling)
 - CustomInputLayoutSampling
 # [DatePickerProject](#DatePickerProject)
