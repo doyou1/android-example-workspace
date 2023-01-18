@@ -148,9 +148,12 @@ ContentProviderProjectA: Implementation Simple DB and ContentProvider (readable 
 <div><video controls src="https://user-images.githubusercontent.com/56281493/213182730-0e5174f4-6170-42c1-8ec4-7fbff52beea1.mp4" muted="false"></video></div>
 
 # [CustomInputLayoutSampling](#CustomInputLayoutSampling)
+- 家計簿アプリの実装中に必要なエディットTextの新しい入力レイアウトの実装。
+- EditText Focus時、キーボードではなく入力レイアウト表示及び関連作業遂行。BottomSheetDialogFragment活用.
 - 가계부 어플 구현 중 필요한 EditText의 새로운 입력 레이아웃 구현.
-- EditText Focus시, 키보드가 아닌 입력 레이아웃 표시 및 관련 작업 수행.
-- BottomSheetDialogFragment 활용
+- EditText Focus시, 키보드가 아닌 입력 레이아웃 표시 및 관련 작업 수행. BottomSheetDialogFragment 활용.
+- - Implementation of a new input layout of EditText required during the implementation of the diary application.
+- During EditText Focus, displaying input layout and performing related tasks, not keyboards. With BottomSheetDialogFragment.
 - ./00_[ProjectResult]/CustomInputLayoutSampling.mp4
 <div><video controls src="https://user-images.githubusercontent.com/56281493/213188521-12c52c2b-faac-46a8-8ca3-75a5d4641a17.mp4" muted="false"></video></div>
 
