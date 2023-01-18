@@ -145,7 +145,7 @@ ContentProviderProjectA: Implementation Simple DB and ContentProvider (readable 
 - Custom View Sampling with View.onDraw.
 - I implemented ladder games and roulette functions that are often used for betting.
 - ./00_[ProjectResult]/CustomDrawingSampling.mp4
-<div><video controls src="" muted="false"></video></div>
+<div><video controls src="https://user-images.githubusercontent.com/56281493/213182730-0e5174f4-6170-42c1-8ec4-7fbff52beea1.mp4" muted="false"></video></div>
 
 # [CustomInputLayoutSampling](#CustomInputLayoutSampling)
 - CustomInputLayoutSampling
