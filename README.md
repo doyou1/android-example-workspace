@@ -152,7 +152,7 @@ ContentProviderProjectA: Implementation Simple DB and ContentProvider (readable 
 - EditText Focus시, 키보드가 아닌 입력 레이아웃 표시 및 관련 작업 수행.
 - BottomSheetDialogFragment 활용
 - ./00_[ProjectResult]/CustomInputLayoutSampling.mp4
-<div><video controls src="" muted="false"></video></div>
+<div><video controls src="https://user-images.githubusercontent.com/56281493/213188521-12c52c2b-faac-46a8-8ca3-75a5d4641a17.mp4" muted="false"></video></div>
 
 # [DatePickerProject](#DatePickerProject)
 - DatePickerProject
