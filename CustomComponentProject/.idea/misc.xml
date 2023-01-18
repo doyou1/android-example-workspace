@@ -3,6 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/jh/android-example-workspace/CustomComponentProject/app/src/main/res/drawable/custom_switch_thumb.xml" value="0.2265" />
+        <entry key="..\:/Users/jh/android-example-workspace/CustomComponentProject/app/src/main/res/drawable/selector_custom_switch_track.xml" value="0.2265" />
+        <entry key="..\:/Users/jh/android-example-workspace/CustomComponentProject/app/src/main/res/layout/activity_init.xml" value="0.5472312703583062" />
+        <entry key="..\:/Users/jh/android-example-workspace/CustomComponentProject/app/src/main/res/layout/activity_main.xml" value="0.18432971014492755" />
         <entry key="..\:/Users/jh/hellobiz-android-workspace/CustomComponentProject/app/src/main/res/drawable/custom_checkbox_checked.xml" value="0.17037037037037037" />
         <entry key="..\:/Users/jh/hellobiz-android-workspace/CustomComponentProject/app/src/main/res/drawable/custom_checkbox_unchecked.xml" value="0.26979166666666665" />
         <entry key="..\:/Users/jh/hellobiz-android-workspace/CustomComponentProject/app/src/main/res/drawable/custom_progress_bar_horizontal.xml" value="0.12407407407407407" />

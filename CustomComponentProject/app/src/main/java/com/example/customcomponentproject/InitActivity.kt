@@ -2,26 +2,28 @@ package com.example.customcomponentproject
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.CountDownTimer
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
 import com.example.customcomponentproject.databinding.ActivityInitBinding
 
 class InitActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityInitBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_init)
+        binding = ActivityInitBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+    }
 
+    override fun onResume() {
+        super.onResume()
         setClickEvent()
     }
 
     private fun setClickEvent() {
-        binding.btnStart.setOnClickListener {   // 시작버튼 클릭시
-            it.isClickable = false  // 중복 호출 방지
+        binding.btnStart.setOnClickListener {
+            it.isClickable = false  // prevent duplicate call
 
             // LoadingBar to ProgressBar
             // hide LoadingBar (id: progress_bar)
@@ -29,57 +31,38 @@ class InitActivity : AppCompatActivity() {
 
             // show ProgressBar (id: progress_bar_horizontal)
             binding.progressBarHorizontal.visibility = View.VISIBLE
-            binding.tvProgressBarPercent.visibility = View.VISIBLE  // 진행률 텍스트 함께 show
+            binding.tvProgressBarPercent.visibility = View.VISIBLE  // show progress status text
 
             startProgressBar()
         }
     }
 
     /**
-     * CountDownTimer와 함께 ProgressBar 자동 진행 메서드
+     * ProgressBar start method with CountDownTimer
      */
     private fun startProgressBar() {
-        // CountDownTimer는 millisFuture(타이머 제한 초), countDownInterval(onTick 호출간격)을 millisecond로 받는다.
-        // 5000, 500 (5초, 0.5초 간격)
-        val countDownTimer = ProgressCountDownTimer(5000, 500, ::addCount, ::moveToMain)    
+        // millisFuture(Timer timeout seconds), countDownInterval(onTick call interval) millisecond
+        // 5000ms, 50 (5seconds, 0.05seconds interval)
+        val countDownTimer = ProgressCountDownTimer(5000, 50, ::addCount, ::moveToMain)
         countDownTimer.start()
     }
 
     /**
-     * ProgressCountDownTimer의
-     * 일정 간격마다 호출되는 onTick 메서드에서 호출됨
-     * 호출될때마다 progress를 `1`씩 증가시키고
-     * 증가된만큼 percent 텍스트 설정
+     * Called by the onTick method called at regular intervals in ProgressCountDownTimer.
+     * Increase the progress by '1' each time called and set the percent text as increased.
      */
     private fun addCount() {
         binding.progressBarHorizontal.progress++
-        binding.tvProgressBarPercent.text = "${binding.progressBarHorizontal.progress * 10}%"
+        binding.tvProgressBarPercent.text = "${binding.progressBarHorizontal.progress}%"
     }
 
     /**
-     * ProgressCountDownTimer의
-     * 타이머가 끝났을 때 호출되는 onFinish 메서드에서 호출됨
-     * 실제 컨텐츠가 있는 MainActivity로 이동하고
-     * 현재 액티비티 소멸
+     * Called from onFinish method called when ProgressCountDownTimer ends.
+     * Go to MainActivity where the actual content resides and finish the current activity.
      */
     private fun moveToMain() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish()
-    }
-
-}
-
-class ProgressCountDownTimer(private val millisFuture: Long, private val countDownInterval: Long, val addCount: () -> Unit, val moveToMain: () -> Unit) : CountDownTimer(millisFuture, countDownInterval) {
-    private val TAG = "MyCountDownTimer"
-
-    // `countDownInterval` ms마다 호출됨
-    override fun onTick(millisUntilFinished: Long) {
-        addCount()
-    }
-
-    override fun onFinish() {
-        Log.e(TAG, "onFinish")
-        moveToMain()
     }
 }

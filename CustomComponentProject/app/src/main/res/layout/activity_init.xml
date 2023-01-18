@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    >
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
 
         <ProgressBar
             android:id="@+id/progress_bar"
@@ -16,57 +15,52 @@
             android:indeterminateDrawable="@drawable/gradient_progress_bar_ring"
             android:scaleX="2"
             android:scaleY="2"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ProgressBar
             android:id="@+id/progress_bar_horizontal"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-            android:progressDrawable="@drawable/custom_progress_bar_horizontal"
             android:layout_marginHorizontal="30dp"
+            android:max="100"
+            android:progressDrawable="@drawable/custom_progress_bar_horizontal"
             android:visibility="invisible"
-            android:max="10"
-            tools:progress="2"
-            tools:visibility="visible"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:progress="2"
+            tools:visibility="visible" />
 
         <TextView
             android:id="@+id/tv_progress_bar_percent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0%"
-            tools:text="0%"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"
             android:visibility="invisible"
-            tools:visibility="visible"
-            app:layout_constraintTop_toTopOf="@+id/progress_bar_horizontal"
             app:layout_constraintBottom_toBottomOf="@+id/progress_bar_horizontal"
-            app:layout_constraintStart_toStartOf="@+id/progress_bar_horizontal"
             app:layout_constraintEnd_toEndOf="@+id/progress_bar_horizontal"
-            />
+            app:layout_constraintStart_toStartOf="@+id/progress_bar_horizontal"
+            app:layout_constraintTop_toTopOf="@+id/progress_bar_horizontal"
+            tools:text="0%"
+            tools:visibility="visible" />
 
         <Button
             android:id="@+id/btn_start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="30dp"
-            android:text="시작"
-            app:layout_constraintTop_toBottomOf="@+id/progress_bar"
-            app:layout_constraintStart_toStartOf="parent"
+            android:text="Start"
             app:layout_constraintEnd_toEndOf="parent"
-            />
-
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/progress_bar" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -8,64 +8,60 @@ import android.view.View
 import android.widget.SeekBar
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import com.example.customcomponentproject.databinding.ActivityInitBinding
 import com.example.customcomponentproject.databinding.ActivityMainBinding
 import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
 
-    private val TAG = "MainActivity"
+    private val TAG = this::class.java.simpleName
     private lateinit var binding: ActivityMainBinding
     private var resultValue = -1
-    private var prevLimit= -1
+    private var prevLimit = -1
     private var endLimit = 31
 
     private var life = 3
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-
-        initialize()
-        setSeekBarChangeEvent()
-        setClickEvent()
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        init()
     }
 
-    private fun initialize() {
+    private fun init() {
         initProgressTextView()
         getRandomResult()
     }
 
-    /**
-     * ProgressBar의 기본 progress 값에 따라
-     * 관련 텍스트뷰 초기화
-     */
+    override fun onResume() {
+        super.onResume()
+        setSeekBarChangeEvent()
+        setClickEvent()
+    }
+
     private fun initProgressTextView() {
         binding.tvProgress.text = binding.seekBar.progress.toString()
         binding.tvPrev.text = "0"
         binding.tvEnd.text = "30"
     }
 
-    /**
-     * 업다운게임의 정답 랜덤값 생성
-     */
     private fun getRandomResult() {
         resultValue = Random.nextInt(0, 30)
         Log.e(TAG, "resultValue: $resultValue")
-        binding.tvResult.text = resultValue.toString()  // 원활한 디버그를 위해 화면에 출력
+        // for debug
+        binding.tvResult.text = resultValue.toString()
     }
 
-    /**
-     * SeekBar(시크바) 드래그 및 클릭에 따른 변화 리스너 설정
-     */
     private fun setSeekBarChangeEvent() {
-        binding.seekBar.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener{
+        binding.seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 Log.e(TAG, "onProgressChanged: $progress")
-                binding.tvProgress.text = progress.toString()   // 변화한 progress 출력
+                binding.tvProgress.text = progress.toString()
 
-                // 이미 틀린 걸로 간주하는 범위는 접근하지 않도록 설정
                 if (progress <= prevLimit) {
-                    seekBar?.progress = prevLimit + 1   // progress 변경시 onProgressChanged 재호출
+                    // seekBar.progress change -> call again onProgressChanged
+                    seekBar?.progress = prevLimit + 1
                 } else if (progress >= endLimit) {
                     seekBar?.progress = endLimit - 1
                 }
@@ -83,26 +79,23 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setClickEvent() {
-        // 추측한 값 확인
-        binding.btnCheck.setOnClickListener {
-            reduceLife()    // Life를 줄이고
 
+        binding.btnCheck.setOnClickListener {
+            reduceLife()
             val current = binding.seekBar.progress
 
-            // 현재 값 비교
-            if (resultValue > current) {    // 정답이 더 클 경우..
+            if (resultValue > current) {    //  above result
                 Toast.makeText(this, "Up!", Toast.LENGTH_LONG).show()
-                prevLimit = current // 최저제한이 현재 값이 됨
-                binding.seekBar.progress++  // 한칸 뒤로 이동
-            }
-            else if (resultValue < current) { // 정답이 더 작은 경우..
+                prevLimit = current
+                binding.seekBar.progress++
+            } else if (resultValue < current) { // down result
                 Toast.makeText(this, "Down!", Toast.LENGTH_LONG).show()
-                endLimit = current  // 최고제한이 현재 값이 됨
-                binding.seekBar.progress--  // 한칸 앞으로 이동
-            }
-            else {  // 둘다 아니라면 `정답`
+                endLimit = current
+                binding.seekBar.progress--
+            } else {  // correct!
                 Toast.makeText(this, "Correct!", Toast.LENGTH_LONG).show()
                 // 재도전 버튼 show, 확인 버튼 click disable
+
                 binding.btnRetry.visibility = View.VISIBLE
                 binding.btnCheck.isClickable = false
 
