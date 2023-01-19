@@ -152,13 +152,25 @@ ContentProviderProjectA: Implementation Simple DB and ContentProvider (readable 
 - EditText Focus時、キーボードではなく入力レイアウト表示及び関連作業遂行。BottomSheetDialogFragment活用.
 - 가계부 어플 구현 중 필요한 EditText의 새로운 입력 레이아웃 구현.
 - EditText Focus시, 키보드가 아닌 입력 레이아웃 표시 및 관련 작업 수행. BottomSheetDialogFragment 활용.
-- - Implementation of a new input layout of EditText required during the implementation of the diary application.
+- Implementation of a new input layout of EditText required during the implementation of the diary application.
 - During EditText Focus, displaying input layout and performing related tasks, not keyboards. With BottomSheetDialogFragment.
 - ./00_[ProjectResult]/CustomInputLayoutSampling.mp4
 <div><video controls src="https://user-images.githubusercontent.com/56281493/213188521-12c52c2b-faac-46a8-8ca3-75a5d4641a17.mp4" muted="false"></video></div>
 
 # [DatePickerProject](#DatePickerProject)
-- DatePickerProject
+- DatePickerに関連してString→Date、Date→String処理サンプリング。
+- DialogFragment와 DatePickerDialog를 구현함. 今になって見ると、それほど必要なサンプリングではなかったような気もする。
+- 内容が不十分すぎて、"AfterDate<PrevDate->PrevDate=AfterDate-1"、"PrevDate>AfterDate->AfterDate=PrevDate+1"に変更されるように処理を追加。
+- DatePicker 관련해서 String -> Date, Date -> String 처리 샘플링.
+- DialogFragment와 DatePickerDialog를 구현함. 지금 와서 보니 그리 필요한 샘플링이 아니었던 것 같기도 함.
+- 내용이 너무 부실해서 "AfterDate < PrevDate -> PrevDate = AfterDate-1", "PrevDate > AfterDate -> AfterDate = PrevDate+1"로 변경되도록 처리 추가.
+- String -> Date, Date -> String treatment sampling in relation to DatePicker.
+- - DialogFragment와 DatePickerDialog를 구현함. Now that I look at it, I don't think it was a necessary sampling.
+- Added treatment to change to "AfterDate < PrevDate -> PrevDate = AfterDate-1", "PrevDate > AfterDate -> AfterDate = PrevDate+1" because the content is too poor.
+- ./00_[ProjectResult]/DatePickerProject.mp4
+<div><video controls src="" muted="false"></video></div>
+
+
 # [DialogActivityProject](#DialogActivityProject)
 - DialogActivityProject
 # [DpAndSpProject](#DpAndSpProject)
