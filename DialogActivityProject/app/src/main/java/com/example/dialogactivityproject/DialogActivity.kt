@@ -13,34 +13,26 @@ class DialogActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_dialog)
+        binding = ActivityDialogBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+    }
 
+    override fun onResume() {
+        super.onResume()
         setClickEvent()
-        setTouchEvent()
     }
 
     private fun setClickEvent() {
-
         binding.container.setOnClickListener {
             finish()
         }
-
-        binding.layoutContent.setOnClickListener {
-            AppMsg.makeText(this, "layoutContent", AppMsg.STYLE_ALERT).show()
+        binding.btnAppMsg.setOnClickListener {
+            AppMsg.makeText(this, "AppMsg on Dialog", AppMsg.STYLE_INFO).show()
         }
-    }
-
-    private fun setTouchEvent() {
-
     }
 
     override fun onPause() {
         super.onPause()
         overridePendingTransition(0, 0)
-
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
     }
 }
