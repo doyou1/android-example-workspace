@@ -168,9 +168,8 @@ ContentProviderProjectA: Implementation Simple DB and ContentProvider (readable 
 - - DialogFragment와 DatePickerDialog를 구현함. Now that I look at it, I don't think it was a necessary sampling.
 - Added treatment to change to "AfterDate < PrevDate -> PrevDate = AfterDate-1", "PrevDate > AfterDate -> AfterDate = PrevDate+1" because the content is too poor.
 - ./00_[ProjectResult]/DatePickerProject.mp4
-<div><video controls src="" muted="false"></video></div>
-
-
+<div><video controls src="https://user-images.githubusercontent.com/56281493/213461426-c785a857-a457-4292-b616-0062d91d7fa1.mp4" muted="false"></video></div>
+  
 # [DialogActivityProject](#DialogActivityProject)
 - DialogActivityProject
 # [DpAndSpProject](#DpAndSpProject)
