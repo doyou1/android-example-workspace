@@ -181,8 +181,8 @@ ContentProviderProjectA: Implementation Simple DB and ContentProvider (readable 
 - AppMsgがcontextを基準に出力される問題と見られる。 そこで、ActivityをDialogと一緒に作ったDialogActivityを利用してAppMsgをDialogの上から出力されるようなトリックを与えた。
 - 今後、透明アクティビティが必要になれば、Theme.Transparentを参考にすればいい。
 - ./00_[ProjectResult]/DialogActivityProject.mp4
-<div><video controls src="" muted="false"></video></div>
-
+<div><video controls src="https://user-images.githubusercontent.com/56281493/213465470-b2a4c3a1-5b28-451c-96c3-47464dd8b128.mp4" muted="false"></video></div>
+  
 # [DpAndSpProject](#DpAndSpProject)
 - DpAndSpProject
 # [FCMProject](#FCMProject)
