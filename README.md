@@ -171,15 +171,15 @@ ContentProviderProjectA: Implementation Simple DB and ContentProvider (readable 
 <div><video controls src="https://user-images.githubusercontent.com/56281493/213461426-c785a857-a457-4292-b616-0062d91d7fa1.mp4" muted="false"></video></div>
   
 # [DialogActivityProject](#DialogActivityProject)
-- While creating a function to output AppMsg, when you output AppMsg from Dialog Fragment, the problem occurs that it is output from the bottom rather than on the Dialog.
-- AppMsg appears to be a problem output based on context. So, using DialogActivity, which made Activity like Dialog, AppMsg was given a trick that seemed to be printed on Dialog.
-- If you need transparent activities in the future, you can refer to Theme.Transparent.
-- AppMsg를 출력하는 기능을 만들던 중, DialogFragment에서 AppMsg를 출력하면 Dialog 위에 출력되는 것이 아니라 밑에서 출력되는 문제가 발생.
-- AppMsg가 context를 기준으로 출력되는 문제로 보여짐. 그래서 Activity를 Dialog와 같이 만든 DialogActivity를 이용해 AppMsg를 Dialog 위에서 출력되는 듯한 트릭을 주었다.
-- 추후 투명 액티비티가 필요해지면 Theme.Transparent를 참고하면 되겠다.
 - AppMsgを出力する機能を作成中、DialogFragmentでAppMsgを出力するとDialogの上に出力されるのではなく、下から出力される問題が発生。
 - AppMsgがcontextを基準に出力される問題と見られる。 そこで、ActivityをDialogと一緒に作ったDialogActivityを利用してAppMsgをDialogの上から出力されるようなトリックを与えた。
 - 今後、透明アクティビティが必要になれば、Theme.Transparentを参考にすればいい。
+- AppMsg를 출력하는 기능을 만들던 중, DialogFragment에서 AppMsg를 출력하면 Dialog 위에 출력되는 것이 아니라 밑에서 출력되는 문제가 발생.
+- AppMsg가 context를 기준으로 출력되는 문제로 보여짐. 그래서 Activity를 Dialog와 같이 만든 DialogActivity를 이용해 AppMsg를 Dialog 위에서 출력되는 듯한 트릭을 주었다.
+- 추후 투명 액티비티가 필요해지면 Theme.Transparent를 참고하면 되겠다.
+- While creating a function to output AppMsg, when you output AppMsg from Dialog Fragment, the problem occurs that it is output from the bottom rather than on the Dialog.
+- AppMsg appears to be a problem output based on context. So, using DialogActivity, which made Activity like Dialog, AppMsg was given a trick that seemed to be printed on Dialog.
+- If you need transparent activities in the future, you can refer to Theme.Transparent.
 - ./00_[ProjectResult]/DialogActivityProject.mp4
 <div><video controls src="https://user-images.githubusercontent.com/56281493/213465470-b2a4c3a1-5b28-451c-96c3-47464dd8b128.mp4" muted="false"></video></div>
   
