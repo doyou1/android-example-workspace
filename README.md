@@ -194,8 +194,8 @@ ContentProviderProjectA: Implementation Simple DB and ContentProvider (readable 
 - dp (size change X according to screen), sp (size change O according to screen)
 - Because the content is poor, list the size types up to dp, sp, in, mm, pt, px and examine the size difference.
 - ./00_[ProjectResult]/DpAndSpProject.mp4
-<div><video controls src="" muted="false"></video></div>
-
+<div><video controls src="https://user-images.githubusercontent.com/56281493/213724494-cbb7b491-0ca4-45bf-bb62-62912f7a07e5.mp4" muted="false"></video></div>
+ 
 # [FCMProject](#FCMProject)
 - FCMProject
 # [FCM_Token](#FCM_Token)
