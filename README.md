@@ -172,7 +172,7 @@ ContentProviderProjectA: Implementation Simple DB and ContentProvider (readable 
   
 # [DialogActivityProject](#DialogActivityProject)
 - AppMsgを出力する機能を作成中、DialogFragmentでAppMsgを出力するとDialogの上に出力されるのではなく、下から出力される問題が発生。
-- AppMsgがcontextを基準に出力される問題と見られる。 そこで、ActivityをDialogと一緒に作ったDialogActivityを利用してAppMsgをDialogの上から出力されるようなトリックを与えた。
+- AppMsgがcontextを基準に出力される問題と見られる。 そこで、ActivityをDialogのように作ったDialogActivityを利用してAppMsgをDialogの上から出力されるようなトリックを与えた。
 - 今後、透明アクティビティが必要になれば、Theme.Transparentを参考にすればいい。
 - AppMsg를 출력하는 기능을 만들던 중, DialogFragment에서 AppMsg를 출력하면 Dialog 위에 출력되는 것이 아니라 밑에서 출력되는 문제가 발생.
 - AppMsg가 context를 기준으로 출력되는 문제로 보여짐. 그래서 Activity를 Dialog와 같이 만든 DialogActivity를 이용해 AppMsg를 Dialog 위에서 출력되는 듯한 트릭을 주었다.
@@ -184,7 +184,18 @@ ContentProviderProjectA: Implementation Simple DB and ContentProvider (readable 
 <div><video controls src="https://user-images.githubusercontent.com/56281493/213465470-b2a4c3a1-5b28-451c-96c3-47464dd8b128.mp4" muted="false"></video></div>
   
 # [DpAndSpProject](#DpAndSpProject)
-- DpAndSpProject
+- 最初はDPとSpの違いを調べる概念のプロジェクト。
+- dp(画面によるサイズ変化X)、sp(画面によるサイズ変化O)
+- 内容が不十分で、dp、sp、in、mm、pt、pxまでサイズタイプを並べてサイズの違いを調べる。
+- 처음엔 Dp와 Sp의 차이점을 조사하는 개념의 프로젝트.
+- dp(화면에 따른 사이즈 변화 X), sp(화면에 따른 사이즈 변화 O)
+- 내용이 부실해서 dp, sp, in, mm, pt, px까지 사이즈 타입을 나열해서 크기 차이를 살펴봄
+- A project of the concept of investigating the difference between Dp and Sp.
+- dp (size change X according to screen), sp (size change O according to screen)
+- Because the content is poor, list the size types up to dp, sp, in, mm, pt, px and examine the size difference.
+- ./00_[ProjectResult]/DpAndSpProject.mp4
+<div><video controls src="" muted="false"></video></div>
+
 # [FCMProject](#FCMProject)
 - FCMProject
 # [FCM_Token](#FCM_Token)
