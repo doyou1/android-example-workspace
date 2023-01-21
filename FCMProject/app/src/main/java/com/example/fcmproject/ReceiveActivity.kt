@@ -31,47 +31,64 @@ class ReceiveActivity : AppCompatActivity() {
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_receive)
-        getIntentData()
+        binding = ActivityReceiveBinding.inflate(layoutInflater)
+        setContentView(binding.root)
     }
 
+    override fun onResume() {
+        super.onResume()
+        setIntentData()
+    }
 
-    /**
-     * onMessageReceived의 intent에 담겨있는 extras를 확인해 Toast 메세지, 레이아웃 설정 등의 처리를 수행한다.
-     */
-    private fun getIntentData() {
-        val isForeground = intent.extras?.get("isForeground") as Boolean?
-        if (isForeground == true) {
-            setDataFromForeground()
-        } else {
-            setDataFromBackground()
+    private fun setIntentData() {
 
+        if (intent?.getStringExtra("title") != null) {
+            binding.tvTitle.text = "title: ${intent?.getStringExtra("title")}"
         }
+
+        if (intent?.getStringExtra("message") != null) {
+            binding.tvMessage.text = "message: ${intent?.getStringExtra("message")}"
+        }
+
+
     }
 
-    private fun setDataFromForeground() {
-        val text = intent.extras?.get("text").toString()
-        val notification_title = intent.extras?.get("notification_title").toString()
-        val notification_body = intent.extras?.get("notification_body").toString()
 
-        binding.tvText.text = text
-
-        Toast.makeText(
-            this,
-            "notification_title: $notification_title, notification_body: $notification_body",
-            Toast.LENGTH_SHORT
-        ).show()
-    }
-
-    private fun setDataFromBackground() {
-        val text = intent.extras?.get("text").toString()
-
-        binding.tvText.text = text
-
-        Toast.makeText(
-            this,
-            "Launch ReceiveActivity from Background",
-            Toast.LENGTH_SHORT
-        ).show()
-    }
+//    /**
+//     * onMessageReceived의 intent에 담겨있는 extras를 확인해 Toast 메세지, 레이아웃 설정 등의 처리를 수행한다.
+//     */
+//    private fun getIntentData() {
+//        val isForeground = intent.extras?.get("isForeground") as Boolean?
+//        if (isForeground == true) {
+//            setDataFromForeground()
+//        } else {
+//            setDataFromBackground()
+//        }
+//    }
+//
+//    private fun setDataFromForeground() {
+//        val text = intent.extras?.get("text").toString()
+//        val notification_title = intent.extras?.get("notification_title").toString()
+//        val notification_body = intent.extras?.get("notification_body").toString()
+//
+//        binding.tvText.text = text
+//
+//        Toast.makeText(
+//            this,
+//            "notification_title: $notification_title, notification_body: $notification_body",
+//            Toast.LENGTH_SHORT
+//        ).show()
+//    }
+//
+//    private fun setDataFromBackground() {
+//        val text = intent.extras?.get("text").toString()
+//
+//        binding.tvText.text = text
+//
+//        Toast.makeText(
+//            this,
+//            "Launch ReceiveActivity from Background",
+//            Toast.LENGTH_SHORT
+//        ).show()
+//    }
 }

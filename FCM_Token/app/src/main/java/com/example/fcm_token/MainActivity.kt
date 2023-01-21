@@ -13,6 +13,7 @@ import com.google.firebase.messaging.FirebaseMessaging
 
 class MainActivity : AppCompatActivity() {
 
+    private val TAG = this::class.java.simpleName
     private lateinit var firebaseToken: String
     private lateinit var binding: ActivityMainBinding
 
@@ -20,18 +21,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         getFirebaseToken()
         getIntentData()
-        Log.e(TAG, "onCreate")
-        setClickEvent()
     }
 
-    private fun setClickEvent() {
-        binding.btnMoveToPush.setOnClickListener {
-            val intent = Intent(this, PushActivity::class.java)
-            startActivity(intent)
-            Toast.makeText(applicationContext, "Move To Push", Toast.LENGTH_SHORT).show()
-        }
+    override fun onResume() {
+        super.onResume()
+        setClickEvent()
     }
 
     private fun getFirebaseToken() {
@@ -44,6 +41,14 @@ class MainActivity : AppCompatActivity() {
             firebaseToken = task.result.toString()
             Log.e(TAG, "firebaseToken: $firebaseToken")
         })
+    }
+
+    private fun setClickEvent() {
+        binding.btnMoveToPush.setOnClickListener {
+            val intent = Intent(this, PushActivity::class.java)
+            startActivity(intent)
+            Toast.makeText(this, "Move To Push", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun getIntentData() {
@@ -73,8 +78,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     companion object {
-        private const val TAG = "MainActivity"
-
         @Volatile
         private var instance: MainActivity? = null
 

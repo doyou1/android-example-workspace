@@ -13,8 +13,9 @@ import com.google.firebase.iid.FirebaseInstanceIdReceiver
 import com.google.firebase.messaging.FirebaseMessaging
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var firebaseToken:String
     private lateinit var binding: ActivityMainBinding
+    private val TAG = this::class.java.simpleName
+//    private lateinit var firebaseToken:String
 
     /**
      * 현재 MainActivity는 `Background`상태에서 FCM을 수신할 경우 열면.
@@ -23,10 +24,11 @@ class MainActivity : AppCompatActivity() {
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-
-        getFirebaseToken()
-        getIntentData()
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        binding.tvActivity.text = TAG
+//        getFirebaseToken()
+//        getIntentData()
     }
 
     /**
@@ -50,20 +52,20 @@ class MainActivity : AppCompatActivity() {
                 return@OnCompleteListener
             }
             // Get new FCM registration token
-            firebaseToken = task.result.toString()
-            Log.e(TAG, "firebaseToken: $firebaseToken")
+//            firebaseToken = task.result.toString()
+//            Log.e(TAG, "firebaseToken: $firebaseToken")
         })
     }
 
     /**
-    * Background인 상태에서
-    * FCM의
-    * `notification` = `작업표시줄`,
-    * `data = `인텐트 부가 정보(intent extra)`
+     * Background인 상태에서
+     * FCM의
+     * `notification` = `작업표시줄`,
+     * `data = `인텐트 부가 정보(intent extra)`
      * 으로 제공된다.
-    *
-    * 작업표시줄의 알림을 클릭할 경우, 열린 액티비티에 FCM의 `data`는 intent extra로 전송된다.
-    */
+     *
+     * 작업표시줄의 알림을 클릭할 경우, 열린 액티비티에 FCM의 `data`는 intent extra로 전송된다.
+     */
     private fun getIntentData() {
 
         /**
@@ -79,8 +81,4 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    companion object {
-        private const val TAG = "MainActivity"
-
-    }
 }
