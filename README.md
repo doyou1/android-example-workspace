@@ -213,8 +213,7 @@ ContentProviderProjectA: Implementation Simple DB and ContentProvider (readable 
 - "supportFragmentManager.popBackStack" POP all of the following fragments of the corresponding fragment! getting rid of
 - Couldn't find out how the current feature is helping development. !!!Need additional study!!!
 - ./00_[ProjectResult]/FragmentBackStackProject.mp4
-<div><video controls src="" muted="false"></video></div>
-
+<div><video controls src="https://user-images.githubusercontent.com/56281493/213921768-2e795b57-861f-4d76-b150-17a85a5a2002.mp4" muted="false"></video></div>
 
 # [GallerySampling](#GallerySampling)
 - GallerySampling
