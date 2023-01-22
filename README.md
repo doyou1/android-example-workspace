@@ -203,7 +203,19 @@ ContentProviderProjectA: Implementation Simple DB and ContentProvider (readable 
 # [FCM_Topic](#FCM_Topic)
 - FCM_Topic
 # [FragmentBackStackProject](#FragmentBackStackProject)
-- FragmentBackStackProject
+- プロジェクトをアップデートしながら、BackStackにあるFragmentに交換する作業を進めようとしたが、関連するAPIが見つからない。
+- "support Fragment Manager.pop Back Stack"は、該当Fragmentの次のFragmentをすべてPOP! 消し止め
+- 現在の機能が開発にどのように役立つのか見つからない。追加的な勉強が必要!!!
+- 프로젝트 업데이트하면서 BackStack에 있는 Fragment로 교체하는 작업을 진행하려했는데, 관련된 API를 찾지 못함.
+- "supportFragmentManager.popBackStack"는 해당Fragment의 다음 Fragment들을 모두 POP! 없애버림.
+- 현재 기능이 개발에 어떤 도움이 되는지 찾지 못함. !!!추가적인 공부 필요!!!
+- While updating the project, I tried to replace it with a fragment in BackStack, but I couldn't find the related API.
+- "supportFragmentManager.popBackStack" POP all of the following fragments of the corresponding fragment! getting rid of
+- Couldn't find out how the current feature is helping development. !!!Need additional study!!!
+- ./00_[ProjectResult]/FragmentBackStackProject.mp4
+<div><video controls src="" muted="false"></video></div>
+
+
 # [GallerySampling](#GallerySampling)
 - GallerySampling
 # [InfiniteViewPagerSampling](#InfiniteViewPagerSampling)

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.EditText
 import android.widget.PopupMenu
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentContainerView
 import androidx.fragment.app.FragmentManager
 import com.example.fragmentbackstackproject.databinding.ActivityMainBinding
@@ -45,7 +46,6 @@ class MainActivity : AppCompatActivity() {
             val popup = PopupMenu(this, binding.btnSelectFragment)
             popup.setOnMenuItemClickListener { item ->
                 binding.btnSelectFragment.text = item.title
-                showFragment(item.title.toString())
                 false
             }
             for (item in fragments) {
@@ -53,6 +53,32 @@ class MainActivity : AppCompatActivity() {
             }
             popup.show()
         }
+
+        binding.btnPop.setOnClickListener {
+            val fragmentId = binding.btnSelectFragment.text.toString()
+            if (fragmentId != "Select Fragment") {
+                for (item in supportFragmentManager.fragments) {
+                    if ((item as AddFragment).id == fragmentId) {
+                        supportFragmentManager.popBackStack((item as AddFragment).id, 0)
+
+                        val newList = arrayListOf<String>()
+                        for (fragment in fragments) {
+                            if ((item as AddFragment).id == fragment) {
+                                newList.add(fragment)
+                                break
+                            } else {
+                                newList.add(fragment)
+                            }
+                        }
+                        fragments.clear()
+                        fragments.addAll(newList)
+
+                        binding.btnSelectFragment.text = "Select Fragment"
+                    }
+                }
+            }
+        }
+
         binding.btnRed.setOnClickListener {
             addFragment(TEXT_RED)
         }
@@ -63,21 +89,18 @@ class MainActivity : AppCompatActivity() {
             addFragment(TEXT_BLUE)
         }
         binding.btnBlack.setOnClickListener {
-            addFragment(TEXT_BLUE)
+            addFragment(TEXT_BLACK)
         }
     }
 
     private fun addFragment(value: String) {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         val fragmentId = "$value - $count"
-        fragmentTransaction.add(R.id.main_frame, AddFragment(value, count))
+        val fragment = AddFragment(value, count)
+        fragmentTransaction.add(R.id.main_frame, fragment)
         fragmentTransaction.addToBackStack(fragmentId)
         fragments.add(fragmentId)
         fragmentTransaction.commit()
         count++
-    }
-
-    private fun showFragment(value: String) {
-
     }
 }

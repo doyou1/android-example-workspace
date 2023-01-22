@@ -13,6 +13,7 @@ import com.example.fragmentbackstackproject.databinding.FragmentAddBinding
 class AddFragment(private val color: String, private val count: Int) : Fragment() {
 
     private lateinit var binding: FragmentAddBinding
+    val id = "$color - $count"
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,6 +48,6 @@ class AddFragment(private val color: String, private val count: Int) : Fragment(
                 binding.tvText.setTextColor(Color.WHITE)
             }
         }
-        binding.tvText.text = "$color - $count"
+        binding.tvText.text = id
     }
 }
