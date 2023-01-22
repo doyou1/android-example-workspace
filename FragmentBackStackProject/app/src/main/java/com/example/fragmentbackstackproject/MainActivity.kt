@@ -4,66 +4,80 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.EditText
+import android.widget.PopupMenu
 import androidx.fragment.app.FragmentContainerView
 import androidx.fragment.app.FragmentManager
+import com.example.fragmentbackstackproject.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    val TAG = "MainActivity"
-    val fragmentManager = supportFragmentManager
-    var count = 1
-    var editText: EditText? = null
+    private val TAG = this::class.java.simpleName
+    private lateinit var binding: ActivityMainBinding
+    var count = 0
+
+    private val fragments = arrayListOf<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        init()
+    }
 
-        editText = findViewById<EditText>(R.id.edit_text)
-        if (findViewById<FragmentContainerView>(R.id.main_frame) != null) {
-            val fragmentTransaction = fragmentManager.beginTransaction()
-            fragmentTransaction.add(R.id.main_frame, RedFragment())
-            fragmentTransaction.commit()
-        }
-
-        fragmentManager.addOnBackStackChangedListener {
-            for (i in 0 until fragmentManager.backStackEntryCount) {
-                Log.e(TAG, fragmentManager.getBackStackEntryAt(i).name.toString())
+    private fun init() {
+        supportFragmentManager.addOnBackStackChangedListener {
+            for (i in 0 until supportFragmentManager.backStackEntryCount) {
+                Log.e(TAG, supportFragmentManager.getBackStackEntryAt(i).name.toString())
             }
             Log.e(TAG, "--------------------------------")
         }
+
+        addFragment(TEXT_RED)
     }
 
-    fun onClickRed(view: android.view.View) {
-        val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.add(R.id.main_frame, RedFragment())
-        fragmentTransaction.addToBackStack("Red - ${count++}")
-        fragmentTransaction.commit()
-    }
-    fun onClickGreen(view: android.view.View) {
-        val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.add(R.id.main_frame, GreenFragment())
-        fragmentTransaction.addToBackStack("Green - ${count++}")
-        fragmentTransaction.commit()
-    }
-    fun onClickBlue(view: android.view.View) {
-        val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.add(R.id.main_frame, BlueFragment())
-        fragmentTransaction.addToBackStack("Blue - ${count++}")
-        fragmentTransaction.commit()
-    }
-    fun onClickBlack(view: android.view.View) {
-        val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.add(R.id.main_frame, BlackFragment())
-        fragmentTransaction.addToBackStack("Black - ${count++}")
-        fragmentTransaction.commit()
+    override fun onResume() {
+        super.onResume()
+        setClickEvent()
     }
 
-    fun onClickPop(view: android.view.View) {
-        val text = editText?.text.toString()
-        fragmentManager.popBackStack(text, 0)
-        // flags
-        // - FragmentManager.POP_BACK_STACK_INCLUSIVE(1) : 상위 스택부터 ~ 특정 fragment까지 지움
-        // - 0 : 상위 스택부터 ~ 특정 fragment를 만날때까지 지움, 특정 fragment는 안지움
+    private fun setClickEvent() {
+        binding.btnSelectFragment.setOnClickListener {
+            val popup = PopupMenu(this, binding.btnSelectFragment)
+            popup.setOnMenuItemClickListener { item ->
+                binding.btnSelectFragment.text = item.title
+                showFragment(item.title.toString())
+                false
+            }
+            for (item in fragments) {
+                popup.menu.add(item)
+            }
+            popup.show()
+        }
+        binding.btnRed.setOnClickListener {
+            addFragment(TEXT_RED)
+        }
+        binding.btnGreen.setOnClickListener {
+            addFragment(TEXT_GREEN)
+        }
+        binding.btnBlue.setOnClickListener {
+            addFragment(TEXT_BLUE)
+        }
+        binding.btnBlack.setOnClickListener {
+            addFragment(TEXT_BLUE)
+        }
     }
 
+    private fun addFragment(value: String) {
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        val fragmentId = "$value - $count"
+        fragmentTransaction.add(R.id.main_frame, AddFragment(value, count))
+        fragmentTransaction.addToBackStack(fragmentId)
+        fragments.add(fragmentId)
+        fragmentTransaction.commit()
+        count++
+    }
+
+    private fun showFragment(value: String) {
+
+    }
 }

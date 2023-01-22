@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/jh/android-example-workspace/FragmentBackStackProject/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Users/jh/android-example-workspace/FragmentBackStackProject/app/src/main/res/layout/fragment_add.xml" value="0.2526041666666667" />
+        <entry key="..\:/Users/jh/android-example-workspace/FragmentBackStackProject/app/src/main/res/layout/fragment_black.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/jh/hellobiz-android-workspace/FragmentBackStackProject/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/jh/hellobiz-android-workspace/FragmentBackStackProject/app/src/main/res/layout/fragment_black.xml" value="0.1" />
         <entry key="..\:/Users/jh/hellobiz-android-workspace/FragmentBackStackProject/app/src/main/res/layout/fragment_blue.xml" value="0.1" />
