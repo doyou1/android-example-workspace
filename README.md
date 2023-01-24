@@ -17,6 +17,7 @@
 * [FCMProject](#FCMProject)
 * [FCM_Token](#FCM_Token)
 * [FCM_Topic](#FCM_Topic)
+* [FcmSampling](#FcmSampling)
 * [FragmentBackStackProject](#FragmentBackStackProject)
 * [GallerySampling](#GallerySampling)
 * [InfiniteViewPagerSampling](#InfiniteViewPagerSampling)
@@ -197,11 +198,40 @@ ContentProviderProjectA: Implementation Simple DB and ContentProvider (readable 
 <div><video controls src="https://user-images.githubusercontent.com/56281493/213724494-cbb7b491-0ca4-45bf-bb62-62912f7a07e5.mp4" muted="false"></video></div>
  
 # [FCMProject](#FCMProject)
-- FCMProject
+- 今後追加勉強が必要
+- 추후 추가공부 필요
+- Additional study is required in the future
+
 # [FCM_Token](#FCM_Token)
-- FCM_Token
+- 今後追加勉強が必要
+- 추후 추가공부 필요
+- Additional study is required in the future
+
 # [FCM_Topic](#FCM_Topic)
-- FCM_Topic
+- 今後追加勉強が必要
+- 추후 추가공부 필요
+- Additional study is required in the future
+
+# [FcmSampling](#FcmSampling)
+- Fcmは以前サンプリングしたことがあり、新たにリマインドする感じでアップデートを実施。
+- しかし、無料アカウントのためか、Fcmディレーが長すぎてプロジェクト進行に困難があった。
+- 以前使用したHTTP API方式もHTTP v1 APIにアップグレードされ、新しいアプローチが必要。 今後追加的な勉強が必要。
+- Token、Topicによる発行だけでなく、click_eventなど様々な機能をサンプリングする必要がある。
+- Fcm은 이전에 샘플링한 적이 있어 새롭게 리마인드하는 느낌으로 업데이트를 진행.
+- 그러나 무료 계정이라서인지 Fcm 딜레이가 너무 길어 프로젝트 진행에 어려운 점이 있었음.
+- 이전에 사용했던 HTTP API 방식도 HTTP v1 API으로 업그레이드되서 새로운 접근이 필요함. 추후 추가적 공부 필요.
+- Token, Topic을 통한 발행 뿐만 아니라 click_event 등 다양한 기능을 샘플링해볼 필요가 있음
+- Fcm has been sampled before, so it is updated as if it is being reminded.
+- However, there was a difficulty in proceeding with the project because the Fcm delay was too long, perhaps because it was a free account.
+- The previous HTTP API method was also upgraded to HTTP v1 API, requiring new access. Additional study is required later.
+- It is necessary to sample various functions such as click_event as well as publishing through Token and Topic.
+- ./00_[ProjectResult]/FcmSampling1.png
+- ./00_[ProjectResult]/FcmSampling2.png
+- ./00_[ProjectResult]/FcmSampling1.png
+![FcmSampling1.png]()
+![FcmSampling2.png]()
+![FcmSampling1.png]()
+
 # [FragmentBackStackProject](#FragmentBackStackProject)
 - プロジェクトをアップデートしながら、BackStackにあるFragmentに交換する作業を進めようとしたが、関連するAPIが見つからない。
 - "support Fragment Manager.pop Back Stack"は、該当Fragmentの次のFragmentをすべてPOP! 消し止め
