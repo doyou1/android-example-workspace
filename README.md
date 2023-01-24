@@ -19,10 +19,6 @@
 * [FCM_Topic](#FCM_Topic)
 * [FcmSampling](#FcmSampling)
 * [FragmentBackStackProject](#FragmentBackStackProject)
-* [GallerySampling](#GallerySampling)
-* [InfiniteViewPagerSampling](#InfiniteViewPagerSampling)
-* [JodaTimeProject](#JodaTimeProject)
-* [MqttPahoProject](#MqttPahoProject)
 * [MultiFragmentInSingleActivitySampling](#MultiFragmentInSingleActivitySampling)
 * [NavigationBackStackProject](#NavigationBackStackProject)
 * [NewNetworkDataTestProject](#NewNetworkDataTestProject)
@@ -245,14 +241,6 @@ ContentProviderProjectA: Implementation Simple DB and ContentProvider (readable 
 - ./00_[ProjectResult]/FragmentBackStackProject.mp4
 <div><video controls src="https://user-images.githubusercontent.com/56281493/213921768-2e795b57-861f-4d76-b150-17a85a5a2002.mp4" muted="false"></video></div>
 
-# [GallerySampling](#GallerySampling)
-- GallerySampling
-# [InfiniteViewPagerSampling](#InfiniteViewPagerSampling)
-- InfiniteViewPagerSampling
-# [JodaTimeProject](#JodaTimeProject)
-- JodaTimeProject
-# [MqttPahoProject](#MqttPahoProject)
-- MqttPahoProject
 # [MultiFragmentInSingleActivitySampling](#MultiFragmentInSingleActivitySampling)
 - MultiFragmentInSingleActivitySampling
 # [NavigationBackStackProject](#NavigationBackStackProject)
