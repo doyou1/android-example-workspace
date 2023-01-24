@@ -228,9 +228,9 @@ ContentProviderProjectA: Implementation Simple DB and ContentProvider (readable 
 - ./00_[ProjectResult]/FcmSampling1.png
 - ./00_[ProjectResult]/FcmSampling2.png
 - ./00_[ProjectResult]/FcmSampling1.png
-![FcmSampling1.png]()
-![FcmSampling2.png]()
-![FcmSampling1.png]()
+![FcmSampling1](https://user-images.githubusercontent.com/56281493/214305709-a05335da-38ae-4c51-8e27-a2fb4a989f44.png)
+![FcmSampling2](https://user-images.githubusercontent.com/56281493/214305748-0eb1d2e5-ecc3-463b-9cf2-aa391db60819.png)
+![FcmSampling3](https://user-images.githubusercontent.com/56281493/214305755-306412c9-5785-4ab0-aff7-6872e69561de.PNG)
 
 # [FragmentBackStackProject](#FragmentBackStackProject)
 - プロジェクトをアップデートしながら、BackStackにあるFragmentに交換する作業を進めようとしたが、関連するAPIが見つからない。
