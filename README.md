@@ -252,9 +252,8 @@ ContentProviderProjectA: Implementation Simple DB and ContentProvider (readable 
 - In addition, the function to change the date to daily, monthly, weekly, and annual according to the current fragment during the swipe event operation is added.
 - It's the most satisfying sampling of the recent sampling because it's a combination of various functions.
 - ./00_[ProjectResult]/MultiFragmentSwipeEventSampling.mp4
-<div><video controls src="" muted="false"></video></div>
-
-
+<div><video controls src="https://user-images.githubusercontent.com/56281493/214579358-f3384783-2e0f-41c8-b200-30202acea760.mp4" muted="false"></video></div>
+  
 # [NavigationBackStackProject](#NavigationBackStackProject)
 - NavigationBackStackProject
 # [NewNetworkDataTestProject](#NewNetworkDataTestProject)
