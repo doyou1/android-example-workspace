@@ -19,7 +19,7 @@
 * [FCM_Topic](#FCM_Topic)
 * [FcmSampling](#FcmSampling)
 * [FragmentBackStackProject](#FragmentBackStackProject)
-* [MultiFragmentInSingleActivitySampling](#MultiFragmentInSingleActivitySampling)
+* [MultiFragmentSwipeEventSampling](#MultiFragmentSwipeEventSampling)
 * [NavigationBackStackProject](#NavigationBackStackProject)
 * [NewNetworkDataTestProject](#NewNetworkDataTestProject)
 * [NotificationChannelSampling](#NotificationChannelSampling)
@@ -241,8 +241,20 @@ ContentProviderProjectA: Implementation Simple DB and ContentProvider (readable 
 - ./00_[ProjectResult]/FragmentBackStackProject.mp4
 <div><video controls src="https://user-images.githubusercontent.com/56281493/213921768-2e795b57-861f-4d76-b150-17a85a5a2002.mp4" muted="false"></video></div>
 
-# [MultiFragmentInSingleActivitySampling](#MultiFragmentInSingleActivitySampling)
-- MultiFragmentInSingleActivitySampling
+# [MultiFragmentSwipeEventSampling](#MultiFragmentSwipeEventSampling)
+- 家計簿アプリの実装中、フレグメントに対するスワイプイベントをアクティビティで受け取り、フレグメントにばら撒く機能が必要。
+- それと共にスワイプイベント動作時、現在のフレグメントによって日·月間·週間·年間に日付を変更する機能を追加。
+- 様々な機能を合わせて作り出したものなので、最近サンプリングしたものの中で一番胸がいっぱいになるサンプリング。
+- 가계부 어플 구현 중 프레그먼트에 대한 스와이프 이벤트를 액티비티에서 받아서 프레그먼트에 뿌려주는 기능이 필요.
+- 그와 함께 스와이프 이벤트 동작시 현재 프레그먼트에 따라 일일, 월간, 주간, 연간으로 날짜를 변경해주는 기능을 추가.
+- 여러가지 기능들을 합쳐서 만들어낸거라 최근 샘플링한 것 중 가장 뿌듯한 샘플링.
+- During the implementation of the household accounting application, the function to receive swipe events for fragments from the activity and spray them on the fragments is required.
+- In addition, the function to change the date to daily, monthly, weekly, and annual according to the current fragment during the swipe event operation is added.
+- It's the most satisfying sampling of the recent sampling because it's a combination of various functions.
+- ./00_[ProjectResult]/MultiFragmentSwipeEventSampling.mp4
+<div><video controls src="" muted="false"></video></div>
+
+
 # [NavigationBackStackProject](#NavigationBackStackProject)
 - NavigationBackStackProject
 # [NewNetworkDataTestProject](#NewNetworkDataTestProject)
