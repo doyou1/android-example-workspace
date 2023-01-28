@@ -8,7 +8,10 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
 
 class MainActivity : AppCompatActivity() {
-    lateinit var navController:NavController
+
+    private val TAG = this::class.java.simpleName
+    private lateinit var navController: NavController
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -24,6 +27,14 @@ class MainActivity : AppCompatActivity() {
 
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        navController.addOnDestinationChangedListener { controller, destination, arguments ->
+            Log.e(TAG, "$controller, $destination, $arguments")
+        }
     }
 
     override fun onBackPressed() {

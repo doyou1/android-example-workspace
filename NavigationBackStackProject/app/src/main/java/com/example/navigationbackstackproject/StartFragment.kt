@@ -11,24 +11,23 @@ import com.example.navigationbackstackproject.databinding.FragmentStartBinding
 
 class StartFragment : Fragment() {
 
-    private lateinit var binding:FragmentStartBinding
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    private lateinit var binding: FragmentStartBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_start, container, false)
-
-        setClickEvent()
+        binding = FragmentStartBinding.inflate(inflater, container, false)
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        setClickEvent()
+    }
+
     private fun setClickEvent() {
-        binding.btnStart.setOnClickListener {
+        binding.btnGo.setOnClickListener {
             findNavController().navigate(R.id.action_startFragment_to_subFragment)
         }
     }

@@ -14,23 +14,25 @@ class SubFragment : Fragment() {
 
     private lateinit var binding: FragmentSubBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_sub, container, false)
-
-        setClickEvent()
+        binding = FragmentSubBinding.inflate(inflater, container, false)
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        setClickEvent()
+    }
+
     private fun setClickEvent() {
-        binding.btnSub.setOnClickListener {
+        binding.btnGo.setOnClickListener {
             findNavController().navigate(R.id.action_subFragment_to_thirdFragment)
+        }
+        binding.btnPop.setOnClickListener {
+            findNavController().popBackStack()
         }
     }
 
