@@ -253,14 +253,13 @@ ContentProviderProjectA: Implementation Simple DB and ContentProvider (readable 
 - It's the most satisfying sampling of the recent sampling because it's a combination of various functions.
 - ./00_[ProjectResult]/MultiFragmentSwipeEventSampling.mp4
 <div><video controls src="https://user-images.githubusercontent.com/56281493/214579358-f3384783-2e0f-41c8-b200-30202acea760.mp4" muted="false"></video></div>
-  
+
 # [NavigationBackStackProject](#NavigationBackStackProject)
 - ResourcesのNavigationファイルを通じてNavigation転移図を作成し、setupActionBarWithNavControllerを通じてNavigation Controllerを追加すると、navigationの機能が追加されたフラグメントを利用することができる。 全体的なアプリ転移度が決まっていれば、簡単に具現でき、backstackなどもシステムが管理してくれるので便利な機能だと思う。
 - Resources의 Navigation 파일을 통해 Navigation 전이도를 만들고, setupActionBarWithNavController를 통해 Navigation Controller를 추가하면, navigation의 기능이 추가된 fragment를 이용할 수 있다. 전체적인 앱 전이도가 정해져있다면, 쉽게 구현할 수 있고, backstack 등도 시스템이 관리해주니 편리한 기능이라고 생각한다.
 - If you create a Navigation transition diagram through the Navigation file in Resources and add a Navigation Controller through the setupActionBarWithNav Controller, you can use a fragment with the added function of Navigation. If the overall app conductivity is set, it can be easily implemented, and I think it is a convenient function because the system manages the backstack.
-
 - ./00_[ProjectResult]/NavigationBackStackProject.mp4
-<div><video controls src="" muted="false"></video></div>
+<div><video controls src="https://user-images.githubusercontent.com/56281493/215265304-855e5025-d856-49a6-b698-56b3fbcf18c8.mp4" muted="false"></video></div>
 
 # [NewNetworkDataTestProject](#NewNetworkDataTestProject)
 - NewNetworkDataTestProject
