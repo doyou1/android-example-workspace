@@ -275,7 +275,7 @@ ContentProviderProjectA: Implementation Simple DB and ContentProvider (readable 
 - A project that displays the behavior of a timer using ProgressBar indicating that it is loading and Horizontal ProgressBar indicating that it is in progress.
 - Can be utilized for long or unexpected operational times.
 - ./00_[ProjectResult]/ProgressbarProject.mp4
-<div><video controls src="" muted="false"></video></div>
+<div><video controls src="https://user-images.githubusercontent.com/56281493/215306147-7d4ffa60-956d-42d5-b5b2-ef9624be96ae.mp4" muted="false"></video></div>
 
 # [RecyclerViewScollProject](#RecyclerViewScollProject)
 - RecyclerViewScollProject
