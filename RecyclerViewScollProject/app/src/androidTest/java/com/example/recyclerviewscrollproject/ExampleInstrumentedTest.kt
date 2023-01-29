@@ -1,4 +1,4 @@
-package com.example.recyclerviewscollproject
+package com.example.recyclerviewscrollproject
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

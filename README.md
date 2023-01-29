@@ -23,7 +23,7 @@
 * [NavigationBackStackProject](#NavigationBackStackProject)
 * [NumberPickerSampling](#NumberPickerSampling)
 * [ProgressbarProject](#ProgressbarProject)
-* [RecyclerViewScollProject](#RecyclerViewScollProject)
+* [RecyclerViewScrollProject](#RecyclerViewScrollProject)
 * [RegularIncomeAndInstallmentSampling](#RegularIncomeAndInstallmentSampling)
 * [RoomDBImageSampling](#RoomDBImageSampling)
 * [RoomDBSampling](#RoomDBSampling)
@@ -277,8 +277,19 @@ ContentProviderProjectA: Implementation Simple DB and ContentProvider (readable 
 - ./00_[ProjectResult]/ProgressbarProject.mp4
 <div><video controls src="https://user-images.githubusercontent.com/56281493/215306147-7d4ffa60-956d-42d5-b5b2-ef9624be96ae.mp4" muted="false"></video></div>
 
-# [RecyclerViewScollProject](#RecyclerViewScollProject)
-- RecyclerViewScollProject
+# [RecyclerViewScrollProject](#RecyclerViewScrollProject)
+- [ComponentSizeAndPositionProject](#ComponentSizeAndPositionProject)でも実装した機能.
+- RecyclerViewのcanScrollVerticallyを利用して最上段、最下段を確認するロジックを実現。
+- 最下段に到達すると、RecyclerViewにアイテムを追加、AppMsgを表示。
+- [ComponentSizeAndPositionProject](#ComponentSizeAndPositionProject)에서도 구현한 기능.
+- RecyclerView의 canScrollVertically를 이용해 최상단, 최하단 확인하는 로직 구현.
+- 최하단 도달시 RecyclerView에 Item 추가, AppMsg 표시.
+- Features also implemented in [ComponentSizeAndPositionProject](#ComponentSizeAndPositionProject)
+- The logic of checking the top and bottom using RecyclerView's canScroll Vertically is implemented.
+- Add items to RecyclerView when reaching the lowest level, and display AppMsg.
+- ./00_[ProjectResult]/RecyclerViewScrollProject.mp4
+<div><video controls src="" muted="false"></video></div>
+
 # [RegularIncomeAndInstallmentSampling](#RegularIncomeAndInstallmentSampling)
 - RegularIncomeAndInstallmentSampling
 # [RoomDBImageSampling](#RoomDBImageSampling)

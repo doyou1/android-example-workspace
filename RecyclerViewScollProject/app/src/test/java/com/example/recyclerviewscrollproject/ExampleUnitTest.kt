@@ -1,4 +1,4 @@
-package com.example.recyclerviewscollproject
+package com.example.recyclerviewscrollproject
 
 import org.junit.Test
 
