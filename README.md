@@ -21,8 +21,6 @@
 * [FragmentBackStackProject](#FragmentBackStackProject)
 * [MultiFragmentSwipeEventSampling](#MultiFragmentSwipeEventSampling)
 * [NavigationBackStackProject](#NavigationBackStackProject)
-* [NewNetworkDataTestProject](#NewNetworkDataTestProject)
-* [NotificationChannelSampling](#NotificationChannelSampling)
 * [NumberPickerSampling](#NumberPickerSampling)
 * [PedometerSampling](#PedometerSampling)
 * [ProgressbarProject](#ProgressbarProject)
@@ -261,12 +259,16 @@ ContentProviderProjectA: Implementation Simple DB and ContentProvider (readable 
 - ./00_[ProjectResult]/NavigationBackStackProject.mp4
 <div><video controls src="https://user-images.githubusercontent.com/56281493/215265304-855e5025-d856-49a6-b698-56b3fbcf18c8.mp4" muted="false"></video></div>
 
-# [NewNetworkDataTestProject](#NewNetworkDataTestProject)
-- NewNetworkDataTestProject
-# [NotificationChannelSampling](#NotificationChannelSampling)
-- NotificationChannelSampling
 # [NumberPickerSampling](#NumberPickerSampling)
-- NumberPickerSampling
+- 社内教育プロジェクトで家計簿アプリを開発中、週間統計画面で週間を選択する機能が必要。
+- 簡単に作れると思ったが、詳しく入ってみると気を使わなければならない部分が多かった。
+- 사내 교육 프로젝트에서 가계부 앱을 개발하던 중, 주간 통계 화면에서 주간을 선택하는 기능이 필요.
+- 쉽게 만들 수 있을 줄 알았는데, 자세히 들어가보니 신경써야할 부분이 많았다.
+- While developing a diary app in an in-house education project, the ability to select a weekly from the weekly statistics screen is required.
+- I thought it would be easy to make, but when I went into detail, there were many things to pay attention to.
+- ./00_[ProjectResult]/NumberPickerSampling.mp4
+<div><video controls src="" muted="false"></video></div>
+
 # [PedometerSampling](#PedometerSampling)
 - PedometerSampling
 # [ProgressbarProject](#ProgressbarProject)

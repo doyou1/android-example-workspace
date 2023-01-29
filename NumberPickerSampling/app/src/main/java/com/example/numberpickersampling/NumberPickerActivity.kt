@@ -18,4 +18,8 @@ class NumberPickerActivity : AppCompatActivity() {
             numberPickerDialog.show()
         }
     }
+
+    fun setButtonText(value: String) {
+        binding.btnNumberPicker.text = value
+    }
 }

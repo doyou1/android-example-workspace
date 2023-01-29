@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/jh/android-example-workspace/NumberPickerSampling/app/src/main/res/layout/dialog_number_picker.xml" value="0.25364583333333335" />
         <entry key="app/src/main/res/layout/activity_date_picker.xml" value="0.13728470111448834" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_number_picker.xml" value="0.13728470111448834" />

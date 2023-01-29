@@ -1,7 +1,5 @@
 package com.example.numberpickersampling
 
-import android.app.Activity
-import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
@@ -11,20 +9,24 @@ import com.example.numberpickersampling.databinding.DialogNumberPickerBinding
 import java.text.SimpleDateFormat
 import java.util.*
 
-class NumberPickerDialog(context: Context): Dialog(context) {
+class NumberPickerDialog(private val _context: Context) : Dialog(_context) {
 
     private lateinit var binding: DialogNumberPickerBinding
     private lateinit var calendar: Calendar
-    // 현재 연도로부터 과거 몇년까지 선택가능한가
-    private val yearCountLimit = 5
 
+    private val TAG = this::class.java.simpleName
+
+    private val yearCountLimit = 20
+
+    // mCurrent'Year' use for 'month' number picker
     private var mCurrentYear = -1
+
+    // mCurrent'Month' use for 'year' number picker
     private var mCurrentMonth = -1
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = DialogNumberPickerBinding.inflate(LayoutInflater.from(context))
         setContentView(binding.root)
 
@@ -35,139 +37,185 @@ class NumberPickerDialog(context: Context): Dialog(context) {
 
     // NumberPicker 초기화
     private fun initNumberPicker() {
-        calendar = Calendar.getInstance()                   // 현재 날짜 객체 생성
-        val currentYear = calendar.get(Calendar.YEAR)       // 현재 연
-        val currentMonth = calendar.get(Calendar.MONTH) + 1 // 현재 월, 0~11 = 1월~12월이기에 +1
-        val currentDay = calendar.get(Calendar.DAY_OF_MONTH)// 현재 일
+        calendar = Calendar.getInstance()
+        val currentYear = calendar.get(Calendar.YEAR)
+        val currentMonth = calendar.get(Calendar.MONTH) + 1
 
-        binding.npYear.maxValue = currentYear               // 미래 데이터를 검색할 수 없기에 현재 년도를 최대값으로 설정
-        binding.npYear.minValue = currentYear - yearCountLimit  // yearCountLimit을 이용해 (현재년도-N)년 ~ 현재년도
-        binding.npYear.value = currentYear                      // default는 현재년도
+        // number picker for year
+        binding.npYear.maxValue =
+            currentYear // Set current year to maximum because future data cannot be retrieved
+        binding.npYear.minValue =
+            currentYear - yearCountLimit  // range is (currentYear - yearCountLimit) ~ currentYear
+        binding.npYear.value = currentYear
 
-        binding.npMonth.minValue = 1                        // 월은 1월~12월
+        // number picker for month
+        binding.npMonth.minValue = 1
         binding.npMonth.maxValue = 12
-        binding.npMonth.value = currentMonth                // default는 현재월
+        binding.npMonth.value = currentMonth
 
-        mCurrentYear = currentYear                          // NumberPicker ValueChangeListener에 활용할 글로벌 현재 연,월 변수 초기화
+        mCurrentYear = currentYear
         mCurrentMonth = currentMonth
-
-        val period: ArrayList<String> = getWeeksOfMonth(currentYear, currentMonth)    // 현재 연,월 값으로 주간 NumberPicker의 Display Values 추출
-
-        binding.npWeek.displayedValues = null               // displayedValues가 null이 아닌 상태에서 displayedValues를 변경할 경우 - ArrayIndexOutOfBounds Exception 발생
-        binding.npWeek.minValue = 0                         // 주간 period는 인덱스로 접근함
+        // get week number picker value
+        val period: ArrayList<String> = getWeeksOfMonth(currentYear, currentMonth)
+        // If you change displayedValues with displayedValues not null - ArrayIndexOutOfBoundsException occurs
+        binding.npWeek.displayedValues = null
+        binding.npWeek.minValue = 0
         binding.npWeek.maxValue = period.size - 1
 
-        binding.npWeek.displayedValues = period.toTypedArray()  // 추출한 주간 period를 주간 NumberPicker의 displayedValues로 대입
-
+        binding.npWeek.displayedValues = period.toTypedArray()
     }
 
     // 클릭 이벤트 설정
     private fun setClickEvent() {
         binding.btnCancel.setOnClickListener {
             // cancel
+            dismiss()
         }
         binding.btnConfirm.setOnClickListener {
             // confirm
+            val prevYear = binding.npYear.value
+            val prevMonth = String.format("%02d", binding.npMonth.value)
+            val period = binding.npWeek.displayedValues[binding.npWeek.value]
+            val prevDay = period.split("~")[0]
+            val lastDay = period.split("~")[1]
+
+            val lastYearAndLastMonth = if ((binding.npWeek.maxValue == binding.npWeek.value) && isOverMonth(prevYear, prevMonth.toInt(), lastDay.toInt())) getLastYearAndLastMonth(prevYear, prevMonth.toInt())
+            else "$prevYear$prevMonth"
+            val lastYear = lastYearAndLastMonth.substring(0, 4)
+            val lastMonth = lastYearAndLastMonth.substring(4, 6)
+            Log.e(
+                TAG,
+                "$prevYear/$prevMonth/$prevDay ~ $lastYear/$lastMonth/$lastDay"
+            )
+            val value = "$prevYear/$prevMonth/$prevDay ~ $lastYear/$lastMonth/$lastDay"
+
+            // java.lang.ClassCastException: android.view.ContextThemeWrapper cannot be cast to com.example.numberpickersampling.NumberPickerActivity
+            // (context as NumberPickerActivity).setButtonText(value)
+            (_context as NumberPickerActivity).setButtonText(value)
+            dismiss()
         }
     }
 
-    // NumberPicker의 ValueChange 이벤트 설정
     private fun setNumberPickerValueChangeEvent() {
-        // 연도 NumberPicker ValueChange 이벤트 설정
         binding.npYear.setOnValueChangedListener { picker, oldVal, newVal ->
-            mCurrentYear = newVal   // mCurrentYear 변수는 npMonth ValueChange Event에서 활용됨
-
-            val period: ArrayList<String> = getWeeksOfMonth(mCurrentYear, mCurrentMonth)    // 변경된 Value로 새로운 기간 값 추출
-
-            binding.npWeek.displayedValues = null   // displayedValues가 null이 아닌 상태에서 displayedValues를 변경할 경우 - ArrayIndexOutOfBounds Exception 발생
+            mCurrentYear = newVal
+            // Change of week period according to change of year and month value
+            val period: ArrayList<String> = getWeeksOfMonth(mCurrentYear, mCurrentMonth)
+            // If you change displayedValues with displayedValues not null - ArrayIndexOutOfBoundsException occurs
+            binding.npWeek.displayedValues = null
             binding.npWeek.minValue = 0
             binding.npWeek.maxValue = period.size - 1
-
             binding.npWeek.displayedValues = period.toTypedArray()
         }
         binding.npMonth.setOnValueChangedListener { picker, oldVal, newVal ->
-            mCurrentMonth = newVal  // mCurrentMonth 변수는 npYear ValueChange Event에서 활용됨
-            val period: ArrayList<String> = getWeeksOfMonth(mCurrentYear, mCurrentMonth)  // 변경된 Value로 새로운 기간 값 추출
-
-            binding.npWeek.displayedValues = null   // displayedValues가 null이 아닌 상태에서 displayedValues를 변경할 경우 - ArrayIndexOutOfBounds Exception 발생
+            mCurrentMonth = newVal
+            // Change of week period according to change of year and month value
+            val period: ArrayList<String> = getWeeksOfMonth(mCurrentYear, mCurrentMonth)
+            // If you change displayedValues with displayedValues not null - ArrayIndexOutOfBoundsException occurs
+            binding.npWeek.displayedValues = null
             binding.npWeek.minValue = 0
             binding.npWeek.maxValue = period.size - 1
-
             binding.npWeek.displayedValues = period.toTypedArray()
         }
     }
 
     // 특정 연월에 해당하는 주간 데이터 추출
-    private fun getWeeksOfMonth(year: Int, month: Int) : ArrayList<String> {
+    private fun getWeeksOfMonth(year: Int, month: Int): ArrayList<String> {
         val calendar = Calendar.getInstance()   // Calendar 객체 생성
-        calendar.set(Calendar.YEAR, year)       // 입력받은 연도값 set
-        calendar.set(Calendar.MONTH, month - 1) // 입력받은 월값 set, Calendar 객체는 "N월 -> Int"의 경우 N월 -> N-1으로 대입해야 함, 1월~12월 == 0~11
-        calendar.set(Calendar.WEEK_OF_MONTH, 1)             // 특정 달의 첫째주를 설정
-        calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY) // 특정 주의 월요일을 설정
+        calendar.set(year, month - 1, 1)
+        calendar.set(
+            Calendar.WEEK_OF_MONTH,
+            1
+        )             // Set the first week of a particular month
+        calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY)  // Set a Monday of a particular week
 
-        // 1월의 첫째주 월요일을 찾는 경우, 첫번째 월요일이 이전달에 들어가 있다면 이전연도로 넘어가버리는 오류가 발생
-        if (year != calendar.get(Calendar.YEAR)) {   // 첫째주 월요일을 설정하는 과정에서 연도가 바뀐 경우
-            calendar.set(Calendar.YEAR, year)
-            calendar.set(Calendar.MONTH, month - 1)
-            calendar.set(Calendar.WEEK_OF_MONTH, 2)        // 1+1인 2를 대입하면 이전연도가 포함되지 않은 우리가 구하고자하는 특정월의"첫째주"를 추출하는 것이 가능
+        // For the first Monday of January, if the first Monday is in the previous month, an error occurs that moves on to the previous year.
+        // The year has changed in the process of setting up the first Monday.
+        if (year != calendar.get(Calendar.YEAR)) {
+            calendar.set(year, month - 1, 1)
+            // If we set 2, it is possible to extract the "first week" of the specific month we want to obtain without the previous year.
+            calendar.set(Calendar.WEEK_OF_MONTH, 2)
             calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY)
         }
 
-        // 위의 조건문과 비슷한 이유로, 첫째주 월요일이 이전달에 들어가 있는 경우 이전월로 넘어가버리는 오류가 발생
-        if (month != calendar.get(Calendar.MONTH) + 1) {    // 첫째주 월요일을 설정하는 과정에서 월이 바뀐 경우
-            // N월 - N-1(Int)으로 대칭되기에 이전월로 넘어가지 않고 정상적인 경우라면
-            // N : month(parameter), N-1 : calendar.get(Calendar.MONTH) as Int 이기에
-            // N != N-1+1 -> N != N 인지를 묻는 조건문이다.
-            calendar.set(Calendar.YEAR, year)
-            calendar.set(Calendar.MONTH, month - 1)
-            calendar.set(Calendar.WEEK_OF_MONTH, 2)     // 1+1인 2를 대입하면 이전월이 포함되지 않은 우리가 구하고자하는 특정월의 "첫째주"를 추출하는 것이 가능
+        // For reasons similar to the above conditional statement, if the first Monday of the week is in the previous month, an error occurs that passes to the previous month.
+        // The month has changed in the process of setting up the first Monday.
+        if (month != calendar.get(Calendar.MONTH) + 1) {
+            calendar.set(year, month - 1, 1)
+            // If we set 2, it is possible to extract the "first week" of the specific month we want to obtain that does not include the previous month.
+            calendar.set(Calendar.WEEK_OF_MONTH, 2)
             calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY)
         }
 
-        // 이를 통해 추출한 특정 연월의 첫째주 월요일에 대한 날짜 데이터
-        val year = calendar.get(Calendar.YEAR)          // 연
-        val month = calendar.get(Calendar.MONTH)        // 월: Int
-        val day = calendar.get(Calendar.DAY_OF_MONTH)   // 일
-        val weekOfMonth = calendar.get(Calendar.WEEK_OF_MONTH)  // 원래라면 해당 변수의 값이 "1"일 경우, 첫째주를 의미하지만, 이전연도, 이전월로 넘어가는 경우에 따라 "2"가 첫째주를 의미하기도 함
+        // Date of the first Monday of a particular year, month
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+        // Originally, if the value of the variable is "1", it means the first week, but "2" also means the first week, depending on the previous year, the previous month.
+        val weekOfMonth = calendar.get(Calendar.WEEK_OF_MONTH)
 
         return makeWeeksOfMonthByString(calendar, year, month, day, weekOfMonth)
     }
 
-    // 특정 연월의 첫째주 월요일 데이터를 이용해
-    // 실제 npWeek의 displayedValues로 활용될 "주에 대한 기간" ArrayList<String> 추출
-    private fun makeWeeksOfMonthByString(calendar: Calendar, year: Int, month: Int, day: Int, weekOfMonth: Int) : ArrayList<String> {
+    private fun makeWeeksOfMonthByString(
+        calendar: Calendar,
+        year: Int,
+        month: Int,
+        day: Int,
+        weekOfMonth: Int
+    ): ArrayList<String> {
         val list = ArrayList<String>()
-        list.add("${day}~${day+6}")     // 일주일은 N일~N+6일
-                                        // 첫째주 기간 추가
+        list.add("${String.format("%02d", day)}~${String.format("%02d", day + 6)}") // 일주일은 N일~N+6일
+        // 첫째주 기간 추가
         var newWeekOfMonth = weekOfMonth    //(variable) val to var weekOfMonth(parameter)
 
+        // Until the month is over,
         while (true) {
             newWeekOfMonth++
-            calendar.set(Calendar.WEEK_OF_MONTH, newWeekOfMonth)    // 둘째주,셋째주... 설정
-            if (month != calendar.get(Calendar.MONTH)) {            // 다음주로 변경했더니 다음달로 넘어가는 경우 (parameter가 Int이기에 "-1"은 불필요)
-                // 29~35, 31~37 등 month(parameter)를 기준으로 한 day 숫자 값이 추출됨
-                // 이를 해결하기 위한 string 변환
+            calendar.set(Calendar.WEEK_OF_MONTH, newWeekOfMonth)
 
-                val dayOfnextMonday = calendar.get(Calendar.DAY_OF_MONTH)
+            // when the month is over, process last period
+            // Day numeric values based on 29~35 and 31~37 months (parameter) are extracted.
+            if (month != calendar.get(Calendar.MONTH)) {
+                // String convert to solve this problem
+                val dayOfNextMonday = calendar.get(Calendar.DAY_OF_MONTH)
 
-                // 다음달로 넘어갔으나 월요일이 1일인 경우
-                // "${N}~${N+6}"형식의 데이터 추가에서 ${N+6}에 특정 달의 말일이 정상적으로 추가 됐기에
-                // 별도 작업 불필요 -> break
-                if (dayOfnextMonday == 1) break
+                // If you have moved on to the next month but Monday is the 1st
+                // Adding data in the format "${N}~${N+6}" has successfully added the end date of a specific month to ${N+6}
+                // No extra work required -> break
+                if (dayOfNextMonday == 1) break
 
-                var dayOfSundayOfLastWeek = (dayOfnextMonday - 1)   // 다음달의 월요일-1은 이번달의 주 기간의 마지막 일(일요일) ex)29~4, 26~2, 31~6
+                val dayOfSundayOfLastWeek = (dayOfNextMonday - 1)
+                val waveIndex = list[list.size - 1].indexOf("~")
+                // "${N}" in the form of "${N}~${N+6}"
+                val frontDayOfWave = list[list.size - 1].substring(0, waveIndex)
+                // Enter the appropriate period string in the last data of the already entered list
+                // ex) 29~35 -> 29~04,
+                list[list.size - 1] =
+                    "$frontDayOfWave~${String.format("%02d", dayOfSundayOfLastWeek)}"
 
-                val waveIndex = list[list.size - 1].indexOf("~")    // "${N}~${N+6}"의 형식에서 "~"앞의 "${N}"부분을 추출하기 위한 index 변수
-                val frontDayOfWave = list[list.size - 1].substring(0, waveIndex) // "${N}~${N+6}"의 형식에 "${N}"
-                list[list.size - 1] = "$frontDayOfWave~$dayOfSundayOfLastWeek"  // 이미 입력된 리스트의 마지막 데이터에 적절한 기간 문자열 입력
-
-                break   // 달의 마지막 기간까지 추가했기에 while문 종료
+                // I added it to the last period of the month, so end the while statement
+                break
             }
 
             val day = calendar.get(Calendar.DAY_OF_MONTH)
-            list.add("${day}~${day+6}")
+            list.add("${String.format("%02d", day)}~${String.format("%02d", day + 6)}")
         }
         return list
+    }
+
+    private fun isOverMonth(prevYear: Int, prevMonth: Int, lastDay: Int): Boolean {
+        val cal = Calendar.getInstance()
+        cal.set(prevYear, prevMonth - 1, 1)
+        return cal.getActualMaximum(Calendar.DAY_OF_MONTH) != lastDay
+    }
+
+    private fun getLastYearAndLastMonth(prevYear: Int, prevMonth: Int): String {
+        val cal = Calendar.getInstance()
+        cal.set(prevYear, prevMonth - 1, 1)
+        cal.add(Calendar.MONTH, 1)
+
+        return SimpleDateFormat("yyyyMM").format(cal.time)
     }
 
 }
