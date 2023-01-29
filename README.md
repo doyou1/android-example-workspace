@@ -288,7 +288,7 @@ ContentProviderProjectA: Implementation Simple DB and ContentProvider (readable 
 - The logic of checking the top and bottom using RecyclerView's canScroll Vertically is implemented.
 - Add items to RecyclerView when reaching the lowest level, and display AppMsg.
 - ./00_[ProjectResult]/RecyclerViewScrollProject.mp4
-<div><video controls src="" muted="false"></video></div>
+<div><video controls src="https://user-images.githubusercontent.com/56281493/215307937-c670a10a-aaab-414f-93d3-f2a9c987a372.mp4" muted="false"></video></div>
 
 # [RegularIncomeAndInstallmentSampling](#RegularIncomeAndInstallmentSampling)
 - RegularIncomeAndInstallmentSampling
