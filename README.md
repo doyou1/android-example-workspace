@@ -22,9 +22,7 @@
 * [MultiFragmentSwipeEventSampling](#MultiFragmentSwipeEventSampling)
 * [NavigationBackStackProject](#NavigationBackStackProject)
 * [NumberPickerSampling](#NumberPickerSampling)
-* [PedometerSampling](#PedometerSampling)
 * [ProgressbarProject](#ProgressbarProject)
-* [QnaProject](#QnaProject)
 * [RecyclerViewScollProject](#RecyclerViewScollProject)
 * [RegularIncomeAndInstallmentSampling](#RegularIncomeAndInstallmentSampling)
 * [RoomDBImageSampling](#RoomDBImageSampling)
@@ -32,16 +30,13 @@
 * [RoomSampling](#RoomSampling)
 * [RyougaeSampling](#RyougaeSampling)
 * [SeekbarProject](#SeekbarProject)
+* [service-sampling](#service-sampling)
 * [ServiceProject](#ServiceProject)
 * [ServiceThreadExample](#ServiceThreadExample)
 * [SwitchProject](#SwitchProject)
 * [TransparentViewSampling](#TransparentViewSampling)
 * [ViewPagerProject](#ViewPagerProject)
 * [ViewPagerSampling](#ViewPagerSampling)
-* [YoutubeAPIProject](#YoutubeAPIProject)
-* [network-data-test-project](#network-data-test-project)
-* [pedometerapp](#pedometerapp)
-* [service-sampling](#service-sampling)
 
 # [ActivityForResultProject](#ActivityForResultProject)
 - ActivityForResult Launcherを利用してSubActivityからTextを受け取ってMainAcitivyに表示し、Galleryから写真を持ってきて表示する機能
@@ -268,13 +263,9 @@ ContentProviderProjectA: Implementation Simple DB and ContentProvider (readable 
 - I thought it would be easy to make, but when I went into detail, there were many things to pay attention to.
 - ./00_[ProjectResult]/NumberPickerSampling.mp4
 <div><video controls src="https://user-images.githubusercontent.com/56281493/215305228-4c969382-4e58-46b8-a98a-f2d48969d43e.mp4" muted="false"></video></div>
-  
-# [PedometerSampling](#PedometerSampling)
-- PedometerSampling
+
 # [ProgressbarProject](#ProgressbarProject)
 - ProgressbarProject
-# [QnaProject](#QnaProject)
-- QnaProject
 # [RecyclerViewScollProject](#RecyclerViewScollProject)
 - RecyclerViewScollProject
 # [RegularIncomeAndInstallmentSampling](#RegularIncomeAndInstallmentSampling)
@@ -289,6 +280,8 @@ ContentProviderProjectA: Implementation Simple DB and ContentProvider (readable 
 - RyougaeSampling
 # [SeekbarProject](#SeekbarProject)
 - SeekbarProject
+# [service-sampling](#service-sampling)
+- service-sampling
 # [ServiceProject](#ServiceProject)
 - ServiceProject
 # [ServiceThreadExample](#ServiceThreadExample)
@@ -301,11 +294,3 @@ ContentProviderProjectA: Implementation Simple DB and ContentProvider (readable 
 - ViewPagerProject
 # [ViewPagerSampling](#ViewPagerSampling)
 - ViewPagerSampling
-# [YoutubeAPIProject](#YoutubeAPIProject)
-- YoutubeAPIProject
-# [network-data-test-project](#network-data-test-project)
-- network-data-test-project
-# [pedometerapp](#pedometerapp)
-- pedometerapp
-# [service-sampling](#service-sampling)
-- service-sampling
