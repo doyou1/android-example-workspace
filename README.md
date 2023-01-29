@@ -265,7 +265,18 @@ ContentProviderProjectA: Implementation Simple DB and ContentProvider (readable 
 <div><video controls src="https://user-images.githubusercontent.com/56281493/215305228-4c969382-4e58-46b8-a98a-f2d48969d43e.mp4" muted="false"></video></div>
 
 # [ProgressbarProject](#ProgressbarProject)
-- ProgressbarProject
+- [CustomComponentProject](#CustomComponentProject)でも活用しましたが、もう一度確実に確認するためサンプリング。
+- ローディング中であることを知らせるProgressBarと進行中であることを知らせるHorizontal ProgressBarを活用してタイマーの動作を表示するプロジェクト。
+- 長かったり、動作時間が予想できない作業の場合に活用できる。
+- [CustomComponentProject](#CustomComponentProject)에서도 활용했지만, 한번 더 확실히 확인하기 위해 샘플링.
+- 로딩중임을 알리는 ProgressBar와 진행중임을 알리는 Horizontal ProgressBar를 활용해 타이머의 동작을 표시하는 프로젝트.
+- 길거나 동작 시간이 예상안되는 작업의 경우 활용할 수 있음.
+- It was also used in [CustomComponentProject](#CustomComponentProject), but sampling to make sure once more.
+- A project that displays the behavior of a timer using ProgressBar indicating that it is loading and Horizontal ProgressBar indicating that it is in progress.
+- Can be utilized for long or unexpected operational times.
+- ./00_[ProjectResult]/ProgressbarProject.mp4
+<div><video controls src="" muted="false"></video></div>
+
 # [RecyclerViewScollProject](#RecyclerViewScollProject)
 - RecyclerViewScollProject
 # [RegularIncomeAndInstallmentSampling](#RegularIncomeAndInstallmentSampling)

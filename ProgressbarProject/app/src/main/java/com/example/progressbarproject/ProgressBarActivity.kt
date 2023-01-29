@@ -17,7 +17,7 @@ import com.example.progressbarproject.databinding.ActivityProgressBarBinding
 import kotlin.math.roundToInt
 
 class ProgressBarActivity : AppCompatActivity() {
-
+    private val TAG = this::class.java.simpleName
     private lateinit var binding: ActivityProgressBarBinding
     private var inputSecond: Long = -1
 
@@ -30,20 +30,17 @@ class ProgressBarActivity : AppCompatActivity() {
             if (binding.etCount.text.isNotEmpty()) {
                 startLoadingBar()
             } else {
-                Toast.makeText(this, "값을 입력하세요", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "please input value", Toast.LENGTH_SHORT).show()
             }
         }
 
         binding.btnMoveToLoadingBar.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
+            onBackPressed()
         }
     }
 
     private fun startLoadingBar() {
-        inputSecond = binding.etCount.text.toString().toLong()   // EditText값을 타이머의 second(초)로 설정, inputType=number
-        // CountDownTimer는 millisFuture(타이머 제한 초), countDownInterval(onTick 호출간격)을 millisecond로 받는다. -> second * 1000
+        inputSecond = binding.etCount.text.toString().toLong()
         val countDownTimer = ProgressCountDownTimer(inputSecond * 1000, 1000, ::reset, ::setCount)
         binding.tvProgress.text = inputSecond.toString()
         binding.progressBar.max = inputSecond.toInt()
@@ -51,27 +48,12 @@ class ProgressBarActivity : AppCompatActivity() {
     }
 
     private fun reset() {
-        binding.tvProgress.text = ""
+        binding.tvProgress.text = "0"
         binding.progressBar.progress = 0
     }
 
     private fun setCount(second: Int) {
         binding.tvProgress.text = second.toString()
         binding.progressBar.progress = (inputSecond - second).toInt()
-    }
-}
-
-class ProgressCountDownTimer(private val millisFuture: Long, private val countDownInterval: Long, val reset: () -> Unit, val setCount: (Int) -> Unit) : CountDownTimer(millisFuture, countDownInterval) {
-    private val TAG = "MyCountDownTimer"
-
-    override fun onTick(millisUntilFinished: Long) {
-        // 남은 millisecond를 파라미터로 제공해준다.
-        // (millisUntilFinished / countDownInterval)을 통해 남은 `초`를 계산한다
-        val reverseSecond = (millisUntilFinished / countDownInterval).toDouble().roundToInt()
-        setCount(reverseSecond)
-    }
-    override fun onFinish() {
-        Log.e(TAG, "onFinish")
-        reset()
     }
 }
