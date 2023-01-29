@@ -267,8 +267,8 @@ ContentProviderProjectA: Implementation Simple DB and ContentProvider (readable 
 - While developing a diary app in an in-house education project, the ability to select a weekly from the weekly statistics screen is required.
 - I thought it would be easy to make, but when I went into detail, there were many things to pay attention to.
 - ./00_[ProjectResult]/NumberPickerSampling.mp4
-<div><video controls src="" muted="false"></video></div>
-
+<div><video controls src="https://user-images.githubusercontent.com/56281493/215305228-4c969382-4e58-46b8-a98a-f2d48969d43e.mp4" muted="false"></video></div>
+  
 # [PedometerSampling](#PedometerSampling)
 - PedometerSampling
 # [ProgressbarProject](#ProgressbarProject)
