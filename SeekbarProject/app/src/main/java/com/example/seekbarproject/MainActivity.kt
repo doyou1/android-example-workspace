@@ -10,10 +10,12 @@ import com.example.seekbarproject.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private val TAG = "MainActivity"
+    private val TAG = this::class.java.simpleName
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         initialize()
         setSeekBarBrightness()
         setSeekBarSize()
@@ -28,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         binding.seekBarBrightness.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener{
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 Log.e(TAG, "onProgressChanged: $progress")
-                binding.tvBrightness.text = "밝기(${progress} * 0.2)" // seekbar의 textview progress 변화 출력
+                binding.tvBrightness.text = "alpha: $progress * 0.2" // seekbar의 textview progress 변화 출력
                 binding.tvResult.alpha = (progress * 0.2).toFloat() // text의 alpha는 float형(0.0 ~ 1.0)
             }
 
@@ -48,7 +50,7 @@ class MainActivity : AppCompatActivity() {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 Log.e(TAG, "onProgressChanged: $progress")
 
-                binding.tvSize.text = "사이즈($progress + 20)"             // seekbar의 textview progress 변화 출력
+                binding.tvSize.text = "textSize: 20 + $progress"             // seekbar의 textview progress 변화 출력
                 binding.tvResult.textSize = (20 + progress).toFloat()   // textSize는 float형
             }
 

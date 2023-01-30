@@ -306,7 +306,13 @@ ContentProviderProjectA: Implementation Simple DB and ContentProvider (readable 
 ![RyougaeSampling](https://user-images.githubusercontent.com/56281493/215492504-3d536acc-261d-4835-8c7e-036348161e94.jpg)
   
 # [SeekbarProject](#SeekbarProject)
-- SeekbarProject
+- Seekbarのchangeeventlistenerを利用してtextの明るさ、textのsizeを調節する機能を実現
+- Seekbar의 change event listener를 이용해 text의 밝기, text의 size를 조절하는 기능 구현
+- Using Seekbar's change event listener, the function of adjusting the brightness of the text and the size of the text is implemented.
+
+- ./00_[ProjectResult]/SeekbarProject.mp4
+<div><video controls src="" muted="false"></video></div>
+
 # [service-sampling](#service-sampling)
 - service-sampling
 # [ServiceProject](#ServiceProject)
