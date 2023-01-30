@@ -2,30 +2,37 @@ package com.example.ryougaesampling
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.withContext
+import com.example.ryougaesampling.databinding.ActivityMainBinding
+import kotlinx.coroutines.*
 
 class MainActivity : AppCompatActivity() {
 
     private val TAG = this::class.java.simpleName
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
+        setCurrentPrice()
 
-        findViewById<Button>(R.id.btn_start).setOnClickListener {
-            var currentPrice: Double? = null
-            runBlocking {
-                withContext(CoroutineScope(Dispatchers.IO).coroutineContext) {
-                    currentPrice = RougaeUtil().getRougae()
-                }
-                currentPrice?.let {
-                    Log.d(TAG, "currentPrice1: $currentPrice")
+        binding.btnStart.setOnClickListener {
+            setCurrentPrice()
+        }
+    }
+
+    private fun setCurrentPrice() {
+        CoroutineScope(Dispatchers.Main).launch {
+            binding.progressBar.visibility = View.VISIBLE
+            CoroutineScope(Dispatchers.IO).launch {
+                val result = RougaeUtil().getRougae()
+                CoroutineScope(Dispatchers.Main).launch {
+                    binding.tvResult.text = result
+                    binding.progressBar.visibility = View.INVISIBLE
                 }
             }
         }

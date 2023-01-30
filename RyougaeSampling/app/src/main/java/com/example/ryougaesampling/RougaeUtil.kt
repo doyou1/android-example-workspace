@@ -15,11 +15,10 @@ class RougaeUtil {
 
     private val TAG = this::class.java.simpleName.toString()
     //    private val API_KEY = resources.getString(R.string.api_key)
-//    private val baseUrl = "http://fx.kebhana.com/"
     private val baseUrl = "https://quotation-api-cdn.dunamu.com/"
     private val codes = "FRX.KRWJPY"
 
-    fun getRougae(): Double? {
+    fun getRougae(): String {
         val retrofit = Retrofit.Builder()
             .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
@@ -29,8 +28,8 @@ class RougaeUtil {
         val call = rougaeService.getResult2(codes)
 
         val result = Gson().fromJson(call.execute().body()?.get(0), RougaeResponseModel::class.java)
-        Log.d(TAG, "현재환율: ${result.basePrice}")
+        Log.e(TAG, "result: $result")
 
-        return result.basePrice
+        return "${result.date} ${result.time} \n ₩1000 = ¥${result.basePrice}"
     }
 }

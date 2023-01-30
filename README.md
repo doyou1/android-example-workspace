@@ -299,7 +299,12 @@ ContentProviderProjectA: Implementation Simple DB and ContentProvider (readable 
 # [RoomSampling](#RoomSampling)
 - RoomSampling
 # [RyougaeSampling](#RyougaeSampling)
-- RyougaeSampling
+- 家計簿アプリの実装中、為替レートの表示が必要。 公共API活用
+- 가계부 어플 구현 중, 환율 표시가 필요함. 공공 API 활용
+- The exchange rate indication is required while implementing the household accounting application. Utilize public APIs
+- ./00_[ProjectResult]/RyougaeSampling.jpg
+
+RyougaeSampling.jpg
 # [SeekbarProject](#SeekbarProject)
 - SeekbarProject
 # [service-sampling](#service-sampling)
