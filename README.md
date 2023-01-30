@@ -303,8 +303,8 @@ ContentProviderProjectA: Implementation Simple DB and ContentProvider (readable 
 - 가계부 어플 구현 중, 환율 표시가 필요함. 공공 API 활용
 - The exchange rate indication is required while implementing the household accounting application. Utilize public APIs
 - ./00_[ProjectResult]/RyougaeSampling.jpg
-
-RyougaeSampling.jpg
+![RyougaeSampling](https://user-images.githubusercontent.com/56281493/215492504-3d536acc-261d-4835-8c7e-036348161e94.jpg)
+  
 # [SeekbarProject](#SeekbarProject)
 - SeekbarProject
 # [service-sampling](#service-sampling)
