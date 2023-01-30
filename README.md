@@ -309,9 +309,8 @@ ContentProviderProjectA: Implementation Simple DB and ContentProvider (readable 
 - Seekbarのchangeeventlistenerを利用してtextの明るさ、textのsizeを調節する機能を実現
 - Seekbar의 change event listener를 이용해 text의 밝기, text의 size를 조절하는 기능 구현
 - Using Seekbar's change event listener, the function of adjusting the brightness of the text and the size of the text is implemented.
-
 - ./00_[ProjectResult]/SeekbarProject.mp4
-<div><video controls src="" muted="false"></video></div>
+<div><video controls src="https://user-images.githubusercontent.com/56281493/215495297-7cd1c1f7-8bb9-4440-bcb2-8803aa13772c.mp4" muted="false"></video></div>
 
 # [service-sampling](#service-sampling)
 - service-sampling
