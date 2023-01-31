@@ -322,10 +322,9 @@ ContentProviderProjectA: Implementation Simple DB and ContentProvider (readable 
 - The return value of the service's onStartCommand is set to START_STICKY so that it can be executed even in the background.
 - Sampling related to service for pedometer function.
 - I am also considering opening Broadcast Receiver in Service on Destory.
-
 - ./00_[ProjectResult]/service-sampling.mp4
-<div><video controls src="" muted="false"></video></div>
-
+<div><video controls src="https://user-images.githubusercontent.com/56281493/215763301-b4fe58f9-2c0f-412b-8ace-0a4d36d2779f.mp4" muted="false"></video></div>
+  
 # [ServiceProject](#ServiceProject)
 - ServiceProject
 # [ServiceThreadExample](#ServiceThreadExample)
