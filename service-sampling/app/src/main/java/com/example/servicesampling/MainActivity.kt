@@ -26,6 +26,24 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
         resetCounterService()
         resetSharedPreferencesChangeListener()
+        setClickEvent()
+    }
+
+    private fun setClickEvent() {
+        binding.btnClear.setOnClickListener {
+            (application as BaseApplication).reset()
+            binding.tvSeconds.text = "0"
+            binding.tvDate.text = ""
+        }
+
+        binding.btnStart.setOnClickListener {
+            resetCounterService()
+        }
+
+        binding.btnStop.setOnClickListener {
+            val intent = Intent(this, CounterService::class.java)
+            stopService(intent)
+        }
     }
 
     private fun resetCounterService() {
@@ -41,6 +59,8 @@ class MainActivity : AppCompatActivity() {
             key?.let {
                 if (it == "value") {
                     binding.tvSeconds.text = prefs?.getInt("value", 0).toString()
+                } else if (it == "date") {
+                    binding.tvDate.text = prefs?.getString("date", null).toString()
                 }
             }
         }

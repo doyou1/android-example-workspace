@@ -17,7 +17,6 @@ class CounterService : Service() {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         handler.removeCallbacksAndMessages(null)
         isRun = true
-        setSavedSeconds()
         setCounter()
         return START_STICKY
     }
@@ -26,14 +25,8 @@ class CounterService : Service() {
         return null
     }
 
-    private fun setSavedSeconds() {
-        val prefs = getSharedPreferences("seconds", Context.MODE_PRIVATE)
-        val value = prefs.getInt("value", 0)
-        seconds = value
-    }
-
     private fun setCounter() {
-        if(isRun) (application as BaseApplication).set(++seconds)
+        if(isRun) (application as BaseApplication).add()
         handler.postDelayed(::setCounter, 1000)
     }
 
@@ -44,9 +37,5 @@ class CounterService : Service() {
     override fun onDestroy() {
         super.onDestroy()
         isRun = false
-    }
-
-    companion object {
-        var seconds = 0
     }
 }

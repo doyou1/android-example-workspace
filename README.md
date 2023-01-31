@@ -313,7 +313,19 @@ ContentProviderProjectA: Implementation Simple DB and ContentProvider (readable 
 <div><video controls src="https://user-images.githubusercontent.com/56281493/215495297-7cd1c1f7-8bb9-4440-bcb2-8803aa13772c.mp4" muted="false"></video></div>
 
 # [service-sampling](#service-sampling)
-- service-sampling
+- ServiceのonStartCommandの戻り値をSTART_STICKYに設定し、backgroundでも実行できるように実装。
+- 万歩計機能のためにサービス関連サンプリングを実施。
+- Service on DestoryでBroadcast Receiverを開く方法も検討中。
+- Service의 onStartCommand의 반환값을 START_STICKY으로 설정해 background에서도 실행할 수 있도록 구현.
+- 만보계 기능을 위해 Service 관련 샘플링을 진행.
+- Service onDestory에서 Broadcast Receiver를 여는 방법도 고려중.
+- The return value of the service's onStartCommand is set to START_STICKY so that it can be executed even in the background.
+- Sampling related to service for pedometer function.
+- I am also considering opening Broadcast Receiver in Service on Destory.
+
+- ./00_[ProjectResult]/service-sampling.mp4
+<div><video controls src="" muted="false"></video></div>
+
 # [ServiceProject](#ServiceProject)
 - ServiceProject
 # [ServiceThreadExample](#ServiceThreadExample)
