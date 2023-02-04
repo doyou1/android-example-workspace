@@ -1,9 +1,6 @@
 package com.example.pedometerclone
 
-import android.app.AlarmManager
-import android.app.Notification
-import android.app.NotificationManager
-import android.app.Service
+import android.app.*
 import android.content.Context
 import android.content.Intent
 import android.hardware.Sensor
@@ -12,6 +9,7 @@ import android.hardware.SensorEventListener
 import android.os.Build
 import android.os.IBinder
 import android.util.Log
+import java.text.NumberFormat
 import java.util.*
 
 
@@ -86,12 +84,34 @@ class SensorListener : Service(), SensorEventListener {
     private fun getNotification(context: Context) : Notification {
         Log.d(TAG, "getNotification")
         val pref = context.getSharedPreferences(TEXT_PEDOMETER, Context.MODE_PRIVATE)
-        pref.getInt(TEXT_GOAL, 10000)
+        val goal = pref.getInt(TEXT_GOAL, 10000)
 
-        val todayOffset = db.getSteps(Util.getToday())
+        var todayOffset = db.getSteps(Util.getToday())
         // use saved value if we haven't anything better
         if(steps == 0) steps = db.getCurrentSteps()
-        
+
+        val notificationBuilder = if(Build.VERSION.SDK_INT >= 26) API26Wrapper.getNotificationBuilder(context)
+        else Notification.Builder(context)
+
+        if(steps > 0) {
+            if(todayOffset == Integer.MIN_VALUE) todayOffset = - steps
+            val format = NumberFormat.getInstance(Locale.getDefault())
+            val contentText = if(todayOffset + steps >= goal) "Goal reached! ${format.format(todayOffset+steps)} steps and counting"
+            else "${goal - todayOffset - steps} steps to go"
+            val contentTitle = "${format.format(todayOffset + steps)} steps"
+            notificationBuilder.setProgress(goal, todayOffset + steps, false).setContentText(contentText).setContentTitle(contentTitle)
+        }
+        // still no steps value
+        else {
+            val contentText = "Your progress will be shown here soon"
+            val contentTitle = "Pedometer is counting"
+            notificationBuilder.setContentText(contentText).setContentTitle(contentTitle)
+        }
+
+        notificationBuilder.setPriority(Notification.PRIORITY_HIGH).setShowWhen(false)
+            .setContentIntent(PendingIntent.getActivity(context, 0, Intent(context, MainActivity::class.java), PendingIntent.FLAG_UPDATE_CURRENT))
+            .setSmallIcon(R.drawable.ic_launcher_foreground).setOngoing(true)
+        return notificationBuilder.build()
     }
 
     companion object {
