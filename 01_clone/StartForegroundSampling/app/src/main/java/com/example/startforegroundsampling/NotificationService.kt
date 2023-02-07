@@ -3,6 +3,7 @@ package com.example.startforegroundsampling
 import android.app.*
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.os.Build
 import android.os.IBinder
 import java.text.SimpleDateFormat
@@ -10,7 +11,10 @@ import java.util.*
 
 class NotificationService : Service() {
 
+    private val shutdownReceiver = ShutdownReceiver()
+
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        registerBroadcastReceiver()
         showNotification()
 
         // after 10 seconds
@@ -25,6 +29,12 @@ class NotificationService : Service() {
         }
 
         return START_STICKY
+    }
+
+    private fun registerBroadcastReceiver() {
+        val filter = IntentFilter()
+        filter.addAction(Intent.ACTION_SHUTDOWN);
+        registerReceiver(shutdownReceiver, filter);
     }
 
     private fun showNotification() {
@@ -50,7 +60,7 @@ class NotificationService : Service() {
         } else {
             Notification.Builder(context)
         }
-        notificationBuilder.setContentTitle(getDate()).setContentText(getTime())
+        notificationBuilder.setContentTitle(getDate()).setContentText("time: ${getTime()} count: ${getCount(context)}")
         notificationBuilder.setPriority(Notification.PRIORITY_MIN)
             .setShowWhen(false)
             .setContentIntent(PendingIntent.getActivity(context, 0, Intent(context, MainActivity::class.java), PendingIntent.FLAG_UPDATE_CURRENT))
@@ -73,6 +83,13 @@ class NotificationService : Service() {
         val cal = Calendar.getInstance()
         val sdf = SimpleDateFormat("HH:mm:ss")
         return sdf.format(cal.time)
+    }
+
+    private fun getCount(context: Context) : Int {
+        val pref = context.getSharedPreferences("count", Context.MODE_PRIVATE)
+        val count = pref.getInt("count", 0)
+        pref.edit().putInt("count", count+1).apply()
+        return count
     }
 
     companion object {
