@@ -17,10 +17,10 @@ class NotificationService : Service() {
         registerBroadcastReceiver()
         showNotification()
 
-        // after 10 seconds
-        val nextTime = System.currentTimeMillis() + (10 * 1000)
+        // after 3 seconds
+        val nextTime = System.currentTimeMillis() + (3 * 1000)
         val am = applicationContext.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val pendingIntent = PendingIntent.getService(applicationContext, 2, Intent(this, NotificationService::class.java), 0)
+        val pendingIntent = PendingIntent.getService(applicationContext, 2, Intent(this, NotificationService::class.java), PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE)
 
         if(Build.VERSION.SDK_INT >= 23) {
             am.setAndAllowWhileIdle(AlarmManager.RTC, nextTime, pendingIntent)
@@ -63,8 +63,8 @@ class NotificationService : Service() {
         notificationBuilder.setContentTitle(getDate()).setContentText("time: ${getTime()} count: ${getCount(context)}")
         notificationBuilder.setPriority(Notification.PRIORITY_MIN)
             .setShowWhen(false)
-            .setContentIntent(PendingIntent.getActivity(context, 0, Intent(context, MainActivity::class.java), PendingIntent.FLAG_UPDATE_CURRENT))
-            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setContentIntent(PendingIntent.getActivity(context, 0, Intent(context, MainActivity::class.java), PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE))
+            .setSmallIcon(R.drawable.ic_baseline_notifications_active_24)
             .setOngoing(true)
         return notificationBuilder.build()
     }
