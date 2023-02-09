@@ -4,19 +4,23 @@ import android.app.*
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
 import android.os.Build
 import android.os.IBinder
 import java.text.SimpleDateFormat
 import java.util.*
 
-class NotificationService : Service() {
+class NotificationService : Service(), SensorEventListener {
 
     private val shutdownReceiver = ShutdownReceiver()
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        reRegisterStepCounter()
         registerBroadcastReceiver()
         showNotification()
-
         // after 3 seconds
         val nextTime = System.currentTimeMillis() + (3 * 1000)
         val am = applicationContext.getSystemService(Context.ALARM_SERVICE) as AlarmManager
@@ -27,8 +31,22 @@ class NotificationService : Service() {
         } else {
             am.set(AlarmManager.RTC, nextTime, pendingIntent)
         }
-
         return START_STICKY
+    }
+
+    private fun reRegisterStepCounter() {
+        val sm = getSystemService(SENSOR_SERVICE) as SensorManager
+
+        try {
+            sm.unregisterListener(this)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        val sensor = sm.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
+
+        // enable batching with delay of max 5 min
+        sm.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL, (5 * MICROSECONDS_IN_ONE_MINUTE).toInt())
     }
 
     private fun registerBroadcastReceiver() {
@@ -60,7 +78,7 @@ class NotificationService : Service() {
         } else {
             Notification.Builder(context)
         }
-        notificationBuilder.setContentTitle(getDate()).setContentText("time: ${getTime()} count: ${getCount(context)}")
+        notificationBuilder.setContentTitle(getDate()).setContentText("time: ${getTime()} count: ${getCount(context)} serviceSteps: ${getServiceSteps(context)}")
         notificationBuilder.setPriority(Notification.PRIORITY_MIN)
             .setShowWhen(false)
             .setContentIntent(PendingIntent.getActivity(context, 0, Intent(context, MainActivity::class.java), PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE))
@@ -92,8 +110,27 @@ class NotificationService : Service() {
         return count
     }
 
+    private fun getServiceSteps(context: Context) : Int {
+        val pref = getSharedPreferences("pedometer", Context.MODE_PRIVATE)
+        return pref.getInt("service_steps", 0)
+    }
+
     companion object {
         const val NOTIFICATION_ID = 1
         const val NOTIFICATION_CHANNEL_ID = "Notification"
+        const val MICROSECONDS_IN_ONE_MINUTE: Long = 60000000
+
+    }
+
+    override fun onSensorChanged(event: SensorEvent?) {
+        event?.let { e ->
+            if(e.values[0] > Integer.MAX_VALUE || e.values[0].toInt() == 0) return
+            val pref = getSharedPreferences("pedometer", Context.MODE_PRIVATE)
+            pref.edit().putInt("service_steps", e.values[0].toInt()).apply()
+        }
+    }
+
+    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
+        // won't happen
     }
 }
