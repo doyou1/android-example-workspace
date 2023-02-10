@@ -21,16 +21,7 @@ class NotificationService : Service(), SensorEventListener {
         reRegisterStepCounter()
         registerBroadcastReceiver()
         showNotification()
-        // after 3 seconds
-        val nextTime = System.currentTimeMillis() + (3 * 1000)
-        val am = applicationContext.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val pendingIntent = PendingIntent.getService(applicationContext, 2, Intent(this, NotificationService::class.java), PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE)
 
-        if(Build.VERSION.SDK_INT >= 23) {
-            am.setAndAllowWhileIdle(AlarmManager.RTC, nextTime, pendingIntent)
-        } else {
-            am.set(AlarmManager.RTC, nextTime, pendingIntent)
-        }
         return START_STICKY
     }
 
@@ -115,11 +106,20 @@ class NotificationService : Service(), SensorEventListener {
         return pref.getInt("service_steps", 0)
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        try {
+            val sm = getSystemService(SENSOR_SERVICE) as SensorManager
+            sm.unregisterListener(this)
+        } catch (e: java.lang.Exception) {
+            e.printStackTrace()
+        }
+    }
+
     companion object {
         const val NOTIFICATION_ID = 1
         const val NOTIFICATION_CHANNEL_ID = "Notification"
         const val MICROSECONDS_IN_ONE_MINUTE: Long = 60000000
-
     }
 
     override fun onSensorChanged(event: SensorEvent?) {

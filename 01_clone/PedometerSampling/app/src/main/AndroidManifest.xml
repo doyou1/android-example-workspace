@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.startforegroundsampling">
+    package="com.example.pedometersampling">
 
-        <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-        <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
 
-        <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION"/>
-        <uses-feature android:name="android.hardware.sensor.stepcounter" />
-    <!--    <uses-permission android:name="android.permission.WAKE_LOCK" />-->
+    <uses-feature android:name="android.hardware.sensor.stepcounter" />
 
     <application
         android:allowBackup="true"
@@ -18,8 +17,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.StartForegroundSampling"
-        tools:targetApi="33">
+        android:theme="@style/Theme.PedometerSampling"
+        tools:targetApi="31">
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -29,10 +28,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service android:name=".NotificationService" />
+
+        <service android:name=".service.PedometerService" />
 
         <receiver
-            android:name=".BootReceiver"
+            android:name=".receiver.BootReceiver"
             android:exported="true"
             android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
             <intent-filter>
