@@ -53,30 +53,11 @@ class Util {
             }
         }
 
-        fun getCount(context: Context): String {
-            val pref = context.getSharedPreferences(TEXT_COUNT, Context.MODE_PRIVATE)
-            val count = pref.getInt(TEXT_COUNT, 0)
-            pref.edit().putInt(TEXT_COUNT, count + 1).apply()
-            return "$count"
-        }
-
         fun convertDate(time: Long): String {
             val cal = Calendar.getInstance()
             cal.timeInMillis = time
             val sdf = SimpleDateFormat("yyyyMMdd")
             return sdf.format(cal.time)
         }
-
-        fun getSteps(context: Context): String {
-            val pref = context.getSharedPreferences(TEXT_PEDOMETER, Context.MODE_PRIVATE)
-            return "${pref.getInt(TEXT_STEPS, 0)}"
-        }
-
-        fun getServiceSteps(context: Context): String {
-            val pref = context.getSharedPreferences(TEXT_PEDOMETER, Context.MODE_PRIVATE)
-            return "${pref.getInt(TEXT_SERVICE, 0)}"
-        }
-
-
     }
 }

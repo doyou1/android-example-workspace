@@ -76,8 +76,8 @@ class PedometerService : Service(), SensorEventListener {
     }
 
     private fun setRepeatAlarm() {
-        // after 1 minute
-        val nextTime = System.currentTimeMillis() + (60 * 1000)
+        // after 10 minute
+        val nextTime = System.currentTimeMillis() + (10 * 60 * 1000)
         val am = applicationContext.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val pendingIntent = PendingIntent.getService(
             applicationContext,
@@ -122,10 +122,17 @@ class PedometerService : Service(), SensorEventListener {
                 Notification.Builder(context)
             }
             val item = DBHelper.getCurrent(context)
-
-            notificationBuilder.setContentTitle(Util.getDate()).setContentText(
-                "$item"
-            )
+            val contentText = if (item != null) {
+                val steps = Util.fromStepsJson(item.steps)
+                var sum = 0
+                for (step in steps) {
+                    sum += step.steps
+                }
+                "${Util.getDate()} ${Util.getTime()} Steps: $sum"
+            } else {
+                "${Util.getDate()} ${Util.getTime()} Steps: 0"
+            }
+            notificationBuilder.setContentTitle(Util.getDate()).setContentText(contentText)
             notificationBuilder.setPriority(Notification.PRIORITY_MIN)
                 .setShowWhen(false)
                 .setContentIntent(
