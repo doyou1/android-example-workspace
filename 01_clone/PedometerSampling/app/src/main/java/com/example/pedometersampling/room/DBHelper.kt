@@ -44,7 +44,7 @@ class DBHelper {
                     Log.d(TAG, "steps: ${item.steps}")
                     val prevStepSum = DBUtil.getPrevStepSum(item.steps)
                     val currentSteps = steps - (item.initSteps + prevStepSum)
-                    val newSteps = DBUtil.addSteps(item.steps, Util.getCurrentTime(), currentSteps)
+                    val newSteps = DBUtil.addSteps(item.steps, Util.getCurrentHour(), currentSteps)
                     item.steps = newSteps
                     db.update(item)
                 }

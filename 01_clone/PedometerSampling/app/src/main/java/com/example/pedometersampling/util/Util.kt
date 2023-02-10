@@ -5,6 +5,10 @@ import com.example.pedometersampling.TEXT_COUNT
 import com.example.pedometersampling.TEXT_PEDOMETER
 import com.example.pedometersampling.TEXT_SERVICE
 import com.example.pedometersampling.TEXT_STEPS
+import com.example.pedometersampling.room.dto.StepsItem
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import java.lang.reflect.Type
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -24,7 +28,7 @@ class Util {
             return sdf.format(cal.time)
         }
 
-        fun getCurrentDate() : Long {
+        fun getCurrentDate(): Long {
             val c = Calendar.getInstance()
             c.timeInMillis = System.currentTimeMillis();
             c.set(Calendar.HOUR_OF_DAY, 0);
@@ -34,10 +38,19 @@ class Util {
             return c.timeInMillis;
         }
 
-        fun getCurrentTime() : String {
+        fun getCurrentHour(): String {
             val c = Calendar.getInstance()
-            val sdf = SimpleDateFormat("HHmm")
+            val sdf = SimpleDateFormat("HH")
             return sdf.format(c.time)
+        }
+
+        fun fromStepsJson(string: String): List<StepsItem> {
+            val type = object : TypeToken<List<StepsItem>>() {}.type
+            return try {
+                Gson().fromJson(string, type)
+            } catch (e: Exception) {
+                listOf()
+            }
         }
 
         fun getCount(context: Context): String {
@@ -47,7 +60,7 @@ class Util {
             return "$count"
         }
 
-        fun convertDate(time: Long) : String {
+        fun convertDate(time: Long): String {
             val cal = Calendar.getInstance()
             cal.timeInMillis = time
             val sdf = SimpleDateFormat("yyyyMMdd")

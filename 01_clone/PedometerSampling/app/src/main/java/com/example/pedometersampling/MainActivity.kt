@@ -67,8 +67,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
     private fun computeSteps(item: Pedometer): Int {
         var sum = 0
-        val type = object : TypeToken<List<StepsItem>>() {}.type
-        val steps = Gson().fromJson<List<StepsItem>>(item.steps, type)
+        val steps = Util.fromStepsJson(item.steps)
         for (step in steps) {
             sum += step.steps
         }
@@ -78,11 +77,9 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     private fun stepsToString(item: Pedometer): String {
         var result = "date: ${Util.convertDate(item.date)} \n"
         result += "initSteps: ${item.initSteps} \n"
-        
-        val type = object : TypeToken<List<StepsItem>>() {}.type
-        val steps = Gson().fromJson<List<StepsItem>>(item.steps, type)
+        val steps = Util.fromStepsJson(item.steps)
         for (step in steps) {
-            result += "${step.time} / ${step.steps} \n"
+            result += "${step.hour} / ${step.steps} \n"
         }
         return result
     }

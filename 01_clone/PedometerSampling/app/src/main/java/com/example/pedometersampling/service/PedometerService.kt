@@ -14,6 +14,10 @@ import com.example.pedometersampling.*
 import com.example.pedometersampling.receiver.ShutdownReceiver
 import com.example.pedometersampling.room.DBHelper
 import com.example.pedometersampling.util.Util
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class PedometerService : Service(), SensorEventListener {
 
@@ -56,12 +60,18 @@ class PedometerService : Service(), SensorEventListener {
     }
 
     private fun showPedometerNotification() {
-        if (Build.VERSION.SDK_INT >= 26) {
-            startForeground(PEDOMETER_NOTIFICATION_ID, getNotification(this));
-        } else {
-            (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).notify(
-                PEDOMETER_NOTIFICATION_ID, getNotification(this)
-            )
+        val context = this
+        GlobalScope.launch(Dispatchers.IO) {
+            val notification = getNotification(context)
+            GlobalScope.launch(Dispatchers.Main) {
+                if (Build.VERSION.SDK_INT >= 26) {
+                    startForeground(PEDOMETER_NOTIFICATION_ID, notification);
+                } else {
+                    (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).notify(
+                        PEDOMETER_NOTIFICATION_ID, notification
+                    )
+                }
+            }
         }
     }
 
@@ -90,45 +100,46 @@ class PedometerService : Service(), SensorEventListener {
         }
     }
 
-    private fun getNotification(context: Context): Notification {
-        val notificationBuilder = if (Build.VERSION.SDK_INT >= 26) {
-            val manager =
-                context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            val channel = NotificationChannel(
-                PEDOMETER_NOTIFICATION_CHANNEL_ID,
-                PEDOMETER_NOTIFICATION_CHANNEL_ID,
-                NotificationManager.IMPORTANCE_NONE
-            )
-            channel.importance = NotificationManager.IMPORTANCE_MIN; // ignored by Android O ...
-            channel.enableLights(false);
-            channel.enableVibration(false);
-            channel.setBypassDnd(false);
-            channel.setSound(null, null);
-            manager.createNotificationChannel(channel);
-            val builder = Notification.Builder(context, PEDOMETER_NOTIFICATION_CHANNEL_ID)
-            builder
-        } else {
-            Notification.Builder(context)
-        }
-        notificationBuilder.setContentTitle(Util.getDate()).setContentText(
-            "time: ${Util.getTime()} count: ${Util.getCount(context)} steps: ${
-                Util.getSteps(context)
-            } serviceSteps: ${Util.getServiceSteps(context)}"
-        )
-        notificationBuilder.setPriority(Notification.PRIORITY_MIN)
-            .setShowWhen(false)
-            .setContentIntent(
-                PendingIntent.getActivity(
-                    context,
-                    0,
-                    Intent(context, MainActivity::class.java),
-                    PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE
+    private suspend fun getNotification(context: Context): Notification =
+        withContext(Dispatchers.IO) {
+            val notificationBuilder = if (Build.VERSION.SDK_INT >= 26) {
+                val manager =
+                    context.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+                val channel = NotificationChannel(
+                    PEDOMETER_NOTIFICATION_CHANNEL_ID,
+                    PEDOMETER_NOTIFICATION_CHANNEL_ID,
+                    NotificationManager.IMPORTANCE_NONE
                 )
+                channel.importance = NotificationManager.IMPORTANCE_MIN; // ignored by Android O ...
+                channel.enableLights(false);
+                channel.enableVibration(false);
+                channel.setBypassDnd(false);
+                channel.setSound(null, null);
+                manager.createNotificationChannel(channel);
+                val builder = Notification.Builder(context, PEDOMETER_NOTIFICATION_CHANNEL_ID)
+                builder
+            } else {
+                Notification.Builder(context)
+            }
+            val item = DBHelper.getCurrent(context)
+
+            notificationBuilder.setContentTitle(Util.getDate()).setContentText(
+                "$item"
             )
-            .setSmallIcon(R.drawable.ic_baseline_notifications_active_24)
-            .setOngoing(true)
-        return notificationBuilder.build()
-    }
+            notificationBuilder.setPriority(Notification.PRIORITY_MIN)
+                .setShowWhen(false)
+                .setContentIntent(
+                    PendingIntent.getActivity(
+                        context,
+                        0,
+                        Intent(context, MainActivity::class.java),
+                        PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE
+                    )
+                )
+                .setSmallIcon(R.drawable.ic_baseline_notifications_active_24)
+                .setOngoing(true)
+            return@withContext notificationBuilder.build()
+        }
 
     private fun stopStepCounter() {
         try {
