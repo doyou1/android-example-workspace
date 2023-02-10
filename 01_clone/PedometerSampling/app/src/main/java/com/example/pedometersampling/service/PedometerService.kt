@@ -12,6 +12,7 @@ import android.os.Build
 import android.os.IBinder
 import com.example.pedometersampling.*
 import com.example.pedometersampling.receiver.ShutdownReceiver
+import com.example.pedometersampling.room.DBHelper
 import com.example.pedometersampling.util.Util
 
 class PedometerService : Service(), SensorEventListener {
@@ -85,8 +86,7 @@ class PedometerService : Service(), SensorEventListener {
     override fun onSensorChanged(event: SensorEvent?) {
         event?.let { e ->
             if (e.values[0] > Integer.MAX_VALUE || e.values[0].toInt() == 0) return
-            val pref = getSharedPreferences(TEXT_PEDOMETER, Context.MODE_PRIVATE)
-            pref.edit().putInt(TEXT_SERVICE, e.values[0].toInt()).apply()
+            DBHelper.process(this, e.values[0].toInt())
         }
     }
 

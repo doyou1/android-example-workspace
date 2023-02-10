@@ -47,6 +47,13 @@ class Util {
             return "$count"
         }
 
+        fun convertDate(time: Long) : String {
+            val cal = Calendar.getInstance()
+            cal.timeInMillis = time
+            val sdf = SimpleDateFormat("yyyyMMdd")
+            return sdf.format(cal.time)
+        }
+
         fun getSteps(context: Context): String {
             val pref = context.getSharedPreferences(TEXT_PEDOMETER, Context.MODE_PRIVATE)
             return "${pref.getInt(TEXT_STEPS, 0)}"
