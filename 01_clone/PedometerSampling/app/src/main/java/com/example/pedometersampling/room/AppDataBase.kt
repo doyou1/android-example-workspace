@@ -1,4 +1,4 @@
-package com.example.pedometersampling
+package com.example.pedometersampling.room
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

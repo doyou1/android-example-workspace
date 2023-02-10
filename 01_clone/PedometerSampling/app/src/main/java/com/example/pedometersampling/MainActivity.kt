@@ -17,12 +17,9 @@ import androidx.lifecycle.lifecycleScope
 import com.example.pedometersampling.databinding.ActivityMainBinding
 import com.example.pedometersampling.room.DBHelper
 import com.example.pedometersampling.room.Pedometer
-import com.example.pedometersampling.room.dto.Steps
-import com.example.pedometersampling.room.dto.StepsItem
 import com.example.pedometersampling.service.PedometerService
+import com.example.pedometersampling.util.REQUEST_CODE_STEP_COUNT
 import com.example.pedometersampling.util.Util
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -43,6 +40,8 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
     override fun onResume() {
         super.onResume()
+
+
         if (checkActivityPermission(this)) {
             updateSteps()
             setStepCounter()
@@ -59,29 +58,11 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                     binding.tvSteps.text = "steps: 0"
                 } else {
                     binding.tvSteps.text =
-                        "steps: ${computeSteps(item!!)} \n ${stepsToString(item!!)}"
+                        "steps: ${Util.computeSteps(item!!)} \n" +
+                                "${Util.stepsToString(item!!)}"
                 }
             }
         }
-    }
-
-    private fun computeSteps(item: Pedometer): Int {
-        var sum = 0
-        val steps = Util.fromStepsJson(item.steps)
-        for (step in steps) {
-            sum += step.steps
-        }
-        return sum
-    }
-
-    private fun stepsToString(item: Pedometer): String {
-        var result = "date: ${Util.convertDate(item.date)} \n"
-        result += "initSteps: ${item.initSteps} \n"
-        val steps = Util.fromStepsJson(item.steps)
-        for (step in steps) {
-            result += "${step.hour} / ${step.steps} \n"
-        }
-        return result
     }
 
     private fun setStepCounter() {
@@ -103,7 +84,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     private fun checkActivityPermission(context: Context): Boolean {
         if (Build.VERSION.SDK_INT >= 23) {
             if (ContextCompat.checkSelfPermission(
-                    this,
+                    context,
                     Manifest.permission.ACTIVITY_RECOGNITION
                 ) == PackageManager.PERMISSION_DENIED
             ) {

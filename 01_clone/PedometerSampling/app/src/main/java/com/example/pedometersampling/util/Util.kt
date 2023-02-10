@@ -1,14 +1,9 @@
 package com.example.pedometersampling.util
 
-import android.content.Context
-import com.example.pedometersampling.TEXT_COUNT
-import com.example.pedometersampling.TEXT_PEDOMETER
-import com.example.pedometersampling.TEXT_SERVICE
-import com.example.pedometersampling.TEXT_STEPS
+import com.example.pedometersampling.room.Pedometer
 import com.example.pedometersampling.room.dto.StepsItem
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import java.lang.reflect.Type
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -53,11 +48,30 @@ class Util {
             }
         }
 
-        fun convertDate(time: Long): String {
+        private fun convertDate(time: Long): String {
             val cal = Calendar.getInstance()
             cal.timeInMillis = time
             val sdf = SimpleDateFormat("yyyyMMdd")
             return sdf.format(cal.time)
+        }
+
+        fun computeSteps(item: Pedometer): Int {
+            var sum = 0
+            val steps = fromStepsJson(item.steps)
+            for (step in steps) {
+                sum += step.steps
+            }
+            return sum
+        }
+
+        fun stepsToString(item: Pedometer): String {
+            var result = "date: ${convertDate(item.date)} \n"
+            result += "initSteps: ${item.initSteps} \n"
+            val steps = fromStepsJson(item.steps)
+            for (step in steps) {
+                result += "${step.hour} : ${step.steps} \n"
+            }
+            return result
         }
     }
 }

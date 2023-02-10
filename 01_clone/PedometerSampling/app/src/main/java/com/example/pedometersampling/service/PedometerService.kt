@@ -13,6 +13,9 @@ import android.os.IBinder
 import com.example.pedometersampling.*
 import com.example.pedometersampling.receiver.ShutdownReceiver
 import com.example.pedometersampling.room.DBHelper
+import com.example.pedometersampling.util.MICROSECONDS_IN_ONE_MINUTE
+import com.example.pedometersampling.util.PEDOMETER_NOTIFICATION_CHANNEL_ID
+import com.example.pedometersampling.util.PEDOMETER_NOTIFICATION_ID
 import com.example.pedometersampling.util.Util
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope

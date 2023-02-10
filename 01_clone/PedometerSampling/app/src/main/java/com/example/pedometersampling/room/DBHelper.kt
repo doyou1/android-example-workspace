@@ -2,10 +2,8 @@ package com.example.pedometersampling.room
 
 import android.content.Context
 import android.util.Log
-import androidx.lifecycle.lifecycleScope
 import androidx.room.Room
-import com.example.pedometersampling.AppDataBase
-import com.example.pedometersampling.TEXT_PEDOMETER
+import com.example.pedometersampling.util.TEXT_PEDOMETER
 import com.example.pedometersampling.room.dto.Steps
 import com.example.pedometersampling.util.DBUtil
 import com.example.pedometersampling.util.Util
