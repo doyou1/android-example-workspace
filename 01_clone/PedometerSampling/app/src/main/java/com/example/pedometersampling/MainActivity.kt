@@ -13,8 +13,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.pedometersampling.databinding.ActivityMainBinding
+import com.example.pedometersampling.fragment.BaseFragment
+import com.example.pedometersampling.fragment.HistoryFragment
+import com.example.pedometersampling.fragment.HomeFragment
+import com.example.pedometersampling.fragment.SettingFragment
 import com.example.pedometersampling.room.DBHelper
 import com.example.pedometersampling.room.Pedometer
 import com.example.pedometersampling.service.PedometerService
@@ -26,7 +31,7 @@ import kotlinx.coroutines.launch
 class MainActivity : AppCompatActivity(), SensorEventListener {
     private lateinit var binding: ActivityMainBinding
     private val TAG = this::class.java.simpleName
-
+    private var item: Pedometer? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -41,27 +46,50 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     override fun onResume() {
         super.onResume()
 
-
         if (checkActivityPermission(this)) {
             updateSteps()
             setStepCounter()
+        }
+
+        // init
+        setFragment(HomeFragment.getInstance())
+
+        binding.bnv.setOnNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.home -> {
+                    setFragment(HomeFragment.getInstance())
+                    updateSteps()
+                }
+                R.id.history -> {
+                    setFragment(HistoryFragment.getInstance())
+                    updateSteps()
+                }
+                R.id.setting -> {
+                    setFragment(SettingFragment.getInstance())
+                    updateSteps()
+                }
+            }
+            true
         }
     }
 
     private fun updateSteps() {
         val context = this
         lifecycleScope.launch(Dispatchers.IO) {
-            val item = DBHelper.getCurrent(context = context)
+            item = DBHelper.getCurrent(context = context)
             Log.d(TAG, "pedometer: $item")
             lifecycleScope.launch(Dispatchers.Main) {
-                if (item == null) {
-                    binding.tvSteps.text = "steps: 0"
-                } else {
-                    binding.tvSteps.text =
-                        "steps: ${Util.computeSteps(item!!)} \n" +
-                                "${Util.stepsToString(item!!)}"
-                }
+                (supportFragmentManager.findFragmentById(binding.frameLayout.id) as BaseFragment).updateSteps(
+                    item
+                )
             }
+        }
+    }
+
+    private fun setFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction().apply {
+            replace(binding.frameLayout.id, fragment)
+            commit()
         }
     }
 
