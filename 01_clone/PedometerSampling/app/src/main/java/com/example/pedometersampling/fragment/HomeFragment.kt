@@ -1,18 +1,26 @@
 package com.example.pedometersampling.fragment
 
+import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.example.pedometersampling.databinding.FragmentHomeBinding
 import com.example.pedometersampling.room.Pedometer
+import com.example.pedometersampling.util.ChartUtil
+import com.example.pedometersampling.util.GOAL_STEPS
 import com.example.pedometersampling.util.Util
+import com.github.mikephil.charting.data.PieData
+import com.github.mikephil.charting.data.PieDataSet
+import com.github.mikephil.charting.data.PieEntry
+import com.github.mikephil.charting.utils.ColorTemplate
 
 class HomeFragment : BaseFragment() {
-
-    private var _binding : FragmentHomeBinding? = null
+    private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+    private val TAG = this::class.java.simpleName
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,18 +33,26 @@ class HomeFragment : BaseFragment() {
 
     override fun onResume() {
         super.onResume()
-        Toast.makeText(requireContext(), "Home Fragment", Toast.LENGTH_LONG).show()
     }
 
-    override fun updateSteps(item: Pedometer?) {
-        super.updateSteps(item)
-        if (item == null) {
-            binding.tvContent.text = "steps: 0"
+    override fun updateCurrentSteps(item: Pedometer?) {
+        super.updateCurrentSteps(item)
+        updateChart(item)
+    }
+
+    private fun updateChart(item: Pedometer?) {
+        binding.chart.description.isEnabled = false
+        binding.chart.centerText = if (item == null) {
+            "0 / $GOAL_STEPS"
         } else {
-            binding.tvContent.text =
-                "steps: ${Util.computeSteps(item!!)} \n" +
-                        "${Util.stepsToString(item!!)}"
+            "${Util.computeSteps(item)} / $GOAL_STEPS"
         }
+        binding.chart.setCenterTextSize(25f)
+        binding.chart.holeRadius = 45f
+        binding.chart.transparentCircleRadius = 50f
+        binding.chart.legend.isEnabled = false
+        binding.chart.data = ChartUtil.generatePieData(item)
+        binding.chart.invalidate()
     }
 
     companion object {

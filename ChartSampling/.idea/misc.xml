@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/jh/android-example-workspace/ChartSampling/app/src/main/res/layout/activity_circle_chart.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/jh/android-example-workspace/ChartSampling/app/src/main/res/layout/activity_default_chart.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/jh/android-example-workspace/ChartSampling/app/src/main/res/layout/activity_main.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/jh/app-fullstack-workspace/ChartSampling/app/src/main/res/layout/activity_main.xml" value="0.1" />
       </map>
     </option>

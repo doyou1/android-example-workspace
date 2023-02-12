@@ -1,5 +1,6 @@
 package com.example.chartsampling
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -12,90 +13,26 @@ import com.github.mikephil.charting.formatter.ValueFormatter
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private val itemSize = 10
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        init()
     }
 
-    private fun init() {
+    override fun onResume() {
+        super.onResume()
         setClickEvent()
-        setChart()
     }
 
     private fun setClickEvent() {
-        binding.btnReset.setOnClickListener {
-            setChart()
+        binding.btnDefaultChart.setOnClickListener {
+            startActivity(Intent(this, DefaultChartActivity::class.java))
+        }
+
+        binding.btnCircleChart.setOnClickListener {
+            startActivity(Intent(this, CircleChartActivity::class.java))
         }
     }
 
-    private fun setChart() {
-        val xvalue = arrayListOf<String>()
-        val lineEntries = arrayListOf<Entry>()
-        val barEntries = arrayListOf<BarEntry>()
-        DateUtil.getStepModel(itemSize).forEachIndexed { i, stepModel ->
-            xvalue.add(stepModel.date)
-            lineEntries.add(Entry(i.toFloat(), stepModel.step.toFloat()))
-            barEntries.add(BarEntry(i.toFloat(), stepModel.step.toFloat()))
-        }
-        val lineData = getLineData(lineEntries)
-        val barData = getBarData(barEntries)
-        val data = CombinedData()
-        data.setData(lineData)
-        data.setData(barData)
-        binding.chart.data = data
-        setChartConfig(xvalue)
-    }
-
-    // LineChart
-    private fun getLineData(lineEntries: ArrayList<Entry>): LineData {
-        val lineDataset = LineDataSet(lineEntries, "line chart")
-        lineDataset.color = Color.GREEN
-        lineDataset.lineWidth = 5f
-        lineDataset.circleRadius = 1f
-        lineDataset.valueTextSize = 20f
-        return LineData(lineDataset)
-    }
-
-    // BarChart
-    private fun getBarData(barEntries: ArrayList<BarEntry>): BarData {
-        val barDataset = BarDataSet(barEntries, "bar chart")
-        barDataset.color = Color.BLUE
-        // barData text visible false because of lineData duplication
-        barDataset.valueTextSize = 0f
-        return BarData(barDataset)
-    }
-
-    private fun setChartConfig(xvalue: ArrayList<String>) {
-        binding.chart.setBackgroundColor(Color.WHITE)
-
-        // Description hide
-        binding.chart.description.isEnabled = false
-
-        // set chart draw order(bar chart is under most)
-        binding.chart.drawOrder = arrayOf(
-            DrawOrder.BAR, DrawOrder.BUBBLE, DrawOrder.CANDLE, DrawOrder.LINE, DrawOrder.SCATTER
-        )
-
-        // XAxis Label set Bottom Position
-        binding.chart.xAxis.position = XAxis.XAxisPosition.BOTTOM
-        binding.chart.xAxis.setDrawGridLines(false)
-        binding.chart.xAxis.textSize = 14f
-        binding.chart.xAxis.spaceMin = 0.5f
-        binding.chart.xAxis.spaceMax = 0.5f
-        binding.chart.xAxis.valueFormatter = object : ValueFormatter() {
-            override fun getFormattedValue(value: Float): String {
-                val index = value.toInt()
-                return xvalue[index]
-            }
-        }
-
-        // xAxis print 7 item of 10 item, add horizontal scroll
-        binding.chart.setVisibleXRangeMaximum(7f)
-        // show most right, most last item
-        binding.chart.moveViewToX(xvalue.size.toFloat())
-    }
 }
