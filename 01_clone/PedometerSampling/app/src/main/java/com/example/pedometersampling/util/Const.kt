@@ -5,3 +5,4 @@ const val TEXT_PEDOMETER = "pedometer"
 const val PEDOMETER_NOTIFICATION_ID = 1
 const val PEDOMETER_NOTIFICATION_CHANNEL_ID = "Pedometer Notification"
 const val MICROSECONDS_IN_ONE_MINUTE: Long = 60000000
+const val GOAL_STEPS = 10000
