@@ -48,6 +48,20 @@ class Util {
             }
         }
 
+        fun fillStepsList(list: List<StepsItem>): List<StepsItem> {
+            val new = arrayListOf<StepsItem>()
+            for (h in 1..24) {
+                val hour = String.format("%02d", h)
+                val filter = list.filter { item -> item.hour == hour }
+                if (filter.isEmpty()) {
+                    new.add(StepsItem(hour, 0))
+                } else {
+                    new.add(filter[0])
+                }
+            }
+            return new.toList()
+        }
+
         fun convertDate(time: Long): String {
             val cal = Calendar.getInstance()
             cal.timeInMillis = time

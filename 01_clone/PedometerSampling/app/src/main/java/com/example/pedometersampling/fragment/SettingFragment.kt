@@ -25,7 +25,6 @@ class SettingFragment : BaseFragment() {
 
     override fun onResume() {
         super.onResume()
-        Toast.makeText(requireContext(), "Setting Fragment", Toast.LENGTH_LONG).show()
     }
 
     override fun updateCurrentSteps(item: Pedometer?) {

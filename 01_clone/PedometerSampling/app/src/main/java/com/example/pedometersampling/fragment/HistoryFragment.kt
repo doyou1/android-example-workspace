@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pedometersampling.databinding.FragmentHistoryBinding
@@ -36,7 +37,6 @@ class HistoryFragment : BaseFragment() {
 
     override fun onResume() {
         super.onResume()
-        Toast.makeText(requireContext(), "History Fragment", Toast.LENGTH_LONG).show()
     }
 
     override fun updateCurrentSteps(item: Pedometer?) {
@@ -53,7 +53,8 @@ class HistoryFragment : BaseFragment() {
 
     private fun updateUI(list: List<Pedometer>) {
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
-        binding.recyclerView.adapter = HistoryAdapter(list)
+        binding.recyclerView.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager(context).orientation))
+        binding.recyclerView.adapter = HistoryAdapter(list, context)
     }
 
     companion object {
