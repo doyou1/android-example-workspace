@@ -28,10 +28,10 @@ import com.example.pedometersampling.util.Util
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class MainActivity : AppCompatActivity(), SensorEventListener {
+class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val TAG = this::class.java.simpleName
-    private var item: Pedometer? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -47,42 +47,22 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         super.onResume()
 
         if (checkActivityPermission(this)) {
-            updateSteps()
-            setStepCounter()
+            setFragment(HomeFragment.getInstance())
         }
-
-        // init
-        setFragment(HomeFragment.getInstance())
 
         binding.bnv.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.home -> {
                     setFragment(HomeFragment.getInstance())
-                    updateSteps()
                 }
                 R.id.history -> {
                     setFragment(HistoryFragment.getInstance())
-                    updateSteps()
                 }
                 R.id.setting -> {
                     setFragment(SettingFragment.getInstance())
-                    updateSteps()
                 }
             }
             true
-        }
-    }
-
-    private fun updateSteps() {
-        val context = this
-        lifecycleScope.launch(Dispatchers.IO) {
-            item = DBHelper.getCurrent(context = context)
-            Log.d(TAG, "pedometer: $item")
-            lifecycleScope.launch(Dispatchers.Main) {
-                (supportFragmentManager.findFragmentById(binding.frameLayout.id) as BaseFragment).updateSteps(
-                    item
-                )
-            }
         }
     }
 
@@ -91,22 +71,6 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             replace(binding.frameLayout.id, fragment)
             commit()
         }
-    }
-
-    private fun setStepCounter() {
-        val sm = getSystemService(Context.SENSOR_SERVICE) as SensorManager
-        val sensor = sm.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
-        sm.registerListener(this, sensor, SensorManager.SENSOR_DELAY_UI, 0)
-    }
-
-    override fun onSensorChanged(event: SensorEvent?) {
-        event?.let { e ->
-            if (e.values[0] > Integer.MAX_VALUE || e.values[0].toInt() == 0) return
-            DBHelper.process(this, e.values[0].toInt())
-            updateSteps()
-        }
-
-        Log.d(TAG, "onSensorChanged")
     }
 
     private fun checkActivityPermission(context: Context): Boolean {
@@ -134,23 +98,8 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == REQUEST_CODE_STEP_COUNT) {
             if (grantResults[0] == PackageManager.PERMISSION_DENIED) {
-                updateSteps()
-                setStepCounter()
+                setFragment(HomeFragment.getInstance())
             }
         }
-    }
-
-    override fun onPause() {
-        super.onPause()
-        stopStepCounter()
-    }
-
-    private fun stopStepCounter() {
-        val sm = getSystemService(Context.SENSOR_SERVICE) as SensorManager
-        sm.unregisterListener(this)
-    }
-
-    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
-        // won't happen
     }
 }

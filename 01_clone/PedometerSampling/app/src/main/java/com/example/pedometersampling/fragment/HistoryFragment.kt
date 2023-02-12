@@ -29,8 +29,8 @@ class HistoryFragment : BaseFragment() {
         Toast.makeText(requireContext(), "History Fragment", Toast.LENGTH_LONG).show()
     }
 
-    override fun updateSteps(item: Pedometer?) {
-        super.updateSteps(item)
+    override fun updateUI(item: Pedometer?) {
+        super.updateUI(item)
         if (item == null) {
             binding.tvContent.text = "steps: 0"
         } else {
