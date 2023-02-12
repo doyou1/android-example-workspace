@@ -46,7 +46,6 @@ open class BaseFragment : Fragment(), SensorEventListener {
     private fun updateSteps(context: Context) {
         lifecycleScope.launch(Dispatchers.IO) {
             val item = DBHelper.getCurrent(context)
-            Log.d(TAG, "pedometer: $item")
             lifecycleScope.launch(Dispatchers.Main) {
                 updateCurrentSteps(item)
             }

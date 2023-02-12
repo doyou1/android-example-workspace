@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">CommuteSampling</string>
+    <string name="text_in">출근</string>
+    <string name="text_out">퇴근</string>
+    <string name="text_lunch">점심</string>
+    <string name="text_click">Click</string>
+    <string name="text_setting">Setting</string>
+    <string name="text_set_default_time">기본 시간 설정</string>
+</resources>
