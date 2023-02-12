@@ -1,11 +1,8 @@
 package com.example.pedometersampling.util
 
 import android.util.Log
-import com.example.pedometersampling.room.dto.Steps
 import com.example.pedometersampling.room.dto.StepsItem
 import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
-import java.lang.invoke.MethodType
 
 class DBUtil {
     companion object {

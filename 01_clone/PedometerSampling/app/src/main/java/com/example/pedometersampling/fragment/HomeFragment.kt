@@ -1,21 +1,14 @@
 package com.example.pedometersampling.fragment
 
-import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.example.pedometersampling.databinding.FragmentHomeBinding
 import com.example.pedometersampling.room.Pedometer
 import com.example.pedometersampling.util.ChartUtil
 import com.example.pedometersampling.util.GOAL_STEPS
 import com.example.pedometersampling.util.Util
-import com.github.mikephil.charting.data.PieData
-import com.github.mikephil.charting.data.PieDataSet
-import com.github.mikephil.charting.data.PieEntry
-import com.github.mikephil.charting.utils.ColorTemplate
 
 class HomeFragment : BaseFragment() {
     private var _binding: FragmentHomeBinding? = null

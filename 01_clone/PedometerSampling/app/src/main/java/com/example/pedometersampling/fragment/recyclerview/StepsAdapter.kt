@@ -1,17 +1,10 @@
 package com.example.pedometersampling.fragment.recyclerview
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.pedometersampling.databinding.RvItemHistoryBinding
 import com.example.pedometersampling.databinding.RvItemStepsBinding
-import com.example.pedometersampling.room.Pedometer
 import com.example.pedometersampling.room.dto.StepsItem
-import com.example.pedometersampling.util.DBUtil
-import com.example.pedometersampling.util.Util
 
 class StepsAdapter(private val _list: List<StepsItem>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
