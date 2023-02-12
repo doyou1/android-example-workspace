@@ -19,4 +19,7 @@ interface PedometerDao {
 
     @Query("SELECT * FROM Pedometer WHERE date = :date")
     fun getByDate(date: Long): Pedometer
+
+    @Query("SELECT * FROM Pedometer")
+    fun getAll() : List<Pedometer>
 }

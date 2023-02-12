@@ -28,8 +28,8 @@ class SettingFragment : BaseFragment() {
         Toast.makeText(requireContext(), "Setting Fragment", Toast.LENGTH_LONG).show()
     }
 
-    override fun updateUI(item: Pedometer?) {
-        super.updateUI(item)
+    override fun updateCurrentSteps(item: Pedometer?) {
+        super.updateCurrentSteps(item)
         if (item == null) {
             binding.tvContent.text = "steps: 0"
         } else {

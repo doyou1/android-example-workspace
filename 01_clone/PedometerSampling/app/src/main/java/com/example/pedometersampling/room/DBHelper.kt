@@ -12,7 +12,6 @@ import kotlinx.coroutines.*
 
 class DBHelper {
     companion object {
-
         private val TAG = this::class.java.simpleName
 
         fun process(context: Context, steps: Int) {
@@ -56,6 +55,15 @@ class DBHelper {
                 TEXT_PEDOMETER
             ).build().pedometerDao()
             return@withContext db.getByDate(Util.getCurrentDate())
+        }
+
+        suspend fun getAll(context: Context) : List<Pedometer> = withContext(Dispatchers.IO) {
+            val db = Room.databaseBuilder(
+                context.applicationContext,
+                AppDataBase::class.java,
+                TEXT_PEDOMETER
+            ).build().pedometerDao()
+            return@withContext db.getAll()
         }
     }
 }

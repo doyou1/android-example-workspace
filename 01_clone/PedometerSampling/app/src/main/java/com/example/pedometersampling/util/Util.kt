@@ -48,7 +48,7 @@ class Util {
             }
         }
 
-        private fun convertDate(time: Long): String {
+        fun convertDate(time: Long): String {
             val cal = Calendar.getInstance()
             cal.timeInMillis = time
             val sdf = SimpleDateFormat("yyyyMMdd")

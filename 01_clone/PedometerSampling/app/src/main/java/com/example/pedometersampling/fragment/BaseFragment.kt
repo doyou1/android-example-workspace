@@ -13,7 +13,7 @@ import com.example.pedometersampling.room.Pedometer
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-open class BaseFragment: Fragment(), SensorEventListener {
+open class BaseFragment : Fragment(), SensorEventListener {
     private val TAG = this::class.java.simpleName
 
     override fun onResume() {
@@ -48,12 +48,12 @@ open class BaseFragment: Fragment(), SensorEventListener {
             val item = DBHelper.getCurrent(context)
             Log.d(TAG, "pedometer: $item")
             lifecycleScope.launch(Dispatchers.Main) {
-                updateUI(item)
+                updateCurrentSteps(item)
             }
         }
     }
 
-    open fun updateUI(item: Pedometer?) {
+    open fun updateCurrentSteps(item: Pedometer?) {
 
     }
 

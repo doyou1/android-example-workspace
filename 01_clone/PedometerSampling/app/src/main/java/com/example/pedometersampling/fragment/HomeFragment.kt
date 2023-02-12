@@ -35,8 +35,8 @@ class HomeFragment : BaseFragment() {
         super.onResume()
     }
 
-    override fun updateUI(item: Pedometer?) {
-        super.updateUI(item)
+    override fun updateCurrentSteps(item: Pedometer?) {
+        super.updateCurrentSteps(item)
         updateChart(item)
     }
 
