@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/jh/android-example-workspace/02_ui/PedometerUIAppSampling/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Users/jh/android-example-workspace/02_ui/PedometerUIAppSampling/app/src/main/res/layout/fragment_history.xml" value="0.1" />
+        <entry key="..\:/Users/jh/android-example-workspace/02_ui/PedometerUIAppSampling/app/src/main/res/layout/fragment_home.xml" value="0.45344506517690875" />
+        <entry key="..\:/Users/jh/android-example-workspace/02_ui/PedometerUIAppSampling/app/src/main/res/layout/fragment_setting.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/jh/android-example-workspace/02_ui/PedometerUIAppSampling/app/src/main/res/layout/lv_item_week_goal.xml" value="0.264" />
+        <entry key="..\:/Users/jh/android-example-workspace/02_ui/PedometerUIAppSampling/app/src/main/res/layout/rv_item_week_goal.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/jh/android-example-workspace/02_ui/PedometerUIAppSampling/app/src/main/res/menu/bottom_nav_menu.xml" value="0.25" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
