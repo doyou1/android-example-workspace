@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/jh/android-example-workspace/02_ui/PedometerUIAppSampling/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Users/jh/android-example-workspace/02_ui/PedometerUIAppSampling/app/src/main/res/layout/activity_setting.xml" value="0.2" />
         <entry key="..\:/Users/jh/android-example-workspace/02_ui/PedometerUIAppSampling/app/src/main/res/layout/fragment_history.xml" value="0.1" />
         <entry key="..\:/Users/jh/android-example-workspace/02_ui/PedometerUIAppSampling/app/src/main/res/layout/fragment_home.xml" value="0.45344506517690875" />
         <entry key="..\:/Users/jh/android-example-workspace/02_ui/PedometerUIAppSampling/app/src/main/res/layout/fragment_setting.xml" value="0.16666666666666666" />

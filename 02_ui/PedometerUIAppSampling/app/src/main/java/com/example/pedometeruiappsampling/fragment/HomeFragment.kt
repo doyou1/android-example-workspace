@@ -1,5 +1,6 @@
 package com.example.pedometeruiappsampling.fragment
 
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.text.SpannableString
@@ -92,7 +93,12 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun getData(): PieData {
-        val goal = 10000
+        val goal = if (activity != null) {
+            requireActivity().getSharedPreferences("goal", Context.MODE_PRIVATE)
+                .getInt("goal", 10000)
+        } else {
+            10000
+        }
         val entries = arrayListOf<PieEntry>()
         val steps = 8513f
         entries.add(PieEntry(steps, "現在歩数"))

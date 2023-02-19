@@ -1,8 +1,10 @@
-package com.example.pedometeruiappsampling
+package com.example.pedometeruiappsampling.activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import com.example.pedometeruiappsampling.R
 import com.example.pedometeruiappsampling.databinding.ActivityMainBinding
 import com.example.pedometeruiappsampling.fragment.HistoryFragment
 import com.example.pedometeruiappsampling.fragment.HomeFragment
@@ -23,6 +25,10 @@ class MainActivity : AppCompatActivity() {
 //        if (checkActivityPermission(this)) {
             setFragment(HomeFragment.getInstance())
 //        }
+
+        binding.btnSetting.setOnClickListener {
+            startActivity(Intent(this, SettingActivity::class.java))
+        }
 
         binding.bnv.setOnNavigationItemSelectedListener {
             when (it.itemId) {
