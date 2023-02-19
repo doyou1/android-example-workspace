@@ -34,13 +34,9 @@ class HomeFragment : BaseFragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        setWeekGoal()
-    }
-
     override fun onResume() {
         super.onResume()
+        setWeekGoal()
         setChart()
         setText()
     }
@@ -51,11 +47,15 @@ class HomeFragment : BaseFragment() {
 
     private fun setChart() {
         binding.chartStep.description.isEnabled = false
-        binding.chartStep.centerText = getCenterText()
         // radius of the center hole in percent of maximum radius
         binding.chartStep.holeRadius = 80f
         binding.chartStep.transparentCircleRadius = 79f
         binding.chartStep.legend.isEnabled = false
+
+        // disable drag
+        binding.chartStep.isRotationEnabled = false
+
+        binding.chartStep.centerText = getCenterText()
         binding.chartStep.data = getData()
     }
 
