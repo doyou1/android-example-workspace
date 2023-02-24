@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.pedometeruiappsampling.databinding.ActivitySettingBinding
+import com.example.pedometeruiappsampling.util.TEXT_GOAL
 import java.lang.Exception
 
 class SettingActivity : AppCompatActivity() {
@@ -31,7 +32,7 @@ class SettingActivity : AppCompatActivity() {
     private fun setClickEvent() {
         binding.btnConfirm.setOnClickListener {
             if (isValidate()) {
-                getSharedPreferences("goal", Context.MODE_PRIVATE).edit()
+                getSharedPreferences(TEXT_GOAL, Context.MODE_PRIVATE).edit()
                     .putInt("goal", binding.etGoal.text.toString().toInt()).apply()
                 finish()
             } else {

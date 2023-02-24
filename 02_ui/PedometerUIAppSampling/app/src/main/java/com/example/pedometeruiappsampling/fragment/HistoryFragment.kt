@@ -2,26 +2,22 @@ package com.example.pedometeruiappsampling.fragment
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.pedometeruiappsampling.R
 import com.example.pedometeruiappsampling.databinding.FragmentHistoryBinding
-import com.example.pedometeruiappsampling.util.RoundBarChartRender
+import com.example.pedometeruiappsampling.util.*
 import com.github.mikephil.charting.components.LimitLine
 import com.github.mikephil.charting.components.XAxis
-import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.model.GradientColor
-import kotlin.random.Random
 
 class HistoryFragment : BaseFragment() {
 
     private var _binding: FragmentHistoryBinding? = null
     private val binding get() = _binding!!
-
     private val TAG = this::class.java.simpleName
 
     override fun onCreateView(
@@ -35,114 +31,118 @@ class HistoryFragment : BaseFragment() {
 
     override fun onResume() {
         super.onResume()
-        setChart()
+        setChartDaily()
+        setChartDailyAverageLine()
+        binding.chartDaily.setOnTouchListener { _, _ ->
+            setChartDailyAverageLine()
+            false
+        }
+
+        setChartWeek()
+        setChartWeekAverageLine()
+
     }
 
-    private fun setChart() {
-        val xvalue = arrayListOf<String>()
-        xvalue.add("1")
-        xvalue.add("2")
-        xvalue.add("3")
-        xvalue.add("4")
-        xvalue.add("5")
-        xvalue.add("6")
-
-        xvalue.add("11/1")
-        xvalue.add("11/2")
-        xvalue.add("11/3")
-        xvalue.add("11/4")
-        xvalue.add("11/5")
-        xvalue.add("Today")
-        val barEntries = arrayListOf<BarEntry>()
-        barEntries.add(BarEntry(0f, Random.nextInt(0, 10000).toFloat()))
-        barEntries.add(BarEntry(1f, Random.nextInt(0, 10000).toFloat()))
-        barEntries.add(BarEntry(2f, Random.nextInt(0, 10000).toFloat()))
-        barEntries.add(BarEntry(3f, Random.nextInt(0, 10000).toFloat()))
-        barEntries.add(BarEntry(4f, Random.nextInt(0, 10000).toFloat()))
-        barEntries.add(BarEntry(5f, Random.nextInt(0, 10000).toFloat()))
-
-        barEntries.add(BarEntry(6f, Random.nextInt(0, 10000).toFloat()))
-        barEntries.add(BarEntry(7f, Random.nextInt(0, 10000).toFloat()))
-        barEntries.add(BarEntry(8f, Random.nextInt(0, 10000).toFloat()))
-        barEntries.add(BarEntry(9f, Random.nextInt(0, 10000).toFloat()))
-        barEntries.add(BarEntry(10f, Random.nextInt(0, 10000).toFloat()))
-        barEntries.add(BarEntry(11f, Random.nextInt(0, 10000).toFloat()))
-
-        val barDataset = BarDataSet(barEntries, "bar chart")
-//        barDataset.color = resources.getColor(R.color.app_color)
+    private fun setChartDaily() {
+        val xvalue = Util.getChartDailyXValue()
+        val barDataset = Util.getChartDailyDataSet(xvalue.size)
+        // gradient bar color
         barDataset.gradientColors = listOf(
             GradientColor(
                 resources.getColor(R.color.app_color),
                 resources.getColor(R.color.app_orange)
             )
         )
+
         // barData text visible false because of lineData duplication
         val data = BarData(barDataset)
-        data.barWidth = 0.25f
+        data.barWidth = SIZE_BAR_WIDTH
         data.isHighlightEnabled = false
-        binding.chartHistory.data = data
+        binding.chartDaily.data = data
 
-        binding.chartHistory.description.isEnabled = false
-        binding.chartHistory.legend.isEnabled = false
-        binding.chartHistory.setScaleEnabled(false)
-        binding.chartHistory.isDoubleTapToZoomEnabled = false
+        binding.chartDaily.description.isEnabled = false
+        binding.chartDaily.legend.isEnabled = false
+        binding.chartDaily.setScaleEnabled(false)
+        binding.chartDaily.isDoubleTapToZoomEnabled = false
 
-        val goal = if (context != null) {
-            context?.getSharedPreferences("goal", Context.MODE_PRIVATE)!!.getInt("goal", 10000)
+        val goal = if (context != null && context?.getSharedPreferences(
+                TEXT_GOAL,
+                Context.MODE_PRIVATE
+            ) != null
+        ) {
+            context?.getSharedPreferences(TEXT_GOAL, Context.MODE_PRIVATE)!!
+                .getInt(TEXT_GOAL, DEFAULT_GOAL)
         } else {
-            10000
+            DEFAULT_GOAL
         }
-        val goalLine = LimitLine(goal.toFloat(), "Goal")
-        goalLine.lineWidth = 8f
-        goalLine.textSize = 24f
+        val goalLine = LimitLine(goal.toFloat(), TEXT_GOAL)
+        goalLine.lineWidth = SIZE_LINE_WIDTH
+        goalLine.textSize = SIZE_GOAL_LINE
         goalLine.lineColor = resources.getColor(R.color.app_color)
         goalLine.textColor = resources.getColor(R.color.app_color)
-        binding.chartHistory.axisLeft.addLimitLine(goalLine)
-
-        binding.chartHistory.axisLeft.setDrawAxisLine(false)
-        binding.chartHistory.axisLeft.setDrawGridLines(false)
-        binding.chartHistory.axisLeft.axisMinimum = 0f
-        binding.chartHistory.axisLeft.axisMaximum = (goal + (goal / 10)).toFloat()
-        binding.chartHistory.axisRight.isEnabled = false
+        binding.chartDaily.axisLeft.addLimitLine(goalLine)
+        binding.chartDaily.axisLeft.setDrawAxisLine(false)
+        binding.chartDaily.axisLeft.setDrawGridLines(false)
+        binding.chartDaily.axisLeft.axisMinimum = 0f
+        binding.chartDaily.axisLeft.axisMaximum = (goal + (goal / 10)).toFloat()
+        binding.chartDaily.axisRight.isEnabled = false
 
         val chartRenderer = RoundBarChartRender(
-            binding.chartHistory,
-            binding.chartHistory.animator,
-            binding.chartHistory.viewPortHandler
+            binding.chartDaily,
+            binding.chartDaily.animator,
+            binding.chartDaily.viewPortHandler
         )
         chartRenderer.setRadius(20)
-        binding.chartHistory.renderer = chartRenderer
-
-        binding.chartHistory.xAxis.textColor = resources.getColor(R.color.app_color)
-        binding.chartHistory.xAxis.spaceMin = 0.5f
-        binding.chartHistory.xAxis.spaceMax = 0.5f
-        binding.chartHistory.xAxis.valueFormatter = object : ValueFormatter() {
+        binding.chartDaily.renderer = chartRenderer
+        binding.chartDaily.xAxis.textColor = resources.getColor(R.color.app_color)
+        binding.chartDaily.xAxis.spaceMin = SIZE_SPACE
+        binding.chartDaily.xAxis.spaceMax = SIZE_SPACE
+        binding.chartDaily.xAxis.valueFormatter = object : ValueFormatter() {
             override fun getFormattedValue(value: Float): String {
                 val index = value.toInt()
                 return xvalue[index]
             }
         }
-
-        binding.chartHistory.xAxis.setDrawGridLines(false)
-        binding.chartHistory.xAxis.setDrawAxisLine(false)
-        binding.chartHistory.xAxis.textSize = 12f
-        binding.chartHistory.xAxis.position = XAxis.XAxisPosition.BOTTOM
-        binding.chartHistory.extraBottomOffset = 12f
+        binding.chartDaily.xAxis.setDrawGridLines(false)
+        binding.chartDaily.xAxis.setDrawAxisLine(false)
+        binding.chartDaily.xAxis.textSize = TEXT_SIZE_X_AXIS
+        binding.chartDaily.xAxis.position = XAxis.XAxisPosition.BOTTOM
+        binding.chartDaily.extraBottomOffset = EXTRA_BOTTOM_OFFSET
         // xAxis print 6 item of one time, add horizontal scroll
-        binding.chartHistory.setVisibleXRangeMaximum(6f)
+        binding.chartDaily.setVisibleXRangeMaximum(SIZE_X_RANGE_MAXIMUM)
         // show most right, most last item
-        binding.chartHistory.moveViewToX(xvalue.size.toFloat())
+        binding.chartDaily.moveViewToX(xvalue.size.toFloat())
+        binding.chartDaily.invalidate()
+    }
 
-        Log.e("tag", "${binding.chartHistory.lowestVisibleX} ${binding.chartHistory.highestVisibleX}")
+    private fun setChartDailyAverageLine() {
+        var average = 0
+        val minIdx = binding.chartDaily.lowestVisibleX.toInt()
+        val maxIdx = binding.chartDaily.highestVisibleX.toInt()
+        for (i in minIdx..maxIdx) {
+            val item = binding.chartDaily.data.dataSets[0].getEntryForIndex(i)
+            average += item.y.toInt()
+        }
+        average = (average / (maxIdx - minIdx))
+        val averageLine = LimitLine(average.toFloat(), TEXT_AVERAGE)
+        averageLine.lineWidth = SIZE_LINE_WIDTH
+        averageLine.textSize = TEXT_SIZE_AVERAGE_LINE
+        averageLine.lineColor = resources.getColor(R.color.purple_700)
+        averageLine.textColor = resources.getColor(R.color.purple_700)
 
+        binding.chartDaily.axisLeft.limitLines.forEach { ll ->
+            if (ll.label == TEXT_AVERAGE) {
+                binding.chartDaily.axisLeft.removeLimitLine(ll)
+            }
+        }
+        binding.chartDaily.axisLeft.addLimitLine(averageLine)
+    }
 
-//        val averageLine = LimitLine(goal.toFloat(), "Average")
-//        averageLine.lineWidth = 8f
-//        averageLine.textSize = 24f
-//        averageLine.lineColor = resources.getColor(R.color.app_color)
-//        averageLine.textColor = resources.getColor(R.color.app_color)
-//
-//        binding.chartHistory.axisLeft.addLimitLine(averageLine)
+    private fun setChartWeek() {
+
+    }
+
+    private fun setChartWeekAverageLine() {
 
     }
 

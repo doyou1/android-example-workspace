@@ -16,6 +16,7 @@ import com.example.pedometeruiappsampling.R
 import com.example.pedometeruiappsampling.adapter.WeekGoalAdapter
 import com.example.pedometeruiappsampling.databinding.FragmentHomeBinding
 import com.example.pedometeruiappsampling.util.DATA_WEEK_GOAL
+import com.example.pedometeruiappsampling.util.TEXT_GOAL
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
@@ -94,8 +95,8 @@ class HomeFragment : BaseFragment() {
 
     private fun getData(): PieData {
         val goal = if (activity != null) {
-            requireActivity().getSharedPreferences("goal", Context.MODE_PRIVATE)
-                .getInt("goal", 10000)
+            requireActivity().getSharedPreferences(TEXT_GOAL, Context.MODE_PRIVATE)
+                .getInt(TEXT_GOAL, 10000)
         } else {
             10000
         }
