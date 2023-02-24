@@ -40,7 +40,10 @@ class HistoryFragment : BaseFragment() {
 
         setChartWeek()
         setChartWeekAverageLine()
-
+        binding.chartWeek.setOnTouchListener { _, _ ->
+            setChartWeekAverageLine()
+            false
+        }
     }
 
     private fun setChartDaily() {
@@ -92,7 +95,7 @@ class HistoryFragment : BaseFragment() {
             binding.chartDaily.animator,
             binding.chartDaily.viewPortHandler
         )
-        chartRenderer.setRadius(20)
+        chartRenderer.setRadius(SIZE_RADIUS)
         binding.chartDaily.renderer = chartRenderer
         binding.chartDaily.xAxis.textColor = resources.getColor(R.color.app_color)
         binding.chartDaily.xAxis.spaceMin = SIZE_SPACE
@@ -123,7 +126,7 @@ class HistoryFragment : BaseFragment() {
             val item = binding.chartDaily.data.dataSets[0].getEntryForIndex(i)
             average += item.y.toInt()
         }
-        average = (average / (maxIdx - minIdx))
+        average = (average / (maxIdx - minIdx + 1))
         val averageLine = LimitLine(average.toFloat(), TEXT_AVERAGE)
         averageLine.lineWidth = SIZE_LINE_WIDTH
         averageLine.textSize = TEXT_SIZE_AVERAGE_LINE
@@ -139,11 +142,98 @@ class HistoryFragment : BaseFragment() {
     }
 
     private fun setChartWeek() {
+        val xvalue = Util.getChartWeekXValue()
+        val barDataset = Util.getChartWeekDataSet(xvalue.size)
+        // gradient bar color
+        barDataset.gradientColors = listOf(
+            GradientColor(
+                resources.getColor(R.color.app_color),
+                resources.getColor(R.color.app_orange)
+            )
+        )
 
+        // barData text visible false because of lineData duplication
+        val data = BarData(barDataset)
+        data.barWidth = SIZE_BAR_WIDTH
+        data.isHighlightEnabled = false
+        binding.chartWeek.data = data
+
+        binding.chartWeek.description.isEnabled = false
+        binding.chartWeek.legend.isEnabled = false
+        binding.chartWeek.setScaleEnabled(false)
+        binding.chartWeek.isDoubleTapToZoomEnabled = false
+
+        val goal = if (context != null && context?.getSharedPreferences(
+                TEXT_GOAL,
+                Context.MODE_PRIVATE
+            ) != null
+        ) {
+            context?.getSharedPreferences(TEXT_GOAL, Context.MODE_PRIVATE)!!
+                .getInt(TEXT_GOAL, DEFAULT_GOAL) * 7
+        } else {
+            DEFAULT_GOAL * 7
+        }
+        val goalLine = LimitLine(goal.toFloat(), TEXT_GOAL)
+        goalLine.lineWidth = SIZE_LINE_WIDTH
+        goalLine.textSize = SIZE_GOAL_LINE
+        goalLine.lineColor = resources.getColor(R.color.app_color)
+        goalLine.textColor = resources.getColor(R.color.app_color)
+        binding.chartWeek.axisLeft.addLimitLine(goalLine)
+        binding.chartWeek.axisLeft.setDrawAxisLine(false)
+        binding.chartWeek.axisLeft.setDrawGridLines(false)
+        binding.chartWeek.axisLeft.axisMinimum = 0f
+        binding.chartWeek.axisLeft.axisMaximum = (goal + (goal / 10)).toFloat()
+        binding.chartWeek.axisRight.isEnabled = false
+
+        val chartRenderer = RoundBarChartRender(
+            binding.chartWeek,
+            binding.chartWeek.animator,
+            binding.chartWeek.viewPortHandler
+        )
+        chartRenderer.setRadius(SIZE_RADIUS)
+        binding.chartWeek.renderer = chartRenderer
+        binding.chartWeek.xAxis.textColor = resources.getColor(R.color.app_color)
+        binding.chartWeek.xAxis.spaceMin = SIZE_SPACE
+        binding.chartWeek.xAxis.spaceMax = SIZE_SPACE
+        binding.chartWeek.xAxis.valueFormatter = object : ValueFormatter() {
+            override fun getFormattedValue(value: Float): String {
+                val index = value.toInt()
+                return xvalue[index]
+            }
+        }
+        binding.chartWeek.xAxis.setDrawGridLines(false)
+        binding.chartWeek.xAxis.setDrawAxisLine(false)
+        binding.chartWeek.xAxis.textSize = TEXT_SIZE_X_AXIS
+        binding.chartWeek.xAxis.position = XAxis.XAxisPosition.BOTTOM
+        binding.chartWeek.extraBottomOffset = EXTRA_BOTTOM_OFFSET
+        // xAxis print 6 item of one time, add horizontal scroll
+        binding.chartWeek.setVisibleXRangeMaximum(SIZE_X_RANGE_MAXIMUM)
+        // show most right, most last item
+        binding.chartWeek.moveViewToX(xvalue.size.toFloat())
+        binding.chartWeek.invalidate()
     }
 
     private fun setChartWeekAverageLine() {
+        var average = 0
+        val minIdx = binding.chartWeek.lowestVisibleX.toInt()
+        val maxIdx = binding.chartWeek.highestVisibleX.toInt()
+        for (i in minIdx..maxIdx) {
+            val item = binding.chartWeek.data.dataSets[0].getEntryForIndex(i)
+            average += item.y.toInt()
+        }
+        average = (average / (maxIdx - minIdx + 1))
+        val averageLine = LimitLine(average.toFloat(), TEXT_AVERAGE)
+        averageLine.lineWidth = SIZE_LINE_WIDTH
+        averageLine.textSize = TEXT_SIZE_AVERAGE_LINE
+        averageLine.lineColor = resources.getColor(R.color.purple_700)
+        averageLine.textColor = resources.getColor(R.color.purple_700)
 
+        binding.chartWeek.axisLeft.limitLines.forEach { ll ->
+            if (ll.label == TEXT_AVERAGE) {
+                binding.chartWeek.axisLeft.removeLimitLine(ll)
+            }
+        }
+        binding.chartWeek.axisLeft.addLimitLine(averageLine)
     }
 
     companion object {

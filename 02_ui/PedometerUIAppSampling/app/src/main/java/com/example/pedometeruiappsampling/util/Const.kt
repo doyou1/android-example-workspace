@@ -22,6 +22,7 @@ const val EXTRA_BOTTOM_OFFSET = 12f
 const val SIZE_X_RANGE_MAXIMUM = 6f
 const val SIZE_BAR_WIDTH = 0.25f
 const val TEXT_SIZE_AVERAGE_LINE = 24f
+const val SIZE_RADIUS = 20
 
 val DATA_WEEK_GOAL = listOf(
     WeekGoal(true, TEXT_SUN),
