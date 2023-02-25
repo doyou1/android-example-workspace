@@ -1,6 +1,7 @@
 package com.example.pedometeruiappsampling.fragment
 
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.Spanned
@@ -55,7 +56,6 @@ class HomeFragment : BaseFragment() {
 
         binding.chartStep.centerText = getCenterText()
         binding.chartStep.data = getData()
-
         binding.chartStep.animateY(DURATION_ANIMATION_Y)
         binding.chartStep.invalidate()
     }
@@ -125,7 +125,7 @@ class HomeFragment : BaseFragment() {
             resources.getColor(R.color.app_orange), resources.getColor(R.color.not_yet)
         )
         datasets.sliceSpace = PIE_DATA_SET_SLICE_SPACE
-//        datasets.setValueTextColors(listOf(Color.WHITE, resources.getColor(R.color.app_color)))
+        datasets.valueTextColor = Color.WHITE
         datasets.valueTextSize = TEXT_SIZE_PIE_DATA_SET_VALUE
 
         return PieData(datasets)

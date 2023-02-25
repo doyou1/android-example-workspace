@@ -79,7 +79,7 @@ class HistoryFragment : BaseFragment() {
             DEFAULT_GOAL
         }
         val goalLine = LimitLine(goal.toFloat(), TEXT_GOAL)
-        goalLine.lineWidth = SIZE_LINE_WIDTH
+        goalLine.lineWidth = SIZE_GOAL_LINE_WIDTH
         goalLine.textSize = SIZE_GOAL_LINE
         goalLine.lineColor = resources.getColor(R.color.app_color)
         goalLine.textColor = resources.getColor(R.color.app_color)
@@ -130,10 +130,11 @@ class HistoryFragment : BaseFragment() {
         }
         average = (average / (maxIdx - minIdx + 1))
         val averageLine = LimitLine(average.toFloat(), TEXT_AVERAGE)
-        averageLine.lineWidth = SIZE_LINE_WIDTH
+        averageLine.lineWidth = SIZE_AVERAGE_LINE_WIDTH
         averageLine.textSize = TEXT_SIZE_AVERAGE_LINE
-        averageLine.lineColor = resources.getColor(R.color.purple_700)
-        averageLine.textColor = resources.getColor(R.color.purple_700)
+        averageLine.lineColor = resources.getColor(R.color.light_blue)
+        averageLine.textColor = resources.getColor(R.color.light_blue)
+        averageLine.enableDashedLine(LINE_LENGTH_DASHED_LINE, SPACE_LENGTH_DASHED_LINE, 0f)
 
         binding.chartDaily.axisLeft.limitLines.forEach { ll ->
             if (ll.label == TEXT_AVERAGE) {
@@ -176,7 +177,7 @@ class HistoryFragment : BaseFragment() {
             DEFAULT_GOAL * 7
         }
         val goalLine = LimitLine(goal.toFloat(), TEXT_GOAL)
-        goalLine.lineWidth = SIZE_LINE_WIDTH
+        goalLine.lineWidth = SIZE_GOAL_LINE_WIDTH
         goalLine.textSize = SIZE_GOAL_LINE
         goalLine.lineColor = resources.getColor(R.color.app_color)
         goalLine.textColor = resources.getColor(R.color.app_color)
@@ -226,10 +227,11 @@ class HistoryFragment : BaseFragment() {
         }
         average = (average / (maxIdx - minIdx + 1))
         val averageLine = LimitLine(average.toFloat(), TEXT_AVERAGE)
-        averageLine.lineWidth = SIZE_LINE_WIDTH
+        averageLine.lineWidth = SIZE_AVERAGE_LINE_WIDTH
         averageLine.textSize = TEXT_SIZE_AVERAGE_LINE
-        averageLine.lineColor = resources.getColor(R.color.purple_700)
-        averageLine.textColor = resources.getColor(R.color.purple_700)
+        averageLine.lineColor = resources.getColor(R.color.light_blue)
+        averageLine.textColor = resources.getColor(R.color.light_blue)
+        averageLine.enableDashedLine(LINE_LENGTH_DASHED_LINE, SPACE_LENGTH_DASHED_LINE, 0f)
 
         binding.chartWeek.axisLeft.limitLines.forEach { ll ->
             if (ll.label == TEXT_AVERAGE) {
