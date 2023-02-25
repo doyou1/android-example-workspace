@@ -115,6 +115,8 @@ class HistoryFragment : BaseFragment() {
         binding.chartDaily.setVisibleXRangeMaximum(SIZE_X_RANGE_MAXIMUM)
         // show most right, most last item
         binding.chartDaily.moveViewToX(xvalue.size.toFloat())
+
+        binding.chartDaily.animateY(DURATION_ANIMATION_Y)
         binding.chartDaily.invalidate()
     }
 
@@ -210,6 +212,7 @@ class HistoryFragment : BaseFragment() {
         binding.chartWeek.setVisibleXRangeMaximum(SIZE_X_RANGE_MAXIMUM)
         // show most right, most last item
         binding.chartWeek.moveViewToX(xvalue.size.toFloat())
+        binding.chartWeek.animateY(DURATION_ANIMATION_Y)
         binding.chartWeek.invalidate()
     }
 

@@ -1,7 +1,6 @@
 package com.example.pedometeruiappsampling.fragment
 
 import android.content.Context
-import android.graphics.Color
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.Spanned
@@ -10,17 +9,14 @@ import android.text.style.RelativeSizeSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.pedometeruiappsampling.R
 import com.example.pedometeruiappsampling.adapter.WeekGoalAdapter
 import com.example.pedometeruiappsampling.databinding.FragmentHomeBinding
-import com.example.pedometeruiappsampling.util.DATA_WEEK_GOAL
-import com.example.pedometeruiappsampling.util.TEXT_GOAL
+import com.example.pedometeruiappsampling.util.*
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
-import com.github.mikephil.charting.utils.ColorTemplate
+import kotlin.random.Random
 
 class HomeFragment : BaseFragment() {
     private var _binding: FragmentHomeBinding? = null
@@ -50,8 +46,8 @@ class HomeFragment : BaseFragment() {
     private fun setChart() {
         binding.chartStep.description.isEnabled = false
         // radius of the center hole in percent of maximum radius
-        binding.chartStep.holeRadius = 80f
-        binding.chartStep.transparentCircleRadius = 79f
+        binding.chartStep.holeRadius = HOLE_RADIUS_PIE_CHART
+        binding.chartStep.transparentCircleRadius = TRANSPARENT_CIRCLE_RADIUS_PIE_CHART
         binding.chartStep.legend.isEnabled = false
 
         // disable drag
@@ -59,6 +55,9 @@ class HomeFragment : BaseFragment() {
 
         binding.chartStep.centerText = getCenterText()
         binding.chartStep.data = getData()
+
+        binding.chartStep.animateY(DURATION_ANIMATION_Y)
+        binding.chartStep.invalidate()
     }
 
     private fun setText() {
@@ -77,7 +76,12 @@ class HomeFragment : BaseFragment() {
             index,
             Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
         )
-        spannable.setSpan(RelativeSizeSpan(6f), 0, index, Spanned.SPAN_EXCLUSIVE_INCLUSIVE)
+        spannable.setSpan(
+            RelativeSizeSpan(TEXT_SIZE_PIE_CHART_CENTER_TITLE_TEXT),
+            0,
+            index,
+            Spanned.SPAN_EXCLUSIVE_INCLUSIVE
+        )
         spannable.setSpan(
             ForegroundColorSpan(resources.getColor(R.color.app_red)),
             index,
@@ -85,7 +89,7 @@ class HomeFragment : BaseFragment() {
             Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
         )
         spannable.setSpan(
-            RelativeSizeSpan(3f),
+            RelativeSizeSpan(TEXT_SIZE_PIE_CHART_CENTER_SUB_TEXT),
             index,
             centerText.length,
             Spanned.SPAN_EXCLUSIVE_INCLUSIVE
@@ -94,14 +98,19 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun getData(): PieData {
-        val goal = if (activity != null) {
-            requireActivity().getSharedPreferences(TEXT_GOAL, Context.MODE_PRIVATE)
-                .getInt(TEXT_GOAL, 10000)
+        val goal = if (activity != null && activity?.getSharedPreferences(
+                TEXT_GOAL,
+                Context.MODE_PRIVATE
+            ) != null
+        ) {
+            activity?.getSharedPreferences(TEXT_GOAL, Context.MODE_PRIVATE)!!
+                .getInt(TEXT_GOAL, DEFAULT_GOAL)
         } else {
-            10000
+            DEFAULT_GOAL
         }
         val entries = arrayListOf<PieEntry>()
-        val steps = 8513f
+//        val steps = 8513f
+        val steps = Random.nextInt(0, DEFAULT_GOAL).toFloat()
         entries.add(PieEntry(steps, "現在歩数"))
         val minus = goal - steps
         if (minus <= 0) {
@@ -115,9 +124,10 @@ class HomeFragment : BaseFragment() {
         datasets.colors = listOf(
             resources.getColor(R.color.app_orange), resources.getColor(R.color.not_yet)
         )
-        datasets.sliceSpace = 2f
-        datasets.valueTextColor = Color.WHITE
-        datasets.valueTextSize = 12f
+        datasets.sliceSpace = PIE_DATA_SET_SLICE_SPACE
+//        datasets.setValueTextColors(listOf(Color.WHITE, resources.getColor(R.color.app_color)))
+        datasets.valueTextSize = TEXT_SIZE_PIE_DATA_SET_VALUE
+
         return PieData(datasets)
     }
 
