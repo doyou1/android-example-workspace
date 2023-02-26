@@ -38,17 +38,31 @@ class SettingHomeFragment : SettingChildBaseFragment() {
     }
 
     private fun setClickEvent() {
-
         binding.layoutNotifications.setOnClickListener {
             navController.navigate(R.id.action_home_to_notifications)
         }
+        binding.btnNotifications.setOnClickListener {
+            navController.navigate(R.id.action_home_to_notifications)
+        }
+
         binding.layoutPrivacySecurity.setOnClickListener {
             navController.navigate(R.id.action_home_to_privacy_security)
         }
+        binding.btnPrivacySecurity.setOnClickListener {
+            navController.navigate(R.id.action_home_to_privacy_security)
+        }
+
         binding.layoutHelpSupport.setOnClickListener {
             navController.navigate(R.id.action_home_to_help_support)
         }
+        binding.btnHelpSupport.setOnClickListener {
+            navController.navigate(R.id.action_home_to_help_support)
+        }
+
         binding.layoutAbout.setOnClickListener {
+            navController.navigate(R.id.action_home_to_about)
+        }
+        binding.btnAbout.setOnClickListener {
             navController.navigate(R.id.action_home_to_about)
         }
     }

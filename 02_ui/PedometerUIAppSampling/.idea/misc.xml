@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/jh/android-example-workspace/02_ui/PedometerUIAppSampling/app/src/main/res/drawable/bottom_gray_border.xml" value="0.121" />
+        <entry key="..\:/Users/jh/android-example-workspace/02_ui/PedometerUIAppSampling/app/src/main/res/drawable/color_switch_thumb_selector.xml" value="0.122" />
         <entry key="..\:/Users/jh/android-example-workspace/02_ui/PedometerUIAppSampling/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Users/jh/android-example-workspace/02_ui/PedometerUIAppSampling/app/src/main/res/layout/activity_setting.xml" value="0.2" />
         <entry key="..\:/Users/jh/android-example-workspace/02_ui/PedometerUIAppSampling/app/src/main/res/layout/fragment_history.xml" value="0.1" />
@@ -12,7 +13,7 @@
         <entry key="..\:/Users/jh/android-example-workspace/02_ui/PedometerUIAppSampling/app/src/main/res/layout/fragment_setting_about.xml" value="0.1125" />
         <entry key="..\:/Users/jh/android-example-workspace/02_ui/PedometerUIAppSampling/app/src/main/res/layout/fragment_setting_help_and_support.xml" value="0.1125" />
         <entry key="..\:/Users/jh/android-example-workspace/02_ui/PedometerUIAppSampling/app/src/main/res/layout/fragment_setting_home.xml" value="0.27734375" />
-        <entry key="..\:/Users/jh/android-example-workspace/02_ui/PedometerUIAppSampling/app/src/main/res/layout/fragment_setting_notifications.xml" value="0.1125" />
+        <entry key="..\:/Users/jh/android-example-workspace/02_ui/PedometerUIAppSampling/app/src/main/res/layout/fragment_setting_notifications.xml" value="0.4" />
         <entry key="..\:/Users/jh/android-example-workspace/02_ui/PedometerUIAppSampling/app/src/main/res/layout/fragment_setting_privacy_security.xml" value="0.1125" />
         <entry key="..\:/Users/jh/android-example-workspace/02_ui/PedometerUIAppSampling/app/src/main/res/layout/lv_item_week_goal.xml" value="0.264" />
         <entry key="..\:/Users/jh/android-example-workspace/02_ui/PedometerUIAppSampling/app/src/main/res/layout/rv_item_week_goal.xml" value="0.25364583333333335" />
