@@ -1,4 +1,4 @@
-package com.example.pedometeruiappsampling.fragment.child
+package com.example.pedometeruiappsampling.fragment.setting
 
 import androidx.fragment.app.Fragment
 

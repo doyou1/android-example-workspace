@@ -2,46 +2,52 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_setting"
-    app:startDestination="@id/fragment_setting_child_home">
+    app:startDestination="@id/fragment_setting_home">
 
     <fragment
-        android:id="@+id/fragment_setting_child_home"
-        android:name="com.example.pedometeruiappsampling.fragment.child.SettingChildHomeFragment">
-        <action
-            android:id="@+id/action_home_to_notifications"
-            app:destination="@id/fragment_setting_child_notifications"
-            app:enterAnim="@android:anim/slide_in_left"
-            app:exitAnim="@android:anim/slide_in_left" />
-
-        <action
-            android:id="@+id/action_home_to_privacy_security"
-            app:destination="@id/fragment_setting_child_privacy_security"
-            app:enterAnim="@android:anim/slide_in_left"
-            app:exitAnim="@android:anim/slide_in_left" />
-
-        <action
-            android:id="@+id/action_home_to_help_and_support"
-            app:destination="@id/fragment_setting_child_help_and_support"
-            app:enterAnim="@android:anim/slide_in_left"
-            app:exitAnim="@android:anim/slide_in_left" />
-
-        <action
-            android:id="@+id/action_home_to_about"
-            app:destination="@id/fragment_setting_child_about"
-            app:enterAnim="@android:anim/slide_in_left"
-            app:exitAnim="@android:anim/slide_in_left" />
-    </fragment>
+        android:id="@+id/fragment_setting_home"
+        android:name="com.example.pedometeruiappsampling.fragment.setting.SettingHomeFragment"
+        />
 
     <fragment
-        android:id="@+id/fragment_setting_child_notifications"
-        android:name="com.example.pedometeruiappsampling.fragment.child.SettingChildNotificationsFragment" />
+        android:id="@+id/fragment_setting_notifications"
+        android:name="com.example.pedometeruiappsampling.fragment.setting.SettingNotificationsFragment"
+        />
+
     <fragment
-        android:id="@+id/fragment_setting_child_privacy_security"
-        android:name="com.example.pedometeruiappsampling.fragment.child.SettingChildPrivacySecurityFragment" />
+        android:id="@+id/fragment_setting_privacy_security"
+        android:name="com.example.pedometeruiappsampling.fragment.setting.SettingPrivacySecurityFragment"
+        />
+
+
     <fragment
-        android:id="@+id/fragment_setting_child_help_and_support"
-        android:name="com.example.pedometeruiappsampling.fragment.child.SettingChildHelpAndSupportFragment" />
+        android:id="@+id/fragment_setting_help_support"
+        android:name="com.example.pedometeruiappsampling.fragment.setting.SettingHelpSupportFragment"
+        />
+
     <fragment
-        android:id="@+id/fragment_setting_child_about"
-        android:name="com.example.pedometeruiappsampling.fragment.child.SettingChildAboutFragment" />
+        android:id="@+id/fragment_setting_about"
+        android:name="com.example.pedometeruiappsampling.fragment.setting.SettingAboutFragment"
+        />
+
+    <action
+        android:id="@+id/action_home_to_notifications"
+        app:destination="@id/fragment_setting_notifications"
+        />
+
+    <action
+        android:id="@+id/action_home_to_privacy_security"
+        app:destination="@id/fragment_setting_privacy_security"
+        />
+
+    <action
+        android:id="@+id/action_home_to_help_support"
+        app:destination="@id/fragment_setting_help_support"
+        />
+
+    <action
+        android:id="@+id/action_home_to_about"
+        app:destination="@id/fragment_setting_about"
+        />
+
 </navigation>

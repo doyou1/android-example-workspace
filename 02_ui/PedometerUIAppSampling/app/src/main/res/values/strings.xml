@@ -5,4 +5,8 @@
     <string name="calories_unit">CALORIES</string>
     <string name="text_confirm">Confirm</string>
     <string name="text_update_goal">目標歩数変更</string>
+    <string name="text_notifications">Notifications</string>
+    <string name="text_privacy_security">Privacy &amp; Security</string>
+    <string name="text_help_support">Help And Support</string>
+    <string name="text_about">About</string>
 </resources>
