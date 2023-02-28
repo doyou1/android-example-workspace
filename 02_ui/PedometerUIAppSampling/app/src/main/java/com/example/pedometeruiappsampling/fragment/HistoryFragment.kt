@@ -47,8 +47,8 @@ class HistoryFragment : BaseFragment() {
     }
 
     private fun setChartDaily() {
-        val xvalue = Util.getChartDailyXValue()
-        val barDataset = Util.getChartDailyDataSet(xvalue.size)
+        val xvalue = Util.getChartDailyXValue(requireContext())
+        val barDataset = Util.getChartDailyDataSet(xvalue.size, requireContext())
         // gradient bar color
         barDataset.gradientColors = listOf(
             GradientColor(
@@ -69,16 +69,16 @@ class HistoryFragment : BaseFragment() {
         binding.chartDaily.isDoubleTapToZoomEnabled = false
 
         val goal = if (context != null && context?.getSharedPreferences(
-                TEXT_GOAL,
+                activity?.getString(R.string.text_goal),
                 Context.MODE_PRIVATE
             ) != null
         ) {
-            context?.getSharedPreferences(TEXT_GOAL, Context.MODE_PRIVATE)!!
-                .getInt(TEXT_GOAL, DEFAULT_GOAL)
+            context?.getSharedPreferences(activity?.getString(R.string.text_goal), Context.MODE_PRIVATE)!!
+                .getInt(activity?.getString(R.string.text_goal), DEFAULT_GOAL)
         } else {
             DEFAULT_GOAL
         }
-        val goalLine = LimitLine(goal.toFloat(), TEXT_GOAL)
+        val goalLine = LimitLine(goal.toFloat(), activity?.getString(R.string.text_goal))
         goalLine.lineWidth = SIZE_GOAL_LINE_WIDTH
         goalLine.textSize = SIZE_GOAL_LINE
         goalLine.lineColor = resources.getColor(R.color.app_color)
@@ -129,7 +129,7 @@ class HistoryFragment : BaseFragment() {
             average += item.y.toInt()
         }
         average = (average / (maxIdx - minIdx + 1))
-        val averageLine = LimitLine(average.toFloat(), TEXT_AVERAGE)
+        val averageLine = LimitLine(average.toFloat(), requireContext().getString(R.string.text_average))
         averageLine.lineWidth = SIZE_AVERAGE_LINE_WIDTH
         averageLine.textSize = TEXT_SIZE_AVERAGE_LINE
         averageLine.lineColor = resources.getColor(R.color.light_blue)
@@ -137,7 +137,7 @@ class HistoryFragment : BaseFragment() {
         averageLine.enableDashedLine(LINE_LENGTH_DASHED_LINE, SPACE_LENGTH_DASHED_LINE, 0f)
 
         binding.chartDaily.axisLeft.limitLines.forEach { ll ->
-            if (ll.label == TEXT_AVERAGE) {
+            if (ll.label == requireContext().getString(R.string.text_average)) {
                 binding.chartDaily.axisLeft.removeLimitLine(ll)
             }
         }
@@ -146,7 +146,7 @@ class HistoryFragment : BaseFragment() {
 
     private fun setChartWeek() {
         val xvalue = Util.getChartWeekXValue()
-        val barDataset = Util.getChartWeekDataSet(xvalue.size)
+        val barDataset = Util.getChartWeekDataSet(xvalue.size, requireContext())
         // gradient bar color
         barDataset.gradientColors = listOf(
             GradientColor(
@@ -167,16 +167,16 @@ class HistoryFragment : BaseFragment() {
         binding.chartWeek.isDoubleTapToZoomEnabled = false
 
         val goal = if (context != null && context?.getSharedPreferences(
-                TEXT_GOAL,
+                activity?.getString(R.string.text_goal),
                 Context.MODE_PRIVATE
             ) != null
         ) {
-            context?.getSharedPreferences(TEXT_GOAL, Context.MODE_PRIVATE)!!
-                .getInt(TEXT_GOAL, DEFAULT_GOAL) * 7
+            context?.getSharedPreferences(activity?.getString(R.string.text_goal), Context.MODE_PRIVATE)!!
+                .getInt(activity?.getString(R.string.text_goal), DEFAULT_GOAL) * 7
         } else {
             DEFAULT_GOAL * 7
         }
-        val goalLine = LimitLine(goal.toFloat(), TEXT_GOAL)
+        val goalLine = LimitLine(goal.toFloat(), activity?.getString(R.string.text_goal))
         goalLine.lineWidth = SIZE_GOAL_LINE_WIDTH
         goalLine.textSize = SIZE_GOAL_LINE
         goalLine.lineColor = resources.getColor(R.color.app_color)
@@ -226,7 +226,7 @@ class HistoryFragment : BaseFragment() {
             average += item.y.toInt()
         }
         average = (average / (maxIdx - minIdx + 1))
-        val averageLine = LimitLine(average.toFloat(), TEXT_AVERAGE)
+        val averageLine = LimitLine(average.toFloat(), requireContext().getString(R.string.text_average))
         averageLine.lineWidth = SIZE_AVERAGE_LINE_WIDTH
         averageLine.textSize = TEXT_SIZE_AVERAGE_LINE
         averageLine.lineColor = resources.getColor(R.color.light_blue)
@@ -234,7 +234,7 @@ class HistoryFragment : BaseFragment() {
         averageLine.enableDashedLine(LINE_LENGTH_DASHED_LINE, SPACE_LENGTH_DASHED_LINE, 0f)
 
         binding.chartWeek.axisLeft.limitLines.forEach { ll ->
-            if (ll.label == TEXT_AVERAGE) {
+            if (ll.label == requireContext().getString(R.string.text_average)) {
                 binding.chartWeek.axisLeft.removeLimitLine(ll)
             }
         }

@@ -41,7 +41,7 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun setWeekGoal() {
-        binding.rvWeekGoal.adapter = WeekGoalAdapter(DATA_WEEK_GOAL)
+        binding.rvWeekGoal.adapter = WeekGoalAdapter(Util.getDataWeekGoal(requireContext()))
     }
 
     private fun setChart() {
@@ -99,25 +99,25 @@ class HomeFragment : BaseFragment() {
 
     private fun getData(): PieData {
         val goal = if (activity != null && activity?.getSharedPreferences(
-                TEXT_GOAL,
+                activity?.getString(R.string.text_goal),
                 Context.MODE_PRIVATE
             ) != null
         ) {
-            activity?.getSharedPreferences(TEXT_GOAL, Context.MODE_PRIVATE)!!
-                .getInt(TEXT_GOAL, DEFAULT_GOAL)
+            activity?.getSharedPreferences(activity?.getString(R.string.text_goal), Context.MODE_PRIVATE)!!
+                .getInt(activity?.getString(R.string.text_goal), DEFAULT_GOAL)
         } else {
             DEFAULT_GOAL
         }
         val entries = arrayListOf<PieEntry>()
 //        val steps = 8513f
         val steps = Random.nextInt(0, DEFAULT_GOAL).toFloat()
-        entries.add(PieEntry(steps, "現在歩数"))
+        entries.add(PieEntry(steps, resources.getString(R.string.text_current_steps) ))
         val minus = goal - steps
         if (minus <= 0) {
             // not working
             // 목표 달성했기에 추가안함
         } else {
-            entries.add(PieEntry(minus, "残り歩数"))
+            entries.add(PieEntry(minus, resources.getString(R.string.text_remain_steps)))
         }
 
         val datasets = PieDataSet(entries, "Datasets")

@@ -1,18 +1,5 @@
 package com.example.pedometeruiappsampling.util
 
-import com.example.pedometeruiappsampling.domain.WeekGoal
-
-const val TEXT_SUN = "SUN"
-const val TEXT_MON = "MON"
-const val TEXT_TUE = "TUE"
-const val TEXT_WED = "WED"
-const val TEXT_THU = "THU"
-const val TEXT_FRI = "FRI"
-const val TEXT_SAT = "SAT"
-const val TEXT_TODAY = "Today"
-const val TEXT_BAR_CHART = "BarChart"
-const val TEXT_GOAL = "goal"
-const val TEXT_AVERAGE = "Average"
 const val DEFAULT_GOAL = 10000
 const val SIZE_GOAL_LINE = 24f
 const val SIZE_GOAL_LINE_WIDTH = 8f
@@ -35,12 +22,3 @@ const val TRANSPARENT_CIRCLE_RADIUS_PIE_CHART = 79f
 const val LINE_LENGTH_DASHED_LINE = 25f
 const val SPACE_LENGTH_DASHED_LINE = 10f
 
-val DATA_WEEK_GOAL = listOf(
-    WeekGoal(true, TEXT_SUN),
-    WeekGoal(true, TEXT_MON),
-    WeekGoal(false, TEXT_TUE),
-    WeekGoal(false, TEXT_WED),
-    WeekGoal(false, TEXT_THU),
-    WeekGoal(false, TEXT_FRI),
-    WeekGoal(false, TEXT_SAT),
-)

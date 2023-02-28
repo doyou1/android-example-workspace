@@ -4,7 +4,7 @@
     <string name="minutes_unit">MINUTES</string>
     <string name="calories_unit">CALORIES</string>
     <string name="text_confirm">Confirm</string>
-    <string name="text_update_goal">目標歩数変更</string>
+    <string name="text_update_goal">Update Goal Steps</string>
     <string name="text_notifications">Notifications</string>
     <string name="text_privacy_security">Privacy &amp; Security</string>
     <string name="text_help_support">Help And Support</string>
@@ -15,4 +15,19 @@
     <string name="text_privacy">Privacy</string>
     <string name="text_security">Security</string>
     <string name="text_language">Language</string>
+    <string name="text_current_steps">CurrentSteps</string>
+    <string name="text_remain_steps">RemainSteps</string>
+    <string name="text_sun">SUN</string>
+    <string name="text_mon">MON</string>
+    <string name="text_tue">TUE</string>
+    <string name="text_wed">WED</string>
+    <string name="text_thu">THU</string>
+    <string name="text_fri">FRI</string>
+    <string name="text_sat">SAT</string>
+    <string name="text_today">Today</string>
+    <string name="text_bar_chart">BarChart</string>
+    <string name="text_goal">goal</string>
+    <string name="text_average">Average</string>
+    <string name="text_edit_text_fail_validate">please check input text</string>
+
 </resources>

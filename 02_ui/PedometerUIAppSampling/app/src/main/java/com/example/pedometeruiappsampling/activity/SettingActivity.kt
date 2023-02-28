@@ -4,8 +4,9 @@ import android.content.Context
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.pedometeruiappsampling.R
 import com.example.pedometeruiappsampling.databinding.ActivitySettingBinding
-import com.example.pedometeruiappsampling.util.TEXT_GOAL
+import com.example.pedometeruiappsampling.util.DEFAULT_GOAL
 import java.lang.Exception
 
 class SettingActivity : AppCompatActivity() {
@@ -17,9 +18,9 @@ class SettingActivity : AppCompatActivity() {
         binding = ActivitySettingBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.etGoal.setText(
-            getSharedPreferences("goal", Context.MODE_PRIVATE).getInt(
-                "goal",
-                10000
+            getSharedPreferences(resources.getString(R.string.text_goal), Context.MODE_PRIVATE).getInt(
+                resources.getString(R.string.text_goal),
+                DEFAULT_GOAL
             ).toString()
         )
     }
@@ -32,11 +33,11 @@ class SettingActivity : AppCompatActivity() {
     private fun setClickEvent() {
         binding.btnConfirm.setOnClickListener {
             if (isValidate()) {
-                getSharedPreferences(TEXT_GOAL, Context.MODE_PRIVATE).edit()
-                    .putInt("goal", binding.etGoal.text.toString().toInt()).apply()
+                getSharedPreferences(resources.getString(R.string.text_goal), Context.MODE_PRIVATE).edit()
+                    .putInt(resources.getString(R.string.text_goal), binding.etGoal.text.toString().toInt()).apply()
                 finish()
             } else {
-                Toast.makeText(this, "please check input text", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, resources.getString(R.string.text_edit_text_fail_validate), Toast.LENGTH_LONG).show()
             }
         }
     }
