@@ -38,9 +38,7 @@ class SettingNotificationsFragment : SettingChildBaseFragment() {
 
     override fun onResume() {
         super.onResume()
-
         setClickEvent()
-
     }
 
     private fun setClickEvent() {

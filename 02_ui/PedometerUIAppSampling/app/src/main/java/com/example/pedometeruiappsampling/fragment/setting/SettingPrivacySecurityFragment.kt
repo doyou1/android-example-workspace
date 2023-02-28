@@ -22,6 +22,7 @@ class SettingPrivacySecurityFragment : SettingChildBaseFragment() {
         _binding = FragmentSettingPrivacySecurityBinding.inflate(inflater, container, false)
         return binding.root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         // This callback will only be called when MyFragment is at least Started.
@@ -34,6 +35,18 @@ class SettingPrivacySecurityFragment : SettingChildBaseFragment() {
             }
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
     }
+
+    override fun onResume() {
+        super.onResume()
+        setClickEvent()
+    }
+
+    private fun setClickEvent() {
+        binding.btnBack.setOnClickListener {
+            Navigation.findNavController(requireView()).navigateUp()
+        }
+    }
+
 
     companion object {
         private var instance: SettingChildBaseFragment? = null
