@@ -6,48 +6,47 @@
 
     <fragment
         android:id="@+id/fragment_setting_home"
-        android:name="com.example.pedometeruiappsampling.fragment.setting.SettingHomeFragment"
-        />
+        android:name="com.example.pedometeruiappsampling.fragment.setting.SettingHomeFragment" />
 
     <fragment
         android:id="@+id/fragment_setting_notifications"
-        android:name="com.example.pedometeruiappsampling.fragment.setting.SettingNotificationsFragment"
-        />
+        android:name="com.example.pedometeruiappsampling.fragment.setting.SettingNotificationsFragment" />
+
+    <fragment
+        android:id="@+id/fragment_setting_language"
+        android:name="com.example.pedometeruiappsampling.fragment.setting.SettingLanguageFragment" />
 
     <fragment
         android:id="@+id/fragment_setting_privacy_security"
-        android:name="com.example.pedometeruiappsampling.fragment.setting.SettingPrivacySecurityFragment"
-        />
+        android:name="com.example.pedometeruiappsampling.fragment.setting.SettingPrivacySecurityFragment" />
 
 
     <fragment
         android:id="@+id/fragment_setting_help_support"
-        android:name="com.example.pedometeruiappsampling.fragment.setting.SettingHelpSupportFragment"
-        />
+        android:name="com.example.pedometeruiappsampling.fragment.setting.SettingHelpSupportFragment" />
 
     <fragment
         android:id="@+id/fragment_setting_about"
-        android:name="com.example.pedometeruiappsampling.fragment.setting.SettingAboutFragment"
-        />
+        android:name="com.example.pedometeruiappsampling.fragment.setting.SettingAboutFragment" />
 
     <action
         android:id="@+id/action_home_to_notifications"
-        app:destination="@id/fragment_setting_notifications"
-        />
+        app:destination="@id/fragment_setting_notifications" />
+
+    <action
+        android:id="@+id/action_home_to_language"
+        app:destination="@id/fragment_setting_language" />
 
     <action
         android:id="@+id/action_home_to_privacy_security"
-        app:destination="@id/fragment_setting_privacy_security"
-        />
+        app:destination="@id/fragment_setting_privacy_security" />
 
     <action
         android:id="@+id/action_home_to_help_support"
-        app:destination="@id/fragment_setting_help_support"
-        />
+        app:destination="@id/fragment_setting_help_support" />
 
     <action
         android:id="@+id/action_home_to_about"
-        app:destination="@id/fragment_setting_about"
-        />
+        app:destination="@id/fragment_setting_about" />
 
 </navigation>

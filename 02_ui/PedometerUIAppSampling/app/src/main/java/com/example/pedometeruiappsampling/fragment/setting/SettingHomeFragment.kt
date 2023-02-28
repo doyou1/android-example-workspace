@@ -45,6 +45,13 @@ class SettingHomeFragment : SettingChildBaseFragment() {
             navController.navigate(R.id.action_home_to_notifications)
         }
 
+        binding.layoutLanguage.setOnClickListener {
+            navController.navigate(R.id.action_home_to_language)
+        }
+        binding.btnLanguage.setOnClickListener {
+            navController.navigate(R.id.action_home_to_language)
+        }
+
         binding.layoutPrivacySecurity.setOnClickListener {
             navController.navigate(R.id.action_home_to_privacy_security)
         }

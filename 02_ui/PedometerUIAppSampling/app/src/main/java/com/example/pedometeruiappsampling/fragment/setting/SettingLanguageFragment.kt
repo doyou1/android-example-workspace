@@ -6,22 +6,22 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.navigation.Navigation
-import com.example.pedometeruiappsampling.databinding.FragmentSettingHelpAndSupportBinding
+import com.example.pedometeruiappsampling.databinding.FragmentSettingAboutBinding
+import com.example.pedometeruiappsampling.databinding.FragmentSettingLanguageBinding
 
-class SettingHelpSupportFragment : SettingChildBaseFragment() {
-
-    private var _binding: FragmentSettingHelpAndSupportBinding? = null
+class SettingLanguageFragment : SettingChildBaseFragment() {
+    private var _binding: FragmentSettingLanguageBinding? = null
     private val binding get() = _binding!!
-    private val TAG = this::class.java.simpleName
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentSettingHelpAndSupportBinding.inflate(inflater, container, false)
+        _binding = FragmentSettingLanguageBinding.inflate(inflater, container, false)
         return binding.root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         // This callback will only be called when MyFragment is at least Started.
@@ -45,12 +45,13 @@ class SettingHelpSupportFragment : SettingChildBaseFragment() {
             Navigation.findNavController(requireView()).navigateUp()
         }
     }
+
     companion object {
         private var instance: SettingChildBaseFragment? = null
 
         fun getInstance(): SettingChildBaseFragment {
             if (instance == null) {
-                instance = SettingHelpSupportFragment()
+                instance = SettingLanguageFragment()
             }
             return instance!!
         }

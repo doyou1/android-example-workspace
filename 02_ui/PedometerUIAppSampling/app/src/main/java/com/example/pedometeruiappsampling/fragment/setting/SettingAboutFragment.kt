@@ -34,6 +34,17 @@ class SettingAboutFragment : SettingChildBaseFragment() {
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
     }
 
+    override fun onResume() {
+        super.onResume()
+        setClickEvent()
+    }
+
+    private fun setClickEvent() {
+        binding.btnBack.setOnClickListener {
+            Navigation.findNavController(requireView()).navigateUp()
+        }
+    }
+
     companion object {
         private var instance: SettingChildBaseFragment? = null
 
