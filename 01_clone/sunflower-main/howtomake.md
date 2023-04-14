@@ -1,0 +1,18 @@
+GardenActivity
+    MdcTheme
+        SunflowerApp
+            SunFlowerNavHost
+            NavHost
+                HomeScreen
+                    HomePagerScreen
+                        My_GARDEN
+                        PLANT_LIST
+                PlantDetailsScreen
+                    TextSnackbarContainer
+                        PlantDetails
+                GallearyScreen
+                    sequence
+                    emptyList()
+                    listof
+                        PlantAndGardenPlantings
+                            GardenPlanting  
