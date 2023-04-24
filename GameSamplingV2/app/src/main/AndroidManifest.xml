@@ -22,9 +22,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".GameActivity"
+            android:name=".activity.JumpCharacterActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activity.AutoBackgroundActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

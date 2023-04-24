@@ -1,15 +1,16 @@
-package com.example.gamesamplingv2
+package com.example.gamesamplingv2.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.gamesamplingv2.databinding.ActivityGameBinding
+import com.example.gamesamplingv2.R
+import com.example.gamesamplingv2.databinding.ActivityJumpCharacterBinding
 
-class GameActivity : AppCompatActivity() {
+class JumpCharacterActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityGameBinding
+    private lateinit var binding: ActivityJumpCharacterBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityGameBinding.inflate(layoutInflater)
+        binding = ActivityJumpCharacterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val bitmapIds = arrayOf(
@@ -19,16 +20,16 @@ class GameActivity : AppCompatActivity() {
 //            R.drawable.character4,
         )
 
-        binding.gameView.start(bitmapIds)
+        binding.jumpCharacterView.start(bitmapIds)
     }
 
     override fun onPause() {
         super.onPause()
-        binding.gameView.pause()
+        binding.jumpCharacterView.pause()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        binding.gameView.destroy()
+        binding.jumpCharacterView.destroy()
     }
 }

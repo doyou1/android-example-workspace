@@ -1,19 +1,15 @@
 package com.example.gamesamplingv2.open
 
-import android.graphics.Bitmap
-import android.graphics.Canvas
-import android.graphics.Paint
-import android.graphics.Rect
-import android.graphics.RectF
-import com.example.gamesamplingv2.view.JumpCharacterView
+import android.graphics.*
+import com.example.gamesamplingv2.view.AutoBackgroundView
 
-open class Character(private val bitmap: Bitmap) {
+
+class Background(val bitmap: Bitmap) {
 
     private var visible: Boolean = true
     private var x: Float = 0f
     private var y: Float = 0f
     private var destroyed: Boolean = false
-    private var frame: Int = 0
 
     fun getWidth(): Int = bitmap.width
     fun getHeight(): Int = bitmap.height
@@ -30,11 +26,6 @@ open class Character(private val bitmap: Bitmap) {
     fun move(offsetX: Float, offsetY: Float) {
         x += offsetX
         y += offsetY
-    }
-
-    fun setYtoCenter(centerY: Int) {
-        this.y = (centerY - (getHeight() / 2)).toFloat()
-
     }
 
     fun getBitmapSrcRec(): Rect {
@@ -59,23 +50,29 @@ open class Character(private val bitmap: Bitmap) {
         this.y = (centerY - (getHeight() / 2)).toFloat()
     }
 
-    fun draw(canvas: Canvas, paint: Paint, jumpCharacterView: JumpCharacterView) {
+    fun draw(canvas: Canvas, paint: Paint, autoBackgroundView: AutoBackgroundView) {
 //        frame++
-        beforeDraw(canvas, paint, jumpCharacterView)
-        onDraw(canvas, paint, jumpCharacterView)
-        afterDraw(canvas, paint, jumpCharacterView)
+        beforeDraw(canvas, paint, autoBackgroundView)
+        onDraw(canvas, paint, autoBackgroundView)
+        afterDraw(canvas, paint, autoBackgroundView)
     }
 
-    open fun beforeDraw(canvas: Canvas, paint: Paint, jumpCharacterView: JumpCharacterView) {}
-    open fun onDraw(canvas: Canvas, paint: Paint, jumpCharacterView: JumpCharacterView) {
+    open fun beforeDraw(canvas: Canvas, paint: Paint, autoBackgroundView: AutoBackgroundView) {}
+    open fun onDraw(canvas: Canvas, paint: Paint, autoBackgroundView: AutoBackgroundView) {
         if (!destroyed && getVisibility()) {
             val srcRef = getBitmapSrcRec()
             val dstRecF = getRectF()
+//            val cropBitmap = Bitmap.createScaledBitmap(bitmap, (canvas.width * 0.8).toInt(), (canvas.height * 0.8).toInt(), true)
+//            val matrix = Matrix()
+//            matrix.setScale(-1f, 1f)
+//            val startX = sY * (canvas.width / 100);
+//            val endX = eY * (canvas.width / 100);
+//            val result = Bitmap.createBitmap(cropBitmap, 0, 0, width, height, matrix, true)
             canvas.drawBitmap(bitmap, srcRef, dstRecF, paint)
         }
     }
 
-    open fun afterDraw(canvas: Canvas, paint: Paint, jumpCharacterView: JumpCharacterView) {}
+    open fun afterDraw(canvas: Canvas, paint: Paint, autoBackgroundView: AutoBackgroundView) {}
     fun setVisibility(visible: Boolean) {
         this.visible = visible
     }
