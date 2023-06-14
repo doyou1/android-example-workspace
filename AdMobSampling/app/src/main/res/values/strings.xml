@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">AdMobSampling</string>
+    <string name="admob_app_id">ca-app-pub-4266664829002178~3097812063</string>
+    <string name="admob_banner_id">ca-app-pub-4266664829002178/3352947027</string>
+</resources>
